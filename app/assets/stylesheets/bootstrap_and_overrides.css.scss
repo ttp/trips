@@ -1,0 +1,13 @@
+@import "bootstrap";
+body { padding-top: 60px; }
+a.btn-primary:visited {
+  color: white;
+}
+.simple_form {
+  input, textarea {
+    &.string, &.text {
+      width: 500px;
+    }
+  }
+}
+@import "bootstrap-responsive";

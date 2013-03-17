@@ -1,0 +1,58 @@
+ua:
+  devise:
+    registrations:
+      user:
+        signed_up: "Ви успішно зареєструвались в системі"
+  date:
+    order:
+      - :day
+      - :month
+      - :year
+    formats:
+      default: "%d.%m.%Y"
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+  helpers:
+    links:
+      add: "Додати"
+      edit: "Редагувати"
+      destroy: "Видалити"
+      save: "Зберегти"
+      cancel: "Відміна"
+      sign_in: "Увійти"
+      logout: "Вийти"
+      sign_up: "Зареєструватись"
+      forgot_password: 'Забули ваш пароль?'
+      confirm_instr_question: "Не отримали інструкцій по підвтердженню?"
+  actions: "Дії"
+  region: "Регіон"
+  fields:
+    created: "Створений"
+
+  user:
+    name: 'Ім"я'
+    password: 'Пароль'
+    password_confirmation: 'Повторіть пароль'
+    remember_me: 'Запам"ятати мене'
+
+  account:
+
+# Tracks
+    my_trips: 'Мої походи'
+
+    tracks: "Маршрути"
+    new_track: "Додати маршрут"
+    track:
+      name: "Назва"
+      description: "Опис"
+      track: "Маршрут"
+      url: "Сайт"
+
+# Trips
+    trips: "Походи"
+    trip:
+      new: "Новий похід"
+      add: "Додати похід"
+      start: "Початок"
+      end: "Закінчення"

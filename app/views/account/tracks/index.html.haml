@@ -1,0 +1,24 @@
+- model_class = Track
+%h3=t 'account.tracks', :default => "Tracks"
+
+= link_to t('account.new_track', :default => t("helpers.links.new")), new_account_track_path, :class => 'btn btn-primary'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t("account.track.name")
+      %th= t("region")
+      %th= t("fields.created")
+      %th= t("helpers.actions")
+  %tbody
+    - @tracks.each do |track|
+      %tr
+        %td= track.name
+        %td= track.region.name
+        %td=l track.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_account_track_path(track), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), account_track_path(track),
+            :method => :delete,
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-mini btn-danger'

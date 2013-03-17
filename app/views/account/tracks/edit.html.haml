@@ -1,0 +1,3 @@
+- model_class = Track
+%h3=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human
+= render :partial => "form"

@@ -1,0 +1,20 @@
+= simple_form_for [:account, @track], :html => { :class => 'form-horizontal' } do |f|
+  %ul.nav.nav-tabs
+    %li.active
+      %a{:href => "#track"}
+        Track
+    %li
+      %a{:href => "#schedule"}
+        Schedule
+  .tab-content
+    #track.tab-pane.active
+      = f.input :name, :label => t('account.track.name')
+      = f.input :region_id, :collection => Region.all
+      = f.input :description, input_html: {:rows => 10}, :label => t('account.track.description')
+      = f.input :track, :label => t('account.track.track')
+      = f.input :details_url, :label => t('account.track.url')
+    #schedule.tab-pane
+      %input#trip_date{:type => "text"}
+  .form-actions
+    = f.button :submit, :value => t('helpers.links.save'), :class => 'btn-primary'
+    = link_to t('helpers.links.cancel'), account_tracks_path, :class => 'btn'

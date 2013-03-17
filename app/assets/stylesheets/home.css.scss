@@ -1,0 +1,59 @@
+.grid {
+  .row {
+
+  }
+
+  .month {
+    background-color: #fff;
+    min-height: 100px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    .calendar {
+      width: 100%;
+
+      .otherMonth {
+        color:  #fff;
+        font-size: 0;
+      }
+      .day {
+        text-align: center;
+        font-size: 16px;
+        vertical-align: top;
+        border-color:  #f0f0f0;
+        border-style: solid;
+        border-width: 1px 1px 0 0;
+
+        .day-wrapper {
+          position: relative;
+          height: 39px;
+          line-height: 39px;
+
+          .day-num {
+            font-size: 10px;
+            height: 10px;
+            line-height: 10px;
+            position: absolute;
+            right: 2px;
+            top: 2px;
+          }
+
+          .events-count {
+            color: #009900;
+            display: inline-block;
+            font-size: 12pt;
+          }
+        }
+
+      }
+
+      tbody {
+        td {
+          height: 40px;
+          width: 14%;
+        }
+      }
+    }
+  }
+}
