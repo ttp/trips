@@ -1,5 +1,4 @@
-- model_class = Trip
-%h3=t '.title', :default => model_class.model_name.human.pluralize
+%h3=t 'account.trips'
 = link_to t('account.trip.add'), new_account_trip_path, :class => 'btn btn-primary'
 %table.table.table-striped
   %thead

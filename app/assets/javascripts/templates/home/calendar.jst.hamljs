@@ -1,0 +1,7 @@
+- for (var i = 0; i < 2; i++) {
+.row-fluid
+  - for (var j = 0; j < 2; j++) {
+  .span6.month
+    != calendar.render(year, monthNum + j + (i * 2))
+  - }
+- }

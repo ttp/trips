@@ -1,78 +1,61 @@
-// these are labels for the days of the week
-cal_days_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-// these are human-readable month name labels, in order
-cal_months_labels = ['January', 'February', 'March', 'April',
-    'May', 'June', 'July', 'August', 'September',
-    'October', 'November', 'December'];
-
-// these are the days of the week for each month, in order
-cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-// this is the current date
-cal_current_date = new Date();
-
-function Calendar(month, year) {
-    this.month = (isNaN(month) || month == null) ? cal_current_date.getMonth() : month;
-    this.year  = (isNaN(year) || year == null) ? cal_current_date.getFullYear() : year;
-    this.html = '';
+function Calendar(options) {
+    this.cal_days_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    this.cal_months_labels = ['January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December'];
+    this.cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 }
 
-Calendar.prototype.generateHTML = function(){
+Calendar.prototype.render = function(year, month) {
+    var firstDay = new Date(year, month, 1);
+    var weekFirstDay = 1;
+    var startingDay = firstDay.getDay() - weekFirstDay;
 
-    // get first day of month
-    var firstDay = new Date(this.year, this.month, 1);
-    var startingDay = firstDay.getDay();
+    var monthLength = this.cal_days_in_month[month];
 
-    // find number of days in month
-    var monthLength = cal_days_in_month[this.month];
-
-    // compensate for leap year
-    if (this.month == 1) { // February only!
-        if((this.year % 4 == 0 && this.year % 100 != 0) || this.year % 400 == 0){
+    if (month == 1) { // February only!
+        if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
             monthLength = 29;
         }
     }
 
-    // do the header
-    var monthName = cal_months_labels[this.month]
-    var html = '<table class="calendar-table">';
-    html += '<tr><th colspan="7">';
-    html +=  monthName + "&nbsp;" + this.year;
-    html += '</th></tr>';
-    html += '<tr class="calendar-header">';
-    for(var i = 0; i <= 6; i++ ){
-        html += '<td class="calendar-header-day">';
-        html += cal_days_labels[i];
-        html += '</td>';
-    }
-    html += '</tr><tr>';
+    var monthName = this.cal_months_labels[month]
+    var html = '<table class="calendar">'
+                + '<thead>'
+                    + '<tr><th colspan="7" class="monthName">'
+                    +  monthName
+                    + '</th></tr>';
 
-    // fill in the days
+    html += '<tr class="dayName">';
+    var weekTitleIndex;
+    for (var i = 0; i <= 6; i++ ) {
+        weekTitleIndex = ((i + weekFirstDay) % 7);
+        html += '<th class="calendar-header-day">' + this.cal_days_labels[weekTitleIndex] + '</th>';
+    }
+    html += '</tr>'
+    + '</thead>'
+    + '<tbody><tr>';
+
     var day = 1;
-    // this loop is for is weeks (rows)
+    var isCurrentMonth, className;
     for (var i = 0; i < 9; i++) {
-        // this loop is for weekdays (cells)
         for (var j = 0; j <= 6; j++) {
-            html += '<td class="calendar-day">';
-            if (day <= monthLength && (i > 0 || j >= startingDay)) {
-                html += day;
+           isCurrentMonth = (day <= monthLength && (i > 0 || j >= startingDay));
+            className = isCurrentMonth ? 'day' : 'otherMonth';
+            html += '<td class="' + className +'">';
+            if (isCurrentMonth) {
+                html += '<div class="day-wrapper"><span class="day-num">' + day + '</span></div>';
                 day++;
             }
             html += '</td>';
         }
-        // stop making rows if we've run out of days
         if (day > monthLength) {
             break;
         } else {
             html += '</tr><tr>';
         }
     }
-    html += '</tr></table>';
+    html += '</tr></tbody></table>';
 
-    this.html = html;
-}
-
-Calendar.prototype.getHTML = function() {
-    return this.html;
+    return html;
 }

@@ -1,3 +1,6 @@
+//= require libs/date
+//= require libs/daterangepicker
+
 $(function () {
     $('#trip_dates_range').daterangepicker({
         format: 'dd.MM.yyyy',
