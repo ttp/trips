@@ -42,10 +42,12 @@ Calendar.prototype.render = function(year, month) {
         for (var j = 0; j <= 6; j++) {
            isCurrentMonth = (day <= monthLength && (i > 0 || j >= startingDay));
             className = isCurrentMonth ? 'day' : 'otherMonth';
-            html += '<td class="' + className +'">';
             if (isCurrentMonth) {
-                html += '<div class="day-wrapper"><span class="day-num">' + day + '</span></div>';
+                html += '<td id="' + this.dayId(year, month, day) + '" class="day">'
+                        + '<div class="day-wrapper"><span class="day-num">' + day + '</span></div>';
                 day++;
+            } else {
+                html += '<td class="otherMonth">';
             }
             html += '</td>';
         }
@@ -58,4 +60,12 @@ Calendar.prototype.render = function(year, month) {
     html += '</tr></tbody></table>';
 
     return html;
-}
+};
+
+Calendar.prototype.dayId = function (year, month, day) {
+    return 'day-' + year + '-' + this._pad(month + 1) + '-' + this._pad(day);
+};
+
+Calendar.prototype._pad = function (num) {
+    return num < 10 ? '0' + num : num;
+};
