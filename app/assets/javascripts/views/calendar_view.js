@@ -30,21 +30,32 @@ _.namespace("App.views");
         onDayClick : function (e) {
             e.preventDefault();
             this.$el.find('.end-day-num').remove();
-            this.$el.find('.highlight').removeClass('highlight');
+            this.$el.find('.highlight, .end-day').removeClass('highlight end-day');
 
-            var el = $(e.target);
-            var date = el.closest('td').attr('id').replace('day-', '');
+            var elTd = $(e.target).closest('td');
+            if (elTd.hasClass("start-day")) {
+                elTd.removeClass('start-day');
+                this._startDate = null;
+                return;
+            }
 
-            var dayTrips = this._trips.where({start_date: date});
+            this.$el.find('.start-day').removeClass('start-day');
+            elTd.addClass('start-day');
+
+            this._startDate = elTd.attr('id').replace('day-', '');
+
+            var dayTrips = this._trips.where({start_date: this._startDate});
             var tripsByEndDate = _.groupBy(dayTrips, function (trip) {
                 return trip.get('end_date');
             });
             _.each(_.keys(tripsByEndDate), function (end_date) {
-                var dateEl = $('#day-' + end_date);
-                var endDayEl = $('<span></span>').addClass('end-day-num').text(tripsByEndDate[end_date].length);
-                dateEl.find('.day-wrapper').append(endDayEl);
-                this.highlightDays(date, end_date);
+                var endDayNumEl = $('<span></span>').addClass('end-day-num').text(tripsByEndDate[end_date].length);
+                $('#day-' + end_date).addClass('end-day')
+                                     .find('.day-wrapper').append(endDayNumEl);
+                this.highlightDays(this._startDate, end_date);
             }, this);
+
+            this.renderTrips(dayTrips);
         },
 
         highlightDays : function (startDay, endDay) {
@@ -71,6 +82,10 @@ _.namespace("App.views");
                 var daysCount = $("<span></span>").addClass('events-count').text(trips.length);
                 this.$el.find("#day-" + day + ' .day-wrapper').append(daysCount)
             }, this);
+        },
+
+        renderTrips : function (trips) {
+            $('#trips').html(JST["templates/home/trips_list"]({trips: trips}));
         },
 
         render: function () {
