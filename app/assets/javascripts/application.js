@@ -5,3 +5,5 @@
 //= require libs/underscore-ux
 //= require libs/backbone
 //= require_tree ./templates/
+//= require i18n
+//= require i18n/translations

@@ -1,6 +1,6 @@
 function Calendar(options) {
-    this.cal_days_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    this.cal_months_labels = ['January', 'February', 'March', 'April',
+    this.cal_days_labels = options.cal_days_labels || ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    this.cal_months_labels = options.cal_months_labels || [nul, 'January', 'February', 'March', 'April',
         'May', 'June', 'July', 'August', 'September',
         'October', 'November', 'December'];
     this.cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -19,7 +19,7 @@ Calendar.prototype.render = function(year, month) {
         }
     }
 
-    var monthName = this.cal_months_labels[month]
+    var monthName = this.cal_months_labels[month + 1]
     var html = '<table class="calendar">'
                 + '<thead>'
                     + '<tr><th colspan="7" class="monthName">'

@@ -1,8 +1,10 @@
+//= require models/trip_model
+
 _.namespace("App.collections");
 
 (function() {
     App.collections.TripCollection = new (Backbone.Collection.extend({
-        model: Backbone.Model,
+        model: App.models.TripModel,
         url: '/trips'
     }));
 })();

@@ -1,0 +1,5 @@
+:each trip in trips
+    .trip
+        %h5= trip.get('track_name')
+        %div
+            %span= trip.startDateText() + ' - ' + trip.endDateText()

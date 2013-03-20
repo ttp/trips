@@ -3,16 +3,6 @@ ua:
     registrations:
       user:
         signed_up: "Ви успішно зареєструвались в системі"
-  date:
-    order:
-      - :day
-      - :month
-      - :year
-    formats:
-      default: "%d.%m.%Y"
-  time:
-    formats:
-      default: "%d.%m.%Y %H:%M"
   helpers:
     links:
       add: "Додати"

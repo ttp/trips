@@ -1,4 +1,5 @@
 //= require libs/calendar
+//= require libs/date
 //= require collections/trip_collection
 
 _.namespace("App.views");
@@ -8,14 +9,59 @@ _.namespace("App.views");
         el: "#calendar",
 
         initialize: function (options) {
-            this._calendar = new Calendar({});
+            this._calendar = new Calendar({
+                cal_days_labels: I18n.t('date.abbr_day_names'),
+                cal_months_labels: I18n.t('date.month_names')
+            });
             this.options = options;
 
             this._trips = App.collections.TripCollection;
-            this._trips.on("reset", this.showTrips, this);
+            this.bindEvents();
 
             this.render();
             this._trips.fetch();
+        },
+
+        bindEvents : function () {
+            this._trips.on("reset", this.showTrips, this);
+            this.$el.delegate('.events-count', 'click', $.proxy(this.onDayClick, this));
+        },
+
+        onDayClick : function (e) {
+            e.preventDefault();
+            this.$el.find('.end-day-num').remove();
+            this.$el.find('.highlight').removeClass('highlight');
+
+            var el = $(e.target);
+            var date = el.closest('td').attr('id').replace('day-', '');
+
+            var dayTrips = this._trips.where({start_date: date});
+            var tripsByEndDate = _.groupBy(dayTrips, function (trip) {
+                return trip.get('end_date');
+            });
+            _.each(_.keys(tripsByEndDate), function (end_date) {
+                var dateEl = $('#day-' + end_date);
+                var endDayEl = $('<span></span>').addClass('end-day-num').text(tripsByEndDate[end_date].length);
+                dateEl.find('.day-wrapper').append(endDayEl);
+                this.highlightDays(date, end_date);
+            }, this);
+        },
+
+        highlightDays : function (startDay, endDay) {
+            var days = this._getDays(new Date(startDay), new Date(endDay));
+            _.each(days, function (day) {
+                $('#day-' + day.toString('yyyy-MM-dd')).addClass("highlight");
+            });
+        },
+
+        _getDays: function (startDate, endDate) {
+            var retVal = [];
+            var current = new Date(startDate);
+            while (current <= endDate) {
+                retVal.push(new Date(current));
+                current = current.next().day();
+            }
+            return retVal;
         },
 
         showTrips : function () {
