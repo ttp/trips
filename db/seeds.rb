@@ -16,5 +16,6 @@ Region.create([
   {id: 1, name: "Carpathian"},
   {id: 2, name: "Crimea"},
   {id: 3, name: "Caucasus"},
-  {id: 4, name: "Turkey"}
+  {id: 4, name: "Turkey"},
+  {id: 5, name: "Nepal"}
 ])

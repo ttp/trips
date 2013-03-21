@@ -12,6 +12,8 @@ class ImportService
 
       if get_track(track_name).nil?
         region = Region.find_by_name(row.field('region'))
+        next if region.nil?
+
         track = Track.new
         track.name = track_name
         track.user_id = @user.id
