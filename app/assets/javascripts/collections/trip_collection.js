@@ -7,7 +7,7 @@ _.namespace("App.collections");
         model: App.models.TripModel,
         url: '/trips',
 
-        comparator = function (item) {
+        comparator : function (item) {
             return item.get("start_date");
         }
     }));
