@@ -26,7 +26,14 @@
         border-width: 1px 1px 0 0;
 
         &.highlight {
-          background-color: #f0f0f0;
+          background: url("/assets/calendar_middle_day_bg.png") repeat-x 0 bottom #f0f0f0;
+
+          &.start-day {
+            background: url("/assets/calendar_start_day_bg.png") no-repeat center bottom #f0f0f0;
+          }
+          &.end-day {
+            background: url("/assets/calendar_end_day_bg.png") no-repeat center bottom #f0f0f0;
+          }
         }
 
         .day-wrapper {

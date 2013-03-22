@@ -14,6 +14,7 @@ _.namespace("App.views");
                 cal_months_labels: I18n.t('date.month_names')
             });
             this.options = options;
+            this._start_date= options._start_date;
 
             this._trips = App.collections.TripCollection;
             this.bindEvents();
@@ -23,7 +24,7 @@ _.namespace("App.views");
         },
 
         bindEvents : function () {
-            this._trips.on("reset", this.showTrips, this);
+            this._trips.on("reset", this.showCalendarTrips, this);
             this.$el.delegate('.events-count', 'click', $.proxy(this.onDayClick, this));
         },
 
@@ -75,7 +76,7 @@ _.namespace("App.views");
             return retVal;
         },
 
-        showTrips : function () {
+        showCalendarTrips : function () {
             this.$el.find('.events-count').remove();
             var grouped = this._trips.groupBy(function (row) {return row.get('start_date');});
             _.each(grouped, function (trips, day) {
@@ -91,8 +92,8 @@ _.namespace("App.views");
         render: function () {
             var data = {
                 calendar: this._calendar,
-                monthNum: 2,
-                year: 2013
+                monthNum: this._start_date.getMonth(),
+                year: this._start_date.getFullYear()
             };
             this.$el.html(JST["templates/home/calendar"](data));
         }
