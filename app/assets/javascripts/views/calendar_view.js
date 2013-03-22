@@ -14,7 +14,7 @@ _.namespace("App.views");
                 cal_months_labels: I18n.t('date.month_names')
             });
             this.options = options;
-            this._start_date= options._start_date;
+            this._start_date= options.start_date;
 
             this._trips = App.collections.TripCollection;
             this.bindEvents();
