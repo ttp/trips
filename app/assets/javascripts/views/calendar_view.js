@@ -30,20 +30,25 @@ _.namespace("App.views");
 
         onDayClick : function (e) {
             e.preventDefault();
-            this.$el.find('.end-day-num').remove();
-            this.$el.find('.highlight, .end-day').removeClass('highlight end-day');
-
-            var elTd = $(e.target).closest('td');
-            if (elTd.hasClass("start-day")) {
-                elTd.removeClass('start-day');
-                this._startDate = null;
-                return;
+            var dayEl = $(e.target).closest('td');
+            if (this._daySelected(dayEl)) {
+                this.deselectDay(dayEl);
+            } else {
+                this.selectDay(dayEl);
             }
+        },
 
-            this.$el.find('.start-day').removeClass('start-day');
-            elTd.addClass('start-day');
+        deselectDay : function () {
+            this.cleanHighlight();
+            this._startDate = null;
+            this.showFilters();
+        },
 
-            this._startDate = elTd.attr('id').replace('day-', '');
+        selectDay : function (dayEl) {
+            this.cleanHighlight();
+            dayEl.addClass('start-day');
+
+            this._startDate = dayEl.attr('id').replace('day-', '');
 
             var dayTrips = this._trips.where({start_date: this._startDate});
             var tripsByEndDate = _.groupBy(dayTrips, function (trip) {
@@ -52,11 +57,32 @@ _.namespace("App.views");
             _.each(_.keys(tripsByEndDate), function (end_date) {
                 var endDayNumEl = $('<span></span>').addClass('end-day-num').text(tripsByEndDate[end_date].length);
                 $('#day-' + end_date).addClass('end-day')
-                                     .find('.day-wrapper').append(endDayNumEl);
+                    .find('.day-wrapper').append(endDayNumEl);
                 this.highlightDays(this._startDate, end_date);
             }, this);
 
             this.renderTrips(dayTrips);
+            this.showTrips();
+        },
+
+        cleanHighlight : function () {
+            this.$el.find('.end-day-num').remove();
+            this.$el.find('.highlight, .end-day').removeClass('highlight end-day');
+            this.$el.find('.start-day').removeClass('start-day');
+        },
+
+        _daySelected : function (dayEl) {
+            return dayEl.hasClass("start-day");
+        },
+
+        showFilters : function () {
+            $('#trips').hide();
+            $('#filters').show();
+        },
+
+        showTrips : function () {
+            $('#trips').show();
+            $('#filters').hide();
         },
 
         highlightDays : function (startDay, endDay) {

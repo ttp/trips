@@ -1,8 +1,4 @@
-.grid {
-  .row {
-
-  }
-
+#calendar {
   .month {
     background-color: #fff;
     min-height: 100px;
@@ -79,6 +75,33 @@
           width: 14%;
         }
       }
+    }
+  }
+}
+
+#trips {
+  .trip {
+    margin-bottom: 5px;
+    font-size: 12px;
+
+    strong {
+      margin-right: 8px;
+    }
+  }
+}
+
+#filters {
+  .regions {
+    padding-left: 10px;
+    label {
+      display: inline;
+      margin-right: 8px;
+    }
+    input {
+      margin: 0 5px 0 0;
+    }
+    .count {
+      color: grey;
     }
   }
 }

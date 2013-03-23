@@ -1,0 +1,8 @@
+%h5= I18n.t('region.region')
+.regions
+  :each trips in regions
+    %div
+      %label
+        %input{type: "checkbox", name: "region", value: __key__}
+        %span= I18n.t('region.' + __key__)
+      %span.count= trips.length

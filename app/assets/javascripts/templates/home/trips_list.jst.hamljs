@@ -1,5 +1,6 @@
 :each trip in trips
     .trip
-        %h5= trip.get('track_name')
+        %strong= trip.get('track_name')
+        %span= I18n.t('region.' + trip.get('region_name'))
         %div
-            %span= trip.startDateText() + ' - ' + trip.endDateText()
+            %span= trip.datesRangeText()
