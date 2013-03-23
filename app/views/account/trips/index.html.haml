@@ -3,18 +3,22 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t('account.track.track')
-      %th= t("account.trip.start")
+      = sortable_header("id", '#')
+      = sortable_header("track", t('account.track.track'))
+      = sortable_header("region", t('region.region'))
+      = sortable_header("start_date", t("account.trip.start"))
       %th= t("account.trip.end")
-      %th= t("fields.created")
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @trips.each do |trip|
       %tr
+        %td= trip.id
         %td= trip.track.name
+        %td= t(trip.track.region.name, :scope => 'region')
         %td= trip.start_date
         %td= trip.end_date
-        %td=l trip.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_account_trip_path(trip), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), account_trip_path(trip), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= will_paginate @trips

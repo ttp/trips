@@ -12,10 +12,17 @@ user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => EN
 puts 'user: ' << user.name
 
 
-Region.create([
-  {id: 1, name: "Carpathian"},
-  {id: 2, name: "Crimea"},
-  {id: 3, name: "Caucasus"},
-  {id: 4, name: "Turkey"},
-  {id: 5, name: "Nepal"}
-])
+Region.delete_all
+regions = [
+    {id: 1, name: "Carpathian"},
+    {id: 2, name: "Crimea"},
+    {id: 3, name: "Caucasus"},
+    {id: 4, name: "Turkey"},
+    {id: 5, name: "Romania"},
+    {id: 6, name: "Nepal"}
+]
+regions.each do |region|
+  row = Region.new(region)
+  row.id = region[:id]
+  row.save
+end

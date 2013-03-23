@@ -16,7 +16,6 @@ ua:
       forgot_password: 'Забули ваш пароль?'
       confirm_instr_question: "Не отримали інструкцій по підвтердженню?"
   actions: "Дії"
-  region: "Регіон"
   fields:
     created: "Створений"
 
@@ -46,3 +45,16 @@ ua:
       add: "Додати похід"
       start: "Початок"
       end: "Закінчення"
+      details: "Деталі походу"
+      url: "Сайт походу"
+      price: "Ціна"
+# Regions
+  region:
+    region: Регіон
+
+    Carpathian: Карпати
+    Crimea: Крим
+    Caucasus: Кавказ
+    Turkey: Турція
+    Romania: Румунія
+    Nepal: Непал

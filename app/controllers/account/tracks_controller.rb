@@ -1,10 +1,22 @@
 class Account::TracksController < ApplicationController
   before_filter :authenticate_user!
 
+  def initialize
+    super
+    @sortable_fields = {
+        "id"     => "id",
+        "region" => "region_id",
+        "name"   => "name"
+    }
+    @default_sort = 'id desc'
+  end
+
   # GET /tracks
   # GET /tracks.json
   def index
+    logger.info(order)
     @tracks = Track.includes(:region).where("user_id = ?", current_user.id)
+                   .paginate(:page => params[:page], :per_page => 10, :order => order)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,7 +60,7 @@ class Account::TracksController < ApplicationController
 
     respond_to do |format|
       if @track.save
-        format.html { redirect_to account_tracks_url, notice: 'Track was successfully created.' }
+        format.html { redirect_to back(account_tracks_url), notice: 'Track was successfully created.' }
         format.json { render json: @track, status: :created, location: @track }
       else
         format.html { render action: "new" }
@@ -61,11 +73,11 @@ class Account::TracksController < ApplicationController
   # PUT /tracks/1.json
   def update
     @track = Track.find(params[:id])
-    redirect_to account_tracks_url if @track.user_id != current_user.id
+    redirect_to back(account_tracks_url) if @track.user_id != current_user.id
 
     respond_to do |format|
       if @track.update_attributes(params[:track])
-        format.html { redirect_to account_tracks_url, notice: 'Track was successfully updated.' }
+        format.html { redirect_to back(account_tracks_url), notice: 'Track was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -78,12 +90,12 @@ class Account::TracksController < ApplicationController
   # DELETE /tracks/1.json
   def destroy
     @track = Track.find(params[:id])
-    redirect_to account_tracks_url if @track.user_id != current_user.id
+    redirect_to request.referer || account_tracks_url if @track.user_id != current_user.id
 
     @track.destroy
 
     respond_to do |format|
-      format.html { redirect_to account_tracks_url }
+      format.html { redirect_to request.referer || account_tracks_url }
       format.json { head :no_content }
     end
   end

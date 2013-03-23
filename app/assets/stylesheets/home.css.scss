@@ -25,14 +25,16 @@
         border-style: solid;
         border-width: 1px 1px 0 0;
 
+
+        $highlight_color: #fdfdfd;
         &.highlight {
-          background: url("/assets/calendar_middle_day_bg.png") repeat-x 0 bottom #f0f0f0;
+          background: url("calendar_middle_day_bg.png") repeat-x 0 bottom $highlight_color;
 
           &.start-day {
-            background: url("/assets/calendar_start_day_bg.png") no-repeat center bottom #f0f0f0;
+            background: url("calendar_start_day_bg.png") no-repeat center bottom $highlight_color;
           }
           &.end-day {
-            background: url("/assets/calendar_end_day_bg.png") no-repeat center bottom #f0f0f0;
+            background: url("calendar_end_day_bg.png") no-repeat center bottom $highlight_color;
           }
         }
 

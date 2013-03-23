@@ -1,7 +1,7 @@
 require 'date'
 
 class Trip < ActiveRecord::Base
-  attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details
+  attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :price, :url
   belongs_to :track
 
   def dates_range

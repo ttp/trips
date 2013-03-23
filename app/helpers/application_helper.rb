@@ -10,4 +10,26 @@ module ApplicationHelper
     HTML
     html.html_safe
   end
+
+  def sortable_header(field, label)
+    classes = 'sortable'
+    sort_params = {
+        sort: field,
+        dir: 'asc'
+    }
+    if params[:sort] === field
+      classes += ' sorted'
+      classes += params[:dir] == 'asc' ? ' headerSortUp' : ' headerSortDown'
+      sort_params[:dir] = 'desc' if params[:dir] == 'asc'
+    end
+
+
+
+    html = <<-HTML
+    <th class="#{classes}">
+      #{link_to label, params.merge(sort_params)}
+    </th>
+    HTML
+    html.html_safe
+  end
 end

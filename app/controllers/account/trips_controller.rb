@@ -1,8 +1,22 @@
 class Account::TripsController < ApplicationController
+  before_filter :authenticate_user!
+
+  def initialize
+    super
+    @sortable_fields = {
+        "id"     => "trips.id",
+        "track" => "track_id",
+        "start_date"   => "start_date",
+        "region"   => "region_id"
+    }
+    @default_sort = 'trips.id desc'
+  end
+
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.includes(:track).where("user_id = ?", current_user.id)
+    @trips = Trip.joins(:track).includes(:track => [:region]).where("trips.user_id = ?", current_user.id)
+                 .paginate(:page => params[:page], :per_page => 10).order(order)
 
     respond_to do |format|
       format.html # index.html.erb
