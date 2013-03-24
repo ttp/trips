@@ -3,9 +3,10 @@
 = simple_form_for [:account, @trip], :html => { :class => 'form-horizontal span9' } do |f|
   = hidden_field_tag :back_url, params[:back_url] || request.referer
 
-  = f.input :track_id, :collection => Track.where("user_id = ?", current_user.id), :label => t('account.track.track')
-  = f.input :price, :label => t('account.trip.price')
+  = f.input :track_id, :collection => grouped_by_region(Track.find_all_by_user_id(current_user.id), Region.sorted),
+    :as => :grouped_select, :group_method => :last, :label => t('account.track.track')
   = f.input :dates_range, :label => t('account.trip.dates')
+  = f.input :price, :label => t('account.trip.price')
   = f.input :trip_details, input_html: {:rows => 10}, :label => t('account.trip.details')
   = f.input :url, :label => t('account.trip.url')
   .form-actions

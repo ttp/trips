@@ -4,6 +4,8 @@ class Trip < ActiveRecord::Base
   attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :price, :url
   belongs_to :track
 
+  validates :track_id, :dates_range, :presence => true
+
   def dates_range
     (I18n.l(start_date) + " - " + I18n.l(end_date)) unless (start_date.nil? || end_date.nil?)
   end
