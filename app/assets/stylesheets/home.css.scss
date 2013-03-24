@@ -1,4 +1,13 @@
+.grid {
+  .calendar-header {
+    font-weight: bold;
+    font-size: 12pt;
+    text-align: center;
+  }
+}
 #calendar {
+  overflow: hidden;
+
   .month {
     background-color: #fff;
     min-height: 100px;

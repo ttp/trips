@@ -1,15 +1,14 @@
 = javascript_include_tag "init/home_init"
-%h3= t('account.trips')
 .grid
   .row-fluid
+    .span1
+      %a.btn.prev{href: "#"}
+        %i.icon-backward
+    .span6.calendar-header= t('trips_calendar')
+    .span1
+      %a.btn.next.pull-right{href: "#"}
+        %i.icon-forward
+  .row-fluid
     #calendar.span8
-      - month = 3
-      - 2.times do
-        .row-fluid
-          - 2.times do |i|
-            .span6.month
-              = calendar(:year => 2013, :month => month, :first_day_of_week => 1) do |day|
-                - render_calendar_day(day)
-              - month += 1
     #filters.span4
     #trips.span4.x-hidden

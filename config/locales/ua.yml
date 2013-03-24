@@ -30,11 +30,12 @@ ua:
     current_password_hint: 'Введіть свій поточний парль щоб підтвердити зміни'
     remember_me: 'Запам"ятати мене'
 
+  trips_calendar: 'Календар походів'
+
   account:
     edit: 'Редагувати аккаунт'
     cancel: 'Видалити мій аккаунт'
     cancal_unhappy: 'Набрид наш сайт?'
-
 
 # Tracks
     tracks: "Маршрути"
