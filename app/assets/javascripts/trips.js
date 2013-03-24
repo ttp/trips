@@ -11,8 +11,8 @@ $(function () {
             toLabel: 'Кінець',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: ['Нд.', 'Пн.', 'Вт.', 'Ср.', 'Чт.', 'Пт.', 'Сб.'],
-            monthNames: Date.CultureInfo.monthNames,
+            daysOfWeek: I18n.t('date.abbr_day_names'),
+            monthNames: I18n.t('date.month_names').slice(1),
             firstDay: 1
         }
     });

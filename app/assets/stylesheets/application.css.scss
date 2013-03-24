@@ -31,9 +31,11 @@ a.btn-primary:visited {
   color: white;
 }
 .simple_form {
-  input, textarea {
-    &.string, &.text {
-      width: 500px;
+  &.span9 {
+    input, textarea {
+      &.string, &.text {
+        width: 510px;
+      }
     }
   }
 }

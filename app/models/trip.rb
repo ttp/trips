@@ -5,7 +5,7 @@ class Trip < ActiveRecord::Base
   belongs_to :track
 
   def dates_range
-    start_date.to_s + "-" + end_date.to_s unless (start_date.nil? && end_date.nil?)
+    (I18n.l(start_date) + " - " + I18n.l(end_date)) unless (start_date.nil? || end_date.nil?)
   end
 
   def dates_range=(value)

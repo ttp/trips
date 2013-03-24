@@ -8,31 +8,44 @@ ua:
       add: "Додати"
       edit: "Редагувати"
       destroy: "Видалити"
+      confirm: "Ви впевненені?"
       save: "Зберегти"
       cancel: "Відміна"
+      back: 'Повернутись'
       sign_in: "Увійти"
-      logout: "Вийти"
+      sign_out: "Вийти"
       sign_up: "Зареєструватись"
       forgot_password: 'Забули ваш пароль?'
       confirm_instr_question: "Не отримали інструкцій по підвтердженню?"
-  actions: "Дії"
+    actions: "Дії"
   fields:
     created: "Створений"
 
   user:
     name: 'Ім"я'
     password: 'Пароль'
+    password_hint: 'Залиште пустим, якщо ви не хочете змінювати пароль'
     password_confirmation: 'Повторіть пароль'
+    current_password: 'Поточний пароль'
+    current_password_hint: 'Введіть свій поточний парль щоб підтвердити зміни'
     remember_me: 'Запам"ятати мене'
 
   account:
+    edit: 'Редагувати аккаунт'
+    cancel: 'Видалити мій аккаунт'
+    cancal_unhappy: 'Набрид наш сайт?'
+
 
 # Tracks
-    my_trips: 'Мої походи'
-
     tracks: "Маршрути"
     new_track: "Додати маршрут"
     track:
+      new: 'Новий маршрут'
+      edit: 'Редагувати маршрут'
+      add: 'Додати маршрут'
+      was_created: 'Маршрут створено.'
+      was_updated: 'Маршрут оновлено.'
+
       name: "Назва"
       description: "Опис"
       track: "Маршрут"
@@ -40,11 +53,17 @@ ua:
 
 # Trips
     trips: "Походи"
+    my_trips: 'Мої походи'
     trip:
       new: "Новий похід"
+      edit: "Редагувати похід"
       add: "Додати похід"
+      was_created: 'Похід створено.'
+      was_updated: 'Похід оновлено.'
+
       start: "Початок"
       end: "Закінчення"
+      dates: "Дати походу"
       details: "Деталі походу"
       url: "Сайт походу"
       price: "Ціна"

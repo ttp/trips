@@ -60,7 +60,7 @@ class Account::TracksController < ApplicationController
 
     respond_to do |format|
       if @track.save
-        format.html { redirect_to back(account_tracks_url), notice: 'Track was successfully created.' }
+        format.html { redirect_to back(account_tracks_url), notice: I18n.t('account.track.was_created') }
         format.json { render json: @track, status: :created, location: @track }
       else
         format.html { render action: "new" }
@@ -77,7 +77,7 @@ class Account::TracksController < ApplicationController
 
     respond_to do |format|
       if @track.update_attributes(params[:track])
-        format.html { redirect_to back(account_tracks_url), notice: 'Track was successfully updated.' }
+        format.html { redirect_to back(account_tracks_url), notice: I18n.t('account.track.was_updated') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

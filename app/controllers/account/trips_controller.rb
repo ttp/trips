@@ -60,7 +60,7 @@ class Account::TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to account_trips_url, notice: 'Trip was successfully created.' }
+        format.html { redirect_to back(account_trips_url), notice: I18n.t('account.trip.was_created') }
         format.json { render json: @trip, status: :created, location: @trip }
       else
         format.html { render action: "new" }
@@ -77,7 +77,7 @@ class Account::TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
-        format.html { redirect_to account_trips_url, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to back(account_trips_url), notice: I18n.t('account.trip.was_updated') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -94,7 +94,7 @@ class Account::TripsController < ApplicationController
     @trip.destroy
 
     respond_to do |format|
-      format.html { redirect_to account_trips_url }
+      format.html { redirect_to request.referer || account_trips_url }
       format.json { head :no_content }
     end
   end

@@ -1,15 +1,16 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
+%h2= t('account.edit')
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f|
   = f.error_notification
   = display_base_errors resource
-  = f.input :name, :autofocus => true
+  = f.input :name, :autofocus => true, :label => t('user.name')
   = f.input :email, :required => true
-  = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
-  = f.input :password_confirmation, :required => false
-  = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
-  = f.button :submit, 'Update', :class => 'btn-primary'
-%h3 Cancel my account
+  = f.input :password, :autocomplete => "off", :hint => t('user.password_hint'), :required => false,
+    :label => t('user.password')
+  = f.input :password_confirmation, :required => false, :label => t('user.password_confirmation')
+  = f.input :current_password, :hint => t('user.current_password_hint'), :required => true,
+    :label => t('user.current_password')
+  = f.button :submit, t('helpers.links.save'), :class => 'btn-primary'
+%h3= t('account.cancel')
 %p
-  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}.
-= link_to "Back", :back
+  #{t('account.cancal_unhappy')} #{link_to t('account.cancel'), registration_path(resource_name), :data => { :confirm => t('helpers.links.confirm') }, :method => :delete}.
+= link_to t('helpers.links.back'), :back
