@@ -31,6 +31,8 @@ _.namespace("App.views");
         },
 
         scrollToPrevMonths : function (e) {
+            if ($(":animated").length) return;
+
             var rows = this._visibleRows();
             var prev = rows.first().prev();
             if (!prev.length) return;
@@ -38,23 +40,32 @@ _.namespace("App.views");
             var height = rows.first().height();
             prev.css('margin-top', -height + 'px').show();
             prev.animate({'margin-top': '0px'}, 500);
-            rows.last().slideUp(500, function () {
-            });
+            rows.last().slideUp(500);
+            $(":animated").promise().done($.proxy(function() {
+                this.refreshNavigation()
+            }, this));
         },
 
         scrollToNextMonths : function (e) {
+            if ($(":animated").length) return;
+
             var rows = this._visibleRows();
             var next = rows.last().next();
             if (!next.length) return;
 
             var height = rows.first().height();
-            rows.first().animate({'margin-top': -height + 'px'}, {
-                duration: 500,
-                complete: function () {
-                    $(this).hide();
-                }
-            });
+            rows.first().animate({'margin-top': -height + 'px'}, 500);
             rows.last().next().slideDown(500);
+            $(":animated").promise().done($.proxy(function() {
+                rows.first().hide();
+                this.refreshNavigation();
+            }, this));
+        },
+
+        refreshNavigation : function () {
+            var rows = this._visibleRows();
+            $('a.prev').toggleClass('disabled', !rows.first().prev().length);
+            $('a.next').toggleClass('disabled', !rows.last().next().length);
         },
 
         _visibleRows : function () {
@@ -151,10 +162,20 @@ _.namespace("App.views");
         render: function () {
             var data = {
                 calendar: this._calendar,
-                monthNum: this._start_date.getMonth(),
-                year: this._start_date.getFullYear()
+                class_name : ''
             };
-            this.$el.html(JST["templates/home/calendar"](data));
+            var html = '';
+            var date = this._start_date.clone(), row;
+            for (var i = 0; i < 6; i++) {
+                if (i == 2) {
+                    data.class_name = 'x-hidden';
+                }
+                data.dates = [date, date.clone().addMonths(1)]
+                html += JST["templates/home/calendar_row"](data);
+                date = date.add(2).month();
+            }
+            this.$el.html(html);
+            this.refreshNavigation();
         }
     });
 })();

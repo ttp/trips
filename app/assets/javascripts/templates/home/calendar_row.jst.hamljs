@@ -1,0 +1,4 @@
+.row-fluid{class: class_name}
+  :each date in dates
+    .span6.month
+      != calendar.render(date.getFullYear(), date.getMonth())
