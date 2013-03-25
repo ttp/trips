@@ -26,6 +26,39 @@ _.namespace("App.views");
         bindEvents : function () {
             this._trips.on("reset", this.showCalendarTrips, this);
             this.$el.delegate('.events-count', 'click', $.proxy(this.onDayClick, this));
+            $('a.prev').click($.proxy(this.scrollToPrevMonths, this));
+            $('a.next').click($.proxy(this.scrollToNextMonths, this));
+        },
+
+        scrollToPrevMonths : function (e) {
+            var rows = this._visibleRows();
+            var prev = rows.first().prev();
+            if (!prev.length) return;
+
+            var height = rows.first().height();
+            prev.css('margin-top', -height + 'px').show();
+            prev.animate({'margin-top': '0px'}, 500);
+            rows.last().slideUp(500, function () {
+            });
+        },
+
+        scrollToNextMonths : function (e) {
+            var rows = this._visibleRows();
+            var next = rows.last().next();
+            if (!next.length) return;
+
+            var height = rows.first().height();
+            rows.first().animate({'margin-top': -height + 'px'}, {
+                duration: 500,
+                complete: function () {
+                    $(this).hide();
+                }
+            });
+            rows.last().next().slideDown(500);
+        },
+
+        _visibleRows : function () {
+            return this.$el.find('.row-fluid:visible');
         },
 
         onDayClick : function (e) {
