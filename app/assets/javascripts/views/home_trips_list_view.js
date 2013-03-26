@@ -10,12 +10,16 @@ _.namespace("App.views");
             this.options = options;
 
             this._trips = App.collections.TripCollection;
-            this._trips.on("reset", this.render, this);
+            this._trips.on("filter:day", this.render, this);
         },
 
-        render: function () {
+        render: function (day) {
+            if (day === null) {
+                this.$el.html('');
+                return;
+            }
             var data = {
-                trips: this._trips.toArray()
+                trips: this._trips.where({'start_date' : day})
             };
             this.$el.html(JST["templates/home/trips_list"](data));
         }

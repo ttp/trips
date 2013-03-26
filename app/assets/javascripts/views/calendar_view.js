@@ -86,6 +86,7 @@ _.namespace("App.views");
             this.cleanHighlight();
             this._startDate = null;
             this.showFilters();
+            this._trips.trigger('filter:day', this._startDate);
         },
 
         selectDay : function (dayEl) {
@@ -104,8 +105,7 @@ _.namespace("App.views");
                     .find('.day-wrapper').append(endDayNumEl);
                 this.highlightDays(this._startDate, end_date);
             }, this);
-
-            this.renderTrips(dayTrips);
+            this._trips.trigger('filter:day', this._startDate);
             this.showTrips();
         },
 
@@ -153,10 +153,6 @@ _.namespace("App.views");
                 var daysCount = $("<span></span>").addClass('events-count').text(trips.length);
                 this.$el.find("#day-" + day + ' .day-wrapper').append(daysCount)
             }, this);
-        },
-
-        renderTrips : function (trips) {
-            $('#trips').html(JST["templates/home/trips_list"]({trips: trips}));
         },
 
         render: function () {
