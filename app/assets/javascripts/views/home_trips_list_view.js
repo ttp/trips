@@ -19,7 +19,7 @@ _.namespace("App.views");
                 return;
             }
             var data = {
-                trips: this._trips.where({'start_date' : day})
+                trips: this._trips.filtered({'start_date' : day})
             };
             this.$el.html(JST["templates/home/trips_list"](data));
         }

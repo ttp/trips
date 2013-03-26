@@ -36,15 +36,22 @@ _.namespace("App.collections");
             this.trigger('filter:changed');
         },
 
-        filtered : function () {
-            if (!_.size(this._filters)) {
+        filtered : function (filters) {
+            if (!_.isUndefined(filters)) {
+                filters = _.extend(filters, this._filters);
+            } else {
+                filters = this._filters;
+            }
+            
+            if (!_.size(filters)) {
                 return this.toArray();
             }
 
             return this.filter(function (item) {
                 var match = true;
-                for (var type in this._filters) {
-                    match = match && _.contains(this._filters[type], item.get(type))
+                for (var type in filters) {
+                    match = match && (_.isArray(filters[type]) ?
+                        _.contains(filters[type], item.get(type)) : item.get(type) == filters[type]);
                 }
                 return match;
             }, this);
