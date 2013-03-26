@@ -96,7 +96,7 @@ _.namespace("App.views");
 
             this._startDate = dayEl.attr('id').replace('day-', '');
 
-            var dayTrips = this._trips.where({start_date: this._startDate});
+            var dayTrips = this._trips.filtered({start_date: this._startDate});
             var tripsByEndDate = _.groupBy(dayTrips, function (trip) {
                 return trip.get('end_date');
             });
