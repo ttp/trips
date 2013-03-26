@@ -25,6 +25,7 @@ _.namespace("App.views");
 
         bindEvents : function () {
             this._trips.on("reset", this.showCalendarTrips, this);
+            this._trips.on("filter:changed", this.showCalendarTrips, this);
             this.$el.delegate('.events-count', 'click', $.proxy(this.onDayClick, this));
             $('a.prev').click($.proxy(this.scrollToPrevMonths, this));
             $('a.next').click($.proxy(this.scrollToNextMonths, this));
@@ -148,7 +149,9 @@ _.namespace("App.views");
 
         showCalendarTrips : function () {
             this.$el.find('.events-count').remove();
-            var grouped = this._trips.groupBy(function (row) {return row.get('start_date');});
+            var grouped = _.groupBy(this._trips.filtered(), function (row) {
+                return row.get('start_date');
+            });
             _.each(grouped, function (trips, day) {
                 var daysCount = $("<span></span>").addClass('events-count').text(trips.length);
                 this.$el.find("#day-" + day + ' .day-wrapper').append(daysCount)

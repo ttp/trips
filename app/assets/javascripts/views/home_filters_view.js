@@ -6,6 +6,10 @@ _.namespace("App.views");
     App.views.HomeFiltersView = Backbone.View.extend({
         el: "#filters",
 
+        events: {
+            'change input': 'updateFilter'
+        },
+
         initialize: function (options) {
             this.options = options;
 
@@ -17,8 +21,16 @@ _.namespace("App.views");
             var data = {
                 regions: this._trips.groupBy(function(row){return row.get('region_name');})
             };
-            console.log(data);
             this.$el.html(JST["templates/home/filters"](data));
+        },
+
+        updateFilter : function (e) {
+            var input = $(e.target);
+            if (input.is(':checked')) {
+                this._trips.addFilter(input.attr('name'), input.val());
+            } else {
+                this._trips.removeFilter(input.attr('name'), input.val());
+            }
         }
     });
 })();
