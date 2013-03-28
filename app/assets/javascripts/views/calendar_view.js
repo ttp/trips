@@ -92,7 +92,7 @@ _.namespace("App.views");
 
         selectDay : function (dayEl) {
             this.cleanHighlight();
-            dayEl.addClass('start-day');
+            dayEl.addClass('selected');
 
             this._startDate = dayEl.attr('id').replace('day-', '');
 
@@ -113,11 +113,11 @@ _.namespace("App.views");
         cleanHighlight : function () {
             this.$el.find('.end-day-num').remove();
             this.$el.find('.highlight, .end-day').removeClass('highlight end-day');
-            this.$el.find('.start-day').removeClass('start-day');
+            this.$el.find('.selected').removeClass('selected');
         },
 
         _daySelected : function (dayEl) {
-            return dayEl.hasClass("start-day");
+            return dayEl.hasClass("selected");
         },
 
         showFilters : function () {
@@ -149,12 +149,15 @@ _.namespace("App.views");
 
         showCalendarTrips : function () {
             this.$el.find('.events-count').remove();
+            this.$el.find('.start-day').removeClass('start-day');
+
             var grouped = _.groupBy(this._trips.filtered(), function (row) {
                 return row.get('start_date');
             });
             _.each(grouped, function (trips, day) {
                 var daysCount = $("<span></span>").addClass('events-count').text(trips.length);
-                this.$el.find("#day-" + day + ' .day-wrapper').append(daysCount)
+                this.$el.find("#day-" + day).addClass('start-day')
+                        .find('.day-wrapper').append(daysCount);
             }, this);
         },
 

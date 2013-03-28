@@ -31,7 +31,10 @@
         border-width: 1px 1px 0 0;
 
 
-        $highlight_color: #fdfdfd;
+        $highlight_color: #e0e099;
+        &.start-day {
+            background-color: #e0e0e0;
+        }
         &.highlight {
           background: url("calendar_middle_day_bg.png") repeat-x 0 bottom $highlight_color;
 
