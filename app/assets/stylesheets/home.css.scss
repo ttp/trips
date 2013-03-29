@@ -31,19 +31,26 @@
         border-width: 1px 1px 0 0;
 
 
-        $highlight_color: #e0e099;
-        &.start-day {
-            background-color: #e0e0e0;
-        }
+        $highlight_color: #c1e0aa;
         &.highlight {
-          background: url("calendar_middle_day_bg.png") repeat-x 0 bottom $highlight_color;
+          background: url("calendar_middle_day_bg.png") repeat-x center bottom $highlight_color;
 
-          &.start-day {
+          &.start-day .day-wrapper {
+            background-color: transparent;
+          }
+
+          &.start-day.selected {
             background: url("calendar_start_day_bg.png") no-repeat center bottom $highlight_color;
           }
+
           &.end-day {
             background: url("calendar_end_day_bg.png") no-repeat center bottom $highlight_color;
           }
+        }
+
+        &.start-day .day-wrapper {
+          background-color: $highlight_color;
+          border-radius: 5px;
         }
 
         .day-wrapper {
