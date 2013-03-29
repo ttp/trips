@@ -31,6 +31,11 @@ ua:
     remember_me: 'Запам"ятати мене'
 
   trips_calendar: 'Календар походів'
+  trip:
+    site: "Сайт"
+    users: "Учасники походу"
+    want_to_join: Хочуть приєднатися
+    join: Приєднатись
 
   account:
     edit: 'Редагувати аккаунт'

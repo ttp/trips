@@ -1,6 +1,7 @@
 Pohody::Application.routes.draw do
 
   get "trips" => "trips#index"
+  get "trips/:id" => "trips#show"
 
   authenticated :user do
     root :to => 'home#index'

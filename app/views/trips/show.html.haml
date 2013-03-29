@@ -1,0 +1,27 @@
+.grid
+  .row-fluid
+    .span8
+      %h1= @track.name
+
+      %p
+        %b= t('region.region') + ':'
+        %span= t(@region.name, :scope => 'region')
+      
+      %p.dates
+        %b= t('account.trip.dates') + ":"
+        %span= l(@trip.start_date) + " - " + l(@trip.end_date)
+      
+      %p
+        %b= t('trip.site') + ":"
+        %a{href: @trip.url || @track.url}= @trip.url || @track.url
+      
+      .description!= @track.description.gsub(/\n+/, "<br/>")
+    .span4
+      %h5= t('trip.users')
+      %p
+        Users list here
+      %h5= t('trip.want_to_join')
+      %p
+        Users list here
+      %p
+        %button.btn.btn-primary= t('trip.join')

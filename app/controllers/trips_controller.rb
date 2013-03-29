@@ -8,4 +8,12 @@ class TripsController < ApplicationController
       format.json { render json: @trips }
     end
   end
+
+  def show
+    @trip = Trip.find(params[:id])
+    @track = @trip.track
+    @region = @track.region
+
+    
+  end
 end
