@@ -1,7 +1,7 @@
 .grid
   .row-fluid
     .span8
-      %h1= @track.name
+      %h3= @track.name
 
       %p
         %b= t('region.region') + ':'
@@ -34,5 +34,6 @@
             %p
               = image_tag user.gravatar_url(:size => 50)
               = user.name
-      %p
-        %button.btn.btn-primary= t('trip.join')
+      - if @trip.start_date > Time.now.to_date && @trip.has_available_places?
+        %p
+          %button.btn.btn-primary= t('trip.join')
