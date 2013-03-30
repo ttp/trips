@@ -11,6 +11,8 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @joined_users = @trip.joined_users
+    @want_to_join_users = @trip.want_to_join_users
     @track = @trip.track
     @region = @track.region
 

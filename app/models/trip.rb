@@ -23,4 +23,17 @@ class Trip < ActiveRecord::Base
       INNER JOIN regions ON tracks.region_id = regions.id
       WHERE trips.start_date >= #{quote_value(DateTime.now.to_date.to_s)}")
   end
+
+  def joined_users
+    users.where("trip_users.approved = 1")
+  end
+
+  def want_to_join_users
+    users.where("trip_users.approved = 0")
+  end
+
+  def users
+    User.joins("join trip_users on trip_users.user_id = users.id")
+      .where("trip_users.trip_id = #{self.id}")
+  end
 end

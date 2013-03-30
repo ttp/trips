@@ -10,20 +10,29 @@
       %p.dates
         %b= t('account.trip.dates') + ":"
         %span= l(@trip.start_date) + " - " + l(@trip.end_date)
-      
-      %p
-        %b= t('trip.site') + ":"
-        %a{href: @trip.url || @track.url}= @trip.url || @track.url
+      -if !@trip.url.empty? || !@track.url.empty?
+        %p
+          %b= t('trip.site') + ":"
+          %a{href: @trip.url.empty? ? @track.url : @trip.url}
+            = @trip.url.empty? ? @track.url : @trip.url
       
       .description!= @track.description.gsub(/\n+/, "<br/>")
     .span4
       %h5= t('trip.users')
-      %p
-        - if user_signed_in?
-          = image_tag current_user.gravatar_url(:size => 50)
-          = current_user.name
-      %h5= t('trip.want_to_join')
-      %p
-        Users list here
+      .trip-users
+        - if @joined_users.size > 0
+          - @joined_users.each do |user|
+            %p
+              = image_tag user.gravatar_url(:size => 50)
+              = user.name
+        - else
+          %p= t('trip.no_users')
+      - if @want_to_join_users.size > 0
+        %h5= t('trip.want_to_join')
+        .want-to-join-users
+          - @want_to_join_users.each do |user|
+            %p
+              = image_tag user.gravatar_url(:size => 50)
+              = user.name
       %p
         %button.btn.btn-primary= t('trip.join')
