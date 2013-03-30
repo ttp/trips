@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
   def index
-    @trips = Trip.latest
+    @trips = Trip.for_year
     render json: @trips and return
 
     respond_to do |format|

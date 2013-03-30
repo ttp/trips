@@ -14,14 +14,16 @@ class Trip < ActiveRecord::Base
     self.start_date, self.end_date = value.split(" - ")
   end
 
-  def self.latest
+  def self.for_year
+    start_at = Time.now
+    end_at = Time.new(start_at.year + 1, start_at.month, 1)
     connection.select_all(
       "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, tracks.name as track_name,
         regions.name as region_name
       FROM trips
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
-      WHERE trips.start_date >= #{quote_value(DateTime.now.to_date.to_s)}")
+      WHERE trips.start_date BETWEEN #{quote_value(start_at.to_date.to_s)} AND #{quote_value(end_at.to_date.to_s)}")
   end
 
   def joined_users
@@ -35,5 +37,9 @@ class Trip < ActiveRecord::Base
   def users
     User.joins("join trip_users on trip_users.user_id = users.id")
       .where("trip_users.trip_id = #{self.id}")
+  end
+
+  def has_available_places?
+    true
   end
 end
