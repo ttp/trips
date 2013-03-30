@@ -28,3 +28,4 @@ gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri
 gem "calendar_helper"
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
+gem 'gravtastic'

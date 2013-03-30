@@ -19,7 +19,9 @@
     .span4
       %h5= t('trip.users')
       %p
-        Users list here
+        - if user_signed_in?
+          = image_tag current_user.gravatar_url(:size => 50)
+          = current_user.name
       %h5= t('trip.want_to_join')
       %p
         Users list here
