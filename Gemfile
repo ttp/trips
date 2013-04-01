@@ -29,3 +29,4 @@ gem "calendar_helper"
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
 gem 'gravtastic'
+gem 'RedCloth'

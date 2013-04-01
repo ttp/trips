@@ -9,7 +9,7 @@ _.namespace("App.collections");
         _filters: {},
 
         comparator : function (item) {
-            return item.get("start_date");
+            return item.get("start_date") + " " + item.get("end_date");
         },
 
         setFilter : function (type, value) {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330092934) do
+ActiveRecord::Schema.define(:version => 20130331081316) do
 
   create_table "regions", :force => true do |t|
     t.string   "name"
@@ -22,10 +22,10 @@ ActiveRecord::Schema.define(:version => 20130330092934) do
   create_table "tracks", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "track"
+    t.text     "track",       :limit => 255
     t.string   "url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "region_id"
     t.integer  "user_id"
   end

@@ -10,13 +10,16 @@
       %p.dates
         %b= t('account.trip.dates') + ":"
         %span= l(@trip.start_date) + " - " + l(@trip.end_date)
-      -if !@trip.url.empty? || !@track.url.empty?
+      - if trip_url(@trip, @track)
         %p
           %b= t('trip.site') + ":"
-          %a{href: @trip.url.empty? ? @track.url : @trip.url}
-            = @trip.url.empty? ? @track.url : @trip.url
+          %a{href: trip_url(@trip, @track)}
+            = trip_url(@trip, @track)
       
-      .description!= @track.description.gsub(/\n+/, "<br/>")
+      %p.track
+        %b= t('account.track.track') + ":"
+        %span= @track.track
+      .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
     .span4
       %h5= t('trip.users')
       .trip-users

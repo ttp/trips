@@ -32,25 +32,26 @@
 
 
         $highlight_color: #c1e0aa;
-        &.highlight {
-          background: url("calendar_middle_day_bg.png") repeat-x center bottom $highlight_color;
-
-          &.start-day .day-wrapper {
-            background-color: transparent;
-          }
+        &.track {
+          background: url("calendar_middle_day_bg.png") repeat-x center bottom;
 
           &.start-day.selected {
-            background: url("calendar_start_day_bg.png") no-repeat center bottom $highlight_color;
+            background: url("calendar_start_day_bg.png") no-repeat center bottom;
           }
 
           &.end-day {
-            background: url("calendar_end_day_bg.png") no-repeat center bottom $highlight_color;
+            background: url("calendar_end_day_bg.png") no-repeat center bottom;
+          }
+
+          &.highlight, &.highlight.selected {
+            background-color: $highlight_color;
           }
         }
 
         &.start-day .day-wrapper {
-          background-color: $highlight_color;
+          background: url("backpacker_bg.png") no-repeat center center;
           border-radius: 5px;
+          cursor: pointer;
         }
 
         .day-wrapper {
@@ -78,11 +79,17 @@
           }
 
           .events-count {
-            color: #009900;
-            display: inline-block;
-            font-size: 12pt;
-            width: 100%;
-            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #fff;
+            display: block;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 10px;
+            padding: 1px 2px;
+            background-color: #2C7025;
+            border-radius: 3px;
           }
         }
 

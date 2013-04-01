@@ -26,7 +26,11 @@ _.namespace("App.views");
         bindEvents : function () {
             this._trips.on("reset", this.showCalendarTrips, this);
             this._trips.on("filter:changed", this.showCalendarTrips, this);
-            this.$el.delegate('.events-count', 'click', $.proxy(this.onDayClick, this));
+
+            this._trips.on("trip:hover", this.highlightTrip, this);
+            this._trips.on("trip:out", this.cleanHighlight, this);
+
+            this.$el.delegate('td.start-day', 'click', $.proxy(this.onDayClick, this));
             $('a.prev').click($.proxy(this.scrollToPrevMonths, this));
             $('a.next').click($.proxy(this.scrollToNextMonths, this));
         },
@@ -75,7 +79,7 @@ _.namespace("App.views");
 
         onDayClick : function (e) {
             e.preventDefault();
-            var dayEl = $(e.target).closest('td');
+            var dayEl = $(e.currentTarget);
             if (this._daySelected(dayEl)) {
                 this.deselectDay(dayEl);
             } else {
@@ -84,14 +88,14 @@ _.namespace("App.views");
         },
 
         deselectDay : function () {
-            this.cleanHighlight();
+            this.cleanTracks();
             this._startDate = null;
             this.showFilters();
             this._trips.trigger('filter:day', this._startDate);
         },
 
         selectDay : function (dayEl) {
-            this.cleanHighlight();
+            this.cleanTracks();
             dayEl.addClass('selected');
 
             this._startDate = dayEl.attr('id').replace('day-', '');
@@ -104,16 +108,22 @@ _.namespace("App.views");
                 var endDayNumEl = $('<span></span>').addClass('end-day-num').text(tripsByEndDate[end_date].length);
                 $('#day-' + end_date).addClass('end-day')
                     .find('.day-wrapper').append(endDayNumEl);
-                this.highlightDays(this._startDate, end_date);
+                this.drawTripTrack(this._startDate, end_date);
             }, this);
             this._trips.trigger('filter:day', this._startDate);
             this.showTrips();
         },
 
-        cleanHighlight : function () {
+        drawTripTrack : function (start_day, end_day) {
+            var days = this._getDays(new Date(start_day), new Date(end_day));
+            _.each(days, function (day) {
+                $('#day-' + day.toString('yyyy-MM-dd')).addClass("track");
+            });
+        },
+
+        cleanTracks : function () {
             this.$el.find('.end-day-num').remove();
-            this.$el.find('.highlight, .end-day').removeClass('highlight end-day');
-            this.$el.find('.selected').removeClass('selected');
+            this.$el.find('.track, .end-day, .selected').removeClass('track end-day selected');
         },
 
         _daySelected : function (dayEl) {
@@ -128,6 +138,19 @@ _.namespace("App.views");
         showTrips : function () {
             $('#trips').show();
             $('#filters').hide();
+        },
+
+        highlightTrip : function (trip_id) {
+            if (trip_id) {
+                var trip = this._trips.get(trip_id);
+                this.highlightDays(trip.get('start_date'), trip.get('end_date'));
+            } else {
+                this.cleanHighlight();
+            }
+        },
+
+        cleanHighlight : function () {
+            this.$el.find('.highlight').removeClass('highlight');
         },
 
         highlightDays : function (startDay, endDay) {

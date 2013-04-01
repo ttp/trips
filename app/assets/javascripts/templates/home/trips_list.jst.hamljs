@@ -1,6 +1,8 @@
 :each trip in trips
-    .trip
+    .trip{data-trip-id: trip.get('id')}
         %a.name{href: '/trips/' + trip.get('id')}= trip.get('track_name')
         %span= I18n.t('region.' + trip.get('region_name'))
         %div
             %span= trip.datesRangeText()
+            &nbsp;
+            %span.icon-eye-open

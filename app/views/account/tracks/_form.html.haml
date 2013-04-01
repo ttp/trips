@@ -5,8 +5,8 @@
 
   = f.input :name, :label => t('account.track.name')
   = f.input :region_id, :collection => Region.sorted, :label_method => :t
-  = f.input :description, input_html: {:rows => 10}, :label => t('account.track.description')
-  = f.input :track, :label => t('account.track.track')
+  = f.input :track, input_html: {:rows => 5}, :label => t('account.track.track')
+  = f.input :description, :label => t('account.track.description')
   = f.input :url, :label => t('account.track.url')
   .form-actions
     = f.button :submit, :value => t('helpers.links.save'), :class => 'btn-primary'

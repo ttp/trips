@@ -22,6 +22,18 @@ _.namespace("App.views");
                 trips: this._trips.filtered({'start_date' : day})
             };
             this.$el.html(JST["templates/home/trips_list"](data));
+            this.bindEvents();
+        },
+
+        bindEvents : function () {
+            var trips = this._trips;
+            this.$el.find('.icon-eye-open')
+                .mouseenter(function () {
+                    trips.trigger('trip:hover', $(this).closest('.trip').data('trip-id'))
+                })
+                .mouseleave(function () {
+                    trips.trigger('trip:out', $(this).closest('.trip').data('trip-id'))
+                });
         }
     });
 })();
