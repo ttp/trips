@@ -30,17 +30,17 @@
         border-style: solid;
         border-width: 1px 1px 0 0;
 
-
+        $slices_image: "calendar_slices.png";
         $highlight_color: #c1e0aa;
         &.track {
-          background: url("calendar_middle_day_bg.png") repeat-x center bottom;
+          background: url($slices_image) repeat-x center -60px;
 
           &.start-day.selected {
-            background: url("calendar_start_day_bg.png") no-repeat center bottom;
+            background: url($slices_image) no-repeat center 29px;
           }
 
           &.end-day {
-            background: url("calendar_end_day_bg.png") no-repeat center bottom;
+            background: url($slices_image) no-repeat center -15px;
           }
 
           &.highlight, &.highlight.selected {
@@ -49,7 +49,7 @@
         }
 
         &.start-day .day-wrapper {
-          background: url("backpacker_bg.png") no-repeat center center;
+          background: url("calendar_slices.png") no-repeat center -118px;
           border-radius: 5px;
           cursor: pointer;
         }
