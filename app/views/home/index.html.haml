@@ -11,4 +11,8 @@
   .row-fluid
     #calendar.span8
     #filters.span4
-    #trips.span4.x-hidden
+    #trips.span4
+      %h4.trips-header
+        %span= t('account.trips')
+        %button.close ×
+      .trips-body

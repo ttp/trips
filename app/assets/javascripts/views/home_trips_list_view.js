@@ -5,6 +5,9 @@ _.namespace("App.views");
 (function() {
     App.views.HomeTripsListView = Backbone.View.extend({
         el: "#trips",
+        events : {
+            "click button.close" : "hide"
+        },
 
         initialize: function (options) {
             this.options = options;
@@ -13,15 +16,19 @@ _.namespace("App.views");
             this._trips.on("filter:day", this.render, this);
         },
 
+        hide : function () {
+            this.$el.hide();
+        },
+
         render: function (day) {
             if (day === null) {
-                this.$el.html('');
+                this.$el.find('.trips-body').html('');
                 return;
             }
             var data = {
                 trips: this._trips.filtered({'start_date' : day})
             };
-            this.$el.html(JST["templates/home/trips_list"](data));
+            this.$el.find('.trips-body').html(JST["templates/home/trips_list"](data));
             this.bindEvents();
         },
 

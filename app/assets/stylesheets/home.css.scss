@@ -106,13 +106,26 @@
 }
 
 #trips {
-  .trip {
-    margin-bottom: 5px;
-    font-size: 12px;
+  display: none;
+  background-color: #fff;
+  border-radius: 3px;
+  margin-top: 10px;
 
-    .name {
-      font-weight: bold;
-      margin-right: 8px;
+  .trips-header {
+    padding-left: 15px;
+    padding-right: 10px;
+  }
+
+  .trips-body {
+    padding: 0 15px;
+    .trip {
+      margin-bottom: 5px;
+      font-size: 12px;
+  
+      .name {
+        font-weight: bold;
+        margin-right: 8px;
+      }
     }
   }
 }

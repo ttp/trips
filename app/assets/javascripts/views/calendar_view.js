@@ -31,6 +31,8 @@ _.namespace("App.views");
             this._trips.on("trip:out", this.cleanHighlight, this);
 
             this.$el.delegate('td.start-day', 'click', $.proxy(this.onDayClick, this));
+            $('#trips button.close').click($.proxy(this.deselectDay, this));
+            
             $('a.prev').click($.proxy(this.scrollToPrevMonths, this));
             $('a.next').click($.proxy(this.scrollToNextMonths, this));
         },
