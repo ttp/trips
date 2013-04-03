@@ -74,6 +74,7 @@ ua:
       details: "Деталі походу"
       url: "Сайт походу"
       price: "Ціна"
+      available_places: Вільних місць
 # Regions
   region:
     region: Регіон
