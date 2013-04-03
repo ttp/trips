@@ -4,7 +4,7 @@
   = hidden_field_tag :back_url, params[:back_url] || request.referer
 
   = f.input :name, :label => t('account.track.name')
-  = f.input :region_id, :collection => Region.sorted, :label_method => :t
+  = f.input :region_id, :collection => Region.sorted, :label_method => :t, :label => t('region.region')
   = f.input :track, input_html: {:rows => 5}, :label => t('account.track.track')
   = f.input :description, :label => t('account.track.description')
   = f.input :url, :label => t('account.track.url')
