@@ -11,21 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331081316) do
+ActiveRecord::Schema.define(:version => 20130330092934) do
 
   create_table "regions", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "tracks", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.text     "track",       :limit => 255
-    t.string   "url"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "name",        :null => false
+    t.text     "description", :null => false
+    t.text     "track",       :null => false
+    t.string   "url",         :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "region_id"
     t.integer  "user_id"
   end
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(:version => 20130331081316) do
 
   create_table "trips", :force => true do |t|
     t.integer  "track_id"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.text     "trip_details"
+    t.date     "start_date",   :null => false
+    t.date     "end_date",     :null => false
+    t.text     "trip_details", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "user_id"
