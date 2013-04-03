@@ -38,5 +38,6 @@
               = image_tag user.gravatar_url(:size => 50)
               = user.name
       - if @trip.start_date > Time.now.to_date && @trip.has_available_places?
-        %p
-          %button.btn.btn-primary= t('trip.join')
+        = form_tag("/trips/#{@trip.id}/join", :method => "post") do
+          %p
+            %button.btn.btn-primary= t('trip.join')

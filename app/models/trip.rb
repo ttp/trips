@@ -3,6 +3,7 @@ require 'date'
 class Trip < ActiveRecord::Base
   attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :price, :url, :available_places
   belongs_to :track
+  has_many :trip_users
 
   validates :track_id, :dates_range, :available_places, :presence => true
 
@@ -27,11 +28,11 @@ class Trip < ActiveRecord::Base
   end
 
   def joined_users
-    users.where("trip_users.approved = 1")
+    users.where("trip_users.approved = ?", true)
   end
 
   def want_to_join_users
-    users.where("trip_users.approved = 0")
+    users.where("trip_users.approved = ?", false)
   end
 
   def users
