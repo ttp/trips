@@ -13,7 +13,7 @@
     - @trips.each do |trip|
       %tr
         %td= trip.id
-        %td= trip.track.name
+        %td= link_to trip.track.name, trip_path(trip.id)
         %td= t(trip.track.region.name, :scope => 'region')
         %td= l(trip.start_date)
         %td= l(trip.end_date)
