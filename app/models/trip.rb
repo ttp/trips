@@ -40,7 +40,7 @@ class Trip < ActiveRecord::Base
       .where("trip_users.trip_id = #{self.id}")
   end
 
-  def has_available_places?
-    true
+  def user_can_join?(user_id)
+      users.where("users.id = ?", user_id).count() == 0 && available_places > 0
   end
 end

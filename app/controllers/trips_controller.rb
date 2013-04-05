@@ -27,24 +27,23 @@ class TripsController < ApplicationController
 
     if trip.available_places == 0
       respond_to do |format|
-        format.html { redirect_to trip_url, flash: {error: "no_available_places"} }
-        format.json { render json: {error: "no_available_places"} }
+        format.html { redirect_to trip_url, flash: {error: t("trip.no_available_places")} }
+        format.json { render json: {error: t("trip.no_available_places")} }
       end
       return
     end
 
-    is_joined = trip.users.where("users.id = ?", current_user.id).count()
-    if is_joined > 0
+    if !trip.user_can_join?(current_user.id)
       respond_to do |format|
-        format.html { redirect_to trip_url, flash: {error: "already_joined"} }
-        format.json { render json: {error: "already_joined"}, status: :unprocessable_entity }
+        format.html { redirect_to trip_url, flash: {error: t("trip.already_joined")} }
+        format.json { render json: {error: t("trip.already_joined")}, status: :unprocessable_entity }
       end
       return
     end
 
     trip.trip_users.create({user_id: current_user.id, approved: false})
     respond_to do |format|
-      format.html { redirect_to trip_url, :notice => "Join request has successfully added" }
+      format.html { redirect_to trip_url, :notice => t("trip.join_request_added") }
       format.json { head :ok }
     end
   end

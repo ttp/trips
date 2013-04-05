@@ -20,6 +20,7 @@
         %b= t('account.track.track') + ":"
         %span= @track.track
       .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
+    
     .span4
       %h5= t('trip.users')
       .trip-users
@@ -37,7 +38,12 @@
             %p
               = image_tag user.gravatar_url(:size => 50)
               = user.name
-      - if @trip.start_date > Time.now.to_date && @trip.has_available_places?
-        = form_tag("/trips/#{@trip.id}/join", :method => "post") do
-          %p
-            %button.btn.btn-primary= t('trip.join')
+      - if user_signed_in?
+        - if @trip.start_date > Time.now.to_date && @trip.user_can_join?(current_user.id)
+          = form_tag("/trips/#{@trip.id}/join", :method => "post") do
+            %p
+              %button.btn.btn-primary= t('trip.join')
+      - else
+        %p
+          %a{href: new_user_session_path}= t('trip.login')
+          = t('trip.to_join')

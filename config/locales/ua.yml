@@ -37,6 +37,11 @@ ua:
     want_to_join: Хочуть приєднатися
     join: Приєднатись
     no_users: "Немає учасників"
+    login: "Увійдіть"
+    to_join: "щоб приєднатися"
+    already_joined: "Ви вже подали заявку на похід"
+    no_available_places: "Немає доступних місць"
+    join_request_added: "Заявку на похід успішно подано"
 
   account:
     edit: 'Редагувати аккаунт'
