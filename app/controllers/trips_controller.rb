@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:join]
+  before_filter :authenticate_user!, :only => [:join, :leave, :decline, :approve]
 
   def index
     @trips = Trip.for_year
@@ -28,7 +28,7 @@ class TripsController < ApplicationController
     if trip.available_places == 0
       respond_to do |format|
         format.html { redirect_to trip_url, flash: {error: t("trip.no_available_places")} }
-        format.json { render json: {error: t("trip.no_available_places")} }
+        format.json { render json: {error: t("trip.no_available_places"), status: :unprocessable_entity} }
       end
       return
     end
@@ -44,7 +44,46 @@ class TripsController < ApplicationController
     trip.trip_users.create({user_id: current_user.id, approved: false})
     respond_to do |format|
       format.html { redirect_to trip_url, :notice => t("trip.join_request_added") }
-      format.json { head :ok }
+      format.json { render json: {status: :ok} }
     end
+  end
+
+  # POST /trips/1/leave
+  def leave
+    request = TripUser.find_request(params[:id], current_user.id)
+    if request
+      request.destroy
+    end
+    render json: {status: :ok}
+  end
+
+  # POST /trips/1/decline/:user_id
+  def decline
+    request = TripUser.find_request(params[:id], params[:user_id])
+    if request
+      if request.trip.user_id != current_user.id
+        render json: {status: :not_trip_owner} and return
+      end
+      request.destroy
+    end
+    render json: {status: :ok}
+  end
+
+  # POST /trips/1/approve/:user_id
+  def approve
+    request = TripUser.find_request(params[:id], params[:user_id])
+    if request
+      if request.trip.user_id != current_user.id
+        render json: {status: :not_trip_owner} and return
+      end
+      request.approved = true
+      request.save
+      trip = request.trip
+      if trip.available_places > 0
+        trip.available_places -= 1
+        trip.save
+      end
+    end
+    render json: {status: :ok}
   end
 end

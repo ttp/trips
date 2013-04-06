@@ -1,3 +1,5 @@
+= javascript_include_tag "init/trips_init"
+
 .grid
   .row-fluid
     .span8
@@ -20,24 +22,39 @@
         %b= t('account.track.track') + ":"
         %span= @track.track
       .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
-    
-    .span4
+
+    #trip_users.span4
       %h5= t('trip.users')
       .trip-users
         - if @joined_users.size > 0
           - @joined_users.each do |user|
-            %p
+            %p.user{user_id: user.id}
               = image_tag user.gravatar_url(:size => 50)
-              = user.name
+              %span= user.name
+              - if user_signed_in?
+                - if @trip.user_id == current_user.id
+                  %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
+                - elsif user.id == current_user.id
+                  %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
         - else
           %p= t('trip.no_users')
+
       - if @want_to_join_users.size > 0
         %h5= t('trip.want_to_join')
         .want-to-join-users
           - @want_to_join_users.each do |user|
-            %p
+            %p.user{user_id: user.id}
               = image_tag user.gravatar_url(:size => 50)
-              = user.name
+              %span= user.name
+              - if user_signed_in?
+                - if @trip.user_id == current_user.id
+                  %a.icon-ok{href: approve_trip_request_path(@trip.id, user.id), title: t("trip.approve")}
+                - if @trip.user_id == current_user.id
+                  %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
+                - elsif user.id == current_user.id
+                  %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
+
+      
       - if user_signed_in?
         - if @trip.start_date > Time.now.to_date && @trip.user_can_join?(current_user.id)
           = form_tag("/trips/#{@trip.id}/join", :method => "post") do

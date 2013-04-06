@@ -42,6 +42,11 @@ ua:
     already_joined: "Ви вже подали заявку на похід"
     no_available_places: "Немає доступних місць"
     join_request_added: "Заявку на похід успішно подано"
+    approve: "Прийняти заявку"
+    decline: "Відхилити заявку"
+    remove_user: "Видалити учасника"
+    cancel_request: "Відмінити заявку"
+    leave_trip: "Покинути похід"
 
   account:
     edit: 'Редагувати аккаунт'
