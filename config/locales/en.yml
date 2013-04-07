@@ -1,7 +1,98 @@
 en:
-  cancel: "Cancel"
+  devise:
+    registrations:
+      user:
+        signed_up: "Welcome! You have signed up successfully."
   helpers:
     links:
-      new: "New"
+      add: "Add"
+      edit: "Edit"
+      destroy: "Remove"
+      confirm: "Are you sure?"
+      update: "Update"
+      save: "Save"
+      cancel: "Cancel"
+      back: 'Back'
+      sign_in: "Login"
+      sign_out: "Sign out"
+      sign_up: "Sign up"
+      forgot_password: 'Forgot password?'
+      confirm_instr_question: "Didn't receive instructions?"
+    actions: "Actions"
+  fields:
+    created: "Created"
+
+  user:
+    name: 'Name'
+    password: 'Password'
+    password_hint: "Leave empty if don't want to change"
+    password_confirmation: 'Repead password'
+    current_password: 'Current password'
+    current_password_hint: 'Enter you current password to confirm your changes'
+    remember_me: 'Remember me'
+
+  trips_calendar: 'Trips calendar'
+  trip:
+    site: "Site"
+    users: "Users"
+    want_to_join: "Want to join"
+    join: "Joined"
+    no_users: "No users"
+    login: "Login"
+    to_join: "to join"
+    already_joined: "You already joined"
+    no_available_places: "No available places"
+    join_request_added: "Join request added."
+    approve: "Approve"
+    decline: "Decline"
+    remove_user: "Remove user"
+    cancel_request: "Cancel request"
+    leave_trip: "Leave trip"
+
   account:
-      tracks: "Tracks"
+    edit: 'Edit account'
+    cancel: 'Cancel account'
+    cancal_unhappy: 'Unhappy?'
+
+# Tracks
+    tracks: "Tracks"
+    new_track: "Add track"
+    track:
+      new: 'New track'
+      edit: 'Edit track'
+      add: 'Add track'
+      was_created: 'Created.'
+      was_updated: 'Updated.'
+
+      name: "Name"
+      description: "Description"
+      track: "Track"
+      url: "Site"
+
+# Trips
+    trips: "Trips"
+    my_trips: 'My trips'
+    trip:
+      new: "New trip"
+      edit: "Edit trip"
+      add: "Add trip"
+      was_created: 'Trip created.'
+      was_updated: 'Trip updated.'
+
+      start: "Start"
+      end: "End"
+      dates: "Dates"
+      details: "Details"
+      url: "Site url"
+      price: "Price"
+      available_places: Available places
+# Regions
+  region:
+    region: Region
+
+    Carpathian: Carpathian
+    Crimea: Crimea
+    Caucasus: Caucasus
+    Turkey: Turkey
+    Romania: Romania
+    Nepal: Nepal
