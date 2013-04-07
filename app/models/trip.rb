@@ -3,6 +3,7 @@ require 'date'
 class Trip < ActiveRecord::Base
   attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :price, :url, :available_places
   belongs_to :track
+  belongs_to :user
   has_many :trip_users
 
   validates :track_id, :dates_range, :available_places, :presence => true

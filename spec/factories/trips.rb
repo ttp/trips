@@ -2,7 +2,13 @@
 
 FactoryGirl.define do
   factory :trip do
-    start_day "2013-03-16"
-    end_day "2013-03-16"
+    trip_details "Trip details"
+    url "trip_site"
+    available_places 10
+    start_date (Date.today + 1.day)
+    end_date (Date.today + 2.days)
+
+    track
+    user
   end
 end
