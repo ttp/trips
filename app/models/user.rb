@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -9,5 +11,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  
+  has_many :trip_comments
+  before_create :update_email_hash
+
+  def update_email_hash
+    self.email_hash = Digest::MD5.hexdigest(email)
+  end
 end

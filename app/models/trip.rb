@@ -5,6 +5,7 @@ class Trip < ActiveRecord::Base
   belongs_to :track
   belongs_to :user
   has_many :trip_users
+  has_many :trip_comments
 
   validates :track_id, :dates_range, :available_places, :presence => true
 

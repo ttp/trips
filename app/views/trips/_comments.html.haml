@@ -1,0 +1,5 @@
+%h5 Comments
+= form_tag("/trips/#{@trip.id}/comments", :method => "post", :class => "span10") do
+  = text_area_tag(:comment, "", :class => "span", :rows => "8")
+  %p
+    %button.btn.btn-primary.pull-right Send
