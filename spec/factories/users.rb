@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :user do
     name 'Test User'
-    sequence(:email){|n| "example#{n}@factory.com" }
+    sequence(:email){|n| "user#{n}@factory.com" }
     password 'changeme'
     password_confirmation 'changeme'
     # required if the Devise Confirmable module is used

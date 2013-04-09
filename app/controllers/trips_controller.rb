@@ -42,6 +42,9 @@ class TripsController < ApplicationController
     end
 
     trip.trip_users.create({user_id: current_user.id, approved: false})
+    TripJoinMailer.join_request_user_notification_email(current_user, trip).deliver
+    TripJoinMailer.join_request_owner_notification_email(trip).deliver
+
     respond_to do |format|
       format.html { redirect_to trip_url, :notice => t("trip.join_request_added") }
       format.json { render json: {status: :ok} }
