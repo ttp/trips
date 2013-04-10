@@ -48,6 +48,12 @@ ua:
     cancel_request: "Відмінити заявку"
     leave_trip: "Покинути похід"
 
+  trip_join_mailer:
+    leave_email:
+      subject: "Користувач покинув похід"
+    approve_email:
+      subject: "Ваша заявка на участь прийнята"
+
   account:
     edit: 'Редагувати аккаунт'
     cancel: 'Видалити мій аккаунт'

@@ -1,0 +1,8 @@
+Користувач "<%= @user.name %>" покинув похід:
+<%= @trip.track.name %> (<%= t(@trip.track.region.name, :scope => "region") %>)
+Дати: <%= l(@trip.start_date) + '-' + l(@trip.end_date) %>
+
+Повний опис походу доступний на сторінці: <%= trip_url(@trip.id) %>
+
+Дякуєм за користування нашим сервісом,
+pohody.com.ua

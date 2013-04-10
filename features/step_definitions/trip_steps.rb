@@ -1,9 +1,11 @@
 def trip_area_element(area)
   case area
-  when "Want to join"
-    find(".want-to-join-users")
   when "Trip users"
     find("#trip_users")
+  when "Joined users"
+    find("#trip_users .trip-users")
+  when "Want to join"
+    find("#trip_users .want-to-join-users")
   end
 end
 
@@ -11,12 +13,19 @@ Given /^I visit trip page$/ do
   visit trip_path(Trip.first.id)
 end
 
+Given /^Trip has join request for user "(.*?)"$/ do |name|
+  user = FactoryGirl.create(:user, {:name => name})
+  trip = Trip.first
+  FactoryGirl.create(:trip_user, {trip: trip, user: user})
+end
+
 When /^I click "(.*?)" button$/ do |button|
   click_button(button)
 end
 
-Then /^I should see my name in "(.*?)" area$/ do |area|
-  trip_area_element(area).should  have_content(@visitor[:name])
+Then /^I should( not)? see my name in "(.*?)" area$/ do |negate, area|
+  area = trip_area_element(area)
+  negate ? area.should_not(have_content(@visitor[:name])) : area.should(have_content(@visitor[:name]))
 end
 
 Then /^I should see "(.*?)" link in "(.*?)" area$/ do |link, area|
@@ -33,6 +42,31 @@ end
 
 Then /^Trip owner should receive an email with subject "(.*?)"$/ do |subject|
   email = Trip.first.user.email
+  steps %Q{
+    Then "#{email}" should receive an email with subject "#{subject}"
+  }
+end
+
+When /^I click "(.*?)" icon$/ do |icon|
+  find("a." + icon.downcase).click
+end
+
+When /^I accept confirm dialog$/ do
+  page.driver.browser.switch_to.alert.accept
+end
+
+When /^I sign in as trip owner$/ do
+  user = Trip.first.user
+  sign_in_as(user)
+end
+
+Then /^I should( not)? see "(.*?)" in "(.*?)" area$/ do |negate, text, area|
+  area = trip_area_element(area)
+  negate ? area.should_not(have_content(text)) : area.should(have_content(text))
+end
+
+Then /^user "(.*?)" should receive an email with subject "(.*?)"$/ do |name, subject|
+  email = User.find_by_name(name).email
   steps %Q{
     Then "#{email}" should receive an email with subject "#{subject}"
   }

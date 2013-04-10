@@ -45,6 +45,13 @@ def sign_in
   click_button "Login"
 end
 
+def sign_in_as(user)
+  visit '/users/sign_in'
+  fill_in "user_email", :with => user.email
+  fill_in "user_password", :with => "password"
+  click_button "Login"
+end
+
 ### GIVEN ###
 Given /^I am not logged in$/ do
   visit '/users/sign_out'

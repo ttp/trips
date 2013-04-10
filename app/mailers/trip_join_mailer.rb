@@ -12,4 +12,17 @@ class TripJoinMailer < ActionMailer::Base
     @trip = trip
     mail(:to => @user.email, :subject => "New join request notification")
   end
+
+  def leave_email(user, trip)
+    @user = user
+    @trip = trip
+
+    mail(:to => @trip.user.email)
+  end
+
+  def approve_email(user, trip)
+    @trip = trip
+
+    mail(:to => user.email)
+  end
 end

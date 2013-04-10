@@ -56,6 +56,7 @@ class TripsController < ApplicationController
     request = TripUser.find_request(params[:id], current_user.id)
     if request
       request.destroy
+      TripJoinMailer.leave_email(current_user, request.trip).deliver
     end
     render json: {status: :ok}
   end
@@ -86,6 +87,7 @@ class TripsController < ApplicationController
         trip.available_places -= 1
         trip.save
       end
+      TripJoinMailer.approve_email(request.user, trip).deliver
     end
     render json: {status: :ok}
   end

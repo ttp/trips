@@ -1,6 +1,7 @@
 class TripUser < ActiveRecord::Base
   attr_accessible :user_id, :trip_id, :approved
   belongs_to :trip
+  belongs_to :user
   before_destroy :update_available_places
 
   def self.find_request(trip_id, user_id)
