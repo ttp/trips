@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p
+      Ваша заявка на похід відхилена:
+      %br
+      #{@trip.track.name} (#{t(@trip.track.region.name, :scope => "region")})
+      %br
+      Дати: #{l(@trip.start_date) + '-' + l(@trip.end_date)}
+
+    %p
+      Повний опис походу доступний на сторінці:
+      %br
+      %a{href: trip_url(@trip.id)}= trip_url(@trip.id)
+
+    %p
+      Дякуєм за користування нашим сервісом,
+      %br
+      %a{href: root_url} pohody.com.ua

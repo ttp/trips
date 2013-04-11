@@ -68,7 +68,10 @@ class TripsController < ApplicationController
       if request.trip.user_id != current_user.id
         render json: {status: :not_trip_owner} and return
       end
+      user = request.user
+      trip = request.trip
       request.destroy
+      TripJoinMailer.decline_email(user, trip).deliver
     end
     render json: {status: :ok}
   end

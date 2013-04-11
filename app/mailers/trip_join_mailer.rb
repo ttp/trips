@@ -5,30 +5,29 @@ class TripJoinMailer < ActionMailer::Base
     @user = user
     @trip = trip
     @track = trip.track
-    I18n.with_locale(I18n.locale) do
-      mail(:to => @user.email)
-    end
+    mail(:to => @user.email)
   end
 
   def join_request_owner_email(user, trip)
     @user = user
     @trip = trip
     @track = trip.track
-    I18n.with_locale(I18n.locale) do
-      mail(:to => trip.user.email)
-    end
+    mail(:to => trip.user.email)
   end
 
   def leave_email(user, trip)
     @user = user
     @trip = trip
-
     mail(:to => @trip.user.email)
   end
 
   def approve_email(user, trip)
     @trip = trip
+    mail(:to => user.email)
+  end
 
+  def decline_email(user, trip)
+    @trip = trip
     mail(:to => user.email)
   end
 end

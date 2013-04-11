@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p
+      Your join request has been declined:
+      %br
+      #{@trip.track.name} (#{t(@trip.track.region.name, :scope => "region")})
+      %br
+      Dates: #{l(@trip.start_date) + '-' + l(@trip.end_date)}
+
+    %p
+      Full trip details are available by url:
+      %br
+      %a{href: trip_url(@trip.id)}= trip_url(@trip.id)
+
+    %p
+      Thank you for using our service,
+      %br
+      %a{href: root_url} pohody.com.ua

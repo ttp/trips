@@ -52,7 +52,9 @@ ua:
     leave_email:
       subject: "Користувач покинув похід"
     approve_email:
-      subject: "Ваша заявка на участь прийнята"
+      subject: "Ваша заявка на участь у поході прийнята"
+    decline_email:
+      subject: "Ваша заявка на участь у поході відхилена"
     join_request_user_email:
       subject: "Заявка на участь у поході"
     join_request_owner_email:

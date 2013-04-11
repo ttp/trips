@@ -19,7 +19,6 @@ Feature: Join trip
       When I visit trip page
       Then I should see "Join" button
 
-    @active
     Scenario: Join button should add user to Want to join list
       Given I am logged in
       When I visit trip page
@@ -38,7 +37,6 @@ Feature: Join trip
       Then I should not see my name in "Want to join" area
       And Trip owner should receive an email with subject "User has left trip"
     
-    @active
     Scenario: Trip owner should be able to approve join request
       Given Trip has join request for user "Super Tracker"
       When I sign in as trip owner
@@ -47,3 +45,13 @@ Feature: Join trip
       Then I should not see "Super Tracker" in "Want to join" area
       And I should see "Super Tracker" in "Joined users" area
       And user "Super Tracker" should receive an email with subject "Your join request has been approved"
+
+    @active
+    Scenario: Trip owner should be able to decline join request
+      Given Trip has join request for user "Super Tracker"
+      When I sign in as trip owner
+      And I visit trip page
+      And I click "Decline" icon
+      And I accept confirm dialog
+      Then I should not see "Super Tracker" in "Want to join" area
+      And user "Super Tracker" should receive an email with subject "Your join request has been declined"
