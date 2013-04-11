@@ -1,0 +1,9 @@
+Ви відправили заявку на участь у наступному походу:
+
+<%= @trip.track.name %> (<%= t(@track.region.name, :scope => 'region') %>)
+Дати походу: <%= l(@trip.start_date) + " - " + l(@trip.end_date) %>
+
+Деталі доступні на сторінці походу: <%= trip_url(@trip.id) %>
+
+Дякуєм за користування нашим сервісом,
+pohody.com.ua

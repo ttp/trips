@@ -1,0 +1,9 @@
+It's just a notification that "<%= @user.name %>" want to join next trip:
+
+<%= @track.name %> (<%= t(@track.region.name, :scope => 'region') %>)
+Dates: <%= l(@trip.start_date) + " - " + l(@trip.end_date) %>
+
+You can approve or decline this request on the trip page: <%= trip_url(@trip.id) %>
+
+Thank you for using our service,
+pohody.com.ua

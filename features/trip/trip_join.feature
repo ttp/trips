@@ -19,14 +19,15 @@ Feature: Join trip
       When I visit trip page
       Then I should see "Join" button
 
+    @active
     Scenario: Join button should add user to Want to join list
       Given I am logged in
       When I visit trip page
       And I click "Join" button
       Then I should see my name in "Want to join" area
       And I should see "Leave" icon in "Want to join" area
-      And I should receive an email with subject "New join request notification"
-      And Trip owner should receive an email with subject "New join request notification"
+      And I should receive an email with subject "New join request"
+      And Trip owner should receive an email with subject "New join request"
 
     Scenario: Leave button should remove user from trip users
       Given I am logged in

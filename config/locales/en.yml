@@ -54,6 +54,10 @@ en:
       subject: "User has left trip"
     approve_email:
       subject: "Your join request has been approved"
+    join_request_user_email:
+      subject: "New join request"
+    join_request_owner_email:
+      subject: "New join request"
 
   account:
     edit: 'Edit account'

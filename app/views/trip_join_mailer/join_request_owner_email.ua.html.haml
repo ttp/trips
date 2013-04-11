@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p
+      Ви отримали заявку на похід від користувача
+      %b= @user.name
+    %p
+      %b= @track.name
+      (#{t(@track.region.name, :scope => 'region')})
+      %br
+      Дати походу: #{l(@trip.start_date) + " - " + l(@trip.end_date)}
+    %p
+      Ви можете прийняти або відхилити заявку на сторінці походу:
+      %a{href: trip_url(@trip.id)}= trip_url(@trip.id)
+
+    %p
+      Дякуєм за користування нашим сервісом,
+      %br
+      %a{href: root_url} pohody.com.ua

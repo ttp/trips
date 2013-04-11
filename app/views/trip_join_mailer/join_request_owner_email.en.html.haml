@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p
+      It's just a notification that
+      %b= @user.name
+      want to join next trip:
+    %p
+      %b= @track.name
+      (#{t(@track.region.name, :scope => 'region')})
+      %br
+      Dates: #{l(@trip.start_date) + " - " + l(@trip.end_date)}
+    %p
+      You can approve or decline this request on the trip page:
+      %a{href: trip_url(@trip.id)}= trip_url(@trip.id)
+
+    %p
+      Thank you for using our service,
+      %br
+      %a{href: root_url} pohody.com.ua

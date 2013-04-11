@@ -1,0 +1,9 @@
+Ви отримали заявку на похід від користувача "<%= @user.name %>".
+
+<%= @trip.track.name %> (<%= t(@track.region.name, :scope => 'region') %>)
+Дати походу: <%= l(@trip.start_date) + " - " + l(@trip.end_date) %>
+
+Ви можете прийняти або відхилити заявку на сторінці походу: <%= trip_url(@trip.id) %>
+
+Дякуєм за користування нашим сервісом,
+pohody.com.ua

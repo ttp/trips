@@ -53,6 +53,10 @@ ua:
       subject: "Користувач покинув похід"
     approve_email:
       subject: "Ваша заявка на участь прийнята"
+    join_request_user_email:
+      subject: "Заявка на участь у поході"
+    join_request_owner_email:
+      subject: "Нова заявка на участь у поході"
 
   account:
     edit: 'Редагувати аккаунт'
