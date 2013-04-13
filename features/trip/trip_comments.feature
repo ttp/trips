@@ -15,11 +15,12 @@ Feature: Trip comments
     Scenario: Show comments from if user is not logged in
       Given I am logged in
       When I visit trip page
-      Then I should see Comments form
+      Then I should see "Add comment" link in "Comments" trip area
 
     Scenario: Logged in user should be able to leave new comments
       Given I am logged in
       When I visit trip page
+      And I click "Add comment" link
       And I enter "Great trip" to Comments form
       And I click "Send" button in Comments form
       Then I should see "Great trip" in "Comments" trip area

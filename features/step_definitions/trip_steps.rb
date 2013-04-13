@@ -73,3 +73,7 @@ Then /^user "(.*?)" should receive an email with subject "(.*?)"$/ do |name, sub
     Then "#{email}" should receive an email with subject "#{subject}"
   }
 end
+
+When /^I click "(.*?)" link$/ do |link|
+  click_link(link)
+end

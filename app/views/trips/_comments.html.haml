@@ -14,10 +14,11 @@
 
 
 - if user_signed_in?
-  = form_tag("/trips/#{@trip.id}/comments", :method => "post", :class => "span10") do
-    = text_area_tag(:comment, "", :class => "span", :rows => "8")
+  %a.add-comment{href: "#"}= t('comments.add_comment')
+  = form_tag("/trips/#{@trip.id}/comments", :method => "post") do
+    = text_area_tag(:comment, "", :class => "span9", :rows => "8")
     %p
-      %button.btn.btn-primary.pull-right= t('comments.send')
+      %button.btn.btn-primary= t('comments.send')
 - else
   %p
     %a{href: new_user_session_path}= t('trip.login')
