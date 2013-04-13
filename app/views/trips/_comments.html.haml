@@ -1,11 +1,15 @@
 %h5= t('comments.title')
 .comments
+  - if @comments.size == 0
+    .no-comments= t('comments.no_comments')
   - @comments.each do |comment|
     .comment{id: 'comment' + comment['id'].to_s}
-      %p
-        %b= comment['name']
-        %span= l(comment['created_at'].to_time, :format => :long)
-        %br
+      .info
+        %a.avatar
+          = gravatar_image_tag(comment['email'], :alt => comment['name'], :gravatar => { :size => 24 })
+        %span.username= comment['name']
+        %time= l(comment['created_at'].to_time, :format => :long)
+      .message
         = comment['comment']
 
 

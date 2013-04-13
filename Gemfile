@@ -27,5 +27,5 @@ gem "better_errors", ">= 0.6.0", :group => :development
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
-gem 'gravtastic'
 gem 'RedCloth'
+gem 'gravatar_image_tag'

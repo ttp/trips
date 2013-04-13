@@ -3,7 +3,7 @@
   - if @joined_users.size > 0
     - @joined_users.each do |user|
       %p.user{user_id: user.id}
-        = image_tag user.gravatar_url(:size => 50)
+        = gravatar_image_tag(user.email, :alt => user.name, :gravatar => { :size => 50 })
         %span= user.name
         - if user_signed_in?
           - if @trip.user_id == current_user.id
@@ -18,7 +18,7 @@
   .want-to-join-users
     - @want_to_join_users.each do |user|
       %p.user{user_id: user.id}
-        = image_tag user.gravatar_url(:size => 50)
+        = gravatar_image_tag(user.email, :alt => user.name, :gravatar => { :size => 50 })
         %span= user.name
         - if user_signed_in?
           - if @trip.user_id == current_user.id

@@ -52,6 +52,7 @@ ua:
     title: 'Коментарі'
     to_leave_comments: 'щоб залишити коментар'
     send: "Надіслати"
+    no_comments: "Немає коментарів"
 
   trip_join_mailer:
     leave_email:

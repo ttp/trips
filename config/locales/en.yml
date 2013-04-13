@@ -53,6 +53,7 @@ en:
     title: 'Comments'
     to_leave_comments: 'to leave comments'
     send: "Send"
+    no_comments: "No comments"
 
   trip_join_mailer:
     leave_email:

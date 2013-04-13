@@ -3,7 +3,7 @@ class TripCommentsController < ApplicationController
 
   # GET /trip/:trip_id/comments
   def index
-    comments = TripComment.with_users(params[:trip_id])
+    comments = TripComment.with_users_hash(params[:trip_id])
 
     render json: {comments: comments}
   end

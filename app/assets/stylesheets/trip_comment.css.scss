@@ -1,3 +1,24 @@
 #trip_comments {
   margin-top: 30px;
+  border-top: 1px dashed #999;
+  
+  .comment {
+    margin-bottom: 20px;
+
+    .info {
+      color: #666;
+
+      .username {
+        font-weight: bold;
+      }
+      time {
+        font-size: 10px;
+      }
+    }
+
+    .message {
+      padding-bottom: 5px;
+      padding-top: 10px;
+    }
+  }
 }
