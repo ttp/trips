@@ -36,7 +36,7 @@ en:
     site: "Site"
     users: "Users"
     want_to_join: "Want to join"
-    join: "Joined"
+    join: "Join"
     no_users: "No users"
     login: "Login"
     to_join: "to join"
@@ -48,6 +48,18 @@ en:
     remove_user: "Remove user"
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"
+
+  trip_join_mailer:
+    leave_email:
+      subject: "User has left trip"
+    approve_email:
+      subject: "Your join request has been approved"
+    decline_email:
+      subject: "Your join request has been declined"
+    join_request_user_email:
+      subject: "New join request"
+    join_request_owner_email:
+      subject: "New join request"
 
   account:
     edit: 'Edit account'

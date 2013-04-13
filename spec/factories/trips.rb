@@ -11,4 +11,10 @@ FactoryGirl.define do
     track
     user
   end
+
+  factory :trip_user do
+    approved false
+    trip
+    user
+  end
 end

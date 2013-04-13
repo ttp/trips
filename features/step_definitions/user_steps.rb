@@ -1,7 +1,7 @@
 ### UTILITY METHODS ###
 
 def create_visitor
-  @visitor ||= { :name => "Testy McUserton", :email => "example@example.com",
+  @visitor ||= { :name => "Testy McUserton", :email => "visitor@pohody.com.ua",
     :password => "changeme", :password_confirmation => "changeme" }
 end
 
@@ -42,6 +42,13 @@ def sign_in
   visit '/users/sign_in'
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
+  click_button "Login"
+end
+
+def sign_in_as(user)
+  visit '/users/sign_in'
+  fill_in "user_email", :with => user.email
+  fill_in "user_password", :with => "password"
   click_button "Login"
 end
 
