@@ -23,16 +23,16 @@ When /^I click "(.*?)" button$/ do |button|
   click_button(button)
 end
 
-Then /^I should( not)? see my name in "(.*?)" area$/ do |negate, area|
+Then /^I should( not)? see my name in "(.*?)" trip area$/ do |negate, area|
   area = trip_area_element(area)
   negate ? area.should_not(have_content(@visitor[:name])) : area.should(have_content(@visitor[:name]))
 end
 
-Then /^I should see "(.*?)" link in "(.*?)" area$/ do |link, area|
+Then /^I should see "(.*?)" link in "(.*?)" trip area$/ do |link, area|
   trip_area_element(area).should  have_link(link)
 end
 
-Then /^I should see "(.*?)" icon in "(.*?)" area$/ do |icon, area|
+Then /^I should see "(.*?)" icon in "(.*?)" trip area$/ do |icon, area|
   trip_area_element(area).should  have_selector('a.' + icon.downcase)
 end
 
@@ -60,7 +60,7 @@ When /^I sign in as trip owner$/ do
   sign_in_as(user)
 end
 
-Then /^I should( not)? see "(.*?)" in "(.*?)" area$/ do |negate, text, area|
+Then /^I should( not)? see "(.*?)" in "(.*?)" trip area$/ do |negate, text, area|
   area = trip_area_element(area)
   negate ? area.should_not(have_content(text)) : area.should(have_content(text))
 end

@@ -12,7 +12,7 @@ Feature: Join trip
       Given I exist as a user
       And I am not logged in
       When I visit trip page
-      Then I should see "Login" link in "Trip users" area
+      Then I should see "Login" link in "Trip users" trip area
 
     Scenario: Show join button if user is logged in
       Given I am logged in
@@ -23,8 +23,8 @@ Feature: Join trip
       Given I am logged in
       When I visit trip page
       And I click "Join" button
-      Then I should see my name in "Want to join" area
-      And I should see "Leave" icon in "Want to join" area
+      Then I should see my name in "Want to join" trip area
+      And I should see "Leave" icon in "Want to join" trip area
       And I should receive an email with subject "New join request"
       And Trip owner should receive an email with subject "New join request"
 
@@ -34,7 +34,7 @@ Feature: Join trip
       And I click "Join" button
       And I click "Leave" icon
       And I accept confirm dialog
-      Then I should not see my name in "Want to join" area
+      Then I should not see my name in "Want to join" trip area
       And Trip owner should receive an email with subject "User has left trip"
     
     Scenario: Trip owner should be able to approve join request
@@ -42,8 +42,8 @@ Feature: Join trip
       When I sign in as trip owner
       And I visit trip page
       And I click "Approve" icon
-      Then I should not see "Super Tracker" in "Want to join" area
-      And I should see "Super Tracker" in "Joined users" area
+      Then I should not see "Super Tracker" in "Want to join" trip area
+      And I should see "Super Tracker" in "Joined users" trip area
       And user "Super Tracker" should receive an email with subject "Your join request has been approved"
 
     @active
@@ -53,5 +53,5 @@ Feature: Join trip
       And I visit trip page
       And I click "Decline" icon
       And I accept confirm dialog
-      Then I should not see "Super Tracker" in "Want to join" area
+      Then I should not see "Super Tracker" in "Want to join" trip area
       And user "Super Tracker" should receive an email with subject "Your join request has been declined"
