@@ -48,6 +48,11 @@ ua:
     cancel_request: "Відмінити заявку"
     leave_trip: "Покинути похід"
 
+  comments:
+    title: 'Коментарі'
+    to_leave_comments: 'щоб залишити коментар'
+    send: "Надіслати"
+
   trip_join_mailer:
     leave_email:
       subject: "Користувач покинув похід"

@@ -49,6 +49,11 @@ en:
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"
 
+  comments:
+    title: 'Comments'
+    to_leave_comments: 'to leave comments'
+    send: "Send"
+
   trip_join_mailer:
     leave_email:
       subject: "User has left trip"

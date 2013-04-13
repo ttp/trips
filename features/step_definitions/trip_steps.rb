@@ -6,6 +6,8 @@ def trip_area_element(area)
     find("#trip_users .trip-users")
   when "Want to join"
     find("#trip_users .want-to-join-users")
+  when "Comments"
+    find("#trip_comments")
   end
 end
 
