@@ -10,6 +10,7 @@ ua:
       destroy: "Видалити"
       confirm: "Ви впевненені?"
       save: "Зберегти"
+      update: "Оновити"
       cancel: "Відміна"
       back: 'Повернутись'
       sign_in: "Увійти"
@@ -53,7 +54,8 @@ ua:
     to_leave_comments: 'щоб залишити коментар'
     send: "Надіслати"
     no_comments: "Немає коментарів"
-    add_comment: "Додати коментар"
+    add: "Додати коментар"
+    remove_confirm: "Видалити коментар?"
 
   trip_join_mailer:
     leave_email:

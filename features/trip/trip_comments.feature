@@ -1,3 +1,4 @@
+@javascript
 Feature: Trip comments
   As a user of the website
   I want to be able to leave comments
@@ -25,3 +26,24 @@ Feature: Trip comments
       And I click "Send" button in Comments form
       Then I should see "Great trip" in "Comments" trip area
       And I should see my name in "Comments" trip area
+
+    Scenario: Logged in user should be able to edit comments
+      Given I am logged in
+      When I visit trip page
+      And I click "Add comment" link
+      And I enter "Great trip" to Comments form
+      And I click "Send" button in Comments form
+      And I click "Edit" icon in "Comments" trip area
+      And I enter "Updated comment" to Comments form
+      And I click "Update" button in Comments form
+      Then I should see "Updated comment" in "Comments" trip area
+
+    Scenario: Logged in user should be able to edit comments
+      Given I am logged in
+      When I visit trip page
+      And I click "Add comment" link
+      And I enter "Great trip" to Comments form
+      And I click "Send" button in Comments form
+      And I click "Remove" icon in "Comments" trip area
+      And I accept confirm dialog
+      Then I should not see "Great trip" in "Comments" trip area
