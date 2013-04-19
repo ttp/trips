@@ -29,7 +29,8 @@ _.namespace("App.views");
         addComment : function (e) {
             e.preventDefault();
             var form = $(e.target);
-            form.find('btn-primary').addClass('disabled');
+            var btnPrimary = form.find('.btn-primary');
+            btnPrimary.addClass('disabled');
             $.ajax({
                 url: form.attr("action"),
                 type: "POST",
@@ -39,12 +40,12 @@ _.namespace("App.views");
                 success : function (data, status) {
                     this.$el.find('.comments').append($(data.bubble));
                     this.$el.find('.no-comments').hide();
-                    form.find('btn-primary').removeClass('disabled');
+                    btnPrimary.removeClass('disabled');
                     form[0].reset();
                     form.hide();
                 },
                 error : function (data, status) {
-                    form.find('btn-primary').removeClass('disabled');
+                    btnPrimary.removeClass('disabled');
                 }
             });
         },
@@ -67,7 +68,8 @@ _.namespace("App.views");
         updateComment : function (e) {
             e.preventDefault();
             var form = $(e.target);
-            form.find('btn-primary').addClass('disabled');
+            var btnPrimary = form.find('.btn-primary');
+            btnPrimary.addClass('disabled');
             $.ajax({
                 url: form.attr("action"),
                 type: "POST",
@@ -76,11 +78,11 @@ _.namespace("App.views");
                 context: this,
                 success : function (data, status) {
                     form.closest('.comment').find('.message').html(data.message);
-                    form.find('btn-primary').removeClass('disabled');
+                    btnPrimary.removeClass('disabled');
                     this.hideEditForm(e);
                 },
                 error : function (data, status) {
-                    form.find('btn-primary').removeClass('disabled');
+                    btnPrimary.removeClass('disabled');
                 }
             });
         },
