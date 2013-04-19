@@ -85,7 +85,7 @@ ua:
       was_updated: 'Маршрут оновлено.'
 
       name: "Назва"
-      description: "Опис"
+      description: "Опис маршруту"
       track: "Маршрут"
       url: "Сайт"
 

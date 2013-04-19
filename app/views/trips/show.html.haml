@@ -21,7 +21,14 @@
       %p.track
         %b= t('account.track.track') + ":"
         %span= @track.track
-      .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
+
+      - if !@trip.trip_details.empty?
+        %h5= t('account.trip.details')
+        .description= raw RedCloth.new(@trip.trip_details, [:filter_html]).to_html
+
+      - if !@track.description.empty?
+        %h5= t('account.track.description')
+        .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
 
       #trip_comments
         = render :partial => "comments"
