@@ -17,6 +17,7 @@ class TripsController < ApplicationController
     @want_to_join_users = @trip.want_to_join_users
     @track = @trip.track
     @region = @track.region
+    @comments = TripComment.with_users(@trip.id)
   end
 
   # POST /trips/1/join
