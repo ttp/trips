@@ -9,7 +9,7 @@ end
 gem "i18n-js"
 gem 'ruby-haml-js', :git => "git://github.com/ttp/ruby-haml-js.git"
 gem 'jquery-rails'
-gem "puma", ">= 1.6.3", :group => :production
+gem "unicorn", :group => :production
 gem "haml-rails", ">= 0.4"
 gem "html2haml", ">= 1.0.1", :group => :development
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
