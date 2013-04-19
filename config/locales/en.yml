@@ -9,8 +9,8 @@ en:
       edit: "Edit"
       destroy: "Remove"
       confirm: "Are you sure?"
-      update: "Update"
       save: "Save"
+      update: "Update"
       cancel: "Cancel"
       back: 'Back'
       sign_in: "Login"
@@ -48,6 +48,14 @@ en:
     remove_user: "Remove user"
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"
+
+  comments:
+    title: 'Comments'
+    to_leave_comments: 'to leave comments'
+    send: "Send"
+    no_comments: "No comments"
+    add: "Add comment"
+    remove_confirm: "Remove comment?"
 
   trip_join_mailer:
     leave_email:

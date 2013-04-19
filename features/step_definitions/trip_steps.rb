@@ -6,6 +6,8 @@ def trip_area_element(area)
     find("#trip_users .trip-users")
   when "Want to join"
     find("#trip_users .want-to-join-users")
+  when "Comments"
+    find("#trip_comments")
   end
 end
 
@@ -70,4 +72,8 @@ Then /^user "(.*?)" should receive an email with subject "(.*?)"$/ do |name, sub
   steps %Q{
     Then "#{email}" should receive an email with subject "#{subject}"
   }
+end
+
+When /^I click "(.*?)" link$/ do |link|
+  click_link(link)
 end

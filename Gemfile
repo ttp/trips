@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.12'
-gem 'sqlite3'
-gem 'mysql2'
+gem 'sqlite3', :group => [:development, :test]
+gem "mysql2"
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'uglifier', '>= 1.0.3'
@@ -28,5 +28,5 @@ gem "better_errors", ">= 0.6.0", :group => :development
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
-gem 'gravtastic'
 gem 'RedCloth'
+gem 'gravatar_image_tag'

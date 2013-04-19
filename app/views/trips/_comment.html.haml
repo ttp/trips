@@ -1,0 +1,20 @@
+.comment{id: 'comment' + comment['id'].to_s}
+  .info
+    %a.avatar
+      = gravatar_image_tag(comment['email'], :alt => comment['name'], :gravatar => { :size => 24 })
+    %span.username= comment['name']
+    %time= l(comment['created_at'], :format => :long)
+    
+    - if user_signed_in? && (comment['user_id'] == current_user.id || trip.user_id == current_user.id)
+      %a.icon-edit.edit{href: '#', title: t("helpers.links.edit")}
+      %a.icon-remove.remove{href: "/trips/#{trip.id}/comments/#{comment['id']}", title: t("helpers.links.destroy")}
+
+  .message
+    = raw RedCloth.new(comment['comment'], [:filter_html]).to_html
+  - if user_signed_in? && (comment['user_id'] == current_user.id || trip.user_id == current_user.id)
+    = form_tag("/trips/#{trip.id}/comments/#{comment['id']}", :method => "post", :class => 'update-comment') do
+      = hidden_field_tag('_method', 'put')
+      = text_area_tag(:comment, comment['comment'], :class => "span9", :rows => "8")
+      %p
+        %button.btn.btn-primary= t('helpers.links.update')
+        %button.btn.cancel-edit-comment= t('helpers.links.cancel')
