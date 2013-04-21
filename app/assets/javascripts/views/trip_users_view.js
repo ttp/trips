@@ -10,13 +10,23 @@ _.namespace("App.views");
             "click a.decline" : "decline"
         },
 
+        toggleAvailablePlaces : function (availablePlaces) {
+            this.$el.find(".available-places .places").text(availablePlaces);
+            this.$el.find(".available-places").toggle(availablePlaces > 0);
+            this.$el.find(".no-available-places").toggle(availablePlaces == 0);
+            this.toggleNoUsers();
+        },
+
+        toggleNoUsers : function () {
+            this.$el.find('.no-users').toggle(this.$el.find('.trip-users .user').length == 0);
+        },
+
         leave : function (e) {
             e.preventDefault();
             var el = $(e.target);
             if (el.hasClass("in-progress")) {
                 return;
             }
-
             if (!confirm(I18n.t("trip.cancel_request") + "?")) {
                 return;
             }
@@ -27,11 +37,12 @@ _.namespace("App.views");
                 type: "POST",
                 data: App.getTokenHash(),
                 dataType: 'json',
+                context: this,
                 success : function (data) {
                     if (data.status == "ok") {
                         el.closest(".user").remove();
-                    } else {
-                    }
+                        this.toggleAvailablePlaces(data.available_places);
+                    } 
                     el.removeClass("in-progress");
                 }
             });
@@ -50,11 +61,12 @@ _.namespace("App.views");
                 type: "POST",
                 data: App.getTokenHash(),
                 dataType: 'json',
+                context: this,
                 success : function (data) {
                     if (data.status == "ok") {
-                        $(".trip-users").append(el.closest(".user"));
+                        this.$el.find(".trip-users").append(el.closest(".user"));
+                        this.toggleAvailablePlaces(data.available_places);
                         el.remove();
-                    } else {
                     }
                 }
             });
@@ -66,7 +78,6 @@ _.namespace("App.views");
             if (el.hasClass("in-progress")) {
                 return;
             }
-
             if (!confirm(I18n.t("trip.decline") + "?")) {
                 return;
             }
@@ -77,10 +88,11 @@ _.namespace("App.views");
                 type: "POST",
                 data: App.getTokenHash(),
                 dataType: 'json',
+                context: this,
                 success : function (data) {
                     if (data.status == "ok") {
                         el.closest(".user").remove();
-                    } else {
+                        this.toggleAvailablePlaces(data.available_places);
                     }
                     el.removeClass("in-progress");
                 }

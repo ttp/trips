@@ -1,17 +1,23 @@
 %h5= t('trip.users')
 .trip-users
-  - if @joined_users.size > 0
-    - @joined_users.each do |user|
-      %p.user{user_id: user.id}
-        = gravatar_image_tag(user.email, :alt => user.name, :gravatar => { :size => 50 })
-        %span= user.name
-        - if user_signed_in?
-          - if @trip.user_id == current_user.id
-            %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
-          - elsif user.id == current_user.id
-            %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
-  - else
-    %p= t('trip.no_users')
+  - @joined_users.each do |user|
+    %p.user{user_id: user.id}
+      = gravatar_image_tag(user.email, :alt => user.name, :gravatar => { :size => 50 })
+      %span= user.name
+      - if user_signed_in?
+        - if @trip.user_id == current_user.id
+          %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
+        - elsif user.id == current_user.id
+          %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
+  
+  %p.no-users{:class => ('x-hidden' if @joined_users.size > 0)}= t('trip.no_users')
+
+%p.available-places{:class => ('x-hidden' if @trip.available_places == 0)}
+  %b= t('account.trip.available_places') + ':'
+  %span.places=@trip.available_places
+
+%p.no-available-places{:class => ('x-hidden' if @trip.available_places > 0)}
+  = t('trip.no_available_places')
 
 - if @want_to_join_users.size > 0
   %h5= t('trip.want_to_join')
@@ -27,7 +33,6 @@
             %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
           - elsif user.id == current_user.id
             %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
-
 
 - if user_signed_in?
   - if @trip.start_date > Time.now.to_date && @trip.user_can_join?(current_user.id)

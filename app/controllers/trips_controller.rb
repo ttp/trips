@@ -48,7 +48,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to trip_url, :notice => t("trip.join_request_added") }
-      format.json { render json: {status: :ok} }
+      format.json { render json: {status: :ok}, status: :ok }
     end
   end
 
@@ -59,7 +59,7 @@ class TripsController < ApplicationController
       request.destroy
       TripJoinMailer.leave_email(current_user, request.trip).deliver
     end
-    render json: {status: :ok}
+    render json: {status: :ok, available_places: request.trip.available_places}
   end
 
   # POST /trips/1/decline/:user_id
@@ -67,14 +67,14 @@ class TripsController < ApplicationController
     request = TripUser.find_request(params[:id], params[:user_id])
     if request
       if request.trip.user_id != current_user.id
-        render json: {status: :not_trip_owner} and return
+        render json: {status: :not_trip_owner}, status: :unprocessable_entity and return
       end
       user = request.user
       trip = request.trip
       request.destroy
       TripJoinMailer.decline_email(user, trip).deliver
     end
-    render json: {status: :ok}
+    render json: {status: :ok, available_places: trip.available_places}, status: :ok
   end
 
   # POST /trips/1/approve/:user_id
@@ -82,7 +82,7 @@ class TripsController < ApplicationController
     request = TripUser.find_request(params[:id], params[:user_id])
     if request
       if request.trip.user_id != current_user.id
-        render json: {status: :not_trip_owner} and return
+        render json: {status: :not_trip_owner}, status: :unprocessable_entity and return
       end
       request.approved = true
       request.save
@@ -93,6 +93,6 @@ class TripsController < ApplicationController
       end
       TripJoinMailer.approve_email(request.user, trip).deliver
     end
-    render json: {status: :ok}
+    render json: {status: :ok, available_places: trip.available_places}, status: :ok
   end
 end
