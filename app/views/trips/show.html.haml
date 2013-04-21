@@ -3,7 +3,10 @@
 .grid
   .row-fluid
     .span8
-      %h3= @track.name
+      %h3
+        = @track.name
+        -if user_signed_in? && @trip.user_id == current_user.id
+          %a.icon-edit.edit{href: edit_account_trip_path(@trip), title: t("helpers.links.edit")}
 
       %p
         %b= t('region.region') + ':'
