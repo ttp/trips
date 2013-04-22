@@ -1,5 +1,7 @@
 Pohody::Application.routes.draw do
 
+  post "users/ulogin" => "users#ulogin"
+
   get "trips" => "trips#index"
   get "trips/:id" => "trips#show", as: :trip
   post "trips/:id/join" => "trips#join"

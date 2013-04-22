@@ -29,7 +29,9 @@ Pohody::Application.configure do
     :authentication => :plain
   }
 
-
+  config.site = {
+    :host => 'localhost:3000'
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
