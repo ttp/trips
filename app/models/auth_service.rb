@@ -5,7 +5,7 @@ class AuthService
     data = ulogin_response(token)
     p data
 
-    if data.has_key?('error')
+    if data.has_key?('error') || data['verified_email'] != '1'
       return false
     end
 
