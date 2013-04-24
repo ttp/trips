@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422174251) do
+ActiveRecord::Schema.define(:version => 20130424204712) do
 
   create_table "regions", :force => true do |t|
     t.string   "name",       :null => false
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20130422174251) do
     t.integer  "user_id"
   end
 
+  add_index "tracks", ["region_id"], :name => "index_tracks_on_region_id"
+  add_index "tracks", ["user_id"], :name => "index_tracks_on_user_id"
+
   create_table "trip_comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
@@ -38,24 +41,32 @@ ActiveRecord::Schema.define(:version => 20130422174251) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "trip_comments", ["trip_id"], :name => "index_trip_comments_on_trip_id"
+
   create_table "trip_users", :force => true do |t|
     t.integer "trip_id"
     t.integer "user_id"
     t.boolean "approved", :default => false
   end
 
+  add_index "trip_users", ["trip_id"], :name => "index_trip_users_on_trip_id"
+  add_index "trip_users", ["user_id"], :name => "index_trip_users_on_user_id"
+
   create_table "trips", :force => true do |t|
     t.integer  "track_id"
-    t.date     "start_date",       :null => false
-    t.date     "end_date",         :null => false
-    t.text     "trip_details",     :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.date     "start_date",                                      :null => false
+    t.date     "end_date",                                        :null => false
+    t.text     "trip_details",                                    :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.integer  "user_id"
-    t.decimal  "price"
+    t.decimal  "price",            :precision => 10, :scale => 0
     t.string   "url"
-    t.integer  "available_places", :null => false
+    t.integer  "available_places",                                :null => false
   end
+
+  add_index "trips", ["start_date"], :name => "index_trips_on_start_date"
+  add_index "trips", ["user_id"], :name => "index_trips_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -75,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130422174251) do
     t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
