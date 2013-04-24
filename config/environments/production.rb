@@ -80,11 +80,8 @@ Pohody::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
-  config.site = {
-    :host => 'pohody.com.ua'
-  }
-
-
+  config.site[:host] = 'pohody.com.ua'
+  config.site[:analytics] = true
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

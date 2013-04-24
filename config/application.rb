@@ -78,5 +78,10 @@ module Pohody
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.site = {
+      :host => 'localhost:3000',
+      :analytics => false
+    }
   end
 end
