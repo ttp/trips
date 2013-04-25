@@ -31,6 +31,16 @@ en:
     current_password_hint: 'Enter you current password to confirm your changes'
     remember_me: 'Remember me'
 
+  user_profile:
+    about_me: "About me"
+    my_experience: "My experience"
+    my_contacts: "My contacts"
+    private_contacts: "Private contacts"
+    private_contacts_hint: "This contacts info can see only trip organizer"
+    private_info: "Private info"
+    private_info_hint: "This private info can see only trip organizer"
+    was_updated: Profile was updated
+
   trips_calendar: 'Trips calendar'
   trip:
     site: "Site"
@@ -70,6 +80,7 @@ en:
       subject: "New join request"
 
   account:
+    profile: 'Tourist profile'
     edit: 'Edit account'
     cancel: 'Cancel account'
     cancal_unhappy: 'Unhappy?'

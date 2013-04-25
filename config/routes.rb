@@ -1,6 +1,9 @@
 Pohody::Application.routes.draw do
 
   post "users/ulogin" => "users#ulogin"
+  get "users/profile" => "users#profile", as: :user_profile
+  put "users/profile" => "users#update_profile"
+  post "users/profile" => "users#update_profile"
 
   get "trips" => "trips#index"
   get "trips/:id" => "trips#show", as: :trip

@@ -1,5 +1,27 @@
-%h3 User
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
+%h3
+  = @user.name
+  -if user_signed_in? && @user.id == current_user.id
+    %a.icon-edit.edit{href: user_profile_path, title: t("helpers.links.edit")}
+= gravatar_image_tag(@user.email, :alt => @user.name, :gravatar => { :size => 50 })
+
+- if !@profile.nil?
+  %p
+    = raw RedCloth.new(@profile.about, [:filter_html]).to_html
+
+  %h4= t 'user_profile.my_experience'
+  %p
+    = raw RedCloth.new(@profile.experience, [:filter_html]).to_html
+
+  %h4= t 'user_profile.my_contacts'
+  %p
+    = raw RedCloth.new(@profile.contacts, [:filter_html]).to_html
+
+  -if user_signed_in? && current_user.can_view_private?(@user)
+    -if !@profile.private_contacts.empty?
+      %h4= t 'user_profile.private_contacts'
+      %p
+        = raw RedCloth.new(@profile.private_contacts, [:filter_html]).to_html
+    -if !@profile.private_info.empty?
+      %h4= t 'user_profile.private_info'
+      %p
+        = raw RedCloth.new(@profile.private_info, [:filter_html]).to_html
