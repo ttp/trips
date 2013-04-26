@@ -23,12 +23,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def profile
+  # GET /users/edit-profile
+  def edit_profile
     @profile = current_user.user_profile
     @profile = UserProfile.new if @profile.nil?
   end
 
-  # POST /users/profile
+  # PUT/POST /users/edit-profile
   def update_profile
     @profile = current_user.user_profile
     @profile = current_user.create_user_profile if @profile.nil?
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
     if @profile.update_attributes(params[:user_profile])
       redirect_to user_path(current_user), notice: I18n.t('user_profile.was_updated')
     else
-      render action: "profile"
+      render action: "edit_profile"
     end
   end
 end

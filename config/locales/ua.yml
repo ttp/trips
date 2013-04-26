@@ -33,8 +33,11 @@ ua:
 
   user_profile:
     about_me: "Про мене"
-    my_experience: "Досвід походів"
-    my_contacts: "Мої контакти"
+    about_me_hint: "Хто ви, звідки і т.д."
+    experience: "Досвід походів"
+    equipment: "Спорядженя"
+    equipment_hint: "Що з спорядження ви маєте, що не вистачає, чим можете поділитись."
+    contacts: "Мої контакти"
     private_contacts: "Приватні контакти"
     private_contacts_hint: "Приватні контакти може бачити лише організатор походу"
     private_info: "Приватна інформація"

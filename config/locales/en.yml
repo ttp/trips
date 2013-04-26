@@ -33,8 +33,11 @@ en:
 
   user_profile:
     about_me: "About me"
-    my_experience: "My experience"
-    my_contacts: "My contacts"
+    about_me_hint: "Who are you, where are you from, etc"
+    experience: "My experience"
+    equipment: "Equipment"
+    equipment_hint: "Equipment you have(don't have), equipment that you can share"
+    contacts: "My contacts"
     private_contacts: "Private contacts"
     private_contacts_hint: "This contacts info can see only trip organizer"
     private_info: "Private info"

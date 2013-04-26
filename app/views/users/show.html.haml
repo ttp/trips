@@ -8,11 +8,15 @@
   %p
     = raw RedCloth.new(@profile.about, [:filter_html]).to_html
 
-  %h4= t 'user_profile.my_experience'
+  %h4= t 'user_profile.experience'
   %p
     = raw RedCloth.new(@profile.experience, [:filter_html]).to_html
 
-  %h4= t 'user_profile.my_contacts'
+  %h4= t 'user_profile.equipment'
+  %p
+    = raw RedCloth.new(@profile.equipment, [:filter_html]).to_html
+
+  %h4= t 'user_profile.contacts'
   %p
     = raw RedCloth.new(@profile.contacts, [:filter_html]).to_html
 

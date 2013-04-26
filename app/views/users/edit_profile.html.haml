@@ -2,8 +2,9 @@
 
 = simple_form_for @profile, :url => user_profile_path, :html => { :class => 'form-horizontal span9' } do |f|
   = f.input :about, input_html: {:rows => 5}, :label => t('user_profile.about_me')
-  = f.input :experience, input_html: {:rows => 10}, :label => t('user_profile.my_experience')
-  = f.input :contacts, input_html: {:rows => 5}, :label => t('user_profile.my_contacts')
+  = f.input :experience, input_html: {:rows => 10}, :label => t('user_profile.experience')
+  = f.input :equipment, :hint => t('user_profile.equipment_hint'), input_html: {:rows => 10}, :label => t('user_profile.equipment')
+  = f.input :contacts, input_html: {:rows => 5}, :label => t('user_profile.contacts')
   = f.input :private_contacts, :hint => t('user_profile.private_contacts_hint'), input_html: {:rows => 5}, :label => t('user_profile.private_contacts')
   = f.input :private_info, :hint => t('user_profile.private_info_hint'), input_html: {:rows => 5}, :label => t('user_profile.private_info')
   .form-actions
