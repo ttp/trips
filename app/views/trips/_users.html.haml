@@ -3,7 +3,7 @@
   - @joined_users.each do |user|
     %p.user{user_id: user.id}
       = gravatar_image_tag(user.email, :alt => user.name, :gravatar => { :size => 50 })
-      %span= user.name
+      %a{href: user_path(user.id)}= user.name
       - if user_signed_in?
         - if @trip.user_id == current_user.id
           %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
@@ -25,7 +25,7 @@
     - @want_to_join_users.each do |user|
       %p.user{user_id: user.id}
         = gravatar_image_tag(user.email, :alt => user.name, :gravatar => { :size => 50 })
-        %span= user.name
+        %a{href: user_path(user.id)}= user.name
         - if user_signed_in?
           - if @trip.user_id == current_user.id
             %a.icon-ok.approve{href: approve_trip_request_path(@trip.id, user.id), title: t("trip.approve")}

@@ -1,5 +1,7 @@
 *.rbc
 *.sassc
+*.sublime-project
+*.sublime-workspace
 .sass-cache
 capybara-*.html
 .rspec

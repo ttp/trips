@@ -10,9 +10,14 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   has_many :trip_comments
+  has_one :user_profile
   before_create :update_email_hash
 
   def update_email_hash
     self.email_hash = Digest::MD5.hexdigest(email)
+  end
+
+  def can_view_private?(user)
+    user.id = self.id
   end
 end
