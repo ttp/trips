@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:ulogin]
-  before_filter :protect_from_forgery, :except => [:ulogin]
+  protect_from_forgery :except => [:ulogin]
 
   def index
     @users = User.all
@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @profile = @user.user_profile
   end
 
   def ulogin
@@ -22,4 +23,21 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/edit-profile
+  def edit_profile
+    @profile = current_user.user_profile
+    @profile = UserProfile.new if @profile.nil?
+  end
+
+  # PUT/POST /users/edit-profile
+  def update_profile
+    @profile = current_user.user_profile
+    @profile = current_user.create_user_profile if @profile.nil?
+
+    if @profile.update_attributes(params[:user_profile])
+      redirect_to user_path(current_user), notice: I18n.t('user_profile.was_updated')
+    else
+      render action: "edit_profile"
+    end
+  end
 end

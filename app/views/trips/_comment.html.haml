@@ -1,8 +1,8 @@
 .comment{id: 'comment' + comment['id'].to_s}
   .info
-    %a.avatar
+    %span.avatar
       = gravatar_image_tag(comment['email'], :alt => comment['name'], :gravatar => { :size => 24 })
-    %span.username= comment['name']
+    %a.username{href: user_path(comment['user_id'])}= comment['name']
     %time= l(comment['created_at'], :format => :long)
     
     - if user_signed_in? && (comment['user_id'] == current_user.id || trip.user_id == current_user.id)
