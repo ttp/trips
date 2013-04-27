@@ -61,6 +61,7 @@ ua:
     join_request_added: "Заявку на похід успішно подано"
     approve: "Прийняти заявку"
     decline: "Відхилити заявку"
+    decline_reason: "Причина відмови"
     remove_user: "Видалити учасника"
     cancel_request: "Відмінити заявку"
     leave_trip: "Покинути похід"

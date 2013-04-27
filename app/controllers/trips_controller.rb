@@ -72,7 +72,7 @@ class TripsController < ApplicationController
       user = request.user
       trip = request.trip
       request.destroy
-      TripJoinMailer.decline_email(user, trip).deliver
+      TripJoinMailer.decline_email(user, trip, params[:message]).deliver
     end
     render json: {status: :ok, available_places: trip.available_places}, status: :ok
   end

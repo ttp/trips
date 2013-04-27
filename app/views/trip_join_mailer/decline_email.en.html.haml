@@ -5,7 +5,8 @@
   %body
     %p
       Your join request has been declined:
-      %br
+    %p= @message
+    %p
       #{@trip.track.name} (#{t(@trip.track.region.name, :scope => "region")})
       %br
       Dates: #{l(@trip.start_date) + '-' + l(@trip.end_date)}

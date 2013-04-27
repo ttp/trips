@@ -26,8 +26,9 @@ class TripJoinMailer < ActionMailer::Base
     mail(:to => user.email)
   end
 
-  def decline_email(user, trip)
+  def decline_email(user, trip, message)
     @trip = trip
+    @message = message
     mail(:to => user.email)
   end
 end

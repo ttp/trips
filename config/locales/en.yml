@@ -58,6 +58,7 @@ en:
     join_request_added: "Join request added."
     approve: "Approve"
     decline: "Decline"
+    decline_reason: "Decline reason"
     remove_user: "Remove user"
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"

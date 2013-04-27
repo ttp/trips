@@ -1,4 +1,7 @@
 Your join request has been declined:
+
+<%= @message %>
+
 <%= @trip.track.name %> (<%= t(@trip.track.region.name, :scope => "region") %>)
 Dates: <%= l(@trip.start_date) + '-' + l(@trip.end_date) %>
 

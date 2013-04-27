@@ -52,6 +52,6 @@ Feature: Join trip
       When I sign in as trip owner
       And I visit trip page
       And I click "Decline" icon
-      And I accept confirm dialog
+      And I click "Decline" button in decline dialog
       Then I should not see "Super Tracker" in "Want to join" trip area
       And user "Super Tracker" should receive an email with subject "Your join request has been declined"

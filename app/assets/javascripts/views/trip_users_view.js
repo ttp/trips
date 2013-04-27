@@ -7,7 +7,8 @@ _.namespace("App.views");
         events: {
             "click a.leave" : "leave",
             "click a.icon-ok" : "approve",
-            "click a.decline" : "decline"
+            "click a.decline" : "declineConfirm",
+            "click #decline_reason .btn-primary" : "decline"
         },
 
         toggleAvailablePlaces : function (availablePlaces) {
@@ -72,31 +73,46 @@ _.namespace("App.views");
             });
         },
 
-        decline : function (e) {
+        declineConfirm : function (e) {
             e.preventDefault();
             var el = $(e.target);
             if (el.hasClass("in-progress")) {
                 return;
             }
-            if (!confirm(I18n.t("trip.decline") + "?")) {
-                return;
-            }
 
-            el.addClass("in-progress");
+            this._declineEl = el;
+            var username = el.closest('.user').find('.username').text();
+
+            var modal = $('#decline_reason');
+            modal.find('.username').text(username);
+            modal.modal('show');
+            modal.find('textarea').val('');
+        },
+
+        decline : function (e) {
+            e.preventDefault();
+
+            var modal = $('#decline_reason');
+            this._declineEl.addClass("in-progress");
+            var postData = _.extend(App.getTokenHash(), {
+                message: modal.find('textarea').val()
+            });
             $.ajax({
-                url: el.attr("href"),
+                url: this._declineEl.attr("href"),
                 type: "POST",
-                data: App.getTokenHash(),
+                data: postData,
                 dataType: 'json',
                 context: this,
                 success : function (data) {
                     if (data.status == "ok") {
-                        el.closest(".user").remove();
+                        this._declineEl.closest(".user").remove();
                         this.toggleAvailablePlaces(data.available_places);
                     }
-                    el.removeClass("in-progress");
+                    this._declineEl.removeClass("in-progress");
                 }
             });
+
+            modal.modal('hide');
         }
     });
 })();

@@ -57,6 +57,10 @@ When /^I accept confirm dialog$/ do
   page.driver.browser.switch_to.alert.accept
 end
 
+When /^I click "Decline" button in decline dialog$/ do
+  find("#decline_reason .btn-primary").click
+end
+
 When /^I sign in as trip owner$/ do
   user = Trip.first.user
   sign_in_as(user)

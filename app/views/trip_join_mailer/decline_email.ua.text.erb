@@ -1,4 +1,7 @@
 Ваша заявка на похід відхилена:
+
+<%= @message %>
+
 <%= @trip.track.name %> (<%= t(@trip.track.region.name, :scope => "region") %>)
 Дати: <%= l(@trip.start_date) + '-' + l(@trip.end_date) %>
 
