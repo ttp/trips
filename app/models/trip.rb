@@ -1,7 +1,7 @@
 require 'date'
 
 class Trip < ActiveRecord::Base
-  attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :price, :url, :available_places
+  attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :has_guide, :url, :available_places
   belongs_to :track
   belongs_to :user
   has_many :trip_users
@@ -21,7 +21,8 @@ class Trip < ActiveRecord::Base
     start_at = Time.now
     end_at = Time.new(start_at.year + 1, start_at.month, 1)
     connection.select_all(
-      "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, tracks.name as track_name,
+      "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
+        tracks.name as track_name,
         regions.name as region_name
       FROM trips
       INNER JOIN tracks ON trips.track_id = tracks.id

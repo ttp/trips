@@ -62,6 +62,7 @@ en:
     remove_user: "Remove user"
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"
+    has_guide: "Includes guide"
 
   comments:
     title: 'Comments'
@@ -118,8 +119,9 @@ en:
       end: "End"
       dates: "Dates"
       details: "Details"
+      details_hint: "Attendees, price, length, etc"
       url: "Site url"
-      price: "Price"
+      has_guide: "Include guide man"
       available_places: Available places
 # Regions
   region:

@@ -6,3 +6,6 @@
             %span= trip.datesRangeText()
             &nbsp;
             %span.icon-eye-open
+        :if trip.get('has_guide')
+            %div
+                %span= I18n.t('trip.has_guide')

@@ -20,6 +20,9 @@
           %b= t('trip.site') + ":"
           %a{href: trip_url(@trip, @track)}
             = trip_url(@trip, @track)
+      - if @trip.has_guide
+        %p
+          %b= t('trip.has_guide')
       
       %p.track
         %b= t('account.track.track') + ":"

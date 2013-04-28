@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425140045) do
+ActiveRecord::Schema.define(:version => 20130428063801) do
 
   create_table "regions", :force => true do |t|
     t.string   "name",       :null => false
@@ -54,15 +54,15 @@ ActiveRecord::Schema.define(:version => 20130425140045) do
 
   create_table "trips", :force => true do |t|
     t.integer  "track_id"
-    t.date     "start_date",       :null => false
-    t.date     "end_date",         :null => false
-    t.text     "trip_details",     :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.date     "start_date",                          :null => false
+    t.date     "end_date",                            :null => false
+    t.text     "trip_details",                        :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
-    t.decimal  "price"
     t.string   "url"
-    t.integer  "available_places", :null => false
+    t.integer  "available_places",                    :null => false
+    t.boolean  "has_guide",        :default => false, :null => false
   end
 
   add_index "trips", ["start_date"], :name => "index_trips_on_start_date"
@@ -70,14 +70,14 @@ ActiveRecord::Schema.define(:version => 20130425140045) do
 
   create_table "user_profiles", :force => true do |t|
     t.integer  "user_id"
-    t.text     "about",            :default => "", :null => false
-    t.text     "experience",       :default => "", :null => false
-    t.text     "equipment",        :default => "", :null => false
-    t.text     "contacts",         :default => "", :null => false
-    t.text     "private_contacts", :default => "", :null => false
-    t.text     "private_info",     :default => "", :null => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.text     "about",            :null => false
+    t.text     "experience",       :null => false
+    t.text     "equipment",        :null => false
+    t.text     "contacts",         :null => false
+    t.text     "private_contacts", :null => false
+    t.text     "private_info",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_profiles_on_user_id", :unique => true

@@ -65,6 +65,7 @@ ua:
     remove_user: "Видалити учасника"
     cancel_request: "Відмінити заявку"
     leave_trip: "Покинути похід"
+    has_guide: "Працює гід"
 
   comments:
     title: 'Коментарі'
@@ -121,8 +122,9 @@ ua:
       end: "Закінчення"
       dates: "Дати походу"
       details: "Деталі походу"
+      details_hint: "Вартість участі, протяжність, складність, учасники і т.д."
       url: "Сайт походу"
-      price: "Ціна"
+      has_guide: "Похід з гідом"
       available_places: Доступно місць
 # Regions
   region:
