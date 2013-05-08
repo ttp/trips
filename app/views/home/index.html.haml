@@ -1,18 +1,16 @@
-= javascript_include_tag "init/home_init"
-.grid
-  .row-fluid
-    .span1
-      %a.btn.prev{href: "#"}
-        %i.icon-chevron-left
-    .span6.calendar-header= t('trips_calendar')
-    .span1
-      %a.btn.next.pull-right{href: "#"}
-        %i.icon-chevron-right
-  .row-fluid
-    #calendar.span8
-    #filters.span4
-    #trips.span4
-      %h4.trips-header
-        %span= t('account.trips')
-        %button.close ×
-      .trips-body
+.row-fluid
+  .span8
+    %h3= t('home.title')
+    %p= t('home.description')
+
+    %ul
+      %li= t('home.list.text_calendar')
+      %li= t('home.list.text_join_add')
+      %li= t('home.list.text_profile')
+
+    %p
+      %a{href: '/about'}= t('home.more')
+
+  .span4
+    #upcoming
+      %h5= t('home.upcoming_trips')

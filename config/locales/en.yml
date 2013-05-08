@@ -22,6 +22,34 @@ en:
   fields:
     created: "Created"
 
+  nav:
+    home: 'Home'
+    calendar: 'Calendar'
+    about: 'About'
+    my_trips: 'My trips'
+    scheduled: 'Scheduled'
+    archive: 'Archive'
+    manage: 'Manage'
+
+  site:
+    meta_keywords: 'trips, mountain, tracking, hiking'
+    meta_description: 'mountain trips, mountain hiking, manage hikings, search members for the hiking, search hiking, hiking calendar'
+
+  home:
+    title: 'Search and manage trips'
+    description: |
+      Сайт створювався для того щоб відійти від пошуку учасників у похід по форумах,
+      а надати для цього зручний інструмент.
+    list:
+      text_calendar: 'Всі заплановані походи доступні в календарі походів.'
+      text_join_add: 'Ви можете приєднатись до вже існуючого походу або додати свій.'
+      text_profile: 'Кожен користувач має туристичний профайл по якому організатор походу вирішує чи приймати заявку на похід.'
+    more: 'More about project'
+    upcoming_trips: 'Upcoming trips'
+  about:
+    title: 'About'
+    contacts: 'Contacts'
+
   user:
     name: 'Name'
     password: 'Password'
@@ -107,7 +135,6 @@ en:
 
 # Trips
     trips: "Trips"
-    my_trips: 'My trips'
     trip:
       new: "New trip"
       edit: "Edit trip"

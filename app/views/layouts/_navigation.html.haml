@@ -1,15 +1,31 @@
 = link_to t('account.trips'), root_path, :class => 'brand'
 %ul.nav
+  %li
+    = link_to t('nav.home'), root_path
+  %li
+    = link_to t('nav.calendar'), calendar_path
+  %li
+    = link_to t('nav.about'), about_path
+
   - if user_signed_in?
     %li.dropdown
       %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-        = t('account.my_trips')
+        = t('nav.my_trips')
         %b.caret
       %ul.dropdown-menu
         %li
-          = link_to t('account.trips'), account_trips_url
+          = link_to t('nav.scheduled'), '/'
+        %li
+          = link_to t('nav.archive'), '/'
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        = t('nav.manage')
+        %b.caret
+      %ul.dropdown-menu
         %li
           = link_to t('account.tracks'), account_tracks_url
+        %li
+          = link_to t('account.trips'), account_trips_url
 
 %ul.nav.pull-right
   - if user_signed_in?

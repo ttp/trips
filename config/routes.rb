@@ -17,6 +17,9 @@ Pohody::Application.routes.draw do
   put "trips/:trip_id/comments/:comment_id" => "trip_comments#update"
   delete "trips/:trip_id/comments/:comment_id" => "trip_comments#destroy"
 
+  get "calendar" => "calendar#index"
+  get "about" => "home#about", as: :about
+
   authenticated :user do
     root :to => 'home#index'
   end

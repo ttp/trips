@@ -20,6 +20,10 @@ class Trip < ActiveRecord::Base
   def self.for_year
     start_at = Time.now
     end_at = Time.new(start_at.year + 1, start_at.month, 1)
+    
+    start_str = start_at.strftime('%Y-%m-') + '00'
+    end_str = end_at.strftime('%Y-%m-') + '00'
+
     connection.select_all(
       "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
         tracks.name as track_name,
@@ -27,7 +31,7 @@ class Trip < ActiveRecord::Base
       FROM trips
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
-      WHERE trips.start_date BETWEEN #{quote_value(start_at.to_date.to_s)} AND #{quote_value(end_at.to_date.to_s)}")
+      WHERE trips.start_date BETWEEN #{quote_value(start_str)} AND #{quote_value(end_str)}")
   end
 
   def joined_users
