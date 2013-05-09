@@ -45,7 +45,7 @@ class Trip < ActiveRecord::Base
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
       WHERE trips.start_date > #{quote_value(start_str)}
-      ORDER BY trips.id
+      ORDER BY trips.start_date
       LIMIT #{num}")
   end
 
