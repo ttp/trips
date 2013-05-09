@@ -106,7 +106,6 @@
 }
 
 #trips {
-  display: none;
   background-color: #fff;
   border-radius: 3px;
   margin-top: 10px;
@@ -128,6 +127,10 @@
       }
     }
   }
+}
+
+.grid #trips {
+  display: none;
 }
 
 #filters {

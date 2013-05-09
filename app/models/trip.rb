@@ -34,6 +34,21 @@ class Trip < ActiveRecord::Base
       WHERE trips.start_date BETWEEN #{quote_value(start_str)} AND #{quote_value(end_str)}")
   end
 
+  def self.upcoming(num)
+    start_str = Time.now.strftime('%Y-%m-%d')
+
+    connection.select_all(
+      "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
+        tracks.name as track_name,
+        regions.name as region_name
+      FROM trips
+      INNER JOIN tracks ON trips.track_id = tracks.id
+      INNER JOIN regions ON tracks.region_id = regions.id
+      WHERE trips.start_date > #{quote_value(start_str)}
+      ORDER BY trips.id
+      LIMIT #{num}")
+  end
+
   def joined_users
     users.where("trip_users.approved = ?", true)
   end

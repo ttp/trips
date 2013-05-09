@@ -11,6 +11,15 @@
     %p
       %a{href: '/about'}= t('home.more')
 
-  .span4
-    #upcoming
-      %h5= t('home.upcoming_trips')
+  #trips.span4
+    %h4.trips-header= t('home.upcoming_trips')
+    .trips-body
+      - @upcoming.each do |trip|
+        .trip{"data-trip-id" => trip['id']}
+          %a.name{href: '/trips/' + trip['id'].to_s}= trip['track_name']
+          %span= I18n.t('region.' + trip['region_name'])
+          %div
+            %span= dates_range_text(trip['start_date'], trip['end_date'])
+          - if trip['has_guide'] == 1
+            %div
+              %span= t('trip.has_guide')

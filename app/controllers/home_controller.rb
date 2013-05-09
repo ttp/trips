@@ -2,6 +2,7 @@
 
 class HomeController < ApplicationController
   def index
+    @upcoming = Trip.upcoming(10)
   end
 
   def about

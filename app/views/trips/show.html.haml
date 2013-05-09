@@ -11,10 +11,10 @@
       %p
         %b= t('region.region') + ':'
         %span= t(@region.name, :scope => 'region')
-      
+
       %p.dates
         %b= t('account.trip.dates') + ":"
-        %span= l(@trip.start_date) + " - " + l(@trip.end_date)
+        %span= dates_range_text(@trip.start_date, @trip.end_date)
       - if trip_url(@trip, @track)
         %p
           %b= t('trip.site') + ":"
@@ -23,7 +23,7 @@
       - if @trip.has_guide
         %p
           %b= t('trip.has_guide')
-      
+
       %p.track
         %b= t('account.track.track') + ":"
         %span= @track.track

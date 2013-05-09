@@ -17,11 +17,7 @@
           = link_to t('nav.scheduled'), '/'
         %li
           = link_to t('nav.archive'), '/'
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-        = t('nav.manage')
-        %b.caret
-      %ul.dropdown-menu
+        %li.nav-header= t('nav.manage')
         %li
           = link_to t('account.tracks'), account_tracks_url
         %li
