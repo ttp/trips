@@ -150,6 +150,9 @@ en:
       url: "Site url"
       has_guide: "Include guide man"
       available_places: Available places
+
+      scheduled: 'Scheduled trips'
+      archive: 'Archived trips'
 # Regions
   region:
     region: Region

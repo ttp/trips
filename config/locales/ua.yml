@@ -153,6 +153,9 @@ ua:
       url: "Сайт походу"
       has_guide: "Похід з гідом"
       available_places: Доступно місць
+
+      scheduled: 'Заплановані походи'
+      archive: 'Минулі походи'
 # Regions
   region:
     region: Регіон

@@ -29,6 +29,9 @@ Pohody::Application.routes.draw do
 
   resources :users
   namespace :account do
+    get 'trips/scheduled' => "trips#scheduled", as: :trips_scheduled
+    get 'trips/archive' => "trips#archive", as: :trips_archive
+
     resources :tracks
     resources :trips
   end

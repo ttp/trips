@@ -20,7 +20,7 @@ class Trip < ActiveRecord::Base
   def self.for_year
     start_at = Time.now
     end_at = Time.new(start_at.year + 1, start_at.month, 1)
-    
+
     start_str = start_at.strftime('%Y-%m-') + '00'
     end_str = end_at.strftime('%Y-%m-') + '00'
 
@@ -49,6 +49,22 @@ class Trip < ActiveRecord::Base
       LIMIT #{num}")
   end
 
+  def self.scheduled(user_id)
+    start_str = Time.now.strftime('%Y-%m-%d')
+    Trip.joins(:track).includes(:track => [:region])
+        .joins(:trip_users)
+        .where('trip_users.user_id = ?', user_id)
+        .where('trips.start_date > ?', start_str)
+  end
+
+  def self.archive(user_id)
+    start_str = Time.now.strftime('%Y-%m-%d')
+    Trip.joins(:track).includes(:track => [:region])
+        .joins(:trip_users)
+        .where('trip_users.user_id = ?', user_id)
+        .where('trips.start_date <= ?', start_str)
+  end
+
   def joined_users
     users.where("trip_users.approved = ?", true)
   end
@@ -63,6 +79,6 @@ class Trip < ActiveRecord::Base
   end
 
   def user_can_join?(user_id)
-      users.where("users.id = ?", user_id).count() == 0 && available_places > 0
+    users.where("users.id = ?", user_id).count() == 0 && available_places > 0
   end
 end

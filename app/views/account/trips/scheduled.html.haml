@@ -1,0 +1,19 @@
+%h3=t 'account.trip.scheduled'
+%table.table.table-striped
+  %thead
+    %tr
+      = sortable_header("id", '#')
+      = sortable_header("track", t('account.track.track'))
+      = sortable_header("region", t('region.region'))
+      = sortable_header("start_date", t("account.trip.start"))
+      %th= t("account.trip.end")
+  %tbody
+    - @trips.each do |trip|
+      %tr
+        %td= trip.id
+        %td= link_to trip.track.name, trip_path(trip.id)
+        %td= t(trip.track.region.name, :scope => 'region')
+        %td= l(trip.start_date)
+        %td= l(trip.end_date)
+
+= will_paginate @trips

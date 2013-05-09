@@ -98,4 +98,15 @@ class Account::TripsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def scheduled
+    @default_sort = 'trips.id'
+    @trips = Trip.scheduled(current_user.id)
+                 .paginate(:page => params[:page], :per_page => 10).order(order)
+  end
+
+  def archive
+    @trips = Trip.archive(current_user.id)
+                 .paginate(:page => params[:page], :per_page => 10).order(order)
+  end
 end
