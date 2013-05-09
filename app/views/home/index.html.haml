@@ -1,15 +1,20 @@
 .row-fluid
   .span8
     %h3= t('home.title')
-    %p= t('home.description')
 
-    %ul
-      %li= t('home.list.text_calendar')
-      %li= t('home.list.text_join_add')
-      %li= t('home.list.text_profile')
+    .row-fluid
+      = image_tag "landscape.jpg", {class: "span5"}
 
-    %p
-      %a{href: '/about'}= t('home.more')
+      .span7
+        %p= t('home.description')
+
+        %ul
+          %li= t('home.list.text_calendar_html', :calendar => link_to(t('home.list.in_calendar'), calendar_path))
+          %li= t('home.list.text_join_add')
+          %li= t('home.list.text_profile_html', :profile => link_to(t('account.profile'), user_path(@profile_id)))
+
+        %p
+          %a{href: '/about'}= t('home.more')
 
   #trips.span4
     %h4.trips-header= t('home.upcoming_trips')
