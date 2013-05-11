@@ -6,6 +6,8 @@
             %span= trip.datesRangeText()
             &nbsp;
             %span.icon-eye-open
-        :if trip.get('has_guide')
-            %div
+        %div
+            %a.username{href: '/users/' + trip.get('user_id'), title: I18n.t('trip.organizer')}= trip.get('user_name')
+            &nbsp;
+            :if trip.get('has_guide')
                 %span= I18n.t('trip.has_guide')

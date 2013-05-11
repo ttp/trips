@@ -91,6 +91,7 @@ en:
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"
     has_guide: "Includes guide"
+    organizer: 'Organizer'
 
   comments:
     title: 'Comments'

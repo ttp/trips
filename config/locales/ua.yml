@@ -95,6 +95,7 @@ ua:
     cancel_request: "Відмінити заявку"
     leave_trip: "Покинути похід"
     has_guide: "Працює гід"
+    organizer: 'Організатор'
 
   comments:
     title: 'Коментарі'

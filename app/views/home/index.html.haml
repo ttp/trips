@@ -25,6 +25,7 @@
           %span= I18n.t('region.' + trip['region_name'])
           %div
             %span= dates_range_text(trip['start_date'], trip['end_date'])
-          - if trip['has_guide'] == 1
-            %div
+          %div
+            %a.username{href: user_path(trip['user_id']), title: t('trip.organizer')}= trip['user_name']
+            - if trip['has_guide'] == 1
               %span= t('trip.has_guide')

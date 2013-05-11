@@ -27,10 +27,12 @@ class Trip < ActiveRecord::Base
     connection.select_all(
       "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
         tracks.name as track_name,
-        regions.name as region_name
+        regions.name as region_name,
+        trips.user_id, users.name as user_name
       FROM trips
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
+      INNER JOIN users ON users.id = trips.user_id
       WHERE trips.start_date BETWEEN #{quote_value(start_str)} AND #{quote_value(end_str)}")
   end
 
@@ -40,10 +42,12 @@ class Trip < ActiveRecord::Base
     connection.select_all(
       "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
         tracks.name as track_name,
-        regions.name as region_name
+        regions.name as region_name,
+        trips.user_id, users.name as user_name
       FROM trips
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
+      INNER JOIN users ON users.id = trips.user_id
       WHERE trips.start_date > #{quote_value(start_str)}
       ORDER BY trips.start_date
       LIMIT #{num}")
