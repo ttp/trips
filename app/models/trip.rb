@@ -59,6 +59,7 @@ class Trip < ActiveRecord::Base
         .joins(:trip_users)
         .where('trip_users.user_id = ?', user_id)
         .where('trips.start_date > ?', start_str)
+        .order('trips.start_date')
   end
 
   def self.archive(user_id)
