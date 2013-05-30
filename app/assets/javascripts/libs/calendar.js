@@ -4,6 +4,7 @@ function Calendar(options) {
         'May', 'June', 'July', 'August', 'September',
         'October', 'November', 'December'];
     this.cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    this.today = new Date();
 }
 
 Calendar.prototype.render = function(year, month) {
@@ -43,7 +44,8 @@ Calendar.prototype.render = function(year, month) {
            isCurrentMonth = (day <= monthLength && (i > 0 || j >= startingDay));
             className = isCurrentMonth ? 'day' : 'otherMonth';
             if (isCurrentMonth) {
-                html += '<td id="' + this.dayId(year, month, day) + '" class="day">'
+                html += '<td id="' + this.dayId(year, month, day) 
+                        + '" class="' + this.dayClass(year, month, day) + '">'
                         + '<div class="day-wrapper"><span class="day-num">' + day + '</span></div>';
                 day++;
             } else {
@@ -64,6 +66,17 @@ Calendar.prototype.render = function(year, month) {
 
 Calendar.prototype.dayId = function (year, month, day) {
     return 'day-' + year + '-' + this._pad(month + 1) + '-' + this._pad(day);
+};
+
+Calendar.prototype.dayClass = function (year, month, day) {
+    var className = 'day',
+        date = new Date(year, month, day);
+    if (date.isSameDay(this.today)) {
+        className += ' today';
+    } else if (date.isBefore(this.today)) {
+        className += ' passed';
+    }
+    return className;
 };
 
 Calendar.prototype._pad = function (num) {

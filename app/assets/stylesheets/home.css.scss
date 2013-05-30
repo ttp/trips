@@ -33,19 +33,30 @@
         $slices_image: "calendar_slices.png";
         $highlight_color: #c1e0aa;
         &.track {
-          background: url($slices_image) repeat-x center -60px;
+          background-image: url($slices_image);
+          background-repeat: repeat-x;
+          background-position: center -60px;
 
           &.start-day.selected {
-            background: url($slices_image) no-repeat center 29px;
+            background-repeat: no-repeat;
+            background-position: center 29px;
           }
 
           &.end-day {
-            background: url($slices_image) no-repeat center -15px;
+            background-repeat: no-repeat;
+            background-position: center -15px;
           }
 
           &.highlight, &.highlight.selected {
             background-color: $highlight_color;
           }
+        }
+
+        &.today {
+          background-color: #ffb;
+        }
+        &.passed * {
+          opacity: 0.7;
         }
 
         &.start-day .day-wrapper {
