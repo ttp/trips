@@ -19,7 +19,7 @@ _.namespace("App.views");
 
         render: function () {
             var data = {
-                regions: this._trips.groupBy(function(row){return row.get('region_name');})
+                regions: _.groupBy(this._trips.upcoming(), function(row){return row.get('region_name');})
             };
             this.$el.html(JST["templates/home/filters"](data));
         },

@@ -55,6 +55,13 @@ _.namespace("App.collections");
                 }
                 return match;
             }, this);
+        },
+
+        upcoming : function () {
+            var yesterday = new Date().addDays(-1);
+            return this.filter(function (item) {
+                return yesterday.isBefore(new Date(item.get('start_date')));
+            });
         }
     }));
 })();
