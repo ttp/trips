@@ -3,6 +3,7 @@ require 'csv'
 class ImportService
   def initialize(user_id)
     @user = User.find(user_id)
+    @logger = Logger.new(STDOUT)
   end
 
   def import_tracks(filename)
@@ -12,12 +13,14 @@ class ImportService
 
       if get_track(track_name).nil?
         region = Region.find_by_name(row.field('region'))
+        @logger.debug('region not found ' + row.field('region')) if region.nil?
         next if region.nil?
 
         track = Track.new
         track.name = track_name
         track.user_id = @user.id
         track.region_id = region.id
+        track.track = row.field('track')
         track.save
       end
     end
@@ -30,16 +33,23 @@ class ImportService
 
       track_row = get_track(track_name)
       if track_row.nil?
+        @logger.debug('track not found, goto next row')
         next
       end
 
       if get_trip(track_row.id, row.field('start_date'), row.field('end_date')).nil?
-        track = Trip.new
-        track.track_id = track_row.id
-        track.user_id = @user.id
-        track.start_date = row.field('start_date')
-        track.end_date = row.field('end_date')
-        track.save
+        @logger.debug('creating trip ' + track_row.name)
+        trip = Trip.new
+        trip.track_id = track_row.id
+        trip.user_id = @user.id
+        trip.start_date = row.field('start_date')
+        trip.end_date = row.field('end_date')
+        trip.url = row.field('url')
+        trip.has_guide = (row.field('has_guide') == "yes")
+        trip.available_places = row.field('available_places').to_i
+        if !trip.save
+          console.debug(trip.errors)
+        end
       end
     end
   end

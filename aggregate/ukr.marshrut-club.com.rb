@@ -3,6 +3,7 @@
 
 require 'rubygems'
 require 'net/http'
+require 'open-uri'
 require 'hpricot'
 require 'cgi'
 require 'csv'
@@ -40,6 +41,28 @@ def get_dates(dates_str)
   [start_date, end_date]
 end
 
+def get_region_name(region)
+  case region
+    when /кр[иы]{1}м/i then 'Crimea'
+    when /карпат[иы]{1}/i then 'Carpathian'
+    when /непал/i then 'Nepal'
+    when /кавказ/i then 'Caucasus'
+    when /румун/i then 'Romania'
+    else 'Other'
+  end
+end
+
+def get_track(url)
+  content = ''
+  open(url) do |f|
+    content = f.read
+  end
+  doc = Hpricot(content)
+  track_node = doc.search("div.content b").select { |el| el.inner_text =~ /маршрут/i }.first.parent
+  track_node.search("b, br").remove
+  track_node.inner_text.strip
+end
+
 domain = 'ukr.marshrut-club.com'
 page_path = '/'
 http = Net::HTTP.new(domain)
@@ -52,7 +75,7 @@ title_node = doc.search("div.column h3").select {|node| node.inner_text == title
 
 list_node = title_node.next_sibling
 
-puts ["name", "start_date", "end_date", "region", "url"].to_csv
+puts ["name", "start_date", "end_date", "region", "track", "url", "has_guide", "available_places"].to_csv
 while true do
   break if list_node.name != "p"
 
@@ -63,12 +86,16 @@ while true do
     dates_text = br_node.next_node.inner_text.strip
     link_node = br_node.next_sibling
     start_date, end_date = get_dates(dates_text)
+    url = link_node.get_attribute("href")
     puts [
       link_node.inner_text.strip,
       start_date,
       end_date,
-      region,
-      link_node.get_attribute("href")
+      get_region_name(region),
+      get_track(url),
+      url,
+      "yes",
+      10
     ].to_csv
   end
   list_node = list_node.next_sibling
