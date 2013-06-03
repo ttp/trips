@@ -91,6 +91,9 @@ en:
     cancel_request: "Cancel request"
     leave_trip: "Leave trip"
     has_guide: "Includes guide"
+    has_guide_0: "No"
+    has_guide_1: "Yes"
+    has_guide_desc: "Paid trips"
     organizer: 'Organizer'
 
   comments:

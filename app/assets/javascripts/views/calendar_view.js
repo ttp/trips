@@ -176,7 +176,9 @@ _.namespace("App.views");
             this.$el.find('.events-count').remove();
             this.$el.find('.start-day').removeClass('start-day');
 
-            var grouped = _.groupBy(this._trips.filtered(), function (row) {
+            var filtered = this._trips.filtered();
+            $('#trips_qty').text(' - ' + filtered.length);
+            var grouped = _.groupBy(filtered, function (row) {
                 return row.get('start_date');
             });
             _.each(grouped, function (trips, day) {

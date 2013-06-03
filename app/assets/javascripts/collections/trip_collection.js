@@ -12,6 +12,10 @@ _.namespace("App.collections");
             return item.get("start_date") + " " + item.get("end_date");
         },
 
+        getFilters : function () {
+            return this._filters;
+        },
+
         setFilter : function (type, value) {
             if (_.isUndefined(this._filters[type])) {
                 this._filters[type] = [];
@@ -36,13 +40,13 @@ _.namespace("App.collections");
             this.trigger('filter:changed');
         },
 
-        filtered : function (filters) {
-            if (!_.isUndefined(filters)) {
+        filtered : function (filters, skip) {
+            if (filters) {
                 filters = _.extend(filters, this._filters);
             } else {
                 filters = this._filters;
             }
-            
+
             if (!_.size(filters)) {
                 return this.toArray();
             }
@@ -50,8 +54,11 @@ _.namespace("App.collections");
             return this.filter(function (item) {
                 var match = true;
                 for (var type in filters) {
+                    if (skip && type === skip) {
+                        continue;
+                    }
                     match = match && (_.isArray(filters[type]) ?
-                        _.contains(filters[type], item.get(type)) : item.get(type) == filters[type]);
+                        _.contains(filters[type], item.get(type) + '') : item.get(type) == filters[type]);
                 }
                 return match;
             }, this);

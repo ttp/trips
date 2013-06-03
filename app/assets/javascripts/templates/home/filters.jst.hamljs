@@ -1,8 +1,17 @@
 %h5= I18n.t('region.region')
 .regions
-  :each trips in regions
+  :each trips in by_regions
     %div
       %label
         %input{type: "checkbox", name: "region_name", value: __key__}
         %span= I18n.t('region.' + __key__)
+      %span.count= trips.length
+
+%h5{title: I18n.t('trip.has_guide_desc')}= I18n.t('trip.has_guide')
+.has_guide
+  :each trips in by_guide
+    %div
+      %label
+        %input{type: "checkbox", name: "has_guide", value: __key__}
+        %span= I18n.t('trip.has_guide_' + __key__)
       %span.count= trips.length

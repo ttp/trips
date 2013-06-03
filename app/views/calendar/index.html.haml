@@ -4,7 +4,9 @@
     .span1
       %a.btn.prev{href: "#"}
         %i.icon-chevron-left
-    .span6.calendar-header= t('trips_calendar')
+    .span6.calendar-header
+      = t('trips_calendar')
+      %span#trips_qty
     .span1
       %a.btn.next.pull-right{href: "#"}
         %i.icon-chevron-right
