@@ -23,13 +23,21 @@ _.namespace("App.views");
                 by_regions: _.groupBy(this._trips.filtered(false, 'region_name'), function(row){return row.get('region_name');}),
             };
             this.$el.html(JST["templates/home/filters"](data));
+            this._checkSelected();
+        },
 
+        _checkSelected : function () {
             _.each(this._trips.getFilters(), function (values, filter) {
                 var inputs = $('input[name="' + filter + '"]');
                 _.each(values, function (value) {
-                    inputs.filter('[value="' + value + '"]').attr('checked', true);
-                });
-            });
+                    var input = inputs.filter('[value="' + value + '"]');
+                    if (input.length) {
+                        inputs.filter('[value="' + value + '"]').attr('checked', true);
+                    } else {
+                        this._trips.removeFilter(filter, value);
+                    }
+                }, this);
+            }, this);
         },
 
         updateFilter : function (e) {
