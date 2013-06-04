@@ -10,6 +10,15 @@ _.namespace("App.views");
             'change input': 'updateFilter'
         },
 
+        filterSorters : {
+            'region_name' : function (item) {
+                return I18n.t('region.' + item[0]);
+            },
+            'has_guide' : function (item) {
+                return I18n.t('trip.has_guide_' + item[0]);
+            }
+        },
+
         initialize: function (options) {
             this.options = options;
 
@@ -18,12 +27,22 @@ _.namespace("App.views");
         },
 
         render: function () {
-            var data = {
-                by_guide: _.groupBy(this._trips.filtered(false, 'has_guide'), function(row){return row.get('has_guide');}),
-                by_regions: _.groupBy(this._trips.filtered(false, 'region_name'), function(row){return row.get('region_name');}),
-            };
+            var data = this._getFilterOptions();
             this.$el.html(JST["templates/home/filters"](data));
             this._checkSelected();
+        },
+
+        _getFilterOptions : function () {
+            var options = {};
+            _.each(_.keys(this.filterSorters), function (type) {
+                var key = 'trips_by_' + type;
+                options[key] = _.chain(this._trips.filtered(false, type))
+                                .groupBy(function(row){return row.get(type);})
+                                .map(function (items, key) { return [key, items.length]; })
+                                .sortBy(this.filterSorters[type])
+                                .value();
+            }, this);
+            return options;
         },
 
         _checkSelected : function () {
