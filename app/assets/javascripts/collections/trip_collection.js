@@ -29,7 +29,19 @@ _.namespace("App.collections");
                 this._filters[type] = [];
             }
             this._filters[type].push(value);
+            this._cleanHiddenFilters();
             this.trigger('filter:changed');
+        },
+
+        _cleanHiddenFilters : function () {
+            var grouped;
+            _.each(this._filters, function (values, type) {
+                grouped = _.groupBy(this.filtered(false, type), function(row){return row.get(type);});
+                var hiddenValues = _.difference(values, _.keys(grouped));
+                _.each(hiddenValues, function (hiddenValue) {
+                    this.removeFilter(type, hiddenValue);
+                }, this);
+            }, this);
         },
 
         removeFilter : function (type, value) {

@@ -30,12 +30,7 @@ _.namespace("App.views");
             _.each(this._trips.getFilters(), function (values, filter) {
                 var inputs = $('input[name="' + filter + '"]');
                 _.each(values, function (value) {
-                    var input = inputs.filter('[value="' + value + '"]');
-                    if (input.length) {
-                        inputs.filter('[value="' + value + '"]').attr('checked', true);
-                    } else {
-                        this._trips.removeFilter(filter, value);
-                    }
+                    inputs.filter('[value="' + value + '"]').attr('checked', true);
                 }, this);
             }, this);
         },
