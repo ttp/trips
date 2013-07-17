@@ -29,3 +29,4 @@ gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri
 gem 'will_paginate'
 gem 'RedCloth'
 gem 'gravatar_image_tag'
+gem 'globalize3'

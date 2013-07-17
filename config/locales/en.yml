@@ -30,6 +30,8 @@ en:
     scheduled: 'Scheduled'
     archive: 'Archive'
     manage: 'Manage'
+    tools: 'Інструменти'
+    food_calculator: 'Food calculator'
 
   site:
     meta_keywords: 'trips, mountain, tracking, hiking'
@@ -115,6 +117,9 @@ en:
       subject: "New join request"
     join_request_owner_email:
       subject: "New join request"
+
+  food:
+    title: 'Food calculator'
 
   account:
     profile: 'Tourist profile'

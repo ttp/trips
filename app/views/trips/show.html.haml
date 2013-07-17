@@ -8,36 +8,50 @@
         -if user_signed_in? && @trip.user_id == current_user.id
           %a.icon-edit.edit{href: edit_account_trip_path(@trip), title: t("helpers.links.edit")}
 
-      %p
-        %b= t('region.region') + ':'
-        %span= t(@region.name, :scope => 'region')
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#description"} Description
+        %li
+          %a{"data-toggle" => "tab", :href => "#tents"} Tents
+        %li
+          %a{"data-toggle" => "tab", :href => "#food"} Food
 
-      %p.dates
-        %b= t('account.trip.dates') + ":"
-        %span= dates_range_text(@trip.start_date, @trip.end_date)
-      - if trip_url(@trip, @track)
-        %p
-          %b= t('trip.site') + ":"
-          %a{href: trip_url(@trip, @track)}
-            = trip_url(@trip, @track)
+      .tab-content
+        #description.tab-pane.active
+          %p
+            %b= t('region.region') + ':'
+            %span= t(@region.name, :scope => 'region')
 
-      %p.organizer
-        %b= t('trip.organizer') + ':'
-        %a.username{href: user_path(@trip.user_id)}= @trip.user.name
-        - if @trip.has_guide
-          %span= t('trip.has_guide')
+          %p.dates
+            %b= t('account.trip.dates') + ":"
+            %span= dates_range_text(@trip.start_date, @trip.end_date)
+          - if trip_url(@trip, @track)
+            %p
+              %b= t('trip.site') + ":"
+              %a{href: trip_url(@trip, @track)}
+                = trip_url(@trip, @track)
 
-      %p.track
-        %b= t('account.track.track') + ":"
-        %span= @track.track
+          %p.organizer
+            %b= t('trip.organizer') + ':'
+            %a.username{href: user_path(@trip.user_id)}= @trip.user.name
+            - if @trip.has_guide
+              %span= t('trip.has_guide')
 
-      - if !@trip.trip_details.empty?
-        %h5= t('account.trip.details')
-        .description= raw RedCloth.new(@trip.trip_details, [:filter_html]).to_html
+          %p.track
+            %b= t('account.track.track') + ":"
+            %span= @track.track
 
-      - if !@track.description.empty?
-        %h5= t('account.track.description')
-        .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
+          - if !@trip.trip_details.empty?
+            %h5= t('account.trip.details')
+            .description= raw RedCloth.new(@trip.trip_details, [:filter_html]).to_html
+
+          - if !@track.description.empty?
+            %h5= t('account.track.description')
+            .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
+
+        #tents.tab-pane
+
+        #food.tab-pane
 
       #trip_comments
         = render :partial => "comments"

@@ -18,6 +18,7 @@ Pohody::Application.routes.draw do
   delete "trips/:trip_id/comments/:comment_id" => "trip_comments#destroy"
 
   get "calendar" => "calendar#index"
+  get "food-calculator" => "food#index", as: :food_calculator
   get "about" => "home#about", as: :about
 
   authenticated :user do

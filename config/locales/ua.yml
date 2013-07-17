@@ -30,6 +30,8 @@ ua:
     scheduled: 'Заплановані'
     archive: 'Минулі'
     manage: 'Керування'
+    tools: 'Інструменти'
+    food_calculator: 'Розкладка їжі'
 
   site:
     meta_keywords: 'походи, гори, туризм'
@@ -119,6 +121,9 @@ ua:
       subject: "Заявка на участь у поході"
     join_request_owner_email:
       subject: "Нова заявка на участь у поході"
+
+  food:
+    title: 'Розкладка їжі'
 
   account:
     profile: 'Туристичний профайл'

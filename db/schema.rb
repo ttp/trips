@@ -11,7 +11,110 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428063801) do
+ActiveRecord::Schema.define(:version => 20130611092641) do
+
+  create_table "menu_day_entities", :force => true do |t|
+    t.integer "parent_id"
+    t.integer "day_id"
+    t.integer "entity_type",                :null => false
+    t.integer "entity_id",                  :null => false
+    t.integer "weight",      :default => 0, :null => false
+  end
+
+  create_table "menu_days", :force => true do |t|
+    t.integer "menu_id"
+    t.integer "num"
+  end
+
+  create_table "menu_dish_categories", :force => true do |t|
+  end
+
+  create_table "menu_dish_category_translations", :force => true do |t|
+    t.integer  "menu_dish_category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "menu_dish_category_translations", ["locale"], :name => "index_menu_dish_category_translations_on_locale"
+  add_index "menu_dish_category_translations", ["menu_dish_category_id"], :name => "index_menu_dish_category_translations_on_menu_dish_category_id"
+
+  create_table "menu_dish_products", :force => true do |t|
+    t.integer "dish_id"
+    t.integer "product_id"
+  end
+
+  create_table "menu_dish_translations", :force => true do |t|
+    t.integer  "menu_dish_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "menu_dish_translations", ["locale"], :name => "index_menu_dish_translations_on_locale"
+  add_index "menu_dish_translations", ["menu_dish_id"], :name => "index_menu_dish_translations_on_menu_dish_id"
+
+  create_table "menu_dishes", :force => true do |t|
+    t.integer "dish_category_id"
+  end
+
+  create_table "menu_meal_translations", :force => true do |t|
+    t.integer  "menu_meal_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "menu_meal_translations", ["locale"], :name => "index_menu_meal_translations_on_locale"
+  add_index "menu_meal_translations", ["menu_meal_id"], :name => "index_menu_meal_translations_on_menu_meal_id"
+
+  create_table "menu_meals", :force => true do |t|
+  end
+
+  create_table "menu_menus", :force => true do |t|
+    t.integer  "users_id"
+    t.string   "name",       :default => "", :null => false
+    t.integer  "users_qty",  :default => 1,  :null => false
+    t.string   "url",                        :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "menu_product_categories", :force => true do |t|
+  end
+
+  create_table "menu_product_category_translations", :force => true do |t|
+    t.integer  "menu_product_category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "menu_product_category_translations", ["locale"], :name => "index_menu_product_category_translations_on_locale"
+  add_index "menu_product_category_translations", ["menu_product_category_id"], :name => "index_6680f3b847633177684d3ec6549dd62931982788"
+
+  create_table "menu_product_translations", :force => true do |t|
+    t.integer  "menu_product_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "menu_product_translations", ["locale"], :name => "index_menu_product_translations_on_locale"
+  add_index "menu_product_translations", ["menu_product_id"], :name => "index_menu_product_translations_on_menu_product_id"
+
+  create_table "menu_products", :force => true do |t|
+    t.integer "product_category_id",                :null => false
+    t.integer "calories",            :default => 0, :null => false
+    t.integer "proteins",            :default => 0, :null => false
+    t.integer "fats",                :default => 0, :null => false
+    t.integer "carbohydrates",       :default => 0, :null => false
+  end
 
   create_table "regions", :force => true do |t|
     t.string   "name",       :null => false
@@ -20,12 +123,12 @@ ActiveRecord::Schema.define(:version => 20130428063801) do
   end
 
   create_table "tracks", :force => true do |t|
-    t.string   "name",        :null => false
-    t.text     "description", :null => false
-    t.text     "track",       :null => false
-    t.string   "url",         :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "name",                        :null => false
+    t.text     "description",                 :null => false
+    t.text     "track"
+    t.string   "url",         :default => ""
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "region_id"
     t.integer  "user_id"
   end

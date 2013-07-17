@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -12,6 +13,7 @@ user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => EN
 puts 'user: ' << user.name
 
 
+puts 'Regions'
 Region.delete_all
 regions = [
     {id: 1, name: "Carpathian"},
@@ -26,3 +28,6 @@ regions.each do |region|
   row.id = region[:id]
   row.save
 end
+
+require_relative './seeds/menu_meals.rb'
+require_relative './seeds/menu_products.rb'
