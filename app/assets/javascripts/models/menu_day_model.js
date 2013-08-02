@@ -1,7 +1,7 @@
 _.namespace("App.models");
 
 (function () {
-    App.models.FoodDayModel = Backbone.Model.extend({
+    App.models.MenuDayModel = Backbone.Model.extend({
 
     });
 })();

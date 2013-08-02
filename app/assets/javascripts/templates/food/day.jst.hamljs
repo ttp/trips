@@ -1,5 +1,8 @@
 .header
-  %b.title= 'Day ' + num
+  %b.title
+    Day&nbsp;
+    %span.num= num
+  %i.icon-remove
 .body
   .noitems
     Drop products here
