@@ -8,6 +8,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
     %script{:type => "text/javascript"}
       I18n.defaultLocale = "#{I18n.locale}";
   %body{:class => "#{controller_name} #{action_name}"}

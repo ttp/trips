@@ -1,2 +1,25 @@
-%h3= t('food.title')
-%p Find me in app/views/food/index.html.haml
+= javascript_include_tag "init/food_init"
+
+%h3= t('menu.title')
+
+%div
+
+#menu.row
+  .span8
+    .days
+    %button.btn.add-day Add day
+  .span4
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => '#product_list'} Products
+      %li
+        %a{"data-toggle" => "tab", :href => '#dish_list'} Dishes
+    .tab-content
+      #product_list.tab-pane.active
+        %div.product Milk
+        %div.product Bread
+        %div.product Cookies
+      #dish_list.tab-pane
+        %div.dish Dish1
+        %div.dish Dish 2
+        %div.dish Dish 3

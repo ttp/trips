@@ -1,0 +1,5 @@
+.header
+  %b.title= 'Day ' + num
+.body
+  .noitems
+    Drop products here
