@@ -5,7 +5,7 @@ _.namespace("App.views");
 (function() {
     App.views.MenuDayView = Backbone.View.extend({
         events: {
-            'click .icon-remove' : 'removeDay'
+            'click button.close' : 'removeDay'
         },
 
         initialize: function (options) {

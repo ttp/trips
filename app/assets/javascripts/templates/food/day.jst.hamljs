@@ -2,7 +2,7 @@
   %b.title
     Day&nbsp;
     %span.num= num
-  %i.icon-remove
+  %button.close ×
 .body
   .noitems
     Drop products here

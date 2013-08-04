@@ -19,6 +19,7 @@ Pohody::Application.routes.draw do
 
   get "calendar" => "calendar#index"
   get "food-calculator" => "food#index", as: :food_calculator
+  get "food/products" => "food#products", as: :food_products
   get "about" => "home#about", as: :about
 
   authenticated :user do
