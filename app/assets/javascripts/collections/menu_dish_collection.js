@@ -1,7 +1,7 @@
 _.namespace("App.collections");
 
 (function() {
-    App.collections.MenuProductCollection = new (Backbone.Collection.extend({
+    App.collections.MenuDishCollection = new (Backbone.Collection.extend({
         comparator : function (item) {
             return item.get("name");
         }

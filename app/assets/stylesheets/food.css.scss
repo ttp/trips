@@ -22,3 +22,35 @@
     }
   }
 }
+
+.sidebar {
+  &.affix {
+    top: 60px;
+  }
+  .tab-content {
+    max-height: 430px;
+  }
+}
+
+#product_list {
+  overflow: auto;
+  position: relative;
+
+  li.category {
+    .category-name {
+      cursor: pointer;
+    }
+
+    ul.products {
+      display: none;
+
+      .product-name {
+        cursor: move;
+      }
+    }
+
+    &.expanded ul.products {
+      display: block;
+    }
+  }
+}

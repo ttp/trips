@@ -1,9 +1,14 @@
 //= require views/menu_day_view
 //= require views/menu_products_view
+//= require views/menu_dishes_view
+//= require views/menu_meals_view
 //= require models/menu_day_model
 //= require collections/menu_day_collection
 //= require collections/menu_product_category_collection
 //= require collections/menu_product_collection
+//= require collections/menu_dish_category_collection
+//= require collections/menu_dish_collection
+//= require collections/menu_meal_collection
 
 _.namespace("App.views");
 
@@ -27,6 +32,9 @@ _.namespace("App.views");
                 success: function (data) {
                     App.collections.MenuProductCategoryCollection.reset(data['product_categories']);
                     App.collections.MenuProductCollection.reset(data['products']);
+                    App.collections.MenuDishCategoryCollection.reset(data['dish_categories']);
+                    App.collections.MenuDishCollection.reset(data['dishes']);
+                    App.collections.MenuMealCollection.reset(data['meals']);
                     this.render();
                 },
                 context: this
@@ -38,6 +46,15 @@ _.namespace("App.views");
                 el: '#product_list',
                 categories: App.collections.MenuProductCategoryCollection,
                 products: App.collections.MenuProductCollection
+            });
+            this.dishesView = new App.views.MenuDishesView({
+                el: '#dish_list',
+                categories: App.collections.MenuDishCategoryCollection,
+                dishes: App.collections.MenuDishCollection
+            });
+            this.mealsView = new App.views.MenuMealsView({
+                el: '#meal_list',
+                meals: App.collections.MenuMealCollection
             });
         },
 

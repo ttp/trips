@@ -9,17 +9,15 @@
     .days
     %button.btn.add-day Add day
   .span4
-    %ul.nav.nav-tabs
-      %li.active
-        %a{"data-toggle" => "tab", :href => '#product_list'} Products
-      %li
-        %a{"data-toggle" => "tab", :href => '#dish_list'} Dishes
-    .tab-content
-      #product_list.tab-pane.active
-        %div.product Milk
-        %div.product Bread
-        %div.product Cookies
-      #dish_list.tab-pane
-        %div.dish Dish1
-        %div.dish Dish 2
-        %div.dish Dish 3
+    %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => '#meal_list'} Meals
+        %li
+          %a{"data-toggle" => "tab", :href => '#product_list'} Products
+        %li
+          %a{"data-toggle" => "tab", :href => '#dish_list'} Dishes
+      .tab-content
+        #meal_list.tab-pane.active
+        #product_list.tab-pane
+        #dish_list.tab-pane

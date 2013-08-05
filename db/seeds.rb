@@ -31,3 +31,4 @@ end
 
 require_relative './seeds/menu_meals.rb'
 require_relative './seeds/menu_products.rb'
+require_relative './seeds/menu_dishes.rb'

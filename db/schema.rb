@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130611092641) do
   create_table "menu_dish_products", :force => true do |t|
     t.integer "dish_id"
     t.integer "product_id"
+    t.integer "weight"
   end
 
   create_table "menu_dish_translations", :force => true do |t|

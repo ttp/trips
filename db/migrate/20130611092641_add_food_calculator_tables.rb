@@ -51,6 +51,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
     create_table :menu_dish_products do |t|
       t.references :dish
       t.references :product
+      t.integer :weight
     end
   end
 
