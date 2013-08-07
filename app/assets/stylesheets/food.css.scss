@@ -17,7 +17,11 @@
       }
 
       .body {
-
+        .entity-meal, .entity-dish {
+          .entity-name {
+            font-weight: bold;
+          }
+        }
       }
     }
   }

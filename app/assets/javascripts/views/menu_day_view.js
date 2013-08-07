@@ -7,13 +7,15 @@ _.namespace("App.views");
 (function() {
     App.views.MenuDayView = Backbone.View.extend({
         events: {
-            'click button.close' : 'removeDay'
+            'click button.close' : 'removeDay',
+            'click .icon-remove' : 'removeEntity'
         },
 
         initialize: function (options) {
             this.model = options.model;
             this.render();
             this.bindEvents();
+            this.entities = App.collections.MenuDayEntityCollection;
         },
 
         render: function () {
@@ -54,16 +56,27 @@ _.namespace("App.views");
                 entity_type : ui.draggable.data('type'),
                 day_id : this.model.cid
             });
-            App.collections.MenuDayEntityCollection.add(entity);
+            this.entities.add(entity);
             this.renderEntity(entity);
         },
 
         renderEntity : function (entity) {
             var entityEl = $("<div></div>");
-            entityEl.text(entity.getName())
-                    .attr('id', 'entity_' + entity.cid)
-                    .appendTo( this.$el.find('.body') );
+            $('<i class="icon-remove"></i>').appendTo(entityEl);
+            $('<span class="entity-name"></span>').text(entity.getName()).appendTo(entityEl);
+            entityEl.attr('id', 'entity_' + entity.cid)
+                    .addClass('entity')
+                    .addClass('entity-' + entity.get('entity_type'))
+                    .appendTo(this.$el.find('.body'));
             return entityEl;
+        },
+
+        removeEntity : function (event) {
+            var entityEl = $(event.target).closest('.entity');
+            var id = entityEl.attr('id').split('_')[1];
+            var entity = this.entities.getByCid(id);
+            this.entities.remove(entity);
+            entityEl.remove();
         }
     });
 })();
