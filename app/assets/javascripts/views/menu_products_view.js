@@ -27,9 +27,13 @@ _.namespace('App.views');
                 var productsRoot = $('<ul></ul>').addClass('products');
                 _.each(products, function (product) {
                     var productLiEl = $('<li></li>');
-                    var spanEl = $('<span></span>').addClass('product-name').data('pid', product.id);
-                    spanEl.text(product.get('name'));
-                    productLiEl.append(spanEl);
+                    var productEl = $('<span></span>').addClass('product');
+                    productEl.attr({
+                        'data-id' : product.id,
+                        'data-type' : 'prod'
+                    });
+                    productEl.text(product.get('name'));
+                    productLiEl.append(productEl);
                     productsRoot.append(productLiEl);
                 }, this);
                 liEl.append(productsRoot);
@@ -38,7 +42,7 @@ _.namespace('App.views');
             this.$el.html('');
             this.$el.append(rootEl);
 
-            this.$el.find('.product-name').draggable({
+            this.$el.find('.product').draggable({
                 revert: "invalid",
                 helper: "clone",
                 appendTo: "body",

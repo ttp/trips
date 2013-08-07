@@ -27,9 +27,13 @@ _.namespace('App.views');
                 var dishesRoot = $('<ul></ul>').addClass('dishes');
                 _.each(dishes, function (dish) {
                     var dishLiEl = $('<li></li>');
-                    var spanEl = $('<span></span>').addClass('dish-name').data('pid', dish.id);
-                    spanEl.text(dish.get('name'));
-                    dishLiEl.append(spanEl);
+                    var dishEl = $('<span></span>').addClass('dish');
+                    dishEl.attr({
+                        'data-id' : dish.id,
+                        'data-type' : 'dish'
+                    });
+                    dishEl.text(dish.get('name'));
+                    dishLiEl.append(dishEl);
                     dishesRoot.append(dishLiEl);
                 }, this);
                 liEl.append(dishesRoot);
@@ -38,7 +42,7 @@ _.namespace('App.views');
             this.$el.html('');
             this.$el.append(rootEl);
 
-            this.$el.find('.dish-name').draggable({
+            this.$el.find('.dish').draggable({
                 revert: "invalid",
                 helper: "clone",
                 appendTo: "body",

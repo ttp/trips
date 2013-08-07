@@ -4,6 +4,6 @@ _.namespace("App.collections");
 
 (function() {
     App.collections.MenuDayCollection = new (Backbone.Collection.extend({
-    	model: App.models.MenuDayModel
+        model: App.models.MenuDayModel
     }));
 })();

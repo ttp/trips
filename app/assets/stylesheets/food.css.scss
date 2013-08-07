@@ -29,6 +29,10 @@
   }
   .tab-content {
     max-height: 430px;
+
+    .product, .dish, .meal {
+      cursor: move;
+    }
   }
 }
 
@@ -43,10 +47,6 @@
 
     ul.products {
       display: none;
-
-      .product-name {
-        cursor: move;
-      }
     }
 
     &.expanded ul.products {

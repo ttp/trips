@@ -11,6 +11,10 @@ _.namespace('App.views');
             var rootEl = $('<div></div>');
             this.meals.each($.proxy(function (meal) {
                 var mealEl = $('<div></div>').addClass('meal').text(meal.get('name'));
+                mealEl.attr({
+                    'data-id': meal.id,
+                    'data-type': 'meal'
+                });
                 rootEl.append(mealEl);
             }, this));
 
