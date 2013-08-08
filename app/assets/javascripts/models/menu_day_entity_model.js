@@ -11,6 +11,12 @@ _.namespace("App.models");
             weight: 0
         },
 
+        initialize : function () {
+            if (!this.id) {
+                this.set('id', this.cid);
+            }
+        },
+
         getName : function () {
             return this.getEntityModel().get('name');
         },

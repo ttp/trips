@@ -56,6 +56,10 @@ _.namespace("App.views");
                 entity_type : ui.draggable.data('type'),
                 day_id : this.model.cid
             });
+            if ($this.is('.entity')) {
+                var parent_id = $this.attr('id').split('_')[1];
+                entity.set('parent_id', parent_id);
+            }
             this.entities.add(entity);
             this.renderEntity(entity);
         },
@@ -64,17 +68,38 @@ _.namespace("App.views");
             var entityEl = $("<div></div>");
             $('<i class="icon-remove"></i>').appendTo(entityEl);
             $('<span class="entity-name"></span>').text(entity.getName()).appendTo(entityEl);
-            entityEl.attr('id', 'entity_' + entity.cid)
+            entityEl.attr('id', 'entity_' + entity.id)
                     .addClass('entity')
-                    .addClass('entity-' + entity.get('entity_type'))
-                    .appendTo(this.$el.find('.body'));
+                    .addClass('entity-' + entity.get('entity_type'));
+            if (entity.get('parent_id')) {
+                entityEl.appendTo(this.$el.find('#entity_' + entity.get('parent_id')));
+            } else {
+                entityEl.appendTo(this.$el.find('.body'));
+            }
+            if (entity.get('entity_type') == 'meal') {
+                entityEl.droppable({
+                    greedy: true,
+                    accept: ".product, .dish",
+                    activeClass: "ui-state-hover",
+                    hoverClass: "ui-state-active",
+                    drop : $.proxy(this.onEntityDrop, this)
+                });
+            } else if (entity.get('entity_type') == 'dish') {
+                entityEl.droppable({
+                    greedy: true,
+                    accept: ".product",
+                    activeClass: "ui-state-hover",
+                    hoverClass: "ui-state-active",
+                    drop : $.proxy(this.onEntityDrop, this)
+                });
+            }
             return entityEl;
         },
 
         removeEntity : function (event) {
             var entityEl = $(event.target).closest('.entity');
             var id = entityEl.attr('id').split('_')[1];
-            var entity = this.entities.getByCid(id);
+            var entity = this.entities.get(id);
             this.entities.remove(entity);
             entityEl.remove();
         }

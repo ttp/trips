@@ -18,10 +18,18 @@
 
       .body {
         .entity-meal, .entity-dish {
-          .entity-name {
+          > .entity-name {
             font-weight: bold;
           }
         }
+        .entity {
+          .entity {
+            margin-left: 10px;
+          }
+        }
+      }
+      .ui-state-active {
+        background-color: #ffa;
       }
     }
   }
