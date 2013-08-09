@@ -17,14 +17,14 @@ _.namespace('App.views');
             this.categories.each($.proxy(function (category) {
                 var products = this.products.where({product_category_id: category.id});
                 var liEl = $('<li></li>').addClass('category');
+                $('<i class="icon-folder-close"></i>').appendTo(liEl);
                 var categoryName = $('<span></span>');
                 categoryName.text(category.get('name'))
                             .addClass('category-name')
                             .data('pid', category.id);
                 liEl.append(categoryName);
-                rootEl.append(liEl);
 
-                var productsRoot = $('<ul></ul>').addClass('products');
+                var productsRoot = $('<ul></ul>').addClass('items');
                 _.each(products, function (product) {
                     var productLiEl = $('<li></li>');
                     var productEl = $('<span></span>').addClass('product');
@@ -37,6 +37,7 @@ _.namespace('App.views');
                     productsRoot.append(productLiEl);
                 }, this);
                 liEl.append(productsRoot);
+                rootEl.append(liEl);
             }, this));
 
             this.$el.html('');
@@ -52,7 +53,9 @@ _.namespace('App.views');
         },
 
         toggleProducts : function (e) {
-            $(e.currentTarget).closest('li').toggleClass('expanded');
+            $(e.currentTarget)
+                .closest('li').toggleClass('expanded')
+                .find('i').toggleClass('icon-folder-closed').toggleClass('icon-folder-open');
         }
     });
 })();

@@ -23,6 +23,12 @@
           }
         }
         .entity {
+          .icon-remove {
+            opacity: 0;
+          }
+          &:hover > .icon-remove {
+            opacity: 1;
+          }
           .entity {
             margin-left: 10px;
           }
@@ -48,20 +54,22 @@
   }
 }
 
-#product_list {
+.tree {
   overflow: auto;
   position: relative;
 
   li.category {
+    list-style: none;
     .category-name {
+      margin-left: 5px;
       cursor: pointer;
     }
 
-    ul.products {
+    ul.items {
       display: none;
     }
 
-    &.expanded ul.products {
+    &.expanded ul.items {
       display: block;
     }
   }

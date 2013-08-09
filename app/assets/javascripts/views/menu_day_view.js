@@ -76,18 +76,11 @@ _.namespace("App.views");
             } else {
                 entityEl.appendTo(this.$el.find('.body'));
             }
-            if (entity.get('entity_type') == 'meal') {
+
+            if (entity.get('entity_type') != 'prod') {
                 entityEl.droppable({
                     greedy: true,
-                    accept: ".product, .dish",
-                    activeClass: "ui-state-hover",
-                    hoverClass: "ui-state-active",
-                    drop : $.proxy(this.onEntityDrop, this)
-                });
-            } else if (entity.get('entity_type') == 'dish') {
-                entityEl.droppable({
-                    greedy: true,
-                    accept: ".product",
+                    accept: entity.get('entity_type') == 'meal' ? ".product, .dish" : '.product',
                     activeClass: "ui-state-hover",
                     hoverClass: "ui-state-active",
                     drop : $.proxy(this.onEntityDrop, this)

@@ -17,14 +17,14 @@ _.namespace('App.views');
             this.categories.each($.proxy(function (category) {
                 var dishes = this.dishes.where({dish_category_id: category.id});
                 var liEl = $('<li></li>').addClass('category');
+                $('<i class="icon-folder-close"></i>').appendTo(liEl);
                 var categoryName = $('<span></span>');
                 categoryName.text(category.get('name'))
                             .addClass('category-name')
                             .data('pid', category.id);
                 liEl.append(categoryName);
-                rootEl.append(liEl);
 
-                var dishesRoot = $('<ul></ul>').addClass('dishes');
+                var dishesRoot = $('<ul></ul>').addClass('items');
                 _.each(dishes, function (dish) {
                     var dishLiEl = $('<li></li>');
                     var dishEl = $('<span></span>').addClass('dish');
@@ -37,6 +37,7 @@ _.namespace('App.views');
                     dishesRoot.append(dishLiEl);
                 }, this);
                 liEl.append(dishesRoot);
+                rootEl.append(liEl);
             }, this));
 
             this.$el.html('');
@@ -52,7 +53,9 @@ _.namespace('App.views');
         },
 
         toggleDishes : function (e) {
-            $(e.currentTarget).closest('li').toggleClass('expanded');
+            $(e.currentTarget)
+                .closest('li').toggleClass('expanded')
+                .find('i').toggleClass('icon-folder-closed').toggleClass('icon-folder-open');
         }
     });
 })();
