@@ -8,6 +8,7 @@
 //= require collections/menu_product_collection
 //= require collections/menu_dish_category_collection
 //= require collections/menu_dish_collection
+//= require collections/menu_dish_product_collection
 //= require collections/menu_meal_collection
 
 _.namespace("App.views");
@@ -34,6 +35,7 @@ _.namespace("App.views");
                     App.collections.MenuProductCollection.reset(data['products']);
                     App.collections.MenuDishCategoryCollection.reset(data['dish_categories']);
                     App.collections.MenuDishCollection.reset(data['dishes']);
+                    App.collections.MenuDishProductCollection.reset(data['dish_products']);
                     App.collections.MenuMealCollection.reset(data['meals']);
                     this.render();
                 },

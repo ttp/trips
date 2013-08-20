@@ -15,9 +15,8 @@ _.namespace('App.views');
         render : function () {
             var rootEl = $('<ul></ul>');
             this.categories.each($.proxy(function (category) {
-                var dishes = this.dishes.where({dish_category_id: category.id});
                 var liEl = $('<li></li>').addClass('category');
-                $('<i class="icon-folder-close"></i>').appendTo(liEl);
+                $('<i class="icon-folder icon-folder-close"></i>').appendTo(liEl);
                 var categoryName = $('<span></span>');
                 categoryName.text(category.get('name'))
                             .addClass('category-name')
@@ -25,6 +24,7 @@ _.namespace('App.views');
                 liEl.append(categoryName);
 
                 var dishesRoot = $('<ul></ul>').addClass('items');
+                var dishes = this.dishes.where({dish_category_id: category.id});
                 _.each(dishes, function (dish) {
                     var dishLiEl = $('<li></li>');
                     var dishEl = $('<span></span>').addClass('dish');
@@ -34,6 +34,9 @@ _.namespace('App.views');
                     });
                     dishEl.text(dish.get('name'));
                     dishLiEl.append(dishEl);
+                    $('<i class="icon-info-sign"></i>')
+                        .attr('title', dish.products_titles().join("<br/>"))
+                        .appendTo(dishLiEl);
                     dishesRoot.append(dishLiEl);
                 }, this);
                 liEl.append(dishesRoot);
@@ -50,12 +53,19 @@ _.namespace('App.views');
                 containment: '#menu',
                 scroll: false
             });
+
+            this.$el.find('i.icon-info-sign').tooltip({
+                animation : false,
+                html: true,
+                placement: 'bottom',
+                container: 'body'
+            });
         },
 
         toggleDishes : function (e) {
             $(e.currentTarget)
                 .closest('li').toggleClass('expanded')
-                .find('i').toggleClass('icon-folder-closed').toggleClass('icon-folder-open');
+                .find('i.icon-folder').toggleClass('icon-folder-close').toggleClass('icon-folder-open');
         }
     });
 })();

@@ -1,6 +1,7 @@
 class Menu::Dish < ActiveRecord::Base
   attr_accessible :name
   translates :name
+  has_many :dish_products
 
   def self.by_lang(lang)
     connection.select_all(
