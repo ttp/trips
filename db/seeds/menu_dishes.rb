@@ -5,10 +5,12 @@ Menu::Dish.translation_class.delete_all
 Menu::Dish.delete_all
 Menu::DishCategory.translation_class.delete_all
 Menu::DishCategory.delete_all
+Menu::DishProduct.delete_all
 
 category = dish = nil
 locales = [:ru,:ua]
 filename = File.expand_path('../menu_dishes.csv', __FILE__)
+products = [Menu::Product.first, Menu::Product.last]
 CSV.foreach(filename, :headers => true) do |row|
   if row.field('type') == '1'
     category = Menu::DishCategory.new
@@ -26,5 +28,13 @@ CSV.foreach(filename, :headers => true) do |row|
       end
     end
     dish.save
+
+    products.each do |product|
+      dish_product = dish.dish_products.create
+      dish_product.product = product
+      dish_product.weight = [10, 20, 30, 40].sample
+      dish_product.save
+    end
+
   end
 end
