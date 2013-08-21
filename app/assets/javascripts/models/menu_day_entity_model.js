@@ -34,6 +34,14 @@ _.namespace("App.models");
                 case 'dish':
                     return App.collections.MenuDishCollection;
             }
+        },
+
+        isProduct : function () {
+            return this.get('entity_type') == 'prod';
+        },
+
+        isDish : function () {
+            return this.get('entity_type') == 'dish';
         }
     });
 })();

@@ -62,6 +62,24 @@ _.namespace("App.views");
             }
             this.entities.add(entity);
             this.renderEntity(entity);
+            if (entity.isDish()) {
+                this.renderDishProducts(entity);
+            }
+        },
+
+        renderDishProducts : function (entity) {
+            var dish = entity.getEntityModel();
+            _.each(dish.dish_products(), function (dish_product) {
+                var productEntity = new App.models.MenuDayEntityModel({
+                    entity_id : dish_product.get('product_id'),
+                    entity_type : 'prod',
+                    day_id : this.model.cid,
+                    parent_id : entity.id || entity.cid,
+                    weight : dish_product.get('weight')
+                });
+                this.entities.add(productEntity);
+                this.renderEntity(productEntity);
+            }, this);
         },
 
         renderEntity : function (entity) {
@@ -71,13 +89,20 @@ _.namespace("App.views");
             entityEl.attr('id', 'entity_' + entity.id)
                     .addClass('entity')
                     .addClass('entity-' + entity.get('entity_type'));
+
+            if (entity.isProduct()) {
+                $('<input type="text" class="weight"/>')
+                    .val(entity.get('weight') || 0)
+                    .appendTo(entityEl);
+            }
+
             if (entity.get('parent_id')) {
                 entityEl.appendTo(this.$el.find('#entity_' + entity.get('parent_id')));
             } else {
                 entityEl.appendTo(this.$el.find('.body'));
             }
 
-            if (entity.get('entity_type') != 'prod') {
+            if (!entity.isProduct()) {
                 entityEl.droppable({
                     greedy: true,
                     accept: entity.get('entity_type') == 'meal' ? ".product, .dish" : '.product',

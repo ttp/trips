@@ -12,6 +12,26 @@ _.namespace('App.views');
             this.render();
         },
 
+        renderDishes: function (category, categoryEl) {
+            var dishesRoot = $('<ul></ul>').addClass('items');
+            var dishes = this.dishes.where({dish_category_id: category.id});
+            _.each(dishes, function (dish) {
+                var dishLiEl = $('<li></li>');
+                var dishEl = $('<span></span>').addClass('dish');
+                dishEl.attr({
+                    'data-id': dish.id,
+                    'data-type': 'dish'
+                });
+                dishEl.text(dish.get('name'));2
+                dishLiEl.append(dishEl);
+                $('<i class="icon-info-sign"></i>')
+                    .attr('title', dish.products_titles().join("<br/>"))
+                    .appendTo(dishLiEl);
+                dishesRoot.append(dishLiEl);
+            }, this);
+            categoryEl.append(dishesRoot);
+        },
+
         render : function () {
             var rootEl = $('<ul></ul>');
             this.categories.each($.proxy(function (category) {
@@ -23,23 +43,7 @@ _.namespace('App.views');
                             .data('pid', category.id);
                 liEl.append(categoryName);
 
-                var dishesRoot = $('<ul></ul>').addClass('items');
-                var dishes = this.dishes.where({dish_category_id: category.id});
-                _.each(dishes, function (dish) {
-                    var dishLiEl = $('<li></li>');
-                    var dishEl = $('<span></span>').addClass('dish');
-                    dishEl.attr({
-                        'data-id' : dish.id,
-                        'data-type' : 'dish'
-                    });
-                    dishEl.text(dish.get('name'));
-                    dishLiEl.append(dishEl);
-                    $('<i class="icon-info-sign"></i>')
-                        .attr('title', dish.products_titles().join("<br/>"))
-                        .appendTo(dishLiEl);
-                    dishesRoot.append(dishLiEl);
-                }, this);
-                liEl.append(dishesRoot);
+                this.renderDishes(category, liEl);
                 rootEl.append(liEl);
             }, this));
 
