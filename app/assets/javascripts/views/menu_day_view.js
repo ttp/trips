@@ -25,7 +25,9 @@ _.namespace("App.views");
             })));
 
             this.$el.droppable({
-                drop: $.proxy(this.onEntityDrop, this)
+                drop: $.proxy(this.onEntityDrop, this),
+                activeClass: "ui-state-hover",
+                hoverClass: "ui-state-active"
             });
         },
 
@@ -83,18 +85,9 @@ _.namespace("App.views");
         },
 
         renderEntity : function (entity) {
-            var entityEl = $("<div></div>");
-            $('<i class="icon-remove"></i>').appendTo(entityEl);
-            $('<span class="entity-name"></span>').text(entity.getName()).appendTo(entityEl);
-            entityEl.attr('id', 'entity_' + entity.id)
-                    .addClass('entity')
-                    .addClass('entity-' + entity.get('entity_type'));
-
-            if (entity.isProduct()) {
-                $('<input type="text" class="weight"/>')
-                    .val(entity.get('weight') || 0)
-                    .appendTo(entityEl);
-            }
+            var entityEl = $(JST["templates/food/day_entity"]({
+                entity: entity
+            }));
 
             if (entity.get('parent_id')) {
                 entityEl.appendTo(this.$el.find('#entity_' + entity.get('parent_id')));
@@ -110,6 +103,8 @@ _.namespace("App.views");
                     hoverClass: "ui-state-active",
                     drop : $.proxy(this.onEntityDrop, this)
                 });
+            } else {
+                rivets.bind(entityEl, {entity: entity});
             }
             return entityEl;
         },

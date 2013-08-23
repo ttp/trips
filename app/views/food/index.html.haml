@@ -7,17 +7,17 @@
 #menu.row
   .span8
     .days
-    %button.btn.add-day Add day
+    %button.btn.add-day= t('menu.add_day')
   .span4
     %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
       %ul.nav.nav-tabs
         %li.active
-          %a{"data-toggle" => "tab", :href => '#meal_list'} Meals
+          %a{"data-toggle" => "tab", :href => '#meal_list'}= t('menu.meals')
         %li
-          %a{"data-toggle" => "tab", :href => '#product_list'} Products
+          %a{"data-toggle" => "tab", :href => '#dish_list'}= t('menu.dishes')
         %li
-          %a{"data-toggle" => "tab", :href => '#dish_list'} Dishes
+          %a{"data-toggle" => "tab", :href => '#product_list'}= t('menu.products')
       .tab-content
         #meal_list.tab-pane.active
-        #product_list.tab-pane.tree
         #dish_list.tab-pane.tree
+        #product_list.tab-pane.tree

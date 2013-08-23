@@ -172,3 +172,9 @@ en:
     Turkey: Turkey
     Romania: Romania
     Nepal: Nepal
+  menu:
+    day: Day
+    add_day: Add day
+    meals: Meals
+    dishes: Dishes
+    products: Products

@@ -1,8 +1,7 @@
-.header
-  %b.title
-    Day&nbsp;
-    %span.num= num
+%h3.popover-title
+  =I18n.t('menu.day')
+  %span.num= num
   %button.close ×
-.body
+.body.popover-content
   .noitems
     Drop products here

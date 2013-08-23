@@ -1,0 +1,5 @@
+%div{id: 'entity_' + entity.id, class: "entity entity-" + entity.get('entity_type')}
+  %i.icon-remove
+  %span.entity-name= entity.getName()
+  :if entity.isProduct()
+    %input{type: 'text', class: 'weight', value: entity.get('weight') || 0, data-value: 'entity.weight'}

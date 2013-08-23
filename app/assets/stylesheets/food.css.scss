@@ -1,28 +1,38 @@
+$hover_color: #ffa;
+
 #menu {
   .days {
     .day {
       min-height: 30px;
       border-radius: 5px;
       margin: 5px 0;
-      padding: 5px;
       background-color: #fff;
       position: relative;
+      display: block;
+      max-width: 100%;
+      z-index: 0;
+      box-shadow: none;
 
-      .header {
-        .icon-remove {
-          position: absolute;
-          top: 3px;
-          right: 5px;
-        }
+      h3 .num {
+        margin-left: 3px;
       }
 
+      &.ui-state-active .body {
+        background-color: $hover_color;
+      }
       .body {
-        .entity-meal, .entity-dish {
-          > .entity-name {
-            font-weight: bold;
-          }
+        > .entity {
+          border: 1px solid #ebebeb;
         }
         .entity {
+          background-color: #fff;
+          border-radius: 4px;
+          margin: 1px;
+
+          &.ui-state-active {
+            background-color: $hover_color;
+          }
+
           .icon-remove {
             opacity: 0;
           }
@@ -30,12 +40,44 @@
             opacity: 1;
           }
           .entity {
-            margin-left: 10px;
+            margin-left: 20px;
+          }
+
+          input.weight {
+            border-color: #f7f7f7;
+            background-color: #f7f7f7;
+            box-shadow: none;
+            margin: 0 0 0 5px;
+            padding: 0;
+            text-align: center;
+            width: 50px;
+
+            &:focus, &:hover {
+              background-color: #fff;
+              border: 1px solid #ccc;
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+              transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+            }
           }
         }
-      }
-      .ui-state-active {
-        background-color: #ffa;
+        .entity-meal, .entity-dish {
+          padding-right: 5px;
+          padding-bottom: 3px;
+          > .entity-name {
+            font-weight: bold;
+          }
+        }
+        .entity-meal {
+          border: 1px solid #ddd;
+          min-height: 40px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+        .entity-prod {
+          background-color: #f7f7f7;
+          padding: 1px;
+          border: 1px solid #ebebeb;
+        }
       }
     }
   }

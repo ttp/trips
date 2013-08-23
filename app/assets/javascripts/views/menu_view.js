@@ -10,6 +10,8 @@
 //= require collections/menu_dish_collection
 //= require collections/menu_dish_product_collection
 //= require collections/menu_meal_collection
+//= require libs/rivets.min
+//= require libs/rivets-backbone
 
 _.namespace("App.views");
 
@@ -61,7 +63,7 @@ _.namespace("App.views");
         },
 
         createDay : function () {
-            var dayEl = $("<div></div>");
+            var dayEl = $("<div class='popover'></div>");
             this.$el.find('.days').append(dayEl);
             var day = new App.models.MenuDayModel({
                 num: App.collections.MenuDayCollection.size() + 1

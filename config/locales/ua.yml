@@ -176,3 +176,10 @@ ua:
     Turkey: Турція
     Romania: Румунія
     Nepal: Непал
+
+  menu:
+    day: День
+    add_day: Додати день
+    meals: Трапези
+    dishes: Страви
+    products: Продукти
