@@ -1,0 +1,9 @@
+%h3= t('menu.examples')
+
+- @menus.each do |menu|
+  .menu-item.well.well-small
+    %div
+      %a{:href => menu_path(menu.id)}= menu.name
+    %span
+      Users: #{menu.users_qty}
+      Days: #{menu.menu_days.count}

@@ -30,4 +30,4 @@ gem 'will_paginate'
 gem 'RedCloth'
 gem 'gravatar_image_tag'
 gem 'globalize3'
-gem 'selenium-webdriver', :group => :test
+gem "selenium-webdriver", "~> 2.34.0", :group => :test

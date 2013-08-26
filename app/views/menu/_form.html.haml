@@ -1,11 +1,18 @@
 = javascript_include_tag "init/food_init"
 
-%h3= t('menu.title')
+%h3#menu-name Title
 
 %div
 
 #menu.row
   .span8
+    .menu
+      %span Users:
+      %input{:name => 'users_qty', "data-value" => 'menu.users_qty'}
+
+      %span Days:
+      %span.days 0
+
     .days
     %button.btn.add-day= t('menu.add_day')
   .span4

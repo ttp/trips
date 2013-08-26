@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(:version => 20130611092641) do
   end
 
   create_table "menu_menus", :force => true do |t|
-    t.integer  "users_id"
-    t.string   "name",       :default => "", :null => false
-    t.integer  "users_qty",  :default => 1,  :null => false
-    t.string   "url",                        :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "user_id"
+    t.string   "name",       :default => "",    :null => false
+    t.integer  "users_qty",  :default => 1,     :null => false
+    t.boolean  "is_public",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "menu_product_categories", :force => true do |t|
@@ -125,9 +125,9 @@ ActiveRecord::Schema.define(:version => 20130611092641) do
 
   create_table "tracks", :force => true do |t|
     t.string   "name",                        :null => false
-    t.text     "description",                 :null => false
-    t.text     "track"
-    t.string   "url",         :default => ""
+    t.text     "description", :default => "", :null => false
+    t.text     "track",       :default => "", :null => false
+    t.string   "url",         :default => "", :null => false
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
     t.integer  "region_id"
@@ -174,14 +174,14 @@ ActiveRecord::Schema.define(:version => 20130611092641) do
 
   create_table "user_profiles", :force => true do |t|
     t.integer  "user_id"
-    t.text     "about",            :null => false
-    t.text     "experience",       :null => false
-    t.text     "equipment",        :null => false
-    t.text     "contacts",         :null => false
-    t.text     "private_contacts", :null => false
-    t.text     "private_info",     :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.text     "about",            :default => "", :null => false
+    t.text     "experience",       :default => "", :null => false
+    t.text     "equipment",        :default => "", :null => false
+    t.text     "contacts",         :default => "", :null => false
+    t.text     "private_contacts", :default => "", :null => false
+    t.text     "private_info",     :default => "", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_profiles_on_user_id", :unique => true

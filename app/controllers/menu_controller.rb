@@ -1,5 +1,18 @@
-class FoodController < ApplicationController
+class MenuController < ApplicationController
   def index
+    @menus = Menu::Menu.find_all_by_is_public(true)
+  end
+
+  def show
+    @menu = Menu::Menu.find(params[:id])
+  end
+
+  def new
+
+  end
+
+  def edit
+
   end
 
   def products

@@ -29,7 +29,7 @@ _.namespace("App.views");
 
         loadData : function () {
             $.ajax({
-                url: '/food/products',
+                url: '/menus/products',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {

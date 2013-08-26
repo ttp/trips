@@ -1,10 +1,10 @@
 class AddFoodCalculatorTables < ActiveRecord::Migration
   def up
     create_table :menu_menus do |t|
-      t.references :users
+      t.references :user
       t.string :name, :null => false, :default => ''
       t.integer :users_qty, :null => false, :default => 1
-      t.string :url, :null => false
+      t.boolean :is_public, :default => false
 
       t.timestamps
     end
