@@ -8,7 +8,7 @@ FactoryGirl.define do
 
     factory :menu_with_days do
       ignore do
-        days_count 5
+        days_count 3
       end
 
       after(:create) do |menu, evaluator|
@@ -59,12 +59,12 @@ FactoryGirl.define do
     association :day, factory: :menu_day
     
     factory :menu_day_entity_product do
-      entity_type 'prod'
+      entity_type Menu::DayEntity::PRODUCT
       association :entity, factory: :menu_product
     end
 
     factory :menu_day_entity_dish do
-      entity_type 'dish'
+      entity_type Menu::DayEntity::DISH
       association :entity, factory: :menu_dish
 
       factory :entity_dish_with_products do
@@ -80,7 +80,7 @@ FactoryGirl.define do
     end
 
     factory :menu_day_entity_meal do
-      entity_type 'meal'
+      entity_type Menu::DayEntity::MEAL
       association :entity, factory: :menu_meal
 
       factory :entity_meal_with_dishes do

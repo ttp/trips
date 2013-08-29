@@ -12,7 +12,12 @@ Then /^I should see "(.*?)" Menus in Menu list$/ do |num|
 end
 
 Then /^I should see menu entities$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_css(".day", :count => 3)
+  days = 3
+  meals = 3 * days
+  dishes = 2 * meals
+  products = 3 * dishes
+  page.should have_css(".entity", :count => meals + dishes + products)
 end
 
 Then /^I should see menu summary$/ do

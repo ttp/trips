@@ -17,7 +17,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
     create_table :menu_day_entities do |t|
       t.integer :parent_id
       t.references :day
-      t.integer :entity_type, :null => false
+      t.integer :entity_type, :null => false, :limit => 1
       t.integer :entity_id, :null => false
       t.integer :weight, :null => false, :default => 0
     end

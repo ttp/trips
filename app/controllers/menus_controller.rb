@@ -1,10 +1,11 @@
-class MenuController < ApplicationController
+class MenusController < ApplicationController
   def index
     @menus = Menu::Menu.find_all_by_is_public(true)
   end
 
   def show
     @menu = Menu::Menu.find(params[:id])
+    @days = @menu.menu_days.order('num')
   end
 
   def new
