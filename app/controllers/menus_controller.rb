@@ -6,6 +6,8 @@ class MenusController < ApplicationController
   def show
     @menu = Menu::Menu.find(params[:id])
     @days = @menu.menu_days.order('num')
+    @product_entities = @menu.entities_by_type(Menu::DayEntity::PRODUCT)
+    @total = @menu.total
   end
 
   def new

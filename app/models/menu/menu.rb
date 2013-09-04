@@ -49,4 +49,28 @@ class Menu::Menu < ActiveRecord::Base
   def entities_children(day_id, parent_id)
     entities_grouped[day_id][parent_id]
   end
+
+  def total
+    total = {
+      weight: 0,
+      calories: 0,
+      proteins: 0,
+      fats: 0,
+      carbohydrates: 0
+    }
+
+    entities_by_type(Menu::DayEntity::PRODUCT).each do |entity|
+      total[:weight] += entity.weight
+      product = entity_model(entity)
+      total[:calories] += product.calories
+      total[:proteins] += product.proteins
+      total[:fats] += product.fats
+      total[:carbohydrates] += product.carbohydrates
+    end
+    return total
+  end
+
+  def avg
+
+  end
 end

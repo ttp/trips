@@ -1,6 +1,46 @@
 %h3= @menu.name
 
 #menu
+  .summary
+    %table
+      %tbody
+        %tr
+          %td Days:
+          %td= @days.size
+        %tr
+          %td Users:
+          %td= @menu.users_qty
+
+    %table
+      %thead
+        %tr
+          %th{colspan: 2} Weight/person
+      %tbody
+        %tr
+          %td One day:
+          %td= weight(@total[:weight] / @days.size)
+        %tr
+          %td All days:
+          %td= weight(@total[:weight])
+        %tr
+          %td Total:
+          %td= weight(@total[:weight] * @days.size)
+
+    %table
+      %thead
+        %tr
+          %th Calories
+          %th Proteins
+          %th Fats
+          %th Carbohydrates
+      %tbody
+        %tr
+          %td= @total[:calories] / @days.count
+          %td= @total[:proteins] / @days.count
+          %td= @total[:fats] / @days.count
+          %td= @total[:carbohydrates] / @days.count
+
+
   .days
     - @days.each_with_index do |day, i|
       .day.well.well-small

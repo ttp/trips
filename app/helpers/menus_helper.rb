@@ -20,4 +20,8 @@ module MenusHelper
     HTML
     html.html_safe
   end
+
+  def weight(number)
+    (number.to_f / 1000).to_s + 'kg'
+  end
 end

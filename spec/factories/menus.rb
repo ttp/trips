@@ -24,6 +24,10 @@ FactoryGirl.define do
   factory :menu_product, :class => Menu::Product do
     name "Product name"
     association :product_category, factory: :menu_product_category
+    calories {Random.rand(50..500)}
+    proteins {Random.rand(10..100)}
+    fats {Random.rand(10..100)}
+    carbohydrates {Random.rand(10..100)}
   end
 
   factory :menu_dish_category, :class => Menu::DishCategory do
@@ -55,7 +59,7 @@ FactoryGirl.define do
   end
 
   factory :menu_day_entity, :class => Menu::DayEntity do
-    weight 100
+    weight {Random.rand(50..100)}
     association :day, factory: :menu_day
     
     factory :menu_day_entity_product do
