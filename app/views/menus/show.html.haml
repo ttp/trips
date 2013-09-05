@@ -1,49 +1,74 @@
 %h3= @menu.name
 
 #menu
-  .summary
-    %table
-      %tbody
-        %tr
-          %td Days:
-          %td= @days.size
-        %tr
-          %td Users:
-          %td= @menu.users_qty
-
-    %table
+  %h4= t('menu.summary')
+  .summary.well.well-small
+    %table.table
       %thead
         %tr
-          %th{colspan: 2} Weight/person
+          %th #
+          %th= t('menu.calories')
+          %th= t('menu.weight')
+          %th= t('menu.proteins')
+          %th= t('menu.fats')
+          %th= t('menu.carbohydrates')
       %tbody
         %tr
-          %td One day:
+          %th= t('menu.person_per_day')
+
+          %td= (@total[:calories] / @days.count).to_i
           %td= weight(@total[:weight] / @days.size)
+          %td= (@total[:proteins] / @days.count).to_i
+          %td= (@total[:fats] / @days.count).to_i
+          %td= (@total[:carbohydrates] / @days.count).to_i
         %tr
-          %td All days:
+          %td= t('menu.recommended')
+
+          %td 3200
+          %td 0.7#{t('menu.kg')}
+          %td 150
+          %td 180
+          %td 690
+        %tr
+          %th= t('menu.person_all_days')
+
+          %td -
           %td= weight(@total[:weight])
-        %tr
-          %td Total:
-          %td= weight(@total[:weight] * @days.size)
+          %td -
+          %td -
+          %td -
 
-    %table
-      %thead
         %tr
-          %th Calories
-          %th Proteins
-          %th Fats
-          %th Carbohydrates
-      %tbody
-        %tr
-          %td= @total[:calories] / @days.count
-          %td= @total[:proteins] / @days.count
-          %td= @total[:fats] / @days.count
-          %td= @total[:carbohydrates] / @days.count
+          %th= t('menu.group_all_days')
+
+          %td -
+          %td= weight(@total[:weight] * @days.count)
+          %td -
+          %td -
+          %td -
+    %div
+      %b= t('menu.persons') + ':'
+      #{@menu.users_qty},
+      %b= t('menu.days') + ':'
+      #{@days.size}
 
 
-  .days
+  %h4= t('menu.ration')
+  %ul.nav.nav-tabs
+    %li
     - @days.each_with_index do |day, i|
-      .day.well.well-small
-        %h4= t('menu.day') + " #{i + 1}"
+      %li{:class => ('active' if i == 0)}
+        %a{:href => "#day_#{i + 1}", "data-toggle" => "tab"}
+          = "#{t('menu.day') + " " if i == 0}#{(i + 1)}"
+  .tab-content.days
+    - @days.each_with_index do |day, i|
+      .tab-pane.day{id: "day_#{i + 1}", class: ('active' if i == 0)}
+        %h4.hide= t('menu.day') + " #{i + 1}"
         .body
           = render_entities(@menu, day.id, 0)
+
+%h4 Products
+- @menu.products.each do |product_id, product|
+  %div
+    %span.name= product.name
+    %span.weight= @total_products[product_id]

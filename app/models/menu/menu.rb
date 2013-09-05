@@ -62,15 +62,19 @@ class Menu::Menu < ActiveRecord::Base
     entities_by_type(Menu::DayEntity::PRODUCT).each do |entity|
       total[:weight] += entity.weight
       product = entity_model(entity)
-      total[:calories] += product.calories
-      total[:proteins] += product.proteins
-      total[:fats] += product.fats
-      total[:carbohydrates] += product.carbohydrates
+      total[:calories] += product.calories.to_f * entity.weight / 100
+      total[:proteins] += product.proteins.to_f * entity.weight / 100
+      total[:fats] += product.fats.to_f * entity.weight / 100
+      total[:carbohydrates] += product.carbohydrates.to_f * entity.weight / 100
     end
     return total
   end
 
-  def avg
-
+  def total_products
+    grouped = entities_by_type(Menu::DayEntity::PRODUCT).group_by {|entity| entity.entity_id}
+    grouped.each do |key, items|
+      grouped[key] = items.inject(0) { |mem, item| mem + item.weight }
+    end
+    grouped
   end
 end

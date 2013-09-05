@@ -8,6 +8,7 @@ class MenusController < ApplicationController
     @days = @menu.menu_days.order('num')
     @product_entities = @menu.entities_by_type(Menu::DayEntity::PRODUCT)
     @total = @menu.total
+    @total_products = @menu.total_products
   end
 
   def new

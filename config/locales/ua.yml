@@ -179,7 +179,22 @@ ua:
 
   menu:
     day: День
+    days: Днів
     add_day: Додати день
     meals: Трапези
     dishes: Страви
     products: Продукти
+    recommended: Рекомендовано
+    weight: Вага
+    calories: Калорії
+    proteins: Білки
+    fats: Жири
+    carbohydrates: Вуглеводи
+    person_per_day: На людину в день
+    person_all_days: На людину за всі дні
+    group_all_days: На групу за всі дні
+    persons: Учасників
+    summary: Загальний підсумок
+    ration: Раціон
+    g: г
+    kg: кг

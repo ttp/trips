@@ -8,4 +8,8 @@ class Menu::DayEntity < ActiveRecord::Base
   def entity=(entity)
   	self.entity_id = entity.id
   end
+
+  def product?
+    entity_type == PRODUCT
+  end
 end

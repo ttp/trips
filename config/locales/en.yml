@@ -174,7 +174,22 @@ en:
     Nepal: Nepal
   menu:
     day: Day
+    days: Days
     add_day: Add day
     meals: Meals
     dishes: Dishes
     products: Products
+    recommended: Recommended
+    weight: Weight
+    calories: Calories
+    proteins: Proteins
+    fats: Fats
+    carbohydrates: Carbohydrates
+    person_per_day: For Person per day
+    person_all_days: For Person all days
+    group_all_days: For Group all days
+    persons: Persons
+    summary: Summary
+    ration: Ration
+    g: g
+    kg: kg
