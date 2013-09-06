@@ -24,42 +24,15 @@ _.namespace("App.views");
         },
 
         initialize: function (options) {
-            this.loadData();
-        },
-
-        loadData : function () {
-            $.ajax({
-                url: '/menus/products',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    App.collections.MenuProductCategoryCollection.reset(data['product_categories']);
-                    App.collections.MenuProductCollection.reset(data['products']);
-                    App.collections.MenuDishCategoryCollection.reset(data['dish_categories']);
-                    App.collections.MenuDishCollection.reset(data['dishes']);
-                    App.collections.MenuDishProductCollection.reset(data['dish_products']);
-                    App.collections.MenuMealCollection.reset(data['meals']);
-                    this.render();
-                },
-                context: this
-            });
+            this.menu = new Backbone.Model(options.menu);
+            this.days = App.collections.MenuDayCollection;
+            this.days.reset(options.days);
+            this.entities = App.collections.MenuDayEntityCollection;
+            this.entities.reset(options.entities);
         },
 
         render: function () {
-            this.productsView = new App.views.MenuProductsView({
-                el: '#product_list',
-                categories: App.collections.MenuProductCategoryCollection,
-                products: App.collections.MenuProductCollection
-            });
-            this.dishesView = new App.views.MenuDishesView({
-                el: '#dish_list',
-                categories: App.collections.MenuDishCategoryCollection,
-                dishes: App.collections.MenuDishCollection
-            });
-            this.mealsView = new App.views.MenuMealsView({
-                el: '#meal_list',
-                meals: App.collections.MenuMealCollection
-            });
+            this.$el.find('#users_qty').val(this.menu.get('users_qty'));
         },
 
         createDay : function () {
@@ -68,7 +41,7 @@ _.namespace("App.views");
             var day = new App.models.MenuDayModel({
                 num: App.collections.MenuDayCollection.size() + 1
             });
-            App.collections.MenuDayCollection.add(day);
+            this.days.add(day);
             var dayView = new App.views.MenuDayView({
                 el: dayEl,
                 model: day

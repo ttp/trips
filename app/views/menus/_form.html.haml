@@ -2,19 +2,24 @@
 
 %h3#menu-name Title
 
-%div
+%script{type: "application/json", id: "menu_item"}
+  = @menu.to_json.html_safe
+%script{type: "application/json", id: "menu_days"}
+  = @menu.menu_days.to_json.html_safe
+%script{type: "application/json", id: "menu_entities"}
+  = @menu.entities.to_json.html_safe
 
-#menu.row
+.row
   .span8
-    .menu
+    #menu.menu
       %span Users:
-      %input{:name => 'users_qty', "data-value" => 'menu.users_qty'}
+      %input#users_qty{:name => 'users_qty', "data-value" => 'menu.users_qty'}
 
       %span Days:
       %span.days 0
 
-    .days
-    %button.btn.add-day= t('menu.add_day')
+      .days
+      %button.btn.add-day= t('menu.add_day')
   .span4
     %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
       %ul.nav.nav-tabs
@@ -28,3 +33,7 @@
         #meal_list.tab-pane.active
         #dish_list.tab-pane.tree
         #product_list.tab-pane.tree
+
+.form-actions
+  %button.btn.btn-primary= t('helpers.links.save')
+  = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'

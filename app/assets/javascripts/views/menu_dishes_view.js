@@ -20,9 +20,9 @@ _.namespace('App.views');
                 var dishEl = $('<span></span>').addClass('dish');
                 dishEl.attr({
                     'data-id': dish.id,
-                    'data-type': 'dish'
+                    'data-type': 2
                 });
-                dishEl.text(dish.get('name'));2
+                dishEl.text(dish.get('name'));
                 dishLiEl.append(dishEl);
                 $('<i class="icon-info-sign"></i>')
                     .attr('title', dish.products_titles().join("<br/>"))

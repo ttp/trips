@@ -12,11 +12,25 @@ class MenusController < ApplicationController
   end
 
   def new
-
+    @menu = Menu::Menu.new
   end
 
   def edit
 
+  end
+
+  # POST /menu
+  # POST /menu.json
+  def create
+    @menu = Menu::Menu.new(params[:menu])
+    @menu.is_public = true
+  end
+
+  # PUT /menu/1
+  # PUT /menu/1.json
+  def update
+    @menu = Menu::Menu.find(params[:id])
+    #redirect_to menu_url and return if @menu.user_id != current_user.id
   end
 
   def products

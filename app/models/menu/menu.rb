@@ -4,6 +4,7 @@ class Menu::Menu < ActiveRecord::Base
   has_many :menu_days, :class_name => 'Menu::Day'
 
   def entities
+    return [] if new_record?
     @entitties || @entities = Menu::DayEntity.joins(day: :menu).where('menu_menus.id = ?', self.id)
   end
 

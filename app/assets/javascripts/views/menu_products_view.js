@@ -30,7 +30,7 @@ _.namespace('App.views');
                     var productEl = $('<span></span>').addClass('product');
                     productEl.attr({
                         'data-id' : product.id,
-                        'data-type' : 'prod'
+                        'data-type' : '3'
                     });
                     productEl.text(product.get('name'));
                     productLiEl.append(productEl);

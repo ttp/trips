@@ -14,7 +14,7 @@ _.namespace('App.views');
                 mealEl.addClass('meal').text(meal.get('name'));
                 mealEl.attr({
                     'data-id': meal.id,
-                    'data-type': 'meal'
+                    'data-type': 1
                 });
                 rootEl.append(mealEl);
             }, this));

@@ -27,21 +27,21 @@ _.namespace("App.models");
 
         getEntityCollection : function () {
             switch (this.get('entity_type')) {
-                case 'meal':
+                case 1:
                     return App.collections.MenuMealCollection;
-                case 'prod':
-                    return App.collections.MenuProductCollection;
-                case 'dish':
+                case 2:
                     return App.collections.MenuDishCollection;
+                case 3:
+                    return App.collections.MenuProductCollection;
             }
         },
 
         isProduct : function () {
-            return this.get('entity_type') == 'prod';
+            return this.get('entity_type') == '3';
         },
 
         isDish : function () {
-            return this.get('entity_type') == 'dish';
+            return this.get('entity_type') == '2';
         }
     });
 })();

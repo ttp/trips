@@ -18,9 +18,10 @@ Pohody::Application.routes.draw do
   delete "trips/:trip_id/comments/:comment_id" => "trip_comments#destroy"
 
   get "calendar" => "calendar#index"
-  get "menus" => "menus#index", as: :menus
-  get "menus/:id" => "menus#show", as: :menu
+
   get "menus/products" => "menus#products", as: :menu_products
+  resources :menus
+
   get "about" => "home#about", as: :about
 
   authenticated :user do

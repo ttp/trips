@@ -74,7 +74,7 @@ _.namespace("App.views");
             _.each(dish.dish_products(), function (dish_product) {
                 var productEntity = new App.models.MenuDayEntityModel({
                     entity_id : dish_product.get('product_id'),
-                    entity_type : 'prod',
+                    entity_type : 3,
                     day_id : this.model.cid,
                     parent_id : entity.id || entity.cid,
                     weight : dish_product.get('weight')
@@ -98,7 +98,7 @@ _.namespace("App.views");
             if (!entity.isProduct()) {
                 entityEl.droppable({
                     greedy: true,
-                    accept: entity.get('entity_type') == 'meal' ? ".product, .dish" : '.product',
+                    accept: entity.get('entity_type') == '1' ? ".product, .dish" : '.product',
                     activeClass: "ui-state-hover",
                     hoverClass: "ui-state-active",
                     drop : $.proxy(this.onEntityDrop, this)

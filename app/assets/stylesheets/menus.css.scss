@@ -65,6 +65,7 @@ $hover_color: #ffa;
           > .entity-name {
             font-weight: bold;
           }
+          min-height: 30px;
         }
         .entity-1 {
           border: 1px solid #ddd;
@@ -80,6 +81,10 @@ $hover_color: #ffa;
       }
     }
   }
+}
+
+.popover.day {
+  display: block;
 }
 
 .sidebar {
