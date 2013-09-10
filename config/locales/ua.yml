@@ -200,4 +200,6 @@ ua:
     kg: кг
     new_menu: Додати меню
     name: Назва
+    was_created: Меню створено
     was_updated: Меню оновлено
+    examples: Приклади меню
