@@ -1,7 +1,7 @@
 %h3.popover-title
   =I18n.t('menu.day')
   %span.num= num
-  %button.close ×
+  %button.close{type: 'button'} &times;
 .body.popover-content
   .noitems
     Drop products here

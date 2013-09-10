@@ -23,7 +23,7 @@
 
         .days
         %textarea.hide{name: 'data'}
-        %button.btn.add-day= t('menu.add_day')
+        %button.btn.add-day{type: 'button'}= t('menu.add_day')
         .form-actions
           %button.btn.btn-primary.save= t('helpers.links.save')
           = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
