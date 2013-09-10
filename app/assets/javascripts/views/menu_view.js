@@ -20,7 +20,8 @@ _.namespace("App.views");
         el: "#menu",
 
         events: {
-            'click button.add-day': 'createDay'
+            'click button.add-day': 'createDay',
+            'click button.save': 'save'
         },
 
         initialize: function (options) {
@@ -29,15 +30,28 @@ _.namespace("App.views");
             this.days.reset(options.days);
             this.entities = App.collections.MenuDayEntityCollection;
             this.entities.reset(options.entities);
+
+            rivets.bind(this.$el, {menu: this.menu});
         },
 
         render: function () {
-            this.$el.find('#users_qty').val(this.menu.get('users_qty'));
+            this.days.each(function (day) {
+                var dayView = new App.views.MenuDayView({
+                    el: this.createDayEl(),
+                    model: day
+                });
+            }, this);
         },
 
-        createDay : function () {
+        createDayEl : function () {
             var dayEl = $("<div class='popover'></div>");
-            this.$el.find('.days').append(dayEl);
+            this.$el.find('div.days').append(dayEl);
+            return dayEl;
+        },
+
+        createDay : function (e) {
+            e.preventDefault();
+            var dayEl = this.createDayEl();
             var day = new App.models.MenuDayModel({
                 num: App.collections.MenuDayCollection.size() + 1
             });
@@ -46,6 +60,15 @@ _.namespace("App.views");
                 el: dayEl,
                 model: day
             });
+        },
+
+        save : function (e) {
+            var menu_data = {
+                menu : this.menu.toJSON(),
+                days : _.indexBy(this.days.toJSON(), 'id'),
+                entities : _.indexBy(this.entities.toJSON(), 'id')
+            };
+            this.$el.find('textarea.hide').val(JSON.stringify(menu_data));
         }
     });
 })();

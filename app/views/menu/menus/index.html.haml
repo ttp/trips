@@ -1,0 +1,21 @@
+%h3= t('menu.examples')
+
+= link_to t('menu.new_menu', :default => t("helpers.links.new")), new_menu_menu_path, :class => 'btn btn-primary'
+
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t('menu.name')
+      %th= t('menu.persons')
+      %th= t('menu.days')
+  %tbody
+    - @menus.each do |menu|
+      %tr
+        %td= link_to menu.name, menu_menu_path(menu.id)
+        %td= menu.users_qty
+        %td= menu.menu_days.count
+        %td
+          = link_to t("helpers.links.edit"), edit_menu_menu_path(menu), :class => 'btn btn-mini'
+          = link_to t("helpers.links.destroy"), menu_menu_path(menu),
+            :method => :delete, :data => { :confirm => t('helpers.links.confirm')}, :class => 'btn btn-mini btn-danger'

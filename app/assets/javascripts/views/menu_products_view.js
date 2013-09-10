@@ -47,7 +47,7 @@ _.namespace('App.views');
                 revert: "invalid",
                 helper: "clone",
                 appendTo: "body",
-                containment: '#menu',
+                containment: '#main',
                 scroll: false
             });
         },

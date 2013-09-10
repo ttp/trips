@@ -13,9 +13,9 @@ _.namespace("App.views");
 
         initialize: function (options) {
             this.model = options.model;
+            this.entities = App.collections.MenuDayEntityCollection;
             this.render();
             this.bindEvents();
-            this.entities = App.collections.MenuDayEntityCollection;
         },
 
         render: function () {
@@ -29,6 +29,22 @@ _.namespace("App.views");
                 activeClass: "ui-state-hover",
                 hoverClass: "ui-state-active"
             });
+
+            var entities = _.groupBy(this.entities.where({day_id: this.model.id}), function (item) {
+                return item.get('parent_id') || 0;
+            });
+            this.renderEntities(entities, 0);
+        },
+
+        renderEntities : function (entities, parent_id) {
+            if (!entities[parent_id]) {
+                return;
+            }
+
+            _.each(entities[parent_id], function (entity) {
+                this.renderEntity(entity);
+                this.renderEntities(entities, entity.id);
+            }, this);
         },
 
 
@@ -51,12 +67,11 @@ _.namespace("App.views");
 
         onEntityDrop : function (event, ui) {
             $this = $(event.target);
-            this.$el.find('.noitems').hide();
-            
+
             var entity = new App.models.MenuDayEntityModel({
                 entity_id : ui.draggable.data('id'),
                 entity_type : ui.draggable.data('type'),
-                day_id : this.model.cid
+                day_id : this.model.id
             });
             if ($this.is('.entity')) {
                 var parent_id = $this.attr('id').split('_')[1];
@@ -75,8 +90,8 @@ _.namespace("App.views");
                 var productEntity = new App.models.MenuDayEntityModel({
                     entity_id : dish_product.get('product_id'),
                     entity_type : 3,
-                    day_id : this.model.cid,
-                    parent_id : entity.id || entity.cid,
+                    day_id : this.model.id,
+                    parent_id : entity.id,
                     weight : dish_product.get('weight')
                 });
                 this.entities.add(productEntity);
@@ -85,6 +100,8 @@ _.namespace("App.views");
         },
 
         renderEntity : function (entity) {
+            this.$el.find('.noitems').hide();
+
             var entityEl = $(JST["templates/food/day_entity"]({
                 entity: entity
             }));

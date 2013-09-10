@@ -48,7 +48,11 @@ class Menu::Menu < ActiveRecord::Base
   end
 
   def entities_children(day_id, parent_id)
-    entities_grouped[day_id][parent_id]
+    if entities_grouped.has_key?(day_id)
+      return entities_grouped[day_id][parent_id]
+    else
+      return []
+    end
   end
 
   def total

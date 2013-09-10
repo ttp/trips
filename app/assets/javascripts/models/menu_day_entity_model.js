@@ -14,6 +14,10 @@ _.namespace("App.models");
         initialize : function () {
             if (!this.id) {
                 this.set('id', this.cid);
+                this.set('new', 1);
+            }
+            if (_.isNull(this.get('parent_id'))) {
+                this.set('parent_id', 0);
             }
         },
 

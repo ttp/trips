@@ -1,7 +1,5 @@
 = javascript_include_tag "init/food_init"
 
-%h3#menu-name Title
-
 %script{type: "application/json", id: "menu_item"}
   = @menu.to_json.html_safe
 %script{type: "application/json", id: "menu_days"}
@@ -12,14 +10,23 @@
 .row
   .span8
     #menu.menu
-      %span Users:
-      %input#users_qty{:name => 'users_qty', "data-value" => 'menu.users_qty'}
+      = form_for @menu do
+        = hidden_field_tag :back_url, params[:back_url] || request.referer
+        %h3
+          %input.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
+            :placeholder => t('menu.name'), "data-value" => 'menu.name'}
+        %span Users:
+        %input.users_qty.input-mini{:name => 'users_qty', "data-value" => 'menu.users_qty', :value => @menu.users_qty}
 
-      %span Days:
-      %span.days 0
+        %span Days:
+        %span.days 0
 
-      .days
-      %button.btn.add-day= t('menu.add_day')
+        .days
+        %textarea.hide{name: 'data'}
+        %button.btn.add-day= t('menu.add_day')
+        .form-actions
+          %button.btn.btn-primary.save= t('helpers.links.save')
+          = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
   .span4
     %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
       %ul.nav.nav-tabs
@@ -33,7 +40,3 @@
         #meal_list.tab-pane.active
         #dish_list.tab-pane.tree
         #product_list.tab-pane.tree
-
-.form-actions
-  %button.btn.btn-primary= t('helpers.links.save')
-  = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'

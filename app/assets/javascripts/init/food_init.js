@@ -2,7 +2,7 @@
 
 $(function () {
     $.ajax({
-        url: '/menus/products',
+        url: '/menu/products',
         type: 'GET',
         dataType: 'json',
         success: function (data) {

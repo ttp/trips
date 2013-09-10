@@ -19,8 +19,10 @@ Pohody::Application.routes.draw do
 
   get "calendar" => "calendar#index"
 
-  get "menus/products" => "menus#products", as: :menu_products
-  resources :menus
+  namespace :menu do
+    get "products" => "menus#products", as: :menu_products
+    resources :menus
+  end
 
   get "about" => "home#about", as: :about
 
