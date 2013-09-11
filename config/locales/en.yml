@@ -175,6 +175,7 @@ en:
   menu:
     day: Day
     days: Days
+    full_days: Full days
     add_day: Add day
     meals: Meals
     dishes: Dishes

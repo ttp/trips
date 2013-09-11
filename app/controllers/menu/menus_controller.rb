@@ -25,7 +25,8 @@ class Menu::MenusController < ApplicationController
     data = JSON.parse(params[:data])
     @menu = Menu::Menu.new
     @menu.name = data['menu']['name']
-    @menu.users_qty = data['menu']['users_qty']
+    @menu.users_count = data['menu']['users_count']
+    @menu.days_count = data['menu']['days_count']
     @menu.is_public = true
     @menu.save
 
@@ -48,7 +49,8 @@ class Menu::MenusController < ApplicationController
     data = JSON.parse(params[:data])
     @menu = Menu::Menu.find(params[:id])
     @menu.name = data['menu']['name']
-    @menu.users_qty = data['menu']['users_qty']
+    @menu.users_count = data['menu']['users_count']
+    @menu.days_count = data['menu']['days_count']
     @menu.save
 
     # update/remove days
@@ -123,6 +125,7 @@ private
         day = Menu::Day.find(day_id)
       end
       day.num = day_data['num']
+      day.rate = day_data['rate']
       day.save
       @day_cid_to_id[day_id] = day.id
     end

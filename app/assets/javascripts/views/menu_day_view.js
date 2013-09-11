@@ -21,7 +21,7 @@ _.namespace("App.views");
         render: function () {
             this.$el.addClass('day');
             this.$el.html($(JST["templates/food/day"]({
-                num: this.model.get('num')
+                day: this.model
             })));
 
             this.$el.droppable({
@@ -29,6 +29,8 @@ _.namespace("App.views");
                 activeClass: "ui-state-hover",
                 hoverClass: "ui-state-active"
             });
+
+            rivets.bind(this.$el.find('input.rate'), {day: this.model});
 
             var entities = _.groupBy(this.entities.where({day_id: this.model.id}), function (item) {
                 return item.get('parent_id') || 0;

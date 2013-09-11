@@ -15,11 +15,11 @@
         %h3
           %input.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
             :placeholder => t('menu.name'), "data-value" => 'menu.name'}
-        %span Users:
-        %input.users_qty.input-mini{:name => 'users_qty', "data-value" => 'menu.users_qty', :value => @menu.users_qty}
+        %span= t('menu.persons') + ':'
+        %input.users_count.input-mini{:name => 'users_count', "data-value" => 'menu.users_count', :value => @menu.users_count}
 
-        %span Days:
-        %span.days 0
+        %span= t('menu.full_days') + ':'
+        %span.days_count{"data-text" => 'menu.days_count', :value => round_precision(@menu.days_count)}
 
         .days
         %textarea.hide{name: 'data'}

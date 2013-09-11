@@ -13,8 +13,8 @@
     - @menus.each do |menu|
       %tr
         %td= link_to menu.name, menu_menu_path(menu.id)
-        %td= menu.users_qty
-        %td= menu.menu_days.count
+        %td= menu.users_count
+        %td= round_precision(menu.days_count)
         %td
           = link_to t("helpers.links.edit"), edit_menu_menu_path(menu), :class => 'btn btn-mini'
           = link_to t("helpers.links.destroy"), menu_menu_path(menu),

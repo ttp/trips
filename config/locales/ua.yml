@@ -180,6 +180,7 @@ ua:
   menu:
     day: День
     days: Днів
+    full_days: Повних днів
     add_day: Додати день
     meals: Трапези
     dishes: Страви

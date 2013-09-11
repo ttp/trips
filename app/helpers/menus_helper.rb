@@ -24,4 +24,12 @@ module MenusHelper
   def weight(number)
     (number.to_f / 1000).to_s + t('menu.kg')
   end
+
+  def round_precision(number)
+    if number.to_i == number
+      return number.to_i
+    else
+      return number
+    end
+  end
 end

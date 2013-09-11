@@ -3,7 +3,7 @@ FactoryGirl.define do
     user
 
     name "New menu"
-    users_qty 5
+    users_count 5
     is_public true
 
     factory :menu_with_days do

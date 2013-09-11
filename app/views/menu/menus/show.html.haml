@@ -16,11 +16,11 @@
         %tr
           %th= t('menu.person_per_day')
 
-          %td= (@total[:calories] / @days.count).to_i
+          %td= (@total[:calories] / @menu.days_count).to_i
           %td= weight(@total[:weight] / @days.size)
-          %td= (@total[:proteins] / @days.count).to_i
-          %td= (@total[:fats] / @days.count).to_i
-          %td= (@total[:carbohydrates] / @days.count).to_i
+          %td= (@total[:proteins] / @menu.days_count).to_i
+          %td= (@total[:fats] / @menu.days_count).to_i
+          %td= (@total[:carbohydrates] / @menu.days_count).to_i
         %tr
           %td= t('menu.recommended')
 
@@ -42,15 +42,15 @@
           %th= t('menu.group_all_days')
 
           %td -
-          %td= weight(@total[:weight] * @days.count)
+          %td= weight(@total[:weight] * @menu.days_count)
           %td -
           %td -
           %td -
     %div
       %b= t('menu.persons') + ':'
-      #{@menu.users_qty},
+      #{@menu.users_count},
       %b= t('menu.days') + ':'
-      #{@days.size}
+      #{@menu.days_count}
 
 
   %h4= t('menu.ration')
