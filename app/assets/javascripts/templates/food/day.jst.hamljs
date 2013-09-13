@@ -2,7 +2,7 @@
   =I18n.t('menu.day')
   %span.num= day.get('num')
   &nbsp; Rate:
-  %input{type: 'text', class: 'rate input-mini', value: day.get('rate'), data-value: 'day.rate | number'}
+  %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
   %button.close{type: 'button'} &times;
 .body.popover-content
   .noitems

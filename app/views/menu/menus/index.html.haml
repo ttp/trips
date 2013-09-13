@@ -11,7 +11,7 @@
       %th= t('menu.days')
   %tbody
     - @menus.each do |menu|
-      %tr
+      %tr.menu-item
         %td= link_to menu.name, menu_menu_path(menu.id)
         %td= menu.users_count
         %td= round_precision(menu.days_count)

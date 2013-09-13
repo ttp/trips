@@ -1,56 +1,57 @@
 %h3= @menu.name
 
 #menu
-  %h4= t('menu.summary')
-  .summary.well.well-small
-    %table.table
-      %thead
-        %tr
-          %th #
-          %th= t('menu.calories')
-          %th= t('menu.weight')
-          %th= t('menu.proteins')
-          %th= t('menu.fats')
-          %th= t('menu.carbohydrates')
-      %tbody
-        %tr
-          %th= t('menu.person_per_day')
+  - if @menu.days_count > 0
+    %h4= t('menu.summary')
+    .summary.well.well-small
+      %table.table
+        %thead
+          %tr
+            %th #
+            %th= t('menu.calories')
+            %th= t('menu.weight')
+            %th= t('menu.proteins')
+            %th= t('menu.fats')
+            %th= t('menu.carbohydrates')
+        %tbody
+          %tr
+            %th= t('menu.person_per_day')
 
-          %td= (@total[:calories] / @menu.days_count).to_i
-          %td= weight(@total[:weight] / @days.size)
-          %td= (@total[:proteins] / @menu.days_count).to_i
-          %td= (@total[:fats] / @menu.days_count).to_i
-          %td= (@total[:carbohydrates] / @menu.days_count).to_i
-        %tr
-          %td= t('menu.recommended')
+            %td= (@total[:calories] / @menu.days_count).to_i
+            %td= weight(@total[:weight] / @days.count)
+            %td= (@total[:proteins] / @menu.days_count).to_i
+            %td= (@total[:fats] / @menu.days_count).to_i
+            %td= (@total[:carbohydrates] / @menu.days_count).to_i
+          %tr
+            %td= t('menu.recommended')
 
-          %td 3200
-          %td 0.7#{t('menu.kg')}
-          %td 150
-          %td 180
-          %td 690
-        %tr
-          %th= t('menu.person_all_days')
+            %td 3200
+            %td 0.7#{t('menu.kg')}
+            %td 150
+            %td 180
+            %td 690
+          %tr
+            %th= t('menu.person_all_days')
 
-          %td -
-          %td= weight(@total[:weight])
-          %td -
-          %td -
-          %td -
+            %td -
+            %td= weight(@total[:weight])
+            %td -
+            %td -
+            %td -
 
-        %tr
-          %th= t('menu.group_all_days')
+          %tr
+            %th= t('menu.group_all_days')
 
-          %td -
-          %td= weight(@total[:weight] * @menu.days_count)
-          %td -
-          %td -
-          %td -
-    %div
-      %b= t('menu.persons') + ':'
-      #{@menu.users_count},
-      %b= t('menu.days') + ':'
-      #{@menu.days_count}
+            %td -
+            %td= weight(@total[:weight] * @menu.days_count)
+            %td -
+            %td -
+            %td -
+      %div
+        %b= t('menu.persons') + ':'
+        #{@menu.users_count},
+        %b= t('menu.days') + ':'
+        #{round_precision(@menu.days_count)}
 
 
   %h4= t('menu.ration')

@@ -1,6 +1,27 @@
 $hover_color: #ffa;
 
 #menu {
+  .days_count {
+    padding-top: 7px;
+  }
+  input.transparent {
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    box-shadow: none;
+    margin: 0 0 0 5px;
+    padding: 0;
+    text-align: center;
+    width: 50px;
+    height: 18px;
+    display: inline-block;
+
+    &:focus, &:hover {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+      transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    }
+  }
   .days {
     .day {
       min-height: 30px;
@@ -40,23 +61,6 @@ $hover_color: #ffa;
           }
           .entity {
             margin-left: 20px;
-          }
-
-          input.weight {
-            border-color: #f7f7f7;
-            background-color: #f7f7f7;
-            box-shadow: none;
-            margin: 0 0 0 5px;
-            padding: 0;
-            text-align: center;
-            width: 50px;
-
-            &:focus, &:hover {
-              background-color: #fff;
-              border: 1px solid #ccc;
-              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-              transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-            }
           }
         }
         .entity-1, .entity-2 {

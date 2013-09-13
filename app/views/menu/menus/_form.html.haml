@@ -8,26 +8,29 @@
   = @menu.entities.to_json.html_safe
 
 .row
-  .span8
+  .col-md-8
     #menu.menu
       = form_for @menu do
         = hidden_field_tag :back_url, params[:back_url] || request.referer
         %h3
-          %input.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
+          %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
             :placeholder => t('menu.name'), "data-value" => 'menu.name'}
-        %span= t('menu.persons') + ':'
-        %input.users_count.input-mini{:name => 'users_count', "data-value" => 'menu.users_count', :value => @menu.users_count}
+        .form-horizontal
+          %label.control-label.col-lg-2{for: 'users_count'}= t('menu.persons') + ':'
+          .col-lg-2
+            %input.form-control.users_count.input-mini{:name => 'users_count', "data-value" => 'menu.users_count', :value => @menu.users_count}
 
-        %span= t('menu.full_days') + ':'
-        %span.days_count{"data-text" => 'menu.days_count', :value => round_precision(@menu.days_count)}
-
+          %label.control-label.col-lg-3= t('menu.full_days') + ':'
+          .col-lg-2
+            .days_count{"data-text" => 'menu.days_count', :value => round_precision(@menu.days_count)}
+        .clearfix
         .days
         %textarea.hide{name: 'data'}
         %button.btn.add-day{type: 'button'}= t('menu.add_day')
         .form-actions
           %button.btn.btn-primary.save= t('helpers.links.save')
           = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
-  .span4
+  .col-md-4
     %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
       %ul.nav.nav-tabs
         %li.active

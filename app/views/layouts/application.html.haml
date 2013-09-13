@@ -11,15 +11,14 @@
     %script{:type => "text/javascript"}
       I18n.defaultLocale = "#{I18n.locale}";
   %body{:class => "#{controller_name} #{action_name}"}
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
-          = render 'layouts/navigation'
+    %nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      .container
+        = render 'layouts/navigation'
     #main{:role => "main"}
       .container
         .content
           .row
-            .span12
+            .col-md-12
               = render 'layouts/messages'
               = yield
           %footer

@@ -4,7 +4,7 @@ Given /^I have "(.*?)"( not empty)?( private)? Menu$/ do |menu_name, not_empty, 
 end
 
 Given /^I am on Menus page$/ do
-  visit menus_path
+  visit menu_menus_path
 end
 
 Then /^I should see "(.*?)" Menus in Menu list$/ do |num|

@@ -26,9 +26,6 @@ Pohody::Application.routes.draw do
 
   get "about" => "home#about", as: :about
 
-  authenticated :user do
-    root :to => 'home#index'
-  end
   root :to => "home#index"
 
   devise_for :users

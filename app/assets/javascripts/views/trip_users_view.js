@@ -6,7 +6,7 @@ _.namespace("App.views");
 
         events: {
             "click a.leave" : "leave",
-            "click a.icon-ok" : "approve",
+            "click a.approve" : "approve",
             "click a.decline" : "declineConfirm",
             "click #decline_reason .btn-primary" : "decline"
         },

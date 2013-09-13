@@ -2,4 +2,5 @@
   %i.icon-remove
   %span.entity-name= entity.getName()
   :if entity.isProduct()
-    %input{type: 'text', class: 'weight', value: entity.get('weight') || 0, data-value: 'entity.weight|number'}
+    %input{type: 'text', class: 'form-control weight transparent',\
+           value: entity.get('weight') || 0, data-value: 'entity.weight|number'}

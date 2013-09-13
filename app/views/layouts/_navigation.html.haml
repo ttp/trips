@@ -1,5 +1,6 @@
-= link_to t('account.trips'), root_path, :class => 'brand'
-%ul.nav
+.navbar-header
+  = link_to t('account.trips'), root_path, :class => 'navbar-brand'
+%ul.nav.navbar-nav
   %li
     = link_to t('nav.home'), root_path
   %li
@@ -24,13 +25,13 @@
           = link_to t('nav.scheduled'), account_trips_scheduled_path
         %li
           = link_to t('nav.archive'), account_trips_archive_path
-        %li.nav-header= t('nav.manage')
+        %li.dropdown-header= t('nav.manage')
         %li
           = link_to t('account.tracks'), account_tracks_url
         %li
           = link_to t('account.trips'), account_trips_url
 
-%ul.nav.pull-right
+%ul.nav.navbar-nav.pull-right
   - if user_signed_in?
     %li.dropdown
       %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
