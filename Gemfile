@@ -3,8 +3,11 @@ gem 'rails', '>= 4.0.0'
 gem 'protected_attributes'
 gem 'sqlite3', :group => [:development, :test]
 gem "mysql2"
-gem 'sass-rails'
-gem 'uglifier', '>= 1.0.3'
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
 gem "i18n-js"
 gem 'ruby-haml-js', :git => "git://github.com/ttp/ruby-haml-js.git"
 gem 'jquery-rails'
