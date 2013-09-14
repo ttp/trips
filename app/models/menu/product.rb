@@ -1,7 +1,10 @@
 class Menu::Product < ActiveRecord::Base
   attr_accessible :name, :calories, :proteins, :fats, :carbohydrates
-  translates :name
   belongs_to :product_category
+  translates :name
+  class Translation
+    attr_accessible :locale
+  end
 
   def self.by_lang(lang)
     connection.select_all(

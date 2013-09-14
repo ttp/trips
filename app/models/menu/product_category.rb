@@ -1,7 +1,10 @@
 class Menu::ProductCategory < ActiveRecord::Base
   attr_accessible :name
-  translates :name
   has_many :products
+  translates :name
+  class Translation
+    attr_accessible :locale
+  end
 
   def self.by_lang(lang)
   	connection.select_all(
