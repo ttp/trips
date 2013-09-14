@@ -31,9 +31,9 @@
           App.collections.MenuProductCollection
 
     isProduct: ->
-      @get("entity_type") is "3"
+      @get("entity_type") is 3
 
     isDish: ->
-      @get("entity_type") is "2"
+      @get("entity_type") is 2
   )
 )()
