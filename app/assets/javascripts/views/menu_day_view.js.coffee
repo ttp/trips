@@ -6,7 +6,7 @@ _.namespace "App.views"
   App.views.MenuDayView = Backbone.View.extend(
     events:
       "click button.close": "removeDay"
-      "click .icon-remove": "removeEntity"
+      "click .glyphicon-remove": "removeEntity"
 
     initialize: (options) ->
       @model = options.model
@@ -88,7 +88,7 @@ _.namespace "App.views"
       unless entity.isProduct()
         entityEl.droppable
           greedy: true
-          accept: (if entity.get("entity_type") is "1" then ".product, .dish" else ".product")
+          accept: (if entity.get("entity_type") is 1 then ".product, .dish" else ".product")
           activeClass: "ui-state-hover"
           hoverClass: "ui-state-active"
           drop: $.proxy(@onEntityDrop, this)

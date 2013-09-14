@@ -21,7 +21,7 @@ _.namespace "App.views"
 
         dishEl.text dish.get("name")
         dishLiEl.append dishEl
-        $("<i class=\"icon-info-sign\"></i>").attr("title", dish.products_titles().join("<br/>")).appendTo dishLiEl
+        $("<i class=\"glyphicon glyphicon-info-sign\"></i>").attr("title", dish.products_titles().join("<br/>")).appendTo dishLiEl
         dishesRoot.append dishLiEl
       ), this
       categoryEl.append dishesRoot
@@ -30,7 +30,7 @@ _.namespace "App.views"
       rootEl = $("<ul></ul>")
       @categories.each $.proxy((category) ->
         liEl = $("<li></li>").addClass("category")
-        $("<i class=\"icon-folder icon-folder-close\"></i>").appendTo liEl
+        $("<i class=\"glyphicon icon-folder glyphicon-folder-close\"></i>").appendTo liEl
         categoryName = $("<span></span>")
         categoryName.text(category.get("name")).addClass("category-name").data "pid", category.id
         liEl.append categoryName
@@ -54,6 +54,6 @@ _.namespace "App.views"
 
 
     toggleDishes: (e) ->
-      $(e.currentTarget).closest("li").toggleClass("expanded").find("i.icon-folder").toggleClass("icon-folder-close").toggleClass "icon-folder-open"
+      $(e.currentTarget).closest("li").toggleClass("expanded").find("i.icon-folder").toggleClass("glyphicon-folder-close").toggleClass "glyphicon-folder-open"
   )
 )()

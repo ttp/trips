@@ -1,5 +1,5 @@
 %div{id: 'entity_' + entity.id, class: "entity entity-" + entity.get('entity_type')}
-  %i.icon-remove
+  %i.glyphicon.glyphicon-remove
   %span.entity-name= entity.getName()
   :if entity.isProduct()
     %input{type: 'text', class: 'form-control weight transparent',\
