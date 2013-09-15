@@ -38,26 +38,26 @@ _.namespace "App.views"
 
     render: ->
       @days.each ((day) ->
-        dayView = new App.views.MenuDayView(
-          el: @createDayEl()
-          model: day
-        )
+        dayView = new App.views.MenuDayView
+          id: "day-#{day.id}"
+          model: day,
+          renderTo: @$el.find(".tab-content"),
+          renderTabTo: @$el.find(".nav-tabs")
+        dayView.show()
       ), this
-
-    createDayEl: ->
-      dayEl = $("<div class='popover'></div>")
-      @$el.find("div.days").append dayEl
-      dayEl
+      @$el.find('.nav-tabs li:eq(1) a').tab('show')
 
     createDay: (e) ->
       e.preventDefault()
-      dayEl = @createDayEl()
       day = new App.models.MenuDayModel(num: App.collections.MenuDayCollection.size() + 1)
       @days.add day
       dayView = new App.views.MenuDayView(
-        el: dayEl
+        id: "day-#{day.id}"
         model: day
+        renderTo: @$el.find(".tab-content"),
+        renderTabTo: @$el.find(".nav-tabs")
       )
+      dayView.show()
 
     updateDaysCount: ->
       sum = @days.reduce((memo, day) ->

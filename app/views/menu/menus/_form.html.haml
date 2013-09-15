@@ -25,8 +25,13 @@
             .days_count{"data-text" => 'menu.days_count', :value => round_precision(@menu.days_count)}
         .clearfix
         .days
+          %ul.nav.nav-tabs
+            %li
+              %button.btn.add-day{type: 'button'}
+                %i.glyphicon.glyphicon-plus
+                = t('menu.day') + ':'
+          .tab-content
         %textarea.hide{name: 'data'}
-        %button.btn.add-day{type: 'button'}= t('menu.add_day')
         .form-actions
           %button.btn.btn-primary.save= t('helpers.links.save')
           = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'

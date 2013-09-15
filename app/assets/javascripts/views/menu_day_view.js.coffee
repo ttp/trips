@@ -4,6 +4,8 @@
 _.namespace "App.views"
 (->
   App.views.MenuDayView = Backbone.View.extend(
+    tagName: 'div'
+    className: 'day tab-pane'
     events:
       "click button.close": "removeDay"
       "click .glyphicon-remove": "removeEntity"
@@ -14,21 +16,27 @@ _.namespace "App.views"
       @render()
       @bindEvents()
 
+
+    createTabEl: ->
+      tabEl = $("<li class='.day-tab-#{@model.id}'></li>")
+      $("<a>#{@model.get('num')}</a>").attr('href', "##{@id}").appendTo(tabEl).click (e) ->
+        e.preventDefault()
+        $(this).tab('show')
+      tabEl
+
+    getDayTabEl: (day) ->
+      @$el.find(".day-tab-#{day.id}")
+
     render: ->
-      @$el.addClass "day"
       @$el.html $(JST["templates/food/day"](day: @model))
-      @$el.droppable
-        drop: $.proxy(@onEntityDrop, this)
-        activeClass: "ui-state-hover"
-        hoverClass: "ui-state-active"
-
-      rivets.bind @$el.find("input.rate"),
-        day: @model
-
       entities = _.groupBy(@entities.where(day_id: @model.id), (item) ->
         item.get("parent_id") or 0
       )
       @renderEntities entities, 0
+      @options.renderTo.append @$el
+
+      @tabEl = @createTabEl()
+      @options.renderTabTo.append @tabEl
 
     renderEntities: (entities, parent_id) ->
       return  unless entities[parent_id]
@@ -37,18 +45,34 @@ _.namespace "App.views"
         @renderEntities entities, entity.id
       ), this
 
+    show: ->
+      @tabEl.find('a').tab('show')
+
     bindEvents: ->
-      @model.on "change", $.proxy(->
-        @$el.find(".num").text @model.get("num")
-      , this)
+      @model.on "change", ->
+        @tabEl.find("a").text @model.get("num")
+      , this
+
+      @$el.droppable
+        drop: $.proxy(@onEntityDrop, this)
+        activeClass: "ui-state-hover"
+        hoverClass: "ui-state-active"
+
+      rivets.bind @$el.find("input.rate"),
+        day: @model
 
     removeDay: (e) ->
-      num = @model.get("num")
-      App.collections.MenuDayCollection.remove @model
-      App.collections.MenuDayCollection.each (day) ->
-        day.set "num", day.get("num") - 1  if day.get("num") > num
+      @tabEl.fadeOut 250, $.proxy(->
+        num = @model.get("num")
+        App.collections.MenuDayCollection.remove @model
+        App.collections.MenuDayCollection.each (day) ->
+          day.set "num", day.get("num") - 1  if day.get("num") > num
 
-      @$el.remove()
+        @$el.remove()
+        switchTab = if @tabEl.next().length then @tabEl.next() else @tabEl.prev()
+        switchTab.find('a').tab('show')
+        @tabEl.remove()
+      , this)
 
     onEntityDrop: (event, ui) ->
       $this = $(event.target)

@@ -1,6 +1,4 @@
 %h3.popover-title
-  =I18n.t('menu.day')
-  %span.num= day.get('num')
   &nbsp; Rate:
   %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
   %button.close{type: 'button'} &times;
