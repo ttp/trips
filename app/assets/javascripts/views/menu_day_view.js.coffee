@@ -1,14 +1,18 @@
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model
+#=require models/menu_clipboard
 _.namespace "App.views"
 (->
   App.views.MenuDayView = Backbone.View.extend(
     tagName: 'div'
     className: 'day tab-pane'
     events:
-      "click button.close": "removeDay"
-      "click .glyphicon-remove": "removeEntity"
+      "click button.copy": "copyDay"
+      "click button.remove": "removeDay"
+
+      "click button.copy-entity": "copyEntity"
+      "click button.remove-entity": "removeEntity"
 
     initialize: (options) ->
       @model = options.model
@@ -129,5 +133,14 @@ _.namespace "App.views"
       entity = @entities.get(id)
       @entities.remove entity
       entityEl.remove()
+
+    copyDay: ->
+      App.modles.MenuClipboard.setObj 'day', this.model.toJSON()
+
+    copyEntity: (event) ->
+      entityEl = $(event.target).closest(".entity")
+      id = entityEl.attr("id").split("_")[1]
+      entity = @entities.get(id)
+      App.models.MenuClipboard.setObj 'entity', entity.toJSON()
   )
 )()

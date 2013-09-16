@@ -3,7 +3,17 @@
     %h3.panel-title
       &nbsp; Rate:
       %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
-      %button.close{type: 'button'} &times;
+
+      .toolbar.pull-right
+        .btn-toolbar
+          .btn-group.btn-group-xs
+            %button.btn.btn-default{type: 'button'}
+              copy
+            %button.btn.btn-default{type: 'button'}
+              paste
+            %button.btn.btn-default.remove{type: 'button', title: I18n.t('helpers.links.destroy')}
+              %i.glyphicon.glyphicon-remove
+
   .panel-body.body
     .noitems
       Drop products here

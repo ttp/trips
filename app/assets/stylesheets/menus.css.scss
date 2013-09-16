@@ -61,10 +61,10 @@ $hover_color: #ffa;
           background-color: $hover_color;
         }
 
-        .icon-remove {
+        .toolbar {
           opacity: 0;
         }
-        &:hover > .icon-remove {
+        &:hover > .toolbar {
           opacity: 1;
         }
         .entity {
@@ -91,6 +91,10 @@ $hover_color: #ffa;
         border: 1px solid #ebebeb;
       }
     }
+
+    .toolbar {
+      display: inline-block;
+    }
   }
 }
 
@@ -105,7 +109,7 @@ $hover_color: #ffa;
   .nav-tabs {
     margin-bottom: 15px;
   }
-  .tab-content {
+  .tab-pane {
     max-height: 430px;
 
     .product, .dish, .meal {
