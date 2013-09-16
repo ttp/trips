@@ -1,7 +1,11 @@
-%h3.popover-title
-  &nbsp; Rate:
-  %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
-  %button.close{type: 'button'} &times;
-.body.popover-content
-  .noitems
-    Drop products here
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      &nbsp; Rate:
+      %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
+      %button.close{type: 'button'} &times;
+  .panel-body.body
+    .noitems
+      Drop products here
+  .panel-footer
+    Summary goes here
