@@ -2,19 +2,19 @@
   _.namespace "App.models"
 
   App.models.MenuClipboard = new (Backbone.Model.extend(
-    setObj: (type, obj)->
+    setObj: (type, data)->
       @set 'type', type
-      @set 'obj', obj
+      @set 'data', data
 
     getObj: ->
       type: @get 'type'
-      obj: @get 'obj'
+      data: @get 'data'
 
     clean: ->
       @set 'type', null
-      @set 'obj', null
+      @set 'data', null
 
     isEmpty: ->
-      @get 'obj' is null
+      @get 'data' is null
   ))
 )()

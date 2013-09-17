@@ -7,9 +7,9 @@
       .toolbar.pull-right
         .btn-toolbar
           .btn-group.btn-group-xs
-            %button.btn.btn-default{type: 'button'}
+            %button.btn.btn-default.copy{type: 'button'}
               copy
-            %button.btn.btn-default{type: 'button'}
+            %button.btn.btn-default.paste{type: 'button'}
               paste
             %button.btn.btn-default.remove{type: 'button', title: I18n.t('helpers.links.destroy')}
               %i.glyphicon.glyphicon-remove

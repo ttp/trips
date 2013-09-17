@@ -9,7 +9,7 @@
         %button.btn.btn-default.copy-entity{type: 'button'}
           copy
         :if !entity.isProduct()
-          %button.btn.btn-default{type: 'button'}
+          %button.btn.btn-default.paste-entity{type: 'button'}
             paste
         %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy')}
           %i.glyphicon.glyphicon-remove

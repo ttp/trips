@@ -1,17 +1,19 @@
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model
-#=require models/menu_clipboard
+#= require models/menu_clipboard
 _.namespace "App.views"
 (->
+  clipboard = App.models.MenuClipboard
   App.views.MenuDayView = Backbone.View.extend(
     tagName: 'div'
     className: 'day tab-pane'
     events:
       "click button.copy": "copyDay"
+      "click button.paste": "pasteToDay"
       "click button.remove": "removeDay"
-
       "click button.copy-entity": "copyEntity"
+      "click button.paste-entity": "pasteToEntity"
       "click button.remove-entity": "removeEntity"
 
     initialize: (options) ->
@@ -33,21 +35,17 @@ _.namespace "App.views"
 
     render: ->
       @$el.html $(JST["templates/food/day"](day: @model))
-      entities = _.groupBy(@entities.where(day_id: @model.id), (item) ->
-        item.get("parent_id") or 0
-      )
-      @renderEntities entities, 0
+      @renderEntities @entities.tree(@model.id)
       @options.renderTo.append @$el
 
       @tabEl = @createTabEl()
       @options.renderTabTo.append @tabEl
 
-    renderEntities: (entities, parent_id) ->
-      return  unless entities[parent_id]
-      _.each entities[parent_id], ((entity) ->
-        @renderEntity entity
-        @renderEntities entities, entity.id
-      ), this
+    renderEntities: (entities) ->
+      _.each(entities, ((entity) ->
+        @renderEntity entity.entity
+        @renderEntities entity.children if entity.children
+      ), this)
 
     show: ->
       @tabEl.find('a').tab('show')
@@ -127,20 +125,66 @@ _.namespace "App.views"
 
       entityEl
 
-    removeEntity: (event) ->
-      entityEl = $(event.target).closest(".entity")
+    _getEntityElByEvent: (event) ->
+      $(event.target).closest(".entity")
+
+    _getEntityByEvent: (event) ->
+      entityEl = @_getEntityElByEvent(event)
       id = entityEl.attr("id").split("_")[1]
-      entity = @entities.get(id)
+      @entities.get(id)
+
+    removeEntity: (event) ->
+      entity = @_getEntityByEvent event
       @entities.remove entity
-      entityEl.remove()
+      @_getEntityElByEvent(event).remove()
 
     copyDay: ->
-      App.modles.MenuClipboard.setObj 'day', this.model.toJSON()
+      clipboard.setObj 'day',
+        day: @model.toJSON()
+        entities: @entities.tree(@model.id, 0, true)
+
+    pasteToDay: ->
+      obj = clipboard.getObj()
+      if obj.type is 'day'
+        @_pasteEntities(obj.data.entities, 0)
+      else if obj.type is 'entity'
+        entity = @_pasteEntity(obj.data.entity, 0)
+        @_pasteEntities(obj.data.entities, entity.id)
+
+    _pasteEntities: (entities, parent_id) ->
+      _.each(entities, (entity)->
+        entity_model = @_pasteEntity entity.entity, parent_id
+        @_pasteEntities(entity.children, entity_model.id) if entity.children
+      , this)
+
+    _pasteEntity: (entity, parent_id) ->
+      entity_model = new App.models.MenuDayEntityModel
+        parent_id: parent_id
+        entity_id: entity.entity_id
+        entity_type: entity.entity_type
+        day_id: @model.id
+        weight: entity.weight
+      @entities.add entity_model
+      @renderEntity entity_model
+      entity_model
 
     copyEntity: (event) ->
-      entityEl = $(event.target).closest(".entity")
-      id = entityEl.attr("id").split("_")[1]
-      entity = @entities.get(id)
-      App.models.MenuClipboard.setObj 'entity', entity.toJSON()
+      entity = @_getEntityByEvent event
+      clipboard.setObj 'entity',
+        entity: entity.toJSON()
+        entities: @entities.tree(@model.id, entity.id, true)
+
+    pasteToEntity: (event) ->
+      obj = clipboard.getObj()
+      return if obj.type is 'day'
+
+      entity = @_getEntityByEvent event
+      return if obj.data.entity.entity_type < entity.get('entity_type')
+
+      if obj.data.entity.entity_type == entity.get('entity_type')
+        @_pasteEntities obj.data.entities, entity.id
+      else
+        new_entity = @_pasteEntity(obj.data.entity, entity.id)
+        @_pasteEntities(obj.data.entities, new_entity.id)
   )
 )()
