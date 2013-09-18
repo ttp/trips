@@ -33,22 +33,21 @@ $hover_color: #ffa;
   }
   .day {
     min-height: 30px;
-    border-radius: 5px;
     margin: 5px 0;
-    background-color: #fff;
-    position: relative;
-    max-width: 100%;
-    z-index: 0;
-    box-shadow: none;
 
-    h3 .num {
-      margin-left: 3px;
+    .panel-heading {
+      .toolbar {
+        opacity: 0;
+      }
+      &:hover .toolbar {
+        opacity: 1;
+      }
     }
 
-    &.ui-state-active .body {
+    &.ui-state-active .panel-body {
       background-color: $hover_color;
     }
-    .body {
+    .panel-body {
       > .entity {
         border: 1px solid #ebebeb;
       }
@@ -61,29 +60,29 @@ $hover_color: #ffa;
           background-color: $hover_color;
         }
 
-        .toolbar {
-          opacity: 0;
-        }
-        &:hover > .toolbar {
-          opacity: 1;
+        .header {
+          .toolbar {
+            opacity: 0;
+          }
+          &:hover > .toolbar {
+            opacity: 1;
+          }
         }
         .entity {
           margin-left: 20px;
         }
       }
       .entity-1, .entity-2 {
-        padding-right: 5px;
-        padding-bottom: 3px;
-        > .entity-name {
+        padding: 0px 5px 3px 3px;
+        min-height: 30px;
+        > .header .entity-name {
           font-weight: bold;
         }
-        min-height: 30px;
       }
       .entity-1 {
         border: 1px solid #ddd;
         min-height: 40px;
-        margin-top: 2px;
-        margin-bottom: 2px;
+        margin: 2px 1px;
       }
       .entity-3 {
         background-color: #f7f7f7;
@@ -96,10 +95,6 @@ $hover_color: #ffa;
       display: inline-block;
     }
   }
-}
-
-.popover.day {
-  display: block;
 }
 
 .sidebar {

@@ -108,9 +108,9 @@ _.namespace "App.views"
       @$el.find(".noitems").hide()
       entityEl = $(JST["templates/food/day_entity"](entity: entity))
       if entity.get("parent_id")
-        entityEl.appendTo @$el.find("#entity_" + entity.get("parent_id"))
+        entityEl.appendTo @$el.find("#entity_#{entity.get('parent_id')} > .body")
       else
-        entityEl.appendTo @$el.find(".body")
+        entityEl.appendTo @$el.find(".panel-body")
       unless entity.isProduct()
         entityEl.droppable
           greedy: true
