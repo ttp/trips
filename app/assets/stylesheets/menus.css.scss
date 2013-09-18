@@ -91,6 +91,11 @@ $hover_color: #ffa;
       }
     }
 
+    .panel-footer {
+      table {
+        margin-bottom: 0;
+      }
+    }
     .toolbar {
       display: inline-block;
     }

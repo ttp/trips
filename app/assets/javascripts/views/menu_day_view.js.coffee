@@ -36,6 +36,7 @@ _.namespace "App.views"
     render: ->
       @$el.html $(JST["templates/food/day"](day: @model))
       @renderEntities @entities.tree(@model.id)
+      @renderSummary()
       @options.renderTo.append @$el
 
       @tabEl = @createTabEl()
@@ -47,6 +48,9 @@ _.namespace "App.views"
         @renderEntities entity.children if entity.children
       ), this)
 
+    renderSummary: ->
+      @$el.find('.panel-footer').html JST["templates/food/day_summary"](@model.summary())
+
     show: ->
       @tabEl.find('a').tab('show')
 
@@ -55,6 +59,11 @@ _.namespace "App.views"
         @tabEl.find("a").text @model.get("num")
       , this
 
+      updateSummary = _.throttle $.proxy(@renderSummary, this), 50
+      @entities.on "add remove change", (entity) ->
+        updateSummary() if entity.get('day_id') is @model.id
+      , this
+      
       @$el.droppable
         drop: $.proxy(@onEntityDrop, this)
         activeClass: "ui-state-hover"
