@@ -1,6 +1,17 @@
 %h3= @menu.name
 
 #menu
+  %h4= t('menu.ration')
+  %ul.nav.nav-tabs
+    - @days.each_with_index do |day, i|
+      %li{:class => ('active' if i == 0)}
+        %a{:href => "#day_#{i + 1}", "data-toggle" => "tab"}
+          = "#{t('menu.day') + " " if i == 0}#{(i + 1)}"
+  .tab-content.days
+    - @days.each_with_index do |day, i|
+      .tab-pane.day{id: "day_#{i + 1}", class: ('active' if i == 0)}
+        .panel-body
+          = render_entities(@menu, day.id, 0)
   - if @menu.days_count > 0
     %h4= t('menu.summary')
     .summary.well.well-small
@@ -52,24 +63,8 @@
         #{@menu.users_count},
         %b= t('menu.days') + ':'
         #{round_precision(@menu.days_count)}
-
-
-  %h4= t('menu.ration')
-  %ul.nav.nav-tabs
-    %li
-    - @days.each_with_index do |day, i|
-      %li{:class => ('active' if i == 0)}
-        %a{:href => "#day_#{i + 1}", "data-toggle" => "tab"}
-          = "#{t('menu.day') + " " if i == 0}#{(i + 1)}"
-  .tab-content.days
-    - @days.each_with_index do |day, i|
-      .tab-pane.day{id: "day_#{i + 1}", class: ('active' if i == 0)}
-        %h4.hide= t('menu.day') + " #{i + 1}"
-        .body
-          = render_entities(@menu, day.id, 0)
-
-%h4 Products
+%h4= t 'menu.products'
 - @menu.products.each do |product_id, product|
   %div
     %span.name= product.name
-    %span.weight= @total_products[product_id]
+    %span.weight= @total_products[product_id].to_s + t('menu.g')

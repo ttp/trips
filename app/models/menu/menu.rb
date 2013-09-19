@@ -20,7 +20,10 @@ class Menu::Menu < ActiveRecord::Base
     return @products if @products
 
     ids = entities_by_type(Menu::DayEntity::PRODUCT).map(&:entity_id).uniq
-    @products = Menu::Product.with_translations(I18n.locale).where('menu_products.id in(?)', ids).index_by(&:id)
+    @products = Menu::Product.with_translations(I18n.locale).where('menu_products.id in(?)', ids)
+    @products.sort! do |a, b| a.name <=> b.name end
+    @products = @products.index_by(&:id)
+    @products
   end
 
   def dishes
