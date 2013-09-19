@@ -1,5 +1,20 @@
 $hover_color: #ffa;
 
+@mixin invisible-toolbar {
+  .toolbar {
+    opacity: 0;
+
+    &.focus {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    .toolbar {
+      opacity: 1;
+    }
+  }
+}
+
 #menu {
   .days_count {
     padding-top: 7px;
@@ -35,13 +50,21 @@ $hover_color: #ffa;
     min-height: 30px;
     margin: 5px 0;
 
+    .twitter-typeahead input {
+      font-size: 12px;
+      height: 22px;
+      padding: 1px 5px;
+      display: inline-block;
+      line-height: 1.5;
+      &.tt-query {
+        background-color: #fff;
+      }
+    }
+
     .panel-heading {
-      .toolbar {
-        opacity: 0;
-      }
-      &:hover .toolbar {
-        opacity: 1;
-      }
+      line-height: 25px;
+      padding: 5px 15px;
+      @include invisible-toolbar;
     }
 
     &.ui-state-active .panel-body {
@@ -60,13 +83,8 @@ $hover_color: #ffa;
           background-color: $hover_color;
         }
 
-        .header {
-          .toolbar {
-            opacity: 0;
-          }
-          &:hover > .toolbar {
-            opacity: 1;
-          }
+        > .header {
+          @include invisible-toolbar;
         }
         .entity {
           margin-left: 20px;

@@ -11,6 +11,8 @@
  *= require_self
  *= require_tree .
 */
+@import "bootstrap/bootstrap";
+
 body {
   padding-top: 60px;
 }
@@ -74,4 +76,11 @@ table {
 
 .x-hidden {
   display: none;
+}
+
+.twitter-typeahead {
+  .tt-hint {
+    @extend .form-control;
+    color: #aaa;
+  }
 }

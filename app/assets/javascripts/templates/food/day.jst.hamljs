@@ -1,11 +1,12 @@
 .panel.panel-default
   .panel-heading
-    %h3.panel-title
-      &nbsp; Rate:
-      %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
-
-      .toolbar.pull-right
+    %span Rate:
+    %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
+    .pull-right
+      .toolbar
         .btn-toolbar
+          .btn-group.btn-group-xs
+            %input.form-control.quick-add{type: 'text', placeholder: 'Quick add', autocomplete: 'off'}
           .btn-group.btn-group-xs
             %button.btn.btn-default.copy{type: 'button'}
               copy

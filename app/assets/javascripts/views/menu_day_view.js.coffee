@@ -1,3 +1,4 @@
+#= require libs/typeahead
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model
@@ -15,6 +16,8 @@ _.namespace "App.views"
       "click button.copy-entity": "copyEntity"
       "click button.paste-entity": "pasteToEntity"
       "click button.remove-entity": "removeEntity"
+      "focus input.quick-add": "toggleToolbar"
+      "blur input.quick-add": "toggleToolbar"
 
     initialize: (options) ->
       @model = options.model
@@ -63,14 +66,46 @@ _.namespace "App.views"
       @entities.on "add remove change", (entity) ->
         updateSummary() if entity.get('day_id') is @model.id
       , this
-      
+
       @$el.droppable
         drop: $.proxy(@onEntityDrop, this)
         activeClass: "ui-state-hover"
         hoverClass: "ui-state-active"
 
+      @initTypeahead(@$el.find('.panel-heading input.quick-add'))
+
       rivets.bind @$el.find("input.rate"),
         day: @model
+
+    initTypeahead: (input, entity_type = 0, parent_id = 0) ->
+      conf = []
+      base_conf = items: 5, minLength: 3, valueKey: 'name'
+      if entity_type is 0
+        conf.push $.extend {}, base_conf,
+          local: App.collections.MenuMealCollection.typeahead()
+          header: "<div class='dropdown-header'>#{I18n.t('menu.meals')}</div>"
+      if entity_type <= 1
+        conf.push $.extend {}, base_conf,
+          local: App.collections.MenuDishCollection.typeahead()
+          header: "<div class='dropdown-header'>#{I18n.t('menu.dishes')}</div>"
+      if entity_type <= 2
+        conf.push $.extend {}, base_conf,
+          local: App.collections.MenuProductCollection.typeahead()
+          header: "<div class='dropdown-header'>#{I18n.t('menu.products')}</div>"
+      input.typeahead(conf)
+      input.on('typeahead:selected typeahead:autocompleted', $.proxy((event, obj) ->
+        @_addEntity(new App.models.MenuDayEntityModel(
+          entity_id: obj.id
+          entity_type: obj.entity_type
+          parent_id: parent_id
+          day_id: @model.id
+        ))
+        $(event.currentTarget).val('').typeahead('setQuery', '')
+        return false
+      , this))
+
+    toggleToolbar: (event) ->
+      $(event.target).closest('.toolbar').toggleClass('focus');
 
     removeDay: (e) ->
       @tabEl.fadeOut 250, $.proxy(->
@@ -95,6 +130,9 @@ _.namespace "App.views"
       if $this.is(".entity")
         parent_id = $this.attr("id").split("_")[1]
         entity.set "parent_id", parent_id
+      @_addEntity(entity)
+
+    _addEntity: (entity) ->
       @entities.add entity
       @renderEntity entity
       @renderDishProducts entity  if entity.isDish()
@@ -120,18 +158,17 @@ _.namespace "App.views"
         entityEl.appendTo @$el.find("#entity_#{entity.get('parent_id')} > .body")
       else
         entityEl.appendTo @$el.find(".panel-body")
-      unless entity.isProduct()
+
+      if entity.isProduct()
+        rivets.bind entityEl, entity: entity
+      else
         entityEl.droppable
           greedy: true
           accept: (if entity.get("entity_type") is 1 then ".product, .dish" else ".product")
           activeClass: "ui-state-hover"
           hoverClass: "ui-state-active"
           drop: $.proxy(@onEntityDrop, this)
-
-      else
-        rivets.bind entityEl,
-          entity: entity
-
+        @initTypeahead(entityEl.find('> .header input.quick-add'), entity.get('entity_type'), entity.id)
       entityEl
 
     _getEntityElByEvent: (event) ->
