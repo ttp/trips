@@ -25,9 +25,7 @@ _.namespace "App.views"
       @$el.html($(JST["templates/food/day_entity"](entity: @model)))
       @$el.attr('id', "entity_#{@model.id}").addClass("entity-#{@model.get('entity_type')}")
 
-      if @model.isProduct()
-        rivets.bind @$el, entity: @model
-      else
+      unless @model.isProduct()
         @$el.droppable
           greedy: true
           accept: (if @model.get("entity_type") is 1 then ".product, .dish" else ".product")
@@ -49,9 +47,16 @@ _.namespace "App.views"
         renderTo: @$el.find('> .body')
 
     bindEvents: ->
-      Backbone.Validation.bind this,
-        valid: @valid
-        invalid: @invalid
+      if @model.isProduct()
+        rivets.bind @$el.find('> .header'), entity: @model
+        Backbone.Validation.bind this,
+          valid: @valid
+          invalid: @invalid
+
+    valid: (view, attr) ->
+      view.$el.find("> .header input[name=#{attr}]").removeClass('error').attr('title', '')
+    invalid: (view, attr, error) ->
+      view.$el.find("> .header input[name=#{attr}]").addClass('error').attr('title', error)
 
     getTypeaheadConf: (entity_type = 0) ->
       conf = []
@@ -82,11 +87,6 @@ _.namespace "App.views"
         $(event.currentTarget).val('').typeahead('setQuery', '')
         return false
       , this))
-
-    valid: (view, attr) ->
-      view.$el.find("> .head input[name=#{attr}]").removeClass('error').attr('title', '')
-    invalid: (view, attr, error) ->
-      view.$el.find("> .head input[name=#{attr}]").addClass('error').attr('title', error)
 
     onDrop: (event, ui) ->
       entity = new App.models.MenuDayEntityModel(

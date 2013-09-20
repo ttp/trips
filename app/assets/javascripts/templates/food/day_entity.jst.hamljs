@@ -1,8 +1,8 @@
 .header
   %span.entity-name= entity.getName()
   :if entity.isProduct()
-    %input{type: 'text', class: 'form-control weight transparent',\
-           value: entity.get('weight') || 0, data-value: 'entity.weight|number'}
+    %input{name: 'weight', type: 'text', class: 'form-control weight transparent',\
+           value: entity.get('weight'), data-value: 'entity.weight|number'}
   .toolbar.pull-right
     .btn-toolbar
       :if !entity.isProduct()

@@ -9,6 +9,15 @@
       parent_id: 0
       weight: 0
 
+    validation:
+      weight: [
+        required: true
+        msg: 'Please enter an weight'
+      ,
+        min: 0
+        msg: "Weight can't be less then 0"
+      ]
+
     initialize: ->
       unless @id
         @set "id", @cid
