@@ -1,4 +1,5 @@
 #= require libs/typeahead
+#= require libs/backbone-validation
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model
@@ -62,6 +63,10 @@ _.namespace "App.views"
         @tabEl.find("a").text @model.get("num")
       , this
 
+      Backbone.Validation.bind this,
+        valid: @valid
+        invalid: @invalid
+
       updateSummary = _.throttle $.proxy(@renderSummary, this), 50
       @entities.on "add remove change", (entity) ->
         updateSummary() if entity.get('day_id') is @model.id
@@ -103,6 +108,11 @@ _.namespace "App.views"
         $(event.currentTarget).val('').typeahead('setQuery', '')
         return false
       , this))
+
+    valid: (view, attr) ->
+      view.$el.find("input[name=#{attr}]").removeClass('error').attr('title', '')
+    invalid: (view, attr, error) ->
+      view.$el.find("input[name=#{attr}]").addClass('error').attr('title', error)
 
     toggleToolbar: (event) ->
       $(event.target).closest('.toolbar').toggleClass('focus');

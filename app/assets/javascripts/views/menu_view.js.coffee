@@ -14,6 +14,7 @@
 #= require libs/rivets.min
 #= require libs/rivets-backbone
 #= require libs/rivets-formatters
+#= require libs/backbone-validation
 _.namespace "App.views"
 (->
   App.views.MenuView = Backbone.View.extend(
@@ -23,7 +24,7 @@ _.namespace "App.views"
       "click button.save": "save"
 
     initialize: (options) ->
-      @menu = new App.models.MenuModel(options.menu)
+      @model = @menu = new App.models.MenuModel(options.menu)
       @days = App.collections.MenuDayCollection
       @days.reset options.days
       @entities = App.collections.MenuDayEntityCollection
@@ -33,8 +34,15 @@ _.namespace "App.views"
     bindEvents: ->
       rivets.bind @$el,
         menu: @menu
-
+      Backbone.Validation.bind this,
+        valid: @valid
+        invalid: @invalid
       @days.bind "add remove change", @updateDaysCount, this
+
+    valid: (view, attr) ->
+      view.$el.find("input[name=#{attr}]").removeClass('error').attr('title', '')
+    invalid: (view, attr, error) ->
+      view.$el.find("input[name=#{attr}]").addClass('error').attr('title', error)
 
     render: ->
       @days.each ((day) ->

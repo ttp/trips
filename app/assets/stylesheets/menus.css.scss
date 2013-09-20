@@ -37,6 +37,9 @@ $hover_color: #ffa;
       transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
     }
   }
+  input.error {
+    border-color: #f00;
+  }
 
   button.add-day {
     margin-right: 5px;

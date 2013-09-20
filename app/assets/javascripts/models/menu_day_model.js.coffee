@@ -4,6 +4,15 @@ _.namespace "App.models"
     defaults:
       rate: 1
 
+    validation:
+      rate: [
+        required: true
+        msg: 'Please enter an day rate'
+      ,
+        range: [0, 1]
+        msg: "Day rate should be a number from 0 to 1"
+      ]
+
     initialize: ->
       unless @id
         @set "id", @cid

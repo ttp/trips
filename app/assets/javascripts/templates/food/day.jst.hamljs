@@ -1,7 +1,8 @@
 .panel.panel-default
   .panel-heading
     %span Rate:
-    %input{type: 'text', class: 'form-control rate transparent', value: day.get('rate'), data-value: 'day.rate | number'}
+    %input{name: 'rate', type: 'text', class: 'form-control rate transparent', value: day.get('rate'),\
+           data-value: 'day.rate | number'}
     .pull-right
       .toolbar
         .btn-toolbar

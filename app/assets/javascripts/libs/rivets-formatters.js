@@ -3,6 +3,6 @@ rivets.formatters.number = {
         return value;
     },
     publish: function(value) {
-        return +value
+        return (+value + "") == value ? +value : value;
     }
 };
