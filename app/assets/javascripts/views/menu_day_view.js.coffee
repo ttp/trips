@@ -4,6 +4,7 @@
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model
 #= require models/menu_clipboard
+#= require views/menu_entity_view
 _.namespace "App.views"
 (->
   clipboard = App.models.MenuClipboard
@@ -14,9 +15,6 @@ _.namespace "App.views"
       "click button.copy": "copyDay"
       "click button.paste": "pasteToDay"
       "click button.remove": "removeDay"
-      "click button.copy-entity": "copyEntity"
-      "click button.paste-entity": "pasteToEntity"
-      "click button.remove-entity": "removeEntity"
       "focus input.quick-add": "toggleToolbar"
       "blur input.quick-add": "toggleToolbar"
 
@@ -47,10 +45,13 @@ _.namespace "App.views"
       @options.renderTabTo.append @tabEl
 
     renderEntities: (entities) ->
-      _.each(entities, ((entity) ->
-        @renderEntity entity.entity
-        @renderEntities entity.children if entity.children
-      ), this)
+      App.views.MenuEntityView.prototype.renderEntities.call this, entities
+
+    renderEntity: (entity) ->
+      @$el.find('.noitems').hide()
+      new App.views.MenuEntityView
+        model: entity
+        renderTo: @$el.find('.panel-body')
 
     renderSummary: ->
       @$el.find('.panel-footer').html JST["templates/food/day_summary"](@model.summary())
@@ -73,7 +74,7 @@ _.namespace "App.views"
       , this
 
       @$el.droppable
-        drop: $.proxy(@onEntityDrop, this)
+        drop: $.proxy(@onDrop, this)
         activeClass: "ui-state-hover"
         hoverClass: "ui-state-active"
 
@@ -82,27 +83,13 @@ _.namespace "App.views"
       rivets.bind @$el.find("input.rate"),
         day: @model
 
-    initTypeahead: (input, entity_type = 0, parent_id = 0) ->
-      conf = []
-      base_conf = items: 5, minLength: 3, valueKey: 'name'
-      if entity_type is 0
-        conf.push $.extend {}, base_conf,
-          local: App.collections.MenuMealCollection.typeahead()
-          header: "<div class='dropdown-header'>#{I18n.t('menu.meals')}</div>"
-      if entity_type <= 1
-        conf.push $.extend {}, base_conf,
-          local: App.collections.MenuDishCollection.typeahead()
-          header: "<div class='dropdown-header'>#{I18n.t('menu.dishes')}</div>"
-      if entity_type <= 2
-        conf.push $.extend {}, base_conf,
-          local: App.collections.MenuProductCollection.typeahead()
-          header: "<div class='dropdown-header'>#{I18n.t('menu.products')}</div>"
+    initTypeahead: (input) ->
+      conf = App.views.MenuEntityView.prototype.getTypeaheadConf.call this
       input.typeahead(conf)
       input.on('typeahead:selected typeahead:autocompleted', $.proxy((event, obj) ->
-        @_addEntity(new App.models.MenuDayEntityModel(
+        @addNewEntity(new App.models.MenuDayEntityModel(
           entity_id: obj.id
           entity_type: obj.entity_type
-          parent_id: parent_id
           day_id: @model.id
         ))
         $(event.currentTarget).val('').typeahead('setQuery', '')
@@ -130,69 +117,19 @@ _.namespace "App.views"
         @tabEl.remove()
       , this)
 
-    onEntityDrop: (event, ui) ->
-      $this = $(event.target)
+    onDrop: (event, ui) ->
       entity = new App.models.MenuDayEntityModel(
         entity_id: ui.draggable.data("id")
         entity_type: ui.draggable.data("type")
         day_id: @model.id
       )
-      if $this.is(".entity")
-        parent_id = $this.attr("id").split("_")[1]
-        entity.set "parent_id", parent_id
-      @_addEntity(entity)
+      @addNewEntity entity
 
-    _addEntity: (entity) ->
-      @entities.add entity
-      @renderEntity entity
-      @renderDishProducts entity  if entity.isDish()
+    addEntity: (entity) ->
+      App.views.MenuEntityView.prototype.addEntity.call this, entity
 
-    renderDishProducts: (entity) ->
-      dish = entity.getEntityModel()
-      _.each dish.dish_products(), ((dish_product) ->
-        productEntity = new App.models.MenuDayEntityModel(
-          entity_id: dish_product.get("product_id")
-          entity_type: 3
-          day_id: @model.id
-          parent_id: entity.id
-          weight: dish_product.get("weight")
-        )
-        @entities.add productEntity
-        @renderEntity productEntity
-      ), this
-
-    renderEntity: (entity) ->
-      @$el.find(".noitems").hide()
-      entityEl = $(JST["templates/food/day_entity"](entity: entity))
-      if entity.get("parent_id")
-        entityEl.appendTo @$el.find("#entity_#{entity.get('parent_id')} > .body")
-      else
-        entityEl.appendTo @$el.find(".panel-body")
-
-      if entity.isProduct()
-        rivets.bind entityEl, entity: entity
-      else
-        entityEl.droppable
-          greedy: true
-          accept: (if entity.get("entity_type") is 1 then ".product, .dish" else ".product")
-          activeClass: "ui-state-hover"
-          hoverClass: "ui-state-active"
-          drop: $.proxy(@onEntityDrop, this)
-        @initTypeahead(entityEl.find('> .header input.quick-add'), entity.get('entity_type'), entity.id)
-      entityEl
-
-    _getEntityElByEvent: (event) ->
-      $(event.target).closest(".entity")
-
-    _getEntityByEvent: (event) ->
-      entityEl = @_getEntityElByEvent(event)
-      id = entityEl.attr("id").split("_")[1]
-      @entities.get(id)
-
-    removeEntity: (event) ->
-      entity = @_getEntityByEvent event
-      @entities.remove entity
-      @_getEntityElByEvent(event).remove()
+    addNewEntity: (entity) ->
+      App.views.MenuEntityView.prototype.addNewEntity.call this, entity
 
     copyDay: ->
       clipboard.setObj 'day',
@@ -202,45 +139,20 @@ _.namespace "App.views"
     pasteToDay: ->
       obj = clipboard.getObj()
       if obj.type is 'day'
-        @_pasteEntities(obj.data.entities, 0)
+        @pasteEntities(obj.data.entities, 0)
       else if obj.type is 'entity'
-        entity = @_pasteEntity(obj.data.entity, 0)
-        @_pasteEntities(obj.data.entities, entity.id)
+        entity_view = @pasteEntity(obj.data.entity, 0)
+        entity_view.pasteEntities(obj.data.entities)
 
-    _pasteEntities: (entities, parent_id) ->
-      _.each(entities, (entity)->
-        entity_model = @_pasteEntity entity.entity, parent_id
-        @_pasteEntities(entity.children, entity_model.id) if entity.children
-      , this)
+    pasteEntities: (entities) ->
+      App.views.MenuEntityView.prototype.pasteEntities.call this, entities
 
-    _pasteEntity: (entity, parent_id) ->
+    pasteEntity: (entity) ->
       entity_model = new App.models.MenuDayEntityModel
-        parent_id: parent_id
         entity_id: entity.entity_id
         entity_type: entity.entity_type
         day_id: @model.id
         weight: entity.weight
-      @entities.add entity_model
-      @renderEntity entity_model
-      entity_model
-
-    copyEntity: (event) ->
-      entity = @_getEntityByEvent event
-      clipboard.setObj 'entity',
-        entity: entity.toJSON()
-        entities: @entities.tree(@model.id, entity.id, true)
-
-    pasteToEntity: (event) ->
-      obj = clipboard.getObj()
-      return if obj.type is 'day'
-
-      entity = @_getEntityByEvent event
-      return if obj.data.entity.entity_type < entity.get('entity_type')
-
-      if obj.data.entity.entity_type == entity.get('entity_type')
-        @_pasteEntities obj.data.entities, entity.id
-      else
-        new_entity = @_pasteEntity(obj.data.entity, entity.id)
-        @_pasteEntities(obj.data.entities, new_entity.id)
+      @addEntity(entity_model)
   )
 )()

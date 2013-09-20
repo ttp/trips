@@ -1,21 +1,20 @@
-%div{id: 'entity_' + entity.id, class: "entity entity-" + entity.get('entity_type')}
-  .header
-    %span.entity-name= entity.getName()
-    :if entity.isProduct()
-      %input{type: 'text', class: 'form-control weight transparent',\
-             value: entity.get('weight') || 0, data-value: 'entity.weight|number'}
-    .toolbar.pull-right
-      .btn-toolbar
-        :if !entity.isProduct()
-          .btn-group.btn-group-xs
-            %input.form-control.quick-add{type: 'text', placeholder: 'Quick add', autocomplete: 'off'}
+.header
+  %span.entity-name= entity.getName()
+  :if entity.isProduct()
+    %input{type: 'text', class: 'form-control weight transparent',\
+           value: entity.get('weight') || 0, data-value: 'entity.weight|number'}
+  .toolbar.pull-right
+    .btn-toolbar
+      :if !entity.isProduct()
         .btn-group.btn-group-xs
-          %button.btn.btn-default.copy-entity{type: 'button'}
-            copy
-          :if !entity.isProduct()
-            %button.btn.btn-default.paste-entity{type: 'button'}
-              paste
-          %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy')}
-            %i.glyphicon.glyphicon-remove
-  .clearfix
-  .body
+          %input.form-control.quick-add{type: 'text', placeholder: 'Quick add', autocomplete: 'off'}
+      .btn-group.btn-group-xs
+        %button.btn.btn-default.copy-entity{type: 'button'}
+          copy
+        :if !entity.isProduct()
+          %button.btn.btn-default.paste-entity{type: 'button'}
+            paste
+        %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy')}
+          %i.glyphicon.glyphicon-remove
+.clearfix
+.body
