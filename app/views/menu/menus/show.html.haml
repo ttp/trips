@@ -1,7 +1,6 @@
 %h3= @menu.name
 
 #menu
-  %h4= t('menu.ration')
   %ul.nav.nav-tabs
     - @days.each_with_index do |day, i|
       %li{:class => ('active' if i == 0)}
@@ -36,7 +35,7 @@
           %tr
             %td= t('menu.recommended')
 
-            %td 3200
+            %td 3100
             %td 0.7#{t('menu.kg')}
             %td 150
             %td 180
@@ -54,7 +53,7 @@
             %th= t('menu.group_all_days')
 
             %td -
-            %td= weight(@total[:weight] * @menu.days_count)
+            %td= weight(@total[:weight] * @menu.users_count)
             %td -
             %td -
             %td -
