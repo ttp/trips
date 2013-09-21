@@ -67,4 +67,4 @@
 - @menu.products.each do |product_id, product|
   %div
     %span.name= product.name
-    %span.weight= @total_products[product_id].to_s + t('menu.g')
+    %span.weight= (@total_products[product_id] * @menu.users_count).to_s + t('menu.g')
