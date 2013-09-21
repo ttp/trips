@@ -122,6 +122,7 @@ _.namespace "App.views"
       event.preventDefault()
       @entities.remove @model
       @$el.remove()
+      false
 
     pasteEntities: (entities) ->
       _.each(entities, (entity)->
@@ -143,6 +144,7 @@ _.namespace "App.views"
       clipboard.setObj 'entity',
         entity: @model.toJSON()
         entities: @entities.tree(@model.get('day_id'), @model.id, true)
+      false
 
     pasteToEntity: (event) ->
       event.preventDefault()
@@ -155,5 +157,6 @@ _.namespace "App.views"
       else
         entity_view = @pasteEntity(obj.data.entity, @model.id)
         entity_view.pasteEntities(obj.data.entities, entity_view.model.id)
+      false
   )
 )()
