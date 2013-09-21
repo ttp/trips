@@ -92,7 +92,7 @@ _.namespace "App.views"
       entity = new App.models.MenuDayEntityModel(
         entity_id: ui.draggable.data("id")
         entity_type: ui.draggable.data("type")
-        day_id: @model.day_id
+        day_id: @model.get 'day_id'
         parent_id: @model.id
       )
       @addNewEntity(entity)
@@ -111,7 +111,7 @@ _.namespace "App.views"
         productEntity = new App.models.MenuDayEntityModel(
           entity_id: dish_product.get("product_id")
           entity_type: 3
-          day_id: @model.day_id
+          day_id: @model.get 'day_id'
           parent_id: @model.id
           weight: dish_product.get("weight")
         )
@@ -134,7 +134,7 @@ _.namespace "App.views"
         parent_id: @model.id
         entity_id: entity.entity_id
         entity_type: entity.entity_type
-        day_id: @model.day_id
+        day_id: @model.get 'day_id'
         weight: entity.weight
       @addEntity entity_model
 
