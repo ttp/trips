@@ -53,6 +53,9 @@ $hover_color: #ffa;
     min-height: 30px;
     margin: 5px 0;
 
+    .print-block {
+      display: none;
+    }
     .twitter-typeahead input {
       font-size: 12px;
       height: 22px;
