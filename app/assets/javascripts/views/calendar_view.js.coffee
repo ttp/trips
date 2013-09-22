@@ -63,7 +63,7 @@ _.namespace "App.views"
       $("a.next").toggleClass "disabled", not rows.last().next().length
 
     _visibleRows: ->
-      @$el.find ".row-fluid:visible"
+      @$el.find ".row:visible"
 
     onDayClick: (e) ->
       e.preventDefault()
