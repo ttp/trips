@@ -1,5 +1,8 @@
 #= require views/menu_view
+#= require libs/backbone-validation
 $ ->
+  Backbone.Validation.configure
+    forceUpdate: true
   $.ajax
     url: "/menu/products"
     type: "GET"
