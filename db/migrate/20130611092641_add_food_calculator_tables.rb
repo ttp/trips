@@ -16,6 +16,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
       t.integer :num
       t.decimal :coverage, :null => false, :default => 0, precision: 3, scale: 2
     end
+    add_index :menu_days, :menu_id
 
     create_table :menu_day_entities do |t|
       t.integer :parent_id
@@ -24,6 +25,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
       t.integer :entity_id, :null => false
       t.integer :weight, :null => false, :default => 0
     end
+    add_index :menu_day_entities, :day_id
 
     create_table :menu_dish_categories do |t|
     end
