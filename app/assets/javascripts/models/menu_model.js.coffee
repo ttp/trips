@@ -4,13 +4,13 @@ _.namespace "App.models"
     validation:
       name:
         required: true
-        msg: 'Please enter an menu name'
+        msg: 'menu.validation.required'
       users_count: [
         required: true
-        msg: 'Please enter persons count'
+        msg: 'menu.validation.required'
       ,
         min: 1
-        msg: "You should have at least one person"
+        msg: "menu.validation.incorrect"
       ]
 
     initialize: ->

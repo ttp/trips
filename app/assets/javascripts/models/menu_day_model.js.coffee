@@ -7,10 +7,10 @@ _.namespace "App.models"
     validation:
       rate: [
         required: true
-        msg: 'Please enter an day rate'
+        msg: 'menu.validation.required'
       ,
         range: [0, 1]
-        msg: "Day rate should be a number from 0 to 1"
+        msg: "menu.validation.day_rate"
       ]
 
     initialize: ->

@@ -7,6 +7,8 @@ ua:
     links:
       add: "Додати"
       edit: "Редагувати"
+      copy: копіювати
+      paste: вставити
       destroy: "Видалити"
       confirm: "Ви впевненені?"
       save: "Зберегти"
@@ -180,7 +182,7 @@ ua:
   menu:
     day: День
     days: Днів
-    full_days: Повних днів
+    days_coverage: Покриття/днів
     add_day: Додати день
     meals: Трапези
     dishes: Страви
@@ -204,3 +206,17 @@ ua:
     was_created: Меню створено
     was_updated: Меню оновлено
     examples: Приклади меню
+    quick_add: Швидке додавання
+    coverage:
+      full: Повний день
+      two_meals: 2 трапези 80%
+      one_meal_plus: 1 трапеза + перекус 60%
+      one_meal: 1 трапеза 40%
+      nosh: Перекус 20%
+      empty: Порожній
+    validation:
+      fix_errors: Будь-ласка, виправте помилки
+      required: Це поле не може бути пустим
+      enter_name: Введіть назву меню
+      enter_weight: Введіть кількість продукту у грамах
+      incorrect: Некоректне значення

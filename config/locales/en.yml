@@ -7,6 +7,8 @@ en:
     links:
       add: "Add"
       edit: "Edit"
+      copy: copy
+      paste: paste
       destroy: "Remove"
       confirm: "Are you sure?"
       save: "Save"
@@ -175,7 +177,7 @@ en:
   menu:
     day: Day
     days: Days
-    full_days: Full days
+    days_coverage: Coverage/days
     add_day: Add day
     meals: Meals
     dishes: Dishes
@@ -199,3 +201,17 @@ en:
     was_created: Menu created
     was_updated: Menu updated
     examples: Menu examples
+    quick_add: Quick add
+    coverage:
+      full: Full day
+      two_meals: 2 meals 80%
+      one_meal_plus: 1 meal + nosh 60%
+      one_meal: 1 meal 40%
+      nosh: Nosh 20%
+      empty: Empty
+    validation:
+      fix_errors: Please, fix errors
+      required: This field can't be empty
+      enter_name: Enter menu name
+      enter_weight: Enter product weight
+      incorrect: Incorrect value

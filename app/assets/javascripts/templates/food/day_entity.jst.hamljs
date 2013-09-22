@@ -7,13 +7,11 @@
     .btn-toolbar
       :if !entity.isProduct()
         .btn-group.btn-group-xs
-          %input.form-control.quick-add{type: 'text', placeholder: 'Quick add', autocomplete: 'off'}
+          %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
       .btn-group.btn-group-xs
-        %button.btn.btn-default.copy-entity{type: 'button'}
-          copy
+        %button.btn.btn-default.copy-entity{type: 'button'}= I18n.t('helpers.links.copy')
         :if !entity.isProduct()
-          %button.btn.btn-default.paste-entity{type: 'button'}
-            paste
+          %button.btn.btn-default.paste-entity{type: 'button'}= I18n.t('helpers.links.paste')
         %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy')}
           %i.glyphicon.glyphicon-remove
 .clearfix

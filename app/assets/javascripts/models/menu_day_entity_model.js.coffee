@@ -12,10 +12,10 @@
     validation:
       weight: [
         required: true
-        msg: 'Please enter an weight'
+        msg: 'menu.validation.enter_weight'
       ,
         min: 0
-        msg: "Weight can't be less then 0"
+        msg: "menu.validation.incorrect"
       ]
 
     initialize: ->
