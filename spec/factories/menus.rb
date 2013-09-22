@@ -7,12 +7,11 @@ FactoryGirl.define do
     is_public true
 
     factory :menu_with_days do
-      ignore do
-        days_count 3
-      end
+      days_count 3
+      coverage 3
 
       after(:create) do |menu, evaluator|
-        FactoryGirl.create_list(:day_with_meals, evaluator.days_count, menu: menu)
+        FactoryGirl.create_list(:day_with_meals, menu.days_count, menu: menu)
       end
     end
   end

@@ -18,3 +18,4 @@ Feature: Menu
       When I click "Menu example one" link
       Then I should see menu entities
       And I should see menu summary
+      And I should see list of products

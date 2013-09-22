@@ -21,5 +21,9 @@ Then /^I should see menu entities$/ do
 end
 
 Then /^I should see menu summary$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_css(".summary")
+end
+
+Then /^I should see list of products$/ do
+  page.should have_css(".products")
 end
