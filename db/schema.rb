@@ -21,11 +21,15 @@ ActiveRecord::Schema.define(version: 20130611092641) do
     t.integer "weight",                default: 0, null: false
   end
 
+  add_index "menu_day_entities", ["day_id"], name: "index_menu_day_entities_on_day_id", using: :btree
+
   create_table "menu_days", force: true do |t|
     t.integer "menu_id"
     t.integer "num"
     t.decimal "coverage", precision: 3, scale: 2, default: 0.0, null: false
   end
+
+  add_index "menu_days", ["menu_id"], name: "index_menu_days_on_menu_id", using: :btree
 
   create_table "menu_dish_categories", force: true do |t|
   end
