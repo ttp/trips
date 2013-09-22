@@ -1,6 +1,6 @@
 class Menu::MenusController < ApplicationController
   def index
-    @menus = Menu::Menu.find_all_by_is_public(true)
+    @menus = Menu::Menu.where(is_public: true)
   end
 
   def show
