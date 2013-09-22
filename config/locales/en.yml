@@ -33,7 +33,7 @@ en:
     archive: 'Archive'
     manage: 'Manage'
     tools: 'Інструменти'
-    food_calculator: 'Food calculator'
+    menu_builder: 'Menu builder'
 
   site:
     meta_keywords: 'trips, mountain, tracking, hiking'
@@ -175,6 +175,7 @@ en:
     Romania: Romania
     Nepal: Nepal
   menu:
+    menu: Menu Builder
     day: Day
     days: Days
     days_coverage: Coverage/days

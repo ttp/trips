@@ -33,7 +33,7 @@ ua:
     archive: 'Минулі'
     manage: 'Керування'
     tools: 'Інструменти'
-    food_calculator: 'Розкладка їжі'
+    menu_builder: 'Конструктор Меню'
 
   site:
     meta_keywords: 'походи, гори, туризм'
@@ -180,6 +180,7 @@ ua:
     Nepal: Непал
 
   menu:
+    menu: Конструктор Меню
     day: День
     days: Днів
     days_coverage: Покриття/днів
