@@ -56,14 +56,16 @@ class Menu::MenusController < ApplicationController
     @menu.save
 
     # update/remove days
-    @menu.menu_days.each do |day|
-      day.delete unless data['days'].has_key?(day.id.to_s)
+    @days = @menu.menu_days.index_by(&:id)
+    @days.each do |id, day|
+      day.delete unless data['days'].has_key?(id.to_s)
     end
     save_days(data['days'])
 
     # update/remove entities
-    @menu.entities.each do |entity|
-      entity.delete unless data['entities'].has_key?(entity.id.to_s)
+    @entities = @menu.entities.index_by(&:id)
+    @entities.each do |id, entity|
+      entity.delete unless data['entities'].has_key?(id.to_s)
     end
     entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
     save_entities(entities, '0')
@@ -108,12 +110,15 @@ private
         entity.entity_id = entity_data['entity_id']
         entity.entity_type = entity_data['entity_type']
         entity.day_id = @day_cid_to_id[entity_data['day_id'].to_s]
-      else
-        entity = Menu::DayEntity.find(entity_data['id'])
+      elsif @entities.has_key? entity_data['id']
+        entity = @entities[entity_data['id']]
       end
-      entity.weight = entity_data['weight']
-      entity.save
-      save_entities(entities, entity_data['id'].to_s, entity.id)
+
+      unless entity.nil?
+        entity.weight = entity_data['weight']
+        entity.save if entity.changed? || entity.new_record?
+        save_entities(entities, entity_data['id'].to_s, entity.id)
+      end
     end
   end
 
@@ -123,13 +128,16 @@ private
       if day_data.has_key?('new')
         day = Menu::Day.new
         day.menu = @menu
-      else
-        day = Menu::Day.find(day_id)
+      elsif @days.has_key?(day_id)
+        day = @days[day_id]
       end
-      day.num = day_data['num']
-      day.rate = day_data['rate']
-      day.save
-      @day_cid_to_id[day_id] = day.id
+
+      unless day.nil?
+        day.num = day_data['num']
+        day.coverage = day_data['coverage']
+        day.save if day.changed? || day.new_record?
+        @day_cid_to_id[day_id] = day.id
+      end
     end
   end
 end

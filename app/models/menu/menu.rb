@@ -5,7 +5,7 @@ class Menu::Menu < ActiveRecord::Base
 
   def entities
     return [] if new_record?
-    @entitties || @entities = Menu::DayEntity.joins(day: :menu).where('menu_menus.id = ?', self.id)
+    @entities ||= Menu::DayEntity.joins(day: :menu).where('menu_menus.id = ?', self.id).readonly(false)
   end
 
   def entity_model(day_entity)
