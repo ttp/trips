@@ -42,7 +42,7 @@ _.namespace "App.views"
     valid: (view, attr) ->
       view.$el.find("input[name=#{attr}]").removeClass('error').attr('title', '')
     invalid: (view, attr, error) ->
-      view.$el.find("input[name=#{attr}]").addClass('error').attr('title', error)
+      view.$el.find("input[name=#{attr}]").addClass('error').attr('title', I18n.t(error))
 
     render: ->
       @days.each ((day) ->
@@ -71,9 +71,14 @@ _.namespace "App.views"
       sum = @days.reduce((memo, day) ->
         memo + day.get("rate")
       , 0)
-      @menu.set "days_count", sum
+      @menu.set "coverage", sum
+      @menu.set "days_count", @days.length
 
     save: (e) ->
+      @menu.validate()
+      if @$el.find('input.error').length > 0
+        alert(I18n.t('menu.validation.fix_errors'))
+        return false
       menu_data =
         menu: @menu.toJSON()
         days: _.indexBy(@days.toJSON(), "id")

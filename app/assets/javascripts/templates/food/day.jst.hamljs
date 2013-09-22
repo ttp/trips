@@ -1,18 +1,23 @@
 .panel.panel-default
   .panel-heading
-    %span Rate:
-    %input{name: 'rate', type: 'text', class: 'form-control rate transparent', value: day.get('rate'),\
-           data-value: 'day.rate | number'}
+    -#%span= I18n.t('menu.day_covering') + ':'
+    -#%input{name: 'rate', type: 'text', class: 'form-control rate transparent', value: day.get('rate'),\
+    -#       data-value: 'day.rate | number'}
+    %select.coverage{data-value: 'day.rate | number'}
+      %option{value: 1}= I18n.t('menu.coverage.full')
+      %option{value: 0.8}= I18n.t('menu.coverage.two_meals')
+      %option{value: 0.6}= I18n.t('menu.coverage.one_meal_plus')
+      %option{value: 0.4}= I18n.t('menu.coverage.one_meal')
+      %option{value: 0.2}= I18n.t('menu.coverage.nosh')
+      %option{value: 0}= I18n.t('menu.coverage.empty')
     .pull-right
       .toolbar
         .btn-toolbar
           .btn-group.btn-group-xs
-            %input.form-control.quick-add{type: 'text', placeholder: 'Quick add', autocomplete: 'off'}
+            %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
           .btn-group.btn-group-xs
-            %button.btn.btn-default.copy{type: 'button'}
-              copy
-            %button.btn.btn-default.paste{type: 'button'}
-              paste
+            %button.btn.btn-default.copy{type: 'button'}= I18n.t('helpers.links.copy')
+            %button.btn.btn-default.paste{type: 'button'}= I18n.t('helpers.links.paste')
             %button.btn.btn-default.remove{type: 'button', title: I18n.t('helpers.links.destroy')}
               %i.glyphicon.glyphicon-remove
 

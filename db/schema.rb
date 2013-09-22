@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20130611092641) do
   create_table "menu_days", force: true do |t|
     t.integer "menu_id"
     t.integer "num"
-    t.decimal "rate",    precision: 10, scale: 0, default: 1, null: false
+    t.decimal "rate",    precision: 3, scale: 2, default: 1.0, null: false
   end
 
   create_table "menu_dish_categories", force: true do |t|
@@ -78,10 +78,11 @@ ActiveRecord::Schema.define(version: 20130611092641) do
 
   create_table "menu_menus", force: true do |t|
     t.integer  "user_id"
-    t.string   "name",                                 default: "",    null: false
-    t.integer  "users_count",                          default: 1,     null: false
-    t.decimal  "days_count",  precision: 10, scale: 0, default: 0,     null: false
-    t.boolean  "is_public",                            default: false
+    t.string   "name",                                default: "",    null: false
+    t.integer  "users_count",                         default: 1,     null: false
+    t.integer  "days_count",                          default: 0,     null: false
+    t.decimal  "coverage",    precision: 5, scale: 2, default: 0.0,   null: false
+    t.boolean  "is_public",                           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

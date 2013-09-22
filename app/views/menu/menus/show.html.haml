@@ -60,8 +60,8 @@
       %div
         %b= t('menu.persons') + ':'
         #{@menu.users_count},
-        %b= t('menu.days') + ':'
-        #{round_precision(@menu.days_count)}
+        %b= t('menu.days_coverage') + ':'
+        #{round_precision(@menu.coverage)} / #{@days.count}
 %h4= t 'menu.products'
 - @menu.products.each do |product_id, product|
   %div

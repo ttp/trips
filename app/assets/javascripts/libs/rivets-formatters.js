@@ -1,6 +1,6 @@
 rivets.formatters.number = {
     read: function(value) {
-        return value;
+        return +value;
     },
     publish: function(value) {
         return (+value + "") == value ? +value : value;

@@ -4,7 +4,8 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
       t.references :user
       t.string :name, :null => false, :default => ''
       t.integer :users_count, :null => false, :default => 1
-      t.decimal :days_count, :null => false, :default => 0
+      t.integer :days_count, :null => false, :default => 0
+      t.decimal :coverage, :null => false, :default => 0, precision: 5, scale: 2
       t.boolean :is_public, :default => false
 
       t.timestamps
@@ -13,7 +14,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
     create_table :menu_days do |t|
       t.references :menu
       t.integer :num
-      t.decimal :rate, :null => false, :default => 1
+      t.decimal :rate, :null => false, :default => 1, precision: 3, scale: 2
     end
 
     create_table :menu_day_entities do |t|

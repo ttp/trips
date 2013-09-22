@@ -27,6 +27,7 @@ class Menu::MenusController < ApplicationController
     @menu.name = data['menu']['name']
     @menu.users_count = data['menu']['users_count']
     @menu.days_count = data['menu']['days_count']
+    @menu.coverage = data['menu']['coverage']
     @menu.is_public = true
     @menu.save
 
@@ -51,6 +52,7 @@ class Menu::MenusController < ApplicationController
     @menu.name = data['menu']['name']
     @menu.users_count = data['menu']['users_count']
     @menu.days_count = data['menu']['days_count']
+    @menu.coverage = data['menu']['coverage']
     @menu.save
 
     # update/remove days

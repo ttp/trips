@@ -56,7 +56,7 @@ _.namespace "App.views"
     valid: (view, attr) ->
       view.$el.find("> .header input[name=#{attr}]").removeClass('error').attr('title', '')
     invalid: (view, attr, error) ->
-      view.$el.find("> .header input[name=#{attr}]").addClass('error').attr('title', error)
+      view.$el.find("> .header input[name=#{attr}]").addClass('error').attr('title', I18n.t(error))
 
     getTypeaheadConf: (entity_type = 0) ->
       conf = []

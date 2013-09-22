@@ -64,6 +64,14 @@ $hover_color: #ffa;
       }
     }
 
+    .bootstrap-select {
+      margin-bottom: 0;
+      width: 230px;
+      .dropdown-toggle {
+        padding: 1px 3px;
+      }
+    }
+
     .panel-heading {
       line-height: 25px;
       padding: 5px 15px;
