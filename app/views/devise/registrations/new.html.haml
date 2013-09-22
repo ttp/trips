@@ -1,4 +1,4 @@
-%h2= t 'helpers.links.sign_up'
+%h3= title t('helpers.links.sign_up')
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
   = devise_error_messages!
   = f.error_notification

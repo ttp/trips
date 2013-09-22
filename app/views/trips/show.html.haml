@@ -4,7 +4,7 @@
   .row
     .col-md-8
       %h3
-        = @track.name
+        = title @track.name
         -if user_signed_in? && @trip.user_id == current_user.id
           %a.glyphicon.glyphicon-edit.edit{href: edit_account_trip_path(@trip), title: t("helpers.links.edit")}
 

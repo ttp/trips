@@ -1,4 +1,4 @@
-%h3= t 'account.profile'
+%h3= title t('account.profile')
 
 = simple_form_for @profile, :url => user_profile_path, :html => { :class => 'form-horizontal col-md-9' } do |f|
   = f.input :about, input_html: {:rows => 5}, :label => t('user_profile.about_me')

@@ -1,4 +1,5 @@
 en:
+  site_title: Pohody
   devise:
     registrations:
       user:
@@ -176,6 +177,9 @@ en:
     Nepal: Nepal
   menu:
     menu: Menu Builder
+    add: New menu
+    new: New menu
+    edit: Edit menu
     day: Day
     days: Days
     days_coverage: Coverage/days
@@ -197,7 +201,6 @@ en:
     ration: Ration
     g: g
     kg: kg
-    new_menu: New menu
     name: Name
     was_created: Menu created
     was_updated: Menu updated
