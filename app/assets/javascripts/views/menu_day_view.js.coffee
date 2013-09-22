@@ -77,8 +77,9 @@ _.namespace "App.views"
 
       @initTypeahead(@$el.find('.panel-heading input.quick-add'))
 
-      rivets.bind @$el.find("select.coverage"),
-        day: @model
+      coverage = @$el.find("select.coverage")
+      rivets.bind coverage, day: @model
+      coverage.trigger('change')
 
     initTypeahead: (input) ->
       conf = App.views.MenuEntityView.prototype.getTypeaheadConf.call this

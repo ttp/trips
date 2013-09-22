@@ -14,7 +14,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
     create_table :menu_days do |t|
       t.references :menu
       t.integer :num
-      t.decimal :rate, :null => false, :default => 1, precision: 3, scale: 2
+      t.decimal :coverage, :null => false, :default => 0, precision: 3, scale: 2
     end
 
     create_table :menu_day_entities do |t|

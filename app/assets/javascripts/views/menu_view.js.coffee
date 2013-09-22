@@ -69,7 +69,7 @@ _.namespace "App.views"
 
     updateDaysCount: ->
       sum = @days.reduce((memo, day) ->
-        memo + day.get("rate")
+        memo + day.get("coverage")
       , 0)
       @menu.set "coverage", sum
       @menu.set "days_count", @days.length

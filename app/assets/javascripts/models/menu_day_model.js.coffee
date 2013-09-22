@@ -2,7 +2,7 @@ _.namespace "App.models"
 (->
   App.models.MenuDayModel = Backbone.Model.extend(
     defaults:
-      rate: 1
+      coverage: 1
 
     validation:
       rate: [
@@ -17,7 +17,7 @@ _.namespace "App.models"
       unless @id
         @set "id", @cid
         @set "new", 1
-      @set "rate", parseFloat(@get("rate"))
+      @set "rate", parseFloat(@get("coverage"))
 
     summary: ->
       entities = App.collections.MenuDayEntityCollection.where(day_id: @id, entity_type: 3)

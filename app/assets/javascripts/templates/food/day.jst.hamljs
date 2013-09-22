@@ -3,7 +3,7 @@
     -#%span= I18n.t('menu.day_covering') + ':'
     -#%input{name: 'rate', type: 'text', class: 'form-control rate transparent', value: day.get('rate'),\
     -#       data-value: 'day.rate | number'}
-    %select.coverage{data-value: 'day.rate | number'}
+    %select.coverage{data-value: 'day.coverage | number'}
       %option{value: 1}= I18n.t('menu.coverage.full')
       %option{value: 0.8}= I18n.t('menu.coverage.two_meals')
       %option{value: 0.6}= I18n.t('menu.coverage.one_meal_plus')
