@@ -33,3 +33,4 @@ gem 'RedCloth'
 gem 'gravatar_image_tag'
 gem 'globalize3', git: 'git://github.com/svenfuchs/globalize3.git', branch: 'rails4'
 gem "selenium-webdriver", "~> 2.35.1", :group => :test
+gem 'font-awesome-sass-rails'
