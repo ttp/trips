@@ -1,3 +1,7 @@
+- content_for :description, t('menu.meta_description')
+- content_for :keywords, t('menu.meta_keywords')
+%p.text-danger= t('menu.about_warning_html')
+
 %h3= title t('menu.menu')
 
 = link_to t('menu.add', :default => t("helpers.links.new")), new_menu_menu_path, :class => 'btn btn-primary'

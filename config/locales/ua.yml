@@ -181,6 +181,13 @@ ua:
     Nepal: Непал
 
   menu:
+    about_warning_html: |
+      Конструктор меню це онлайн версія <a href="http://softpole.narod.ru/index.html">Outdoor Food Ration calculator</a>.
+      Поточна база продуктів/страв взята з <strong>Outdoor Food Ration calculator</strong> і буде модифікована пізніше.
+      Конструктор меню працює в чорновому режимі і всі меню як і база продуктів/страв час від часу очищаються до фінальної версії.
+    meta_description: Конструктор меню в похід.
+    meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
+
     menu: Конструктор Меню
     add: Додати меню
     new: Нове меню
