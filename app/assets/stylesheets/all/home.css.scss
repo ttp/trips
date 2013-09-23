@@ -1,0 +1,43 @@
+
+
+#trips {
+  background-color: #fff;
+  border-radius: 3px;
+  margin-top: 10px;
+
+  .trips-header {
+    padding-left: 15px;
+    padding-right: 10px;
+  }
+
+  .trips-body {
+    padding: 0 15px;
+    .trip {
+      margin-bottom: 5px;
+      font-size: 12px;
+  
+      .name {
+        font-weight: bold;
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.grid #trips {
+  display: none;
+}
+
+#filters {
+  padding-left: 10px;
+  label {
+    display: inline;
+    margin-right: 8px;
+  }
+  input {
+    margin: 0 5px 0 0;
+  }
+  .count {
+    color: grey;
+  }
+}

@@ -2,8 +2,9 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "Pohody"
+    %title= (content_for?(:title) ? yield(:title) : "") + t("site_title")
     %meta{:content => content_for?(:description) ? yield(:description) : t('site.meta_description'), :name => "description"}
+    %meta{:content => content_for?(:keywords) ? yield(:keywords) : t('site.meta_keywords'), :name => "keywords"}
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -11,15 +12,14 @@
     %script{:type => "text/javascript"}
       I18n.defaultLocale = "#{I18n.locale}";
   %body{:class => "#{controller_name} #{action_name}"}
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
-          = render 'layouts/navigation'
+    %nav.navbar.navbar-default.navbar-fixed-top.hidden-print{role: 'navigation'}
+      .container
+        = render 'layouts/navigation'
     #main{:role => "main"}
       .container
         .content
           .row
-            .span12
+            .col-md-12
               = render 'layouts/messages'
               = yield
           %footer

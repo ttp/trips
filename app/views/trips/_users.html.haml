@@ -6,9 +6,9 @@
       %a.username{href: user_path(user.id)}= user.name
       - if user_signed_in?
         - if @trip.user_id == current_user.id
-          %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
+          %a.glyphicon.glyphicon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
         - elsif user.id == current_user.id
-          %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
+          %a.glyphicon.glyphicon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
   
   %p.no-users{:class => ('x-hidden' if @joined_users.size > 0)}= t('trip.no_users')
 
@@ -28,11 +28,11 @@
         %a.username{href: user_path(user.id)}= user.name
         - if user_signed_in?
           - if @trip.user_id == current_user.id
-            %a.icon-ok.approve{href: approve_trip_request_path(@trip.id, user.id), title: t("trip.approve")}
+            %a.glyphicon.glyphicon-ok.approve{href: approve_trip_request_path(@trip.id, user.id), title: t("trip.approve")}
           - if @trip.user_id == current_user.id
-            %a.icon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
+            %a.glyphicon.glyphicon-remove.decline{href: decline_trip_request_path(@trip.id, user.id), title: t("trip.decline")}
           - elsif user.id == current_user.id
-            %a.icon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
+            %a.glyphicon.glyphicon-remove.leave{href: leave_trip_path(@trip.id), title: t("trip.cancel_request")}
 
 - if user_signed_in?
   - if @trip.start_date > Time.now.to_date && @trip.user_can_join?(current_user.id)
@@ -45,15 +45,17 @@
     = t('trip.to_join')
 
 
-#decline_reason.modal.hide.fade
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3
-      = t("trip.decline_reason")
-      %span.username
-  .modal-body
-    %p
-      %textarea.reason.span{rows: 5}
-  .modal-footer
-    %a.btn{:href => "#", "data-dismiss" => "modal", "aria-hidden" => "true"}= t('helpers.links.cancel')
-    %a.btn.btn-primary{:href => "#"}= t("trip.decline")
+#decline_reason.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", "aria-hidden" => "true"} &times;
+        %h4.modal-title
+          = t("trip.decline_reason")
+          %span.username
+      .modal-body
+        %p
+          %textarea.form-control.reason.span{rows: 5}
+      .modal-footer
+        %button.btn.btn-default{:type => 'button', "data-dismiss" => "modal"}= t('helpers.links.cancel')
+        %button.btn.btn-primary{:type => 'button'}= t("trip.decline")

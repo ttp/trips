@@ -1,0 +1,169 @@
+$hover_color: #ffa;
+
+@mixin invisible-toolbar {
+  .toolbar {
+    opacity: 0;
+
+    &.focus {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    .toolbar {
+      opacity: 1;
+    }
+  }
+}
+
+#menu {
+  .days_count {
+    padding-top: 7px;
+  }
+  input.transparent {
+    border-color: #f7f7f7;
+    background-color: #f7f7f7;
+    box-shadow: none;
+    margin: 0 0 0 5px;
+    padding: 0;
+    text-align: center;
+    width: 50px;
+    height: 18px;
+    display: inline-block;
+
+    &:focus, &:hover {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+      transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    }
+  }
+  input.error {
+    border-color: #f00;
+  }
+
+  button.add-day {
+    margin-right: 5px;
+  }
+  .days {
+    .tab-content {
+      min-height: 100px;
+    }
+  }
+  .day {
+    min-height: 30px;
+    margin: 5px 0;
+
+    .print-block {
+      display: none;
+    }
+    .twitter-typeahead input {
+      font-size: 12px;
+      height: 22px;
+      padding: 1px 5px;
+      display: inline-block;
+      line-height: 1.5;
+      &.tt-query {
+        background-color: #fff;
+      }
+    }
+
+    .bootstrap-select {
+      margin-bottom: 0;
+      width: 230px;
+      .dropdown-toggle {
+        padding: 1px 3px;
+      }
+    }
+
+    .panel-heading {
+      line-height: 25px;
+      padding: 5px 15px;
+      @include invisible-toolbar;
+    }
+
+    &.ui-state-active .panel-body {
+      background-color: $hover_color;
+    }
+    .panel-body {
+      > .entity {
+        border: 1px solid #ebebeb;
+      }
+      .entity {
+        background-color: #fff;
+        border-radius: 4px;
+        margin: 1px;
+
+        &.ui-state-active {
+          background-color: $hover_color;
+        }
+
+        > .header {
+          @include invisible-toolbar;
+        }
+        .entity {
+          margin-left: 20px;
+        }
+      }
+      .entity-1, .entity-2 {
+        padding: 0px 5px 3px 3px;
+        min-height: 30px;
+        > .header .entity-name {
+          font-weight: bold;
+        }
+      }
+      .entity-1 {
+        border: 1px solid #ddd;
+        min-height: 40px;
+        margin: 2px 1px;
+      }
+      .entity-3 {
+        background-color: #f7f7f7;
+        padding: 1px;
+        border: 1px solid #ebebeb;
+      }
+    }
+
+    .panel-footer {
+      table {
+        margin-bottom: 0;
+      }
+    }
+    .toolbar {
+      display: inline-block;
+    }
+  }
+}
+
+.sidebar {
+  &.affix {
+    top: 60px;
+  }
+  .tab-pane {
+    max-height: 430px;
+
+    .product, .dish, .meal {
+      cursor: move;
+    }
+  }
+}
+
+.tree {
+  overflow: auto;
+  position: relative;
+
+  li.category {
+    list-style: none;
+    .category-name {
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    ul.items {
+      display: none;
+    }
+
+    &.expanded ul.items {
+      display: block;
+    }
+  }
+}

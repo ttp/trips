@@ -1,11 +1,11 @@
-.row-fluid
-  .span8
+.row
+  .col-md-8
     %h3= t('home.title')
 
-    .row-fluid
-      = image_tag "landscape.jpg", {class: "span5"}
+    .row
+      = image_tag "landscape.jpg", {class: "col-md-5"}
 
-      .span7
+      .col-md-7
         %p= t('home.description')
 
         %ul
@@ -16,7 +16,7 @@
         %p
           %a{href: '/about'}= t('home.more')
 
-  #trips.span4
+  #trips.col-md-4
     %h4.trips-header= t('home.upcoming_trips')
     .trips-body
       - @upcoming.each do |trip|

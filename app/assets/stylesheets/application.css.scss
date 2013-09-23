@@ -9,8 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require_tree ./libs
+ *= require_tree ./all
 */
+@import "bootstrap/bootstrap";
+
 body {
   padding-top: 60px;
 }
@@ -74,4 +77,18 @@ table {
 
 .x-hidden {
   display: none;
+}
+
+.twitter-typeahead {
+  .tt-hint {
+    @extend .form-control;
+    color: #aaa;
+  }
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+a.glyphicon {
+  text-decoration: none;
 }
