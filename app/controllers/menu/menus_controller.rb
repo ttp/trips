@@ -128,8 +128,8 @@ private
       if day_data.has_key?('new')
         day = Menu::Day.new
         day.menu = @menu
-      elsif @days.has_key?(day_id)
-        day = @days[day_id]
+      elsif @days.has_key?(day_id.to_i)
+        day = @days[day_id.to_i]
       end
 
       unless day.nil?

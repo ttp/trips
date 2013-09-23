@@ -153,10 +153,10 @@ _.namespace "App.views"
       return if obj.data.entity.entity_type < @model.get('entity_type')
 
       if obj.data.entity.entity_type == @model.get('entity_type')
-        @pasteEntities obj.data.entities, @model.id
+        @pasteEntities obj.data.entities
       else
-        entity_view = @pasteEntity(obj.data.entity, @model.id)
-        entity_view.pasteEntities(obj.data.entities, entity_view.model.id)
+        entity_view = @pasteEntity(obj.data.entity)
+        entity_view.pasteEntities(obj.data.entities)
       false
   )
 )()
