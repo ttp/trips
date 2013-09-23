@@ -23,7 +23,7 @@
             %tr
               %th #
               %th= t('menu.calories')
-              %th= t('menu.weight')
+              %th= t('menu.weight') + '*'
               %th= t('menu.proteins')
               %th= t('menu.fats')
               %th= t('menu.carbohydrates')
@@ -31,11 +31,11 @@
             %tr
               %th= t('menu.person_per_day')
 
-              %td= (@total[:calories] / @menu.days_count).to_i
+              %td= (@total[:calories] / @menu.coverage).to_i
               %td= weight(@total[:weight] / @days.count)
-              %td= (@total[:proteins] / @menu.days_count).to_i
-              %td= (@total[:fats] / @menu.days_count).to_i
-              %td= (@total[:carbohydrates] / @menu.days_count).to_i
+              %td= (@total[:proteins] / @menu.coverage).to_i
+              %td= (@total[:fats] / @menu.coverage).to_i
+              %td= (@total[:carbohydrates] / @menu.coverage).to_i
             %tr
               %td= t('menu.recommended')
 
