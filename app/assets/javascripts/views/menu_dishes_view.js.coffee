@@ -46,7 +46,7 @@ _.namespace "App.views"
         containment: "#main"
         scroll: false
 
-      @$el.find("i.icon-info-sign").tooltip
+      @$el.find("i.glyphicon-info-sign").tooltip
         animation: false
         html: true
         placement: "bottom"
