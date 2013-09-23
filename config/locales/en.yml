@@ -1,4 +1,5 @@
 en:
+  site_title: Pohody
   devise:
     registrations:
       user:
@@ -7,6 +8,8 @@ en:
     links:
       add: "Add"
       edit: "Edit"
+      copy: copy
+      paste: paste
       destroy: "Remove"
       confirm: "Are you sure?"
       save: "Save"
@@ -30,6 +33,8 @@ en:
     scheduled: 'Scheduled'
     archive: 'Archive'
     manage: 'Manage'
+    tools: 'Інструменти'
+    menu_builder: 'Menu builder'
 
   site:
     meta_keywords: 'trips, mountain, tracking, hiking'
@@ -116,6 +121,9 @@ en:
     join_request_owner_email:
       subject: "New join request"
 
+  food:
+    title: 'Food calculator'
+
   account:
     profile: 'Tourist profile'
     edit: 'Edit account'
@@ -167,3 +175,47 @@ en:
     Turkey: Turkey
     Romania: Romania
     Nepal: Nepal
+  menu:
+    menu: Menu Builder
+    add: New menu
+    new: New menu
+    edit: Edit menu
+    day: Day
+    days: Days
+    days_coverage: Coverage/days
+    add_day: Add day
+    meals: Meals
+    dishes: Dishes
+    products: Products
+    recommended: Recommended
+    weight: Weight
+    calories: Calories
+    proteins: Proteins
+    fats: Fats
+    carbohydrates: Carbohydrates
+    person_per_day: For Person per day
+    person_all_days: For Person all days
+    group_all_days: For Group all days
+    persons: Persons
+    summary: Summary
+    ration: Ration
+    g: g
+    kg: kg
+    name: Name
+    was_created: Menu created
+    was_updated: Menu updated
+    examples: Menu examples
+    quick_add: Quick add
+    coverage:
+      full: Full day
+      two_meals: 2 meals 80%
+      one_meal_plus: 1 meal + nosh 60%
+      one_meal: 1 meal 40%
+      nosh: Nosh 20%
+      empty: Empty
+    validation:
+      fix_errors: Please, fix errors
+      required: This field can't be empty
+      enter_name: Enter menu name
+      enter_weight: Enter product weight
+      incorrect: Incorrect value

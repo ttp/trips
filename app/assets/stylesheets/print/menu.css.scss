@@ -1,0 +1,29 @@
+#menu {
+  h3 {
+    margin-top: 0 !important;
+  }
+  .day {
+    .panel-body {
+      .entity-3 {
+        border: none;
+        background-color: transparent;
+      }
+    }
+  }
+  .tab-pane {
+    display: block !important;
+  }
+  .summary, .products {
+    page-break-before: always;
+  }
+}
+
+.body {
+  padding-top: 0 !important;
+  .navbar {
+    display: none !important;
+  }
+  .content {
+    padding: 0 !important;
+  }
+}

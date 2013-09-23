@@ -1,6 +1,6 @@
 %h5= t('comments.title')
 .comments
-  - if @comments.size == 0
+  - if @comments.count == 0
     %p.no-comments= t('comments.no_comments')
   - @comments.each do |comment|
     = render :partial => 'comment', :locals => {:comment => comment, :trip => @trip}
@@ -8,7 +8,7 @@
 - if user_signed_in?
   %a.add-comment{href: "#"}= t('comments.add')
   = form_tag("/trips/#{@trip.id}/comments", :method => "post", :class => "add-comment") do
-    = text_area_tag(:comment, "", :class => "span9", :rows => "8")
+    = text_area_tag(:comment, "", :class => "col-md-9", :rows => "8")
     %p
       %button.btn.btn-primary= t('comments.send')
       %button.btn.cancel-add-comment= t('helpers.links.cancel')

@@ -1,7 +1,7 @@
 
 # GIVEN
 Given /^I am on calendar page$/ do
-  visit "/"
+  visit "/calendar"
 end
 
 Given /^I have "(\d+)" trips? in "(\w+)"$/ do |num, region_name|

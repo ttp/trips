@@ -1,6 +1,6 @@
 = javascript_include_tag "trips"
 
-= simple_form_for [:account, @trip], :html => { :class => 'form-horizontal span9' } do |f|
+= simple_form_for [:account, @trip], :html => { :class => 'form-horizontal col-md-9' } do |f|
   = hidden_field_tag :back_url, params[:back_url] || request.referer
 
   = f.input :track_id, :collection => grouped_by_region(Track.find_all_by_user_id(current_user.id), Region.sorted),

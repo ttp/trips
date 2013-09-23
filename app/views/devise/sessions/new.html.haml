@@ -1,4 +1,4 @@
-%h2= t('helpers.links.sign_in')
+%h3= title t('helpers.links.sign_in')
 = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
   = f.input :email, :autofocus => true
   = f.input :password, :label => t('user.password')

@@ -1,4 +1,5 @@
 ua:
+  site_title: Походи
   devise:
     registrations:
       user:
@@ -7,6 +8,8 @@ ua:
     links:
       add: "Додати"
       edit: "Редагувати"
+      copy: копіювати
+      paste: вставити
       destroy: "Видалити"
       confirm: "Ви впевненені?"
       save: "Зберегти"
@@ -30,10 +33,12 @@ ua:
     scheduled: 'Заплановані'
     archive: 'Минулі'
     manage: 'Керування'
+    tools: 'Інструменти'
+    menu_builder: 'Конструктор Меню'
 
   site:
-    meta_keywords: 'походи, гори, туризм'
-    meta_description: 'гірські походи, керування походами, організація походу, пошук учасників для походу, пошук походу, календар походів'
+    meta_keywords: 'походи, гори, туризм, гірські походи, керування походами, організація походу, пошук учасників для походу, пошук походу, календар походів'
+    meta_description: 'Сайт пошуку та керування походами'
 
   home:
     title: 'Сайт пошуку та керування походами'
@@ -120,6 +125,9 @@ ua:
     join_request_owner_email:
       subject: "Нова заявка на участь у поході"
 
+  food:
+    title: 'Розкладка їжі'
+
   account:
     profile: 'Туристичний профайл'
     edit: 'Редагувати аккаунт'
@@ -171,3 +179,55 @@ ua:
     Turkey: Турція
     Romania: Румунія
     Nepal: Непал
+
+  menu:
+    about_warning_html: |
+      Конструктор меню це онлайн версія <a href="http://softpole.narod.ru/index.html">Outdoor Food Ration calculator</a>.
+      Поточна база продуктів/страв взята з <strong>Outdoor Food Ration calculator</strong> і буде модифікована пізніше.
+      Конструктор меню працює в чорновому режимі і всі меню як і база продуктів/страв час від часу очищаються до фінальної версії.
+    meta_description: Конструктор меню в похід.
+    meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
+
+    menu: Конструктор Меню
+    add: Додати меню
+    new: Нове меню
+    edit: Редагувати меню
+    day: День
+    days: Днів
+    days_coverage: Покриття/днів
+    add_day: Додати день
+    meals: Трапези
+    dishes: Страви
+    products: Продукти
+    recommended: Рекомендовано
+    weight: Вага
+    calories: Калорії
+    proteins: Білки
+    fats: Жири
+    carbohydrates: Вуглеводи
+    person_per_day: На людину в день
+    person_all_days: На людину за всі дні
+    group_all_days: На групу за всі дні
+    persons: Учасників
+    summary: Загальний підсумок
+    ration: Раціон
+    g: г
+    kg: кг
+    name: Назва
+    was_created: Меню створено
+    was_updated: Меню оновлено
+    examples: Приклади меню
+    quick_add: Швидке додавання
+    coverage:
+      full: Повний день
+      two_meals: 2 трапези 80%
+      one_meal_plus: 1 трапеза + перекус 60%
+      one_meal: 1 трапеза 40%
+      nosh: Перекус 20%
+      empty: Порожній
+    validation:
+      fix_errors: Будь-ласка, виправте помилки
+      required: Це поле не може бути пустим
+      enter_name: Введіть назву меню
+      enter_weight: Введіть кількість продукту у грамах
+      incorrect: Некоректне значення

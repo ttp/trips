@@ -11,7 +11,7 @@ module TripsHelper
 
   def dates_range_text(start_date, end_date)
     start_date = Date.parse(start_date) if start_date.is_a? String
-    end_date = Date.parse(end_date) if start_date.is_a? String
+    end_date = Date.parse(end_date) if end_date.is_a? String
 
     start_date_text = date_text(start_date)
     start_date_items = date_text(start_date).split(' ')

@@ -1,0 +1,53 @@
+= javascript_include_tag "init/menu_init"
+
+%script{type: "application/json", id: "menu_item"}
+  = @menu.to_json.html_safe
+%script{type: "application/json", id: "menu_days"}
+  = @menu.menu_days.to_json.html_safe
+%script{type: "application/json", id: "menu_entities"}
+  = @menu.entities.to_json.html_safe
+
+.row
+  .col-md-8
+    #menu.menu
+      = form_for @menu do
+        = hidden_field_tag :back_url, params[:back_url] || request.referer
+        %h3
+          %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
+            :placeholder => t('menu.name'), "data-value" => 'menu.name'}
+        .form-horizontal
+          %label.control-label.col-lg-2{for: 'users_count'}= t('menu.persons') + ':'
+          .col-lg-2
+            %input.form-control.users_count.input-mini{:name => 'users_count', "data-value" => 'menu.users_count', :value => @menu.users_count}
+
+          %label.control-label.col-lg-3= t('menu.days_coverage') + ':'
+          .col-lg-2
+            .days_count
+              %span{"data-text" => 'menu.coverage | number'}
+              %span /
+              %span{"data-text" => 'menu.days_count | number'}
+        .clearfix
+        .days
+          %ul.nav.nav-tabs
+            %li
+              %button.btn.add-day{type: 'button'}
+                %i.glyphicon.glyphicon-plus
+                = t('menu.day') + ':'
+          .tab-content
+        %textarea.hide{name: 'data'}
+        .form-actions
+          %button.btn.btn-primary.save= t('helpers.links.save')
+          = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
+  .col-md-4
+    %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => '#meal_list'}= t('menu.meals')
+        %li
+          %a{"data-toggle" => "tab", :href => '#dish_list'}= t('menu.dishes')
+        %li
+          %a{"data-toggle" => "tab", :href => '#product_list'}= t('menu.products')
+      .tab-content
+        #meal_list.tab-pane.active
+        #dish_list.tab-pane.tree
+        #product_list.tab-pane.tree
