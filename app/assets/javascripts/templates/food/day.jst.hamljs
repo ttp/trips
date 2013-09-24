@@ -16,9 +16,9 @@
           .btn-group.btn-group-xs
             %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
           .btn-group.btn-group-xs
-            %button.btn.btn-default.move-left{type: 'button', title: I18n.t('helpers.links.move_left')}
+            %button.btn.btn-default.move-left{type: 'button', title: I18n.t('menu.move')}
               %i.glyphicon.glyphicon-arrow-left
-            %button.btn.btn-default.move-right{type: 'button', title: I18n.t('helpers.links.move_right')}
+            %button.btn.btn-default.move-right{type: 'button', title: I18n.t('menu.move')}
               %i.glyphicon.glyphicon-arrow-right
           .btn-group.btn-group-xs
             %button.btn.btn-default.icon-copy.copy{type: 'button', title: I18n.t('helpers.links.copy')}

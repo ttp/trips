@@ -12,6 +12,9 @@ _.namespace "App.views"
     tagName: 'div'
     className: 'day tab-pane'
     events:
+      "click button.move-left": "moveLeft"
+      "click button.move-right": "moveRight"
+
       "click button.copy": "copyDay"
       "click button.paste": "pasteToDay"
       "click button.remove": "removeDay"
@@ -20,17 +23,18 @@ _.namespace "App.views"
 
     initialize: (options) ->
       @model = options.model
+      @days = App.collections.MenuDayCollection
       @entities = App.collections.MenuDayEntityCollection
       @render()
       @bindEvents()
 
 
     createTabEl: ->
-      tabEl = $("<li class='.day-tab-#{@model.id}'></li>")
-      $("<a>#{@model.get('num')}</a>").attr('href', "##{@id}").appendTo(tabEl).click (e) ->
+      @tabEl = $("<li class='.day-tab-#{@model.id}'></li>")
+      $("<a>#{@model.get('num')}</a>").attr('href', "##{@id}").appendTo(@tabEl).click (e) ->
         e.preventDefault()
         $(this).tab('show')
-      tabEl
+      @tabEl
 
     getDayTabEl: (day) ->
       @$el.find(".day-tab-#{day.id}")
@@ -100,8 +104,8 @@ _.namespace "App.views"
     removeDay: (e) ->
       @tabEl.fadeOut 250, $.proxy(->
         num = @model.get("num")
-        App.collections.MenuDayCollection.remove @model
-        App.collections.MenuDayCollection.each (day) ->
+        @days.remove @model
+        @days.each (day) ->
           day.set "num", day.get("num") - 1  if day.get("num") > num
 
         @$el.remove()
@@ -147,5 +151,21 @@ _.namespace "App.views"
         day_id: @model.id
         weight: entity.weight
       @addEntity(entity_model)
+
+    moveLeft: (event) ->
+      return if @model.get('num') is 1
+      @tabEl.prev().insertAfter @tabEl
+      @days.find((day) ->
+        day.get('num') is @model.get('num') - 1
+      , this).num(+1)
+      @model.num(-1)
+
+    moveRight: (event) ->
+      return if @model.get('num') is @days.length
+      @tabEl.insertAfter @tabEl.next()
+      @days.find((day) ->
+        day.get('num') is @model.get('num') + 1
+      , this).num(-1)
+      @model.num(+1)
   )
 )()

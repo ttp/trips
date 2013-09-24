@@ -8,6 +8,9 @@ _.namespace "App.collections"
       @entities = App.collections.MenuDayEntityCollection
       @on "remove", @removeEntities, this
 
+    comparator: (day) ->
+      day.get 'num'
+
     removeEntities: (day) ->
       @entities.remove @entities.where(day_id: day.id)
   ))

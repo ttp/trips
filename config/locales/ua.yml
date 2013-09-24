@@ -196,6 +196,7 @@ ua:
     days: Днів
     days_coverage: Покриття/днів
     add_day: Додати день
+    move: Змістити
     meals: Трапези
     dishes: Страви
     products: Продукти
