@@ -27,6 +27,9 @@
     getName: ->
       @getEntityModel().get "name"
 
+    infoText: ->
+      @getEntityModel().infoText()
+
     getEntityModel: ->
       @getEntityCollection().get @get("entity_id")
 

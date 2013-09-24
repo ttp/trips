@@ -22,13 +22,16 @@ _.namespace "App.views"
         productsRoot = $("<ul></ul>").addClass("items")
         _.each products, ((product) ->
           productLiEl = $("<li></li>")
-          productEl = $("<span></span>").addClass("product")
-          productEl.attr
+
+          productEl = $("<span></span>").addClass("product").text(product.get("name")).attr
             "data-id": product.id
             "data-type": "3"
+          productEl.appendTo productLiEl
 
-          productEl.text product.get("name")
-          productLiEl.append productEl
+          $("<i class=\"glyphicon glyphicon-info-sign\"></i>")
+            .attr("title", product.infoText().join("<br/>"))
+            .appendTo productLiEl
+
           productsRoot.append productLiEl
         ), this
         liEl.append productsRoot
@@ -42,6 +45,12 @@ _.namespace "App.views"
         appendTo: "body"
         containment: "#main"
         scroll: false
+
+      @$el.find("i.glyphicon-info-sign").tooltip
+        animation: false
+        html: true
+        placement: "bottom"
+        container: "body"
 
 
     toggleProducts: (e) ->

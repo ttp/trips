@@ -38,6 +38,13 @@ _.namespace "App.views"
         @initTypeahead(@$el.find('> .header input.quick-add'))
       @options.renderTo.append @$el
 
+      if @model.isProduct()
+        @$el.find("button.info").tooltip
+          animation: false
+          html: true
+          placement: "bottom"
+          container: "body"
+
     renderEntities: (entities) ->
       _.each(entities, ((entity) ->
         entity_view = @renderEntity entity.entity
@@ -51,7 +58,7 @@ _.namespace "App.views"
 
     bindEvents: ->
       if @model.isProduct()
-        rivets.bind @$el.find('> .header'), entity: @model
+        rivets.bind @$el.find('> .header input.weight'), entity: @model
         Backbone.Validation.bind this,
           valid: @valid
           invalid: @invalid
