@@ -129,6 +129,7 @@ _.namespace "App.views"
       App.views.MenuEntityView.prototype.addNewEntity.call this, entity
 
     copyDay: ->
+      @entities.sort()
       clipboard.setObj 'day',
         day: @model.toJSON()
         entities: @entities.tree(@model.id, 0, true)

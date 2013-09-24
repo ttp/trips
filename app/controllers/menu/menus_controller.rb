@@ -116,6 +116,7 @@ private
 
       unless entity.nil?
         entity.weight = entity_data['weight']
+        entity.sort_order = entity_data['sort_order']
         entity.save if entity.changed? || entity.new_record?
         save_entities(entities, entity_data['id'].to_s, entity.id)
       end

@@ -24,6 +24,7 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
       t.integer :entity_type, :null => false, :limit => 1
       t.integer :entity_id, :null => false
       t.integer :weight, :null => false, :default => 0
+      t.integer :sort_order, :null => false, :default => 0
     end
     add_index :menu_day_entities, :day_id
 
