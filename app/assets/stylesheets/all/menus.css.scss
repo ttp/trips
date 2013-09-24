@@ -160,6 +160,10 @@ $hover_color: #ffa;
     .glyphicon-folder, .category-name {
       cursor: pointer;
     }
+    .glyphicon-info-sign {
+      margin-left: 5px;
+      cursor: default;
+    }
 
     ul.items {
       display: none;
