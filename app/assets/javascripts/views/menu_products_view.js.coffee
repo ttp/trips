@@ -3,6 +3,7 @@ _.namespace "App.views"
   App.views.MenuProductsView = Backbone.View.extend(
     events:
       "click .category-name": "toggleProducts"
+      "click i.glyphicon-folder": "toggleProducts"
 
     initialize: (options) ->
       @categories = options.categories
@@ -14,7 +15,7 @@ _.namespace "App.views"
       @categories.each $.proxy((category) ->
         products = @products.where(product_category_id: category.id)
         liEl = $("<li></li>").addClass("category")
-        $("<i class=\"glyphicon glyphicon-folder-close\"></i>").appendTo liEl
+        $("<i class=\"glyphicon glyphicon-folder glyphicon-folder-close\"></i>").appendTo liEl
         categoryName = $("<span></span>")
         categoryName.text(category.get("name")).addClass("category-name").data "pid", category.id
         liEl.append categoryName
@@ -44,6 +45,6 @@ _.namespace "App.views"
 
 
     toggleProducts: (e) ->
-      $(e.currentTarget).closest("li").toggleClass("expanded").find("i").toggleClass("glyphicon glyphicon-folder-closed").toggleClass "glyphicon glyphicon-folder-open"
+      $(e.currentTarget).closest("li").toggleClass("expanded").find("i.glyphicon-folder").toggleClass("glyphicon-folder-close").toggleClass "glyphicon-folder-open"
   )
 )()
