@@ -1,7 +1,15 @@
+require 'securerandom'
+
 class Menu::Menu < ActiveRecord::Base
   attr_accessible :name, :users_count, :is_public
   belongs_to :user
   has_many :menu_days, :class_name => 'Menu::Day'
+  after_initialize :defaults
+
+  def defaults
+    public_key ||= SecureRandom.urlsafe_base64(16)
+    edit_key ||= SecureRandom.urlsafe_base64(16)
+  end
 
   def entities
     return [] if new_record?

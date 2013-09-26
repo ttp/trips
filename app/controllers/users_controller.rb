@@ -15,8 +15,7 @@ class UsersController < ApplicationController
     auth_service = AuthService.new
     user = auth_service.authenticate(params[:token])
     if user
-      sign_in user, :bypass => true
-      redirect_to root_path
+      sign_in_and_redirect user, :bypass => true
     else
       flash[:error] = "Unable to login"
       redirect_to new_user_session_path

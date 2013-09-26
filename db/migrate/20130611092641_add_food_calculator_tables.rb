@@ -3,6 +3,8 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
     create_table :menu_menus do |t|
       t.references :user
       t.string :name, :null => false, :default => ''
+      t.string :read_key, :null => false, :default => ''
+      t.string :edit_key, :null => false, :default => ''
       t.integer :users_count, :null => false, :default => 1
       t.integer :days_count, :null => false, :default => 0
       t.decimal :coverage, :null => false, :default => 0, precision: 5, scale: 2
@@ -10,6 +12,8 @@ class AddFoodCalculatorTables < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :menu_menus, :user_id
+    add_index :menu_menus, :is_public
 
     create_table :menu_days do |t|
       t.references :menu
