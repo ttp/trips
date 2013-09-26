@@ -1,15 +1,10 @@
-- content_for :description, t('menu.meta_description')
-- content_for :keywords, t('menu.meta_keywords')
 %p.text-danger= t('menu.about_warning_html')
 
-%h3= title(@title || t('menu.menu'))
-- if user_signed_in?
-  = link_to t('menu.add', :default => t("helpers.links.new")), new_menu_menu_path, :class => 'btn btn-primary'
-- else
-  %p
-    %a{href: new_user_session_path}= t('user.login')
-    = t('menu.to_add_menu')
+%h3= title t('menu.my_menu')
 
+%p
+  = link_to t('menu.add'), new_menu_menu_path, :class => 'btn btn-primary'
+  = link_to t('menu.examples'), menu_examples_path
 
 %table.table.table-striped
   %thead

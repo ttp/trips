@@ -184,6 +184,7 @@ en:
     days: Days
     days_coverage: Coverage/days
     add_day: Add day
+    move: Move
     meals: Meals
     dishes: Dishes
     products: Products

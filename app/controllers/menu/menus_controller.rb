@@ -1,10 +1,33 @@
 class Menu::MenusController < ApplicationController
+  before_filter :authenticate_user!, :only => [:my, :new, :create, :update, :destroy]
+  around_filter :catch_not_found, :only => [:show, :edit, :update, :destroy]
+
   def index
+    if user_signed_in?
+      my
+    else
+      examples
+    end
+  end
+
+  def my
+    @title = t('menu.my_menu')
+    @menus = Menu::Menu.where(user_id: current_user.id)
+    render 'my'
+  end
+
+  def examples
     @menus = Menu::Menu.where(is_public: true)
+    render 'examples'
   end
 
   def show
     @menu = Menu::Menu.find(params[:id])
+
+    if !@menu.is_public and (!user_signed_in? or @menu.user_id != current_user.id)
+      redirect_to menu_menus_url and return
+    end
+
     @days = @menu.menu_days.order('num')
     @product_entities = @menu.entities_by_type(Menu::DayEntity::PRODUCT)
     @total = @menu.total
@@ -17,6 +40,9 @@ class Menu::MenusController < ApplicationController
 
   def edit
     @menu = Menu::Menu.find(params[:id])
+    if @menu.user_id != current_user.id
+      redirect_to menu_menus_url and return
+    end
   end
 
   # POST /menu
@@ -24,11 +50,8 @@ class Menu::MenusController < ApplicationController
   def create
     data = JSON.parse(params[:data])
     @menu = Menu::Menu.new
-    @menu.name = data['menu']['name']
-    @menu.users_count = data['menu']['users_count']
-    @menu.days_count = data['menu']['days_count']
-    @menu.coverage = data['menu']['coverage']
-    @menu.is_public = true
+    @menu.user_id = current_user.id
+    set_menu_data(data['menu'])
     @menu.save
 
     # save days
@@ -47,12 +70,13 @@ class Menu::MenusController < ApplicationController
   # PUT /menu/1
   # PUT /menu/1.json
   def update
-    data = JSON.parse(params[:data])
     @menu = Menu::Menu.find(params[:id])
-    @menu.name = data['menu']['name']
-    @menu.users_count = data['menu']['users_count']
-    @menu.days_count = data['menu']['days_count']
-    @menu.coverage = data['menu']['coverage']
+    if @menu.user_id != current_user.id
+      redirect_to menu_menus_url and return
+    end
+
+    data = JSON.parse(params[:data])
+    set_menu_data(data['menu'])
     @menu.save
 
     # update/remove days
@@ -91,6 +115,9 @@ class Menu::MenusController < ApplicationController
   # DELETE /trips/1.json
   def destroy
     menu = Menu::Menu.find(params[:id])
+    if menu.user_id != current_user.id
+      redirect_to menu_menus_url and return
+    end
     menu.destroy
 
     respond_to do |format|
@@ -100,6 +127,14 @@ class Menu::MenusController < ApplicationController
   end
 
 private
+  def set_menu_data(data)
+    @menu.name = data['name']
+    @menu.users_count = data['users_count']
+    @menu.days_count = data['days_count']
+    @menu.coverage = data['coverage']
+    @menu.is_public = data['is_public']
+  end
+
   def save_entities(entities, parent_cid, parent_id = nil)
     return unless entities.has_key?(parent_cid)
 
@@ -116,6 +151,7 @@ private
 
       unless entity.nil?
         entity.weight = entity_data['weight']
+        entity.sort_order = entity_data['sort_order']
         entity.save if entity.changed? || entity.new_record?
         save_entities(entities, entity_data['id'].to_s, entity.id)
       end
@@ -139,5 +175,11 @@ private
         @day_cid_to_id[day_id] = day.id
       end
     end
+  end
+
+  def catch_not_found
+    yield
+  rescue ActiveRecord::RecordNotFound
+    redirect_to menu_menus_url, :flash => { :error => t('site.not_found') }
   end
 end

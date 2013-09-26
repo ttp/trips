@@ -15,17 +15,21 @@
         %h3
           %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
             :placeholder => t('menu.name'), "data-value" => 'menu.name'}
-        .form-horizontal
-          %label.control-label.col-lg-2{for: 'users_count'}= t('menu.persons') + ':'
-          .col-lg-2
-            %input.form-control.users_count.input-mini{:name => 'users_count', "data-value" => 'menu.users_count', :value => @menu.users_count}
-
-          %label.control-label.col-lg-3= t('menu.days_coverage') + ':'
-          .col-lg-2
+        .row.fields
+          .col.col-lg-4
+            %label.control-label.pull-left{for: 'users_count'}= t('menu.persons') + ':'
+            %input.form-control.users_count{:name => 'users_count', "data-value" => 'menu.users_count',
+              :value => @menu.users_count}
+          .col.col-lg-4
+            %label.control-label.pull-left= t('menu.days_coverage') + ':'
             .days_count
               %span{"data-text" => 'menu.coverage | number'}
               %span /
               %span{"data-text" => 'menu.days_count | number'}
+          .col.col-lg-4
+            %label.control-label.pull-left{for: 'is_public'}= t('menu.is_public') + ':'
+            %input.form-control.is_public{:name => 'is_public', :id => 'is_public',
+              :type => 'checkbox', "data-value" => 'menu.is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs

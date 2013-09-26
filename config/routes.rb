@@ -21,6 +21,7 @@ Pohody::Application.routes.draw do
 
   namespace :menu do
     get "products" => "menus#products", as: :menu_products
+    get "examples" => "menus#examples", as: :examples
     resources :menus
   end
 

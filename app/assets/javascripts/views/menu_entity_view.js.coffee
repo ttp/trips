@@ -11,6 +11,9 @@ _.namespace "App.views"
     tagName: 'div'
     className: 'entity'
     events:
+      "click button.move-up": "moveUp"
+      "click button.move-down": "moveDown"
+
       "click button.copy-entity": "copyEntity"
       "click button.paste-entity": "pasteToEntity"
       "click button.remove-entity": "removeEntity"
@@ -35,6 +38,13 @@ _.namespace "App.views"
         @initTypeahead(@$el.find('> .header input.quick-add'))
       @options.renderTo.append @$el
 
+      if @model.isProduct()
+        @$el.find("button.info").tooltip
+          animation: false
+          html: true
+          placement: "bottom"
+          container: "body"
+
     renderEntities: (entities) ->
       _.each(entities, ((entity) ->
         entity_view = @renderEntity entity.entity
@@ -48,7 +58,7 @@ _.namespace "App.views"
 
     bindEvents: ->
       if @model.isProduct()
-        rivets.bind @$el.find('> .header'), entity: @model
+        rivets.bind @$el.find('> .header input.weight'), entity: @model
         Backbone.Validation.bind this,
           valid: @valid
           invalid: @invalid
@@ -141,6 +151,7 @@ _.namespace "App.views"
 
     copyEntity: (event) ->
       event.preventDefault()
+      @entities.sort()
       clipboard.setObj 'entity',
         entity: @model.toJSON()
         entities: @entities.tree(@model.get('day_id'), @model.id, true)
@@ -158,5 +169,25 @@ _.namespace "App.views"
         entity_view = @pasteEntity(obj.data.entity)
         entity_view.pasteEntities(obj.data.entities)
       false
+
+    moveUp: (event) ->
+      event.stopPropagation()
+      return if @model.get('sort_order') is 0
+
+      @$el.prev().insertAfter @$el
+      _.find(@entities.siblings(@model), (entity) ->
+        entity.get('sort_order') is @model.get('sort_order') - 1
+      , this).sortOrder(+1)
+      @model.sortOrder(-1)
+
+    moveDown: (event) ->
+      event.stopPropagation()
+      return unless @$el.next().length
+
+      @$el.insertAfter @$el.next()
+      _.find(@entities.siblings(@model), (entity) ->
+        entity.get('sort_order') is @model.get('sort_order') + 1
+      , this).sortOrder(-1)
+      @model.sortOrder(+1)
   )
 )()

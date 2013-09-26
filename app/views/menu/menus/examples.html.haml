@@ -1,0 +1,24 @@
+- content_for :description, t('menu.meta_description')
+- content_for :keywords, t('menu.meta_keywords')
+
+%h3= title t('menu.examples')
+- if user_signed_in?
+  = link_to t('menu.my_menu'), menu_menus_path, :class => 'btn btn-primary'
+- else
+  %p
+    %a{href: new_user_session_path}= t('user.login')
+    = t('menu.to_add_menu')
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t('menu.name')
+      %th= t('menu.persons')
+      %th= t('menu.days_coverage')
+  %tbody
+    - @menus.each do |menu|
+      %tr.menu-item
+        %td= link_to menu.name, menu_menu_path(menu.id)
+        %td= menu.users_count
+        %td
+          #{round_precision(menu.coverage)} / #{menu.days_count}
