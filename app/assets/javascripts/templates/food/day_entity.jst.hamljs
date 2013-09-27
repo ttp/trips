@@ -10,18 +10,18 @@
           %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
       :if entity.isProduct()
         .btn-group.btn-group-xs
-          %button.btn.btn-default.info{type: 'button', title: entity.infoText().join('<br/>')}
+          %button.btn.btn-default.info{type: 'button', title: entity.infoText().join('<br/>'), tabindex: "-1"}
             %i.glyphicon.glyphicon-info-sign
       .btn-group.btn-group-xs
-        %button.btn.btn-default.move-up{type: 'button', title: I18n.t('menu.move')}
+        %button.btn.btn-default.move-up{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
           %i.glyphicon.glyphicon-arrow-up
-        %button.btn.btn-default.move-down{type: 'button', title: I18n.t('menu.move')}
+        %button.btn.btn-default.move-down{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
           %i.glyphicon.glyphicon-arrow-down
       .btn-group.btn-group-xs
-        %button.btn.btn-default.icon-copy.copy-entity{type: 'button', title: I18n.t('helpers.links.copy')}
+        %button.btn.btn-default.icon-copy.copy-entity{type: 'button', title: I18n.t('helpers.links.copy'), tabindex: "-1"}
         :if !entity.isProduct()
-          %button.btn.btn-default.icon-paste.paste-entity{type: 'button', title: I18n.t('helpers.links.paste')}
-        %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy')}
+          %button.btn.btn-default.icon-paste.paste-entity{type: 'button', title: I18n.t('helpers.links.paste'), tabindex: "-1"}
+        %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy'), tabindex: "-1"}
           %i.glyphicon.glyphicon-remove
 .clearfix
 .body
