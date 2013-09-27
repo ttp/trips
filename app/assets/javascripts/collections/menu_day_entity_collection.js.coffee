@@ -5,9 +5,30 @@ _.namespace "App.collections"
     model: App.models.MenuDayEntityModel
     initialize: ->
       @on "remove", @removeChildren, this
+      @on "remove", @updateSortOrders, this
+      @on "add", @initSortOrder, this
+
+    comparator: (entity) ->
+      entity.get 'sort_order'
 
     removeChildren: (entity) ->
       @remove @where(parent_id: entity.id)
+
+    initSortOrder: (entity) ->
+      if entity.get('new')
+        entity.set('sort_order', @siblings(entity).length - 1)
+        @sort()
+
+    updateSortOrders: (entity) ->
+      _.each(@siblings(entity), (item, i) ->
+        item.set 'sort_order', i
+      , this)
+
+    siblings: (entity) ->
+      @where
+        parent_id: entity.get 'parent_id'
+        day_id: entity.get 'day_id'
+
 
     tree: (day_id, parent_id = 0, json = false) ->
       entities = @where(day_id: day_id)

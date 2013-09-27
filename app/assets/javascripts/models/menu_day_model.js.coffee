@@ -19,6 +19,9 @@ _.namespace "App.models"
         @set "new", 1
       @set "rate", parseFloat(@get("coverage"))
 
+    num: (change_by) ->
+      @set('num', @get('num') + change_by)
+
     summary: ->
       entities = App.collections.MenuDayEntityCollection.where(day_id: @id, entity_type: 3)
       _.reduce(entities, (result, entity) ->

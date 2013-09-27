@@ -27,6 +27,9 @@
     getName: ->
       @getEntityModel().get "name"
 
+    infoText: ->
+      @getEntityModel().infoText()
+
     getEntityModel: ->
       @getEntityCollection().get @get("entity_id")
 
@@ -44,5 +47,8 @@
 
     isDish: ->
       @get("entity_type") is 2
+
+    sortOrder: (change_by) ->
+      @set 'sort_order', @get('sort_order') + change_by
   )
 )()

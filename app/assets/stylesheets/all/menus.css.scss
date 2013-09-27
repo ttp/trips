@@ -16,8 +16,22 @@ $hover_color: #ffa;
 }
 
 #menu {
-  .days_count {
-    padding-top: 7px;
+  .fields {
+    margin-bottom: 3px;
+    .col {
+      overflow: hidden;
+      line-height: 32px;
+    }
+    label {
+      margin-right: 10px;
+      margin-bottom: 0;
+    }
+    .users_count {
+      width:  60px;
+    }
+    .is_public {
+      margin-top: 10px;
+    }
   }
   input.transparent {
     border-color: #f7f7f7;
@@ -155,7 +169,14 @@ $hover_color: #ffa;
     list-style: none;
     .category-name {
       margin-left: 5px;
+    }
+
+    .glyphicon-folder, .category-name {
       cursor: pointer;
+    }
+    .glyphicon-info-sign {
+      margin-left: 5px;
+      cursor: default;
     }
 
     ul.items {
