@@ -1,3 +1,26 @@
 .icon-ok, .icon-remove {
     cursor: pointer;
 }
+
+.markItUp {
+    .markItUpHeader {
+        margin-bottom: 2px;
+    }
+
+    li.btn {
+        padding: 1px 5px;
+        line-height: 18px;
+        a {
+            padding: 0;
+            text-indent: 0;
+            width: auto;
+            height: auto;
+            background-image: none;
+            font-size: 14px;
+        }
+    }
+}
+
+.markItUp-preview {
+    padding: 5px;
+}
