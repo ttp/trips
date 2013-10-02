@@ -26,6 +26,7 @@ Pohody::Application.routes.draw do
   end
 
   get "about" => "home#about", as: :about
+  post 'textile/preview' => 'textile#preview'
 
   root :to => "home#index"
 
