@@ -106,6 +106,7 @@ ua:
     has_guide_1: "Так"
     has_guide_desc: "Платні походи"
     organizer: 'Організатор'
+    menu: 'Меню походу'
 
   comments:
     title: 'Коментарі'

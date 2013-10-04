@@ -23,15 +23,9 @@ class Menu::MenusController < ApplicationController
 
   def show
     @menu = Menu::Menu.find(params[:id])
-
     if !@menu.is_public and (!user_signed_in? or @menu.user_id != current_user.id)
       redirect_to menu_menus_url and return
     end
-
-    @days = @menu.menu_days.order('num')
-    @product_entities = @menu.entities_by_type(Menu::DayEntity::PRODUCT)
-    @total = @menu.total
-    @total_products = @menu.total_products
   end
 
   def new

@@ -6,7 +6,8 @@
       %h3
         = title @track.name
         -if user_signed_in? && @trip.user_id == current_user.id
-          %a.glyphicon.glyphicon-edit.edit{href: edit_account_trip_path(@trip), title: t("helpers.links.edit")}
+          %a.glyphicon.glyphicon-edit.edit{href: edit_account_track_path(@track), title: t("account.track.edit")}
+          %a.glyphicon.glyphicon-edit.edit{href: edit_account_trip_path(@trip), title: t("account.trip.edit")}
 
       #description
         %p
@@ -39,7 +40,19 @@
         - if !@track.description.empty?
           %h5= t('account.track.description')
           .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
-
+        
+        - if @trip.menu_id
+          %button.btn.btn-default.btn-xs.menu{:type => 'button', 'data-toggle' => 'collapse', 'data-target' => '#menu'}
+            %i.glyphicon.glyphicon-chevron-down
+            = t 'trip.menu'
+          #menu.collapse
+            .panel.panel-default
+              .panel-body
+                = render "menu/menus/menu"
+        - elsif user_signed_in? && @trip.user_id == current_user.id
+          %a.btn.btn-default.btn-xs{:href => new_menu_menu_path}
+            %i.glyphicon.glyphicon-plus
+            = t('menu.add')
       #trip_comments
         = render :partial => "comments"
 

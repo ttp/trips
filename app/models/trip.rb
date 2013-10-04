@@ -1,9 +1,10 @@
 require 'date'
 
 class Trip < ActiveRecord::Base
-  attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :has_guide, :url, :available_places
+  attr_accessible :track_id, :dates_range, :end_date, :start_date, :trip_details, :has_guide, :url, :available_places, :menu_id
   belongs_to :track
   belongs_to :user
+  belongs_to :menu_menu, :class_name => 'Menu::Menu', :foreign_key => :menu_id
   has_many :trip_users
   has_many :trip_comments
 
