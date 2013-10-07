@@ -4,4 +4,4 @@ $ ->
   users_view = new App.views.TripUsersView()
   comments_view = new App.views.TripCommentsView()
   $('button.menu').click ->
-    $(this).find('i').toggleClass('glyphicon-chevron-down').toggleClass('glyphicon-chevron-up')
+    $(this).find('i').toggleClass('glyphicon-chevron-down glyphicon-chevron-up')
