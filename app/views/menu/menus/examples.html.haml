@@ -1,6 +1,8 @@
 - content_for :description, t('menu.meta_description')
 - content_for :keywords, t('menu.meta_keywords')
 
+%p.text-danger= t('menu.about_warning_html')
+
 %h3= title t('menu.examples')
 - if user_signed_in?
   = link_to t('menu.my_menu'), menu_menus_path, :class => 'btn btn-primary'

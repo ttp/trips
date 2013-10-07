@@ -11,6 +11,10 @@ class Menu::Menu < ActiveRecord::Base
     edit_key ||= SecureRandom.urlsafe_base64(16)
   end
 
+  def days
+    @days ||= menu_days.order('num')
+  end
+
   def entities
     return [] if new_record?
     @entities ||= Menu::DayEntity.order('sort_order').joins(day: :menu).where('menu_menus.id = ?', self.id).readonly(false)
@@ -67,7 +71,8 @@ class Menu::Menu < ActiveRecord::Base
   end
 
   def total
-    total = {
+    return @total if @total
+    @total = {
       weight: 0,
       calories: 0,
       proteins: 0,
@@ -76,21 +81,22 @@ class Menu::Menu < ActiveRecord::Base
     }
 
     entities_by_type(Menu::DayEntity::PRODUCT).each do |entity|
-      total[:weight] += entity.weight
+      @total[:weight] += entity.weight
       product = entity_model(entity)
-      total[:calories] += product.calories.to_f * entity.weight / 100
-      total[:proteins] += product.proteins.to_f * entity.weight / 100
-      total[:fats] += product.fats.to_f * entity.weight / 100
-      total[:carbohydrates] += product.carbohydrates.to_f * entity.weight / 100
+      @total[:calories] += product.calories.to_f * entity.weight / 100
+      @total[:proteins] += product.proteins.to_f * entity.weight / 100
+      @total[:fats] += product.fats.to_f * entity.weight / 100
+      @total[:carbohydrates] += product.carbohydrates.to_f * entity.weight / 100
     end
-    return total
+    @total
   end
 
   def total_products
-    grouped = entities_by_type(Menu::DayEntity::PRODUCT).group_by {|entity| entity.entity_id}
-    grouped.each do |key, items|
-      grouped[key] = items.inject(0) { |mem, item| mem + item.weight }
+    return @total_products if @total_products
+    @total_products = entities_by_type(Menu::DayEntity::PRODUCT).group_by {|entity| entity.entity_id}
+    @total_products.each do |key, items|
+      @total_products[key] = items.inject(0) { |mem, item| mem + item.weight }
     end
-    grouped
+    @total_products
   end
 end

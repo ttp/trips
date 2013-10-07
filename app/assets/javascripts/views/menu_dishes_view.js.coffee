@@ -55,6 +55,7 @@ _.namespace "App.views"
 
 
     toggleDishes: (e) ->
-      $(e.currentTarget).closest("li").toggleClass("expanded").find("i.glyphicon-folder").toggleClass("glyphicon-folder-close").toggleClass "glyphicon-folder-open"
+      $(e.currentTarget).closest("li").toggleClass("expanded")
+        .find("i.glyphicon-folder").toggleClass("glyphicon-folder-close glyphicon-folder-open")
   )
 )()
