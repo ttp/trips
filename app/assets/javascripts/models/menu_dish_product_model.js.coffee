@@ -6,6 +6,6 @@ _.namespace "App.models"
       App.collections.MenuProductCollection.get @get("product_id")
 
     title: ->
-      @product().get("name") + "(" + @get("weight") + ")"
+      @product().get("name") + ": " + @get("weight")
   )
 )()
