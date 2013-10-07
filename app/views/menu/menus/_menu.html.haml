@@ -1,0 +1,72 @@
+.menu
+  %ul.nav.nav-tabs.hidden-print
+    - @menu.days.each_with_index do |day, i|
+      %li{:class => ('active' if i == 0)}
+        %a{:href => "#day_#{i + 1}", "data-toggle" => "tab"}
+          = "#{t('menu.day') + " " if i == 0}#{(i + 1)}"
+  .tab-content.days
+    - @menu.days.each_with_index do |day, i|
+      .tab-pane.day{id: "day_#{i + 1}", class: ('active' if i == 0)}
+        .panel-body
+          %h4.visible-print= t('menu.day') + ' ' + day.num.to_s
+          = render_entities(@menu, day.id, 0)
+  - if @menu.days_count > 0
+    .summary
+      %h4= t('menu.summary')
+      .well.well-small
+        %table.table
+          %thead
+            %tr
+              %th #
+              %th= t('menu.calories')
+              %th= t('menu.weight') + '*'
+              %th= t('menu.proteins')
+              %th= t('menu.fats')
+              %th= t('menu.carbohydrates')
+          %tbody
+            %tr
+              %th= t('menu.person_per_day')
+
+              %td= (@menu.total[:calories] / @menu.coverage).to_i
+              %td= weight(@menu.total[:weight] / @menu.days_count)
+              %td= (@menu.total[:proteins] / @menu.coverage).to_i
+              %td= (@menu.total[:fats] / @menu.coverage).to_i
+              %td= (@menu.total[:carbohydrates] / @menu.coverage).to_i
+            %tr
+              %td= t('menu.recommended')
+
+              %td 3100
+              %td 0.7#{t('menu.kg')}
+              %td 150
+              %td 180
+              %td 690
+            %tr
+              %th= t('menu.person_all_days')
+
+              %td -
+              %td= weight(@menu.total[:weight])
+              %td -
+              %td -
+              %td -
+
+            %tr
+              %th= t('menu.group_all_days')
+
+              %td -
+              %td= weight(@menu.total[:weight] * @menu.users_count)
+              %td -
+              %td -
+              %td -
+        %div
+          %b= t('menu.persons') + ':'
+          #{@menu.users_count},
+          %b= t('menu.days_coverage') + ':'
+          #{round_precision(@menu.coverage)} / #{@menu.days_count}
+
+  .products
+    %h4= t 'menu.products'
+    .well.well-small
+      - @menu.products.each do |product_id, product|
+        %div
+          %span.name= product.name
+          %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')

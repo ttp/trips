@@ -12,6 +12,7 @@
     #menu.menu
       = form_for @menu do
         = hidden_field_tag :back_url, params[:back_url] || request.referer
+        = hidden_field_tag :trip, params[:trip] || 0
         %h3
           %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
             :placeholder => t('menu.name'), "data-value" => 'menu.name'}
