@@ -18,7 +18,12 @@ class TripsController < ApplicationController
     @track = @trip.track
     @region = @track.region
     @comments = TripComment.with_users(@trip.id)
-    @menu = @trip.menu_menu if @trip.menu_id
+    if @trip.menu_id
+      @menu = @trip.menu_menu
+      if @menu
+        @menu.users_count = @joined_users.count > 0 ? @joined_users.count : 1
+      end
+    end
   end
 
   # POST /trips/1/join

@@ -30,6 +30,14 @@ class Menu::MenusController < ApplicationController
 
   def new
     @menu = Menu::Menu.new
+    if params[:trip]
+      trip = Trip.find_by(id: params[:trip])
+      if trip.user_id == current_user.id
+        @menu.name = trip.track.name + ' menu'
+        users_count = trip.joined_users.count
+        @menu.users_count = users_count if users_count > 0
+      end
+    end
   end
 
   def edit
@@ -54,6 +62,14 @@ class Menu::MenusController < ApplicationController
     # save entities
     entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
     save_entities(entities, '0')
+
+    if params[:trip] != '0'
+      trip = Trip.find_by(id: params[:trip])
+      if trip.user_id == current_user.id
+        trip.menu_id = @menu.id
+        trip.save
+      end
+    end
 
     respond_to do |format|
       format.html { redirect_to back(menu_menus_url), notice: I18n.t('menu.was_created') }
