@@ -37,4 +37,8 @@ module ApplicationHelper
     content_for(:title, page_title.to_s + ' - ')
     return page_title
   end
+
+  def return_here_path(path)
+    path + '?return=' + u(request.fullpath)
+  end
 end

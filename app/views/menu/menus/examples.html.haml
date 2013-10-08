@@ -8,7 +8,7 @@
   = link_to t('menu.my_menu'), menu_menus_path, :class => 'btn btn-primary'
 - else
   %p
-    %a{href: new_user_session_path}= t('user.login')
+    %a{href: return_here_path(new_user_session_path)}= t('user.login')
     = t('menu.to_add_menu')
 
 %table.table.table-striped

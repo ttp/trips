@@ -8,11 +8,11 @@
 - if user_signed_in?
   %a.add-comment{href: "#"}= t('comments.add')
   = form_tag("/trips/#{@trip.id}/comments", :method => "post", :class => "add-comment") do
-    = text_area_tag(:comment, "", :class => "col-md-9", :rows => "8")
-    %p
+    = text_area_tag(:comment, "", :class => "form-control", :rows => "8")
+    %p.form-actions
       %button.btn.btn-primary= t('comments.send')
       %button.btn.cancel-add-comment= t('helpers.links.cancel')
 - else
   %p
-    %a{href: new_user_session_path}= t('trip.login')
+    %a{href: return_here_path(new_user_session_path)}= t('trip.login')
     = t('comments.to_leave_comments')

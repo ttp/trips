@@ -41,7 +41,7 @@
         %button.btn.btn-primary= t('trip.join')
 - else
   %p
-    %a{href: new_user_session_path}= t('trip.login')
+    %a{href: return_here_path(new_user_session_path)}= t('trip.login')
     = t('trip.to_join')
 
 

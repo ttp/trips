@@ -23,6 +23,9 @@ ua:
       signed_in: 'Вхід успішний.'
       signed_out: 'Вихід успішний.'
     passwords:
+      submit_intructions: 'Надіслати інструкції'
+      change_title: Змініть ваш пароль
+      change_my: Змінити мій пароль
       send_instructions: 'Ви отримаєте інструкції зі скидання паролю через декілька хвилин.'
       updated: 'Ваш пароль було успішно змінено.'
       updated_not_active: 'Ваш пароль було успішно змінено.'

@@ -7,12 +7,8 @@ protected
     if request.get? and controller_name != "user_sessions" and controller_name != "sessions"
       session[:return_to] = request.fullpath
     end
-    if !user_signed_in? and request.get? and
-       request.fullpath != "/users/sign_in" and
-       request.fullpath != "/users/sign_up" and
-       request.fullpath != "/users/password" and
-       !request.xhr?
-      session[:previous_url] = request.fullpath
+    if params[:return] && !user_signed_in? and request.get? and !request.xhr?
+      session[:previous_url] = params[:return]
     end
   end
 

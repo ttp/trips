@@ -1,15 +1,15 @@
-en:
+ua:
   simple_form:
     "yes": 'Так'
     "no": 'Ні'
     required:
-      text: 'обов"язкове'
+      text: "обов'язкове"
       mark: '*'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Будь-ласка виправте помилки:"
+      default_message: '<a class="close" data-dismiss="alert">&times;</a> Будь-ласка виправте помилки:'
     # Labels and hints examples
     # labels:
     #   defaults:

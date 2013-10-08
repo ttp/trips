@@ -1,8 +1,6 @@
 %h3= title t('helpers.links.sign_up')
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
-  = devise_error_messages!
   = f.error_notification
-  = display_base_errors resource
   = f.input :name, :autofocus => true, :label => t('user.name')
   = f.input :email, :required => true
   = f.input :password, :required => true, :label => t('user.password')
