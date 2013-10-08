@@ -1,7 +1,8 @@
 %h3= t('helpers.links.forgot_password')
-= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name),
+  :html => { :method => :post, :class => 'form-vertical row col-md-6' }) do |f|
   = f.error_notification
   = f.input :email, :required => true
-  = f.button :submit, t('devise.passwords.submit_intructions'), :class => 'btn-primary'
-
+  .form-actions
+    = f.button :submit, t('devise.passwords.submit_intructions'), :class => 'btn-primary'
 = render "devise/shared/links"

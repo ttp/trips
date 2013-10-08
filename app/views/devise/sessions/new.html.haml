@@ -1,11 +1,11 @@
 %h3= title t('helpers.links.sign_in')
-= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical row col-md-6' }) do |f|
   = f.input :email, :autofocus => true
   = f.input :password, :label => t('user.password')
-  = f.input :remember_me, :label => t('user.remember_me'), :as => :boolean if devise_mapping.rememberable?
-  = f.button :submit, t('helpers.links.sign_in'), :class => 'btn-primary'
-
-<script src="//ulogin.ru/js/ulogin.js"></script>
-<div id="uLogin" data-ulogin="verify=1;display=panel;fields=first_name,last_name,email;providers=vkontakte,yandex,google,facebook,twitter;hidden=mailru,odnoklassniki,livejournal,linkedin,liveid,openid;redirect_uri=http%3A%2F%2F#{Rails.application.config.site[:host]}%2Fusers%2Fulogin"></div>
-
+  = f.input :remember_me, :label => t('user.remember_me'), :as => :boolean, :wrapper => :inline_checkbox if devise_mapping.rememberable?
+  .form-actions
+    = f.button :submit, t('helpers.links.sign_in'), :class => 'btn-primary'
+    .pull-right
+      <script src="//ulogin.ru/js/ulogin.js"></script>
+      <div id="uLogin" data-ulogin="verify=1;display=panel;fields=first_name,last_name,email;providers=vkontakte,yandex,google,facebook,twitter;hidden=mailru,odnoklassniki,livejournal,linkedin,liveid,openid;redirect_uri=http%3A%2F%2F#{Rails.application.config.site[:host]}%2Fusers%2Fulogin"></div>
 = render "devise/shared/links"

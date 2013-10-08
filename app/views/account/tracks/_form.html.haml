@@ -1,7 +1,7 @@
 = javascript_include_tag "tracks"
 = javascript_include_tag "init/textile_init"
 
-= simple_form_for [:account, @track], :html => { :class => 'form-horizontal col-md-9' } do |f|
+= simple_form_for [:account, @track], :html => { :class => 'row col-md-9' } do |f|
   = hidden_field_tag :back_url, params[:back_url] || request.referer
 
   = f.input :name, :label => t('account.track.name')
