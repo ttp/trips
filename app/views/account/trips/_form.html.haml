@@ -1,4 +1,5 @@
 = javascript_include_tag "trips"
+= javascript_include_tag "init/textile_init"
 
 = simple_form_for [:account, @trip], :html => { :class => 'form-horizontal col-md-9' } do |f|
   = hidden_field_tag :back_url, params[:back_url] || request.referer
@@ -7,8 +8,9 @@
     :as => :grouped_select, :group_method => :last, :label => t('account.track.track')
   = f.input :dates_range, :label => t('account.trip.dates')
   = f.input :available_places, :label => t('account.trip.available_places')
+  = f.input :trip_details, :hint => t('account.trip.details_hint'), input_html: {:rows => 10, :class => 'textile'}, :label => t('account.trip.details')
   = f.input :has_guide, :label => t('account.trip.has_guide')
-  = f.input :trip_details, :hint => t('account.trip.details_hint'), input_html: {:rows => 10}, :label => t('account.trip.details')
+  = f.input :menu_id, :collection => Menu::Menu.find_all_by_user_id(current_user.id), :label => t('trip.menu')
   = f.input :url, :label => t('account.trip.url')
   .form-actions
     = f.button :submit, :class => 'btn-primary', :value => t('helpers.links.save')

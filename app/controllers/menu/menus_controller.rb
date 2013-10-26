@@ -23,19 +23,21 @@ class Menu::MenusController < ApplicationController
 
   def show
     @menu = Menu::Menu.find(params[:id])
-
     if !@menu.is_public and (!user_signed_in? or @menu.user_id != current_user.id)
       redirect_to menu_menus_url and return
     end
-
-    @days = @menu.menu_days.order('num')
-    @product_entities = @menu.entities_by_type(Menu::DayEntity::PRODUCT)
-    @total = @menu.total
-    @total_products = @menu.total_products
   end
 
   def new
     @menu = Menu::Menu.new
+    if params[:trip]
+      trip = Trip.find_by(id: params[:trip])
+      if trip.user_id == current_user.id
+        @menu.name = trip.track.name + ' menu'
+        users_count = trip.joined_users.count
+        @menu.users_count = users_count if users_count > 0
+      end
+    end
   end
 
   def edit
@@ -60,6 +62,14 @@ class Menu::MenusController < ApplicationController
     # save entities
     entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
     save_entities(entities, '0')
+
+    if params[:trip] != '0'
+      trip = Trip.find_by(id: params[:trip])
+      if trip.user_id == current_user.id
+        trip.menu_id = @menu.id
+        trip.save
+      end
+    end
 
     respond_to do |format|
       format.html { redirect_to back(menu_menus_url), notice: I18n.t('menu.was_created') }
