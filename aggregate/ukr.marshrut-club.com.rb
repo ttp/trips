@@ -4,7 +4,7 @@
 require 'rubygems'
 require 'net/http'
 require 'open-uri'
-require 'hpricot'
+require 'nokogiri'
 require 'cgi'
 require 'csv'
 
@@ -57,36 +57,33 @@ def get_track(url)
   open(url) do |f|
     content = f.read
   end
-  doc = Hpricot(content)
-  track_node = doc.search("div.content b").select { |el| el.inner_text =~ /маршрут/i }.first.parent
-  track_node.search("b, br").remove
+  doc = Nokogiri::HTML(content)
+  track_node = doc.css("div.content b").select { |el| el.inner_text =~ /маршрут/i }.first.parent
+  track_node.css("b, br").remove
   track_node.inner_text.strip
 end
 
-domain = 'ukr.marshrut-club.com'
+$domain = 'ukr.marshrut-club.com'
 page_path = '/'
-http = Net::HTTP.new(domain)
+http = Net::HTTP.new($domain)
 resp = http.get(page_path)
-doc = Hpricot(resp.body)
+doc = Nokogiri::HTML(resp.body)
 
 title = "Розклад походів"
-title_node = doc.search("div.column h3").select {|node| node.inner_text == title}.first
+title_node = doc.css("div.column h3").select {|node| node.inner_text == title}.first
 
 
-list_node = title_node.next_sibling
+list_node = title_node.next_element
 
 puts ["name", "start_date", "end_date", "region", "track", "url", "has_guide", "available_places"].to_csv
 while true do
-  break if list_node.name != "p"
-
-  region = list_node.search("b").first.inner_text
-  list_node.search("br").each do |br_node|
-    break if br_node.next_sibling.nil?
-
-    dates_text = br_node.next_node.inner_text.strip
-    link_node = br_node.next_sibling
+  if list_node['class'] == 'main_cal_title_r'
+    region = list_node.at_css("a").inner_text
+  elsif list_node['class'] == 'main_cal_elem_r'
+    dates_text = list_node.inner_text.strip
+    link_node = list_node.at_css('a')
     start_date, end_date = get_dates(dates_text)
-    url = link_node.get_attribute("href")
+    url = "http://" + $domain + link_node.attr("href")
     puts [
       link_node.inner_text.strip,
       start_date,
@@ -97,6 +94,8 @@ while true do
       "yes",
       10
     ].to_csv
+  else
+    break
   end
-  list_node = list_node.next_sibling
+  list_node = list_node.next_element
 end
