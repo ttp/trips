@@ -18,6 +18,7 @@ module Import
           next if region.nil?
 
           track = Track.new
+          track.description = ''
           track.name = track_name
           track.user_id = @user.id
           track.region_id = region.id
@@ -48,6 +49,7 @@ module Import
           trip.url = row.field('url')
           trip.has_guide = (row.field('has_guide') == "yes")
           trip.available_places = row.field('available_places').to_i
+          trip.trip_details = ''
           if !trip.save
             console.debug(trip.errors)
           end
