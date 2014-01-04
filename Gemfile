@@ -20,7 +20,7 @@ gem "launchy", ">= 2.2.0", :group => :test
 gem "capybara", ">= 2.0.2", :group => :test
 gem "factory_girl_rails", ">= 4.2.0", :group => [:development, :test]
 gem "bootstrap-sass", :git => "git://github.com/thomas-mcdonald/bootstrap-sass.git"
-gem "devise", ">= 2.2.3"
+gem "devise", ">= 3.2.2"
 gem "simple_form", :github => "plataformatec/simple_form"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "figaro", ">= 0.5.3"
@@ -29,6 +29,6 @@ gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri
 gem 'will_paginate'
 gem 'RedCloth'
 gem 'gravatar_image_tag'
-gem 'globalize3', git: 'git://github.com/svenfuchs/globalize3.git', branch: 'rails4'
+gem 'globalize', '~> 4.0.0.alpha.3'
 gem "selenium-webdriver", "~> 2.35.1", :group => :test
 gem 'font-awesome-sass-rails'
