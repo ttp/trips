@@ -35,7 +35,7 @@ module Import
 
         track_row = get_track(track_name)
         if track_row.nil?
-          @logger.debug('track not found, goto next row')
+          @logger.debug("track not found #{track_name}, goto next row")
           next
         end
 
@@ -51,7 +51,7 @@ module Import
           trip.available_places = row.field('available_places').to_i
           trip.trip_details = ''
           if !trip.save
-            console.debug(trip.errors)
+            @logger.debug(trip.errors)
           end
         end
       end

@@ -70,7 +70,7 @@ resp = http.get(page_path)
 doc = Nokogiri::HTML(resp.body)
 
 title = "Розклад походів"
-title_node = doc.css("div.column h3").select {|node| node.inner_text == title}.first
+title_node = doc.css("div.column h2").select {|node| node.inner_text == title}.first
 
 
 list_node = title_node.next_element
