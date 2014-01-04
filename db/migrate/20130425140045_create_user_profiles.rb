@@ -3,12 +3,12 @@ class CreateUserProfiles < ActiveRecord::Migration
     create_table :user_profiles do |t|
       t.references :user
 
-      t.text :about, :null => false, :default => ''
-      t.text :experience, :null => false, :default => ''
-      t.text :equipment, :null => false, :default => ''
-      t.text :contacts, :null => false, :default => ''
-      t.text :private_contacts, :null => false, :default => ''
-      t.text :private_info, :null => false, :default => ''
+      t.text :about
+      t.text :experience
+      t.text :equipment
+      t.text :contacts
+      t.text :private_contacts
+      t.text :private_info
 
       t.timestamps
     end

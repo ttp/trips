@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130611092641) do
+ActiveRecord::Schema.define(version: 20131004114517) do
 
   create_table "menu_day_entities", force: true do |t|
     t.integer "parent_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20130611092641) do
     t.integer "entity_type", limit: 1,             null: false
     t.integer "entity_id",                         null: false
     t.integer "weight",                default: 0, null: false
+    t.integer "sort_order",            default: 0, null: false
   end
 
   add_index "menu_day_entities", ["day_id"], name: "index_menu_day_entities_on_day_id", using: :btree
@@ -83,6 +84,8 @@ ActiveRecord::Schema.define(version: 20130611092641) do
   create_table "menu_menus", force: true do |t|
     t.integer  "user_id"
     t.string   "name",                                default: "",    null: false
+    t.string   "read_key",                            default: "",    null: false
+    t.string   "edit_key",                            default: "",    null: false
     t.integer  "users_count",                         default: 1,     null: false
     t.integer  "days_count",                          default: 0,     null: false
     t.decimal  "coverage",    precision: 5, scale: 2, default: 0.0,   null: false
@@ -90,6 +93,9 @@ ActiveRecord::Schema.define(version: 20130611092641) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "menu_menus", ["is_public"], name: "index_menu_menus_on_is_public", using: :btree
+  add_index "menu_menus", ["user_id"], name: "index_menu_menus_on_user_id", using: :btree
 
   create_table "menu_product_categories", force: true do |t|
   end
@@ -126,17 +132,17 @@ ActiveRecord::Schema.define(version: 20130611092641) do
 
   create_table "regions", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tracks", force: true do |t|
     t.string   "name",                     null: false
-    t.text     "description",              null: false
+    t.text     "description"
     t.text     "track"
-    t.string   "url",         default: ""
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "url",         default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "region_id"
     t.integer  "user_id"
   end
@@ -148,8 +154,8 @@ ActiveRecord::Schema.define(version: 20130611092641) do
     t.integer  "user_id"
     t.integer  "trip_id"
     t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "trip_comments", ["trip_id"], name: "index_trip_comments_on_trip_id", using: :btree
@@ -167,13 +173,14 @@ ActiveRecord::Schema.define(version: 20130611092641) do
     t.integer  "track_id"
     t.date     "start_date",                       null: false
     t.date     "end_date",                         null: false
-    t.text     "trip_details",                     null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.text     "trip_details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "url"
     t.integer  "available_places",                 null: false
     t.boolean  "has_guide",        default: false, null: false
+    t.integer  "menu_id"
   end
 
   add_index "trips", ["start_date"], name: "index_trips_on_start_date", using: :btree
@@ -181,14 +188,14 @@ ActiveRecord::Schema.define(version: 20130611092641) do
 
   create_table "user_profiles", force: true do |t|
     t.integer  "user_id"
-    t.text     "about",            null: false
-    t.text     "experience",       null: false
-    t.text     "equipment",        null: false
-    t.text     "contacts",         null: false
-    t.text     "private_contacts", null: false
-    t.text     "private_info",     null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.text     "about"
+    t.text     "experience"
+    t.text     "equipment"
+    t.text     "contacts"
+    t.text     "private_contacts"
+    t.text     "private_info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
@@ -204,8 +211,8 @@ ActiveRecord::Schema.define(version: 20130611092641) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
     t.string   "email_hash"
     t.string   "authentication_token"

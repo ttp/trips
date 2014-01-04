@@ -4,7 +4,7 @@ class CreateTrips < ActiveRecord::Migration
       t.references :track
       t.date :start_date, :null => false
       t.date :end_date, :null => false
-      t.text :trip_details, :null => false
+      t.text :trip_details
 
       t.timestamps
     end
