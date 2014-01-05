@@ -42,6 +42,10 @@ Then /^I should see "(.*?)" button$/ do |button|
   page.should have_button(button)
 end
 
+Then /^I should see "(.*?)" link$/ do |link|
+  page.should have_link(link)
+end
+
 Then /^Trip owner should receive an email with subject "(.*?)"$/ do |subject|
   email = Trip.first.user.email
   steps %Q{

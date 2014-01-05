@@ -30,5 +30,5 @@ gem 'will_paginate'
 gem 'RedCloth'
 gem 'gravatar_image_tag'
 gem 'globalize', '~> 4.0.0.alpha.3'
-gem "selenium-webdriver", "~> 2.35.1", :group => :test
+gem "selenium-webdriver", "~> 2.39.0", :group => :test
 gem 'font-awesome-sass-rails'

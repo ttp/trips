@@ -13,7 +13,6 @@ Feature: Menu
     Scenario: Menu page should show list of Menu examples
       Then I should see "2" Menus in Menu list
 
-    @active
     Scenario: Menu page should show menu entities
       When I click "Menu example one" link
       Then I should see menu entities

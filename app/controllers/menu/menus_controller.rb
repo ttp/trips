@@ -1,5 +1,7 @@
 class Menu::MenusController < ApplicationController
-  before_filter :authenticate_user!, :only => [:my, :new, :create, :update, :destroy]
+  include MenusHelper
+
+  before_filter :authenticate_user!, :only => [:my]
   around_filter :catch_not_found, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -23,9 +25,8 @@ class Menu::MenusController < ApplicationController
 
   def show
     @menu = Menu::Menu.find(params[:id])
-    if !@menu.is_public and (!user_signed_in? or @menu.user_id != current_user.id)
-      redirect_to menu_menus_url and return
-    end
+
+    redirect_to menu_menus_url and return unless can_view?
   end
 
   def new
@@ -42,9 +43,7 @@ class Menu::MenusController < ApplicationController
 
   def edit
     @menu = Menu::Menu.find(params[:id])
-    if @menu.user_id != current_user.id
-      redirect_to menu_menus_url and return
-    end
+    redirect_to menu_menus_url and return unless can_edit?
   end
 
   # POST /menu
@@ -52,7 +51,7 @@ class Menu::MenusController < ApplicationController
   def create
     data = JSON.parse(params[:data])
     @menu = Menu::Menu.new
-    @menu.user_id = current_user.id
+    @menu.user_id = current_user.id if current_user
     set_menu_data(data['menu'])
     @menu.save
 
@@ -72,7 +71,13 @@ class Menu::MenusController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to back(menu_menus_url), notice: I18n.t('menu.was_created') }
+      format.html {
+        if @menu.user_id
+          redirect_to back(menu_menus_url), notice: I18n.t('menu.was_created')
+        else
+          redirect_to guest_owner_menu_path(@menu)
+        end
+      }
       format.json { render json: @menu, status: :created, location: @trip }
     end
   end
@@ -81,9 +86,7 @@ class Menu::MenusController < ApplicationController
   # PUT /menu/1.json
   def update
     @menu = Menu::Menu.find(params[:id])
-    if @menu.user_id != current_user.id
-      redirect_to menu_menus_url and return
-    end
+    redirect_to menu_menus_url and return unless can_edit?
 
     data = JSON.parse(params[:data])
     set_menu_data(data['menu'])
@@ -105,7 +108,10 @@ class Menu::MenusController < ApplicationController
     save_entities(entities, '0')
 
     respond_to do |format|
-      format.html { redirect_to back(menu_menus_url), notice: I18n.t('menu.was_updated') }
+      format.html {
+        back_url = user_signed_in? ? menu_menus_url : guest_owner_menu_path(@menu)
+        redirect_to back(back_url), notice: I18n.t('menu.was_updated')
+      }
       format.json { head :no_content }
     end
   end

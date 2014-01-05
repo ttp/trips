@@ -32,4 +32,23 @@ module MenusHelper
       return number
     end
   end
+
+  def can_view?
+    @menu.is_public? or
+      (user_signed_in? and @menu.user_id == current_user.id) or
+      (params[:key] and [@menu.edit_key, @menu.read_key].include?(params[:key]))
+  end
+
+  def can_edit?
+    (user_signed_in? and @menu.user_id == current_user.id) or
+      (params[:key] and @menu.edit_key == params[:key])
+  end
+
+  def guest_menu_edit_path(menu)
+    edit_menu_menu_path(menu) + "?key=#{menu.edit_key}"
+  end
+
+  def guest_owner_menu_path(menu)
+    menu_menu_path(@menu) + "?key=#{@menu.edit_key}"
+  end
 end

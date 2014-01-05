@@ -4,11 +4,12 @@ class Menu::Menu < ActiveRecord::Base
   attr_accessible :name, :users_count, :is_public
   belongs_to :user
   has_many :menu_days, :class_name => 'Menu::Day'
-  after_initialize :defaults
 
-  def defaults
-    public_key ||= SecureRandom.urlsafe_base64(16)
-    edit_key ||= SecureRandom.urlsafe_base64(16)
+  after_initialize do |menu|
+    if menu.read_key.empty?
+      menu.read_key = SecureRandom.urlsafe_base64(16)
+      menu.edit_key = SecureRandom.urlsafe_base64(16)
+    end
   end
 
   def days

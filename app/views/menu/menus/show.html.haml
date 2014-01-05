@@ -1,5 +1,11 @@
 = stylesheet_link_tag "print/menu", :media => "print"
 
-%h3= title @menu.name
+%h3
+  = title @menu.name
+  -if !user_signed_in? && can_edit?
+    .btn-group.btn-group-xs.pull-right
+      %a.btn.btn-default{href: guest_menu_edit_path(@menu), title: t("helpers.links.edit")}
+        %i.glyphicon.glyphicon-edit.edit
+        = t("helpers.links.edit")
 
 = render :partial => 'menu'

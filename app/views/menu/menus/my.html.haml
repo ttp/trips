@@ -1,10 +1,12 @@
 %p.text-danger= t('menu.about_warning_html')
 
-%h3= title t('menu.my_menu')
+%ul.nav.nav-tabs
+  %li= link_to t('menu.examples'), menu_examples_path
+  %li.active
+    %a{href: "#"}= title t('menu.my_menu')
 
 %p
   = link_to t('menu.add'), new_menu_menu_path, :class => 'btn btn-primary'
-  = link_to t('menu.examples'), menu_examples_path
 
 %table.table.table-striped
   %thead
@@ -12,6 +14,7 @@
       %th= t('menu.name')
       %th= t('menu.persons')
       %th= t('menu.days_coverage')
+      %th= t('helpers.actions')
   %tbody
     - @menus.each do |menu|
       %tr.menu-item

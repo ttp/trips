@@ -207,6 +207,7 @@ en:
     was_updated: Menu updated
     examples: Menu examples
     quick_add: Quick add
+    is_public: Public
     coverage:
       full: Full day
       two_meals: 2 meals 80%

@@ -3,13 +3,13 @@
 
 %p.text-danger= t('menu.about_warning_html')
 
-%h3= title t('menu.examples')
-- if user_signed_in?
-  = link_to t('menu.my_menu'), menu_menus_path, :class => 'btn btn-primary'
-- else
-  %p
-    %a{href: return_here_path(new_user_session_path)}= t('user.login')
-    = t('menu.to_add_menu')
+%ul.nav.nav-tabs
+  %li.active
+    %a{href: "#"}= title t('menu.examples')
+  - if user_signed_in?
+    %li= link_to t('menu.my_menu'), menu_menus_path
+%p
+  = link_to t('menu.add'), new_menu_menu_path, :class => 'btn btn-primary'
 
 %table.table.table-striped
   %thead
