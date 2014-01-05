@@ -18,7 +18,11 @@ protected
   end
 
   def back(url)
-    params[:back_url] || url
+    if params[:back_url] && !params[:back_url].empty?
+      params[:back_url]
+    else
+      url
+    end
   end
 
   def order
