@@ -8,10 +8,10 @@ Feature: Menu for Guest
     And I am on Menus page
 
     Scenario: User should see Add menu button
-      Then I should see "New menu" link
+      Then I should see "Create menu" link
 
     Scenario: User should be able to save menu
-      When I click "New menu" link
+      When I click "Create menu" link
       And I fill in "name" with "Guest menu"
       And I add day to menu
       And I click "Save" button

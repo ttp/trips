@@ -165,19 +165,21 @@ Then /^I should see a successful sign up message$/ do
 end
 
 Then /^I should see an invalid email message$/ do
-  page.should have_content "Email is invalid"
+  page.should have_css ".form-group.user_email.has-error"
+  page.find(".form-group.user_email").should have_content "is invalid"
 end
 
 Then /^I should see a missing password message$/ do
-  page.should have_content "Password can't be blank"
+  page.should have_css ".form-group.user_password.has-error"
+  page.find(".form-group.user_password").should have_content "can't be blank"
 end
 
 Then /^I should see a missing password confirmation message$/ do
-  page.should have_content "Password confirmation doesn't match Password"
+  page.should have_content "doesn't match Password"
 end
 
 Then /^I should see a mismatched password message$/ do
-  page.should have_content "Password confirmation doesn't match Password"
+  page.should have_content "doesn't match Password"
 end
 
 Then /^I should see a signed out message$/ do
