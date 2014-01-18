@@ -24,7 +24,7 @@ _.namespace "App.views"
 
     bindEvents: ->
       trips = @_trips
-      @$el.find(".icon-eye-open").mouseenter(->
+      @$el.find(".fa-eye").mouseenter(->
         trips.trigger "trip:hover", $(this).closest(".trip").data("trip-id")
       ).mouseleave ->
         trips.trigger "trip:out", $(this).closest(".trip").data("trip-id")

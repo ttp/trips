@@ -17,10 +17,15 @@
             height: auto;
             background-image: none;
             font-size: 14px;
+            display: inline-block;
         }
     }
 }
 
 .markItUp-preview {
     padding: 5px;
+}
+
+.fa.fa-usd {
+  color: #080;
 }

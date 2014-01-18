@@ -104,6 +104,7 @@ ua:
     has_guide: "Працює гід"
     has_guide_0: "Ні"
     has_guide_1: "Так"
+    paid: Платний
     has_guide_desc: "Платні походи"
     organizer: 'Організатор'
     menu: 'Меню походу'

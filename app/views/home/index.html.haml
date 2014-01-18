@@ -28,4 +28,4 @@
           %div
             %a.username{href: user_path(trip['user_id']), title: t('trip.organizer')}= trip['user_name']
             - if trip['has_guide'] == 1
-              %span= t('trip.has_guide')
+              %span.fa.fa-usd{title: t('trip.paid')}

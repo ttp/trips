@@ -35,17 +35,17 @@ $ ->
     ,
       separator: "---------------"
     ,
-      name: "", replaceWith: "![![Source:!:http://]!]([![Alternative text]!])!", className: "btn btn-default btn-sm action-picture"
+      name: "", replaceWith: "![![Source:!:http://]!]([![Alternative text]!])!", className: "btn btn-default btn-sm action-picture-o"
     ,
       name: "", openWith: "\"", closeWith: "([![Title]!])\":[![Link:!:http://]!]", placeHolder: "Your text to link here...", className: "btn btn-default btn-sm action-link"
     ,
       separator: "---------------"
     ,
-      name: " Preview", call: "preview", className: "btn btn-default btn-sm action-eye-open"
+      name: " Preview", call: "preview", className: "btn btn-default btn-sm action-eye"
     ]
 
   
-  actions = ["bold", "italic", "strikethrough", "list-ul", "list-ol", "picture", "link", "eye-open"]
+  actions = ["bold", "italic", "strikethrough", "list-ul", "list-ol", "picture-o", "link", "eye"]
 
   $("textarea.textile").each ->
     textarea = $(this)
@@ -78,4 +78,4 @@ $ ->
     wrapper.find(".markItUpHeader").addClass "btn-toolbar"
     wrapper.find("ul").addClass "btn-group"
     _.each actions, (action) ->
-      wrapper.find(".action-" + action + " a").addClass "icon-" + action
+      wrapper.find(".action-" + action + " a").addClass "fa fa-" + action

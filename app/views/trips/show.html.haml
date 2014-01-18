@@ -37,7 +37,7 @@
           %b= t('trip.organizer') + ':'
           %a.username{href: user_path(@trip.user_id)}= @trip.user.name
           - if @trip.has_guide
-            %span= t('trip.has_guide')
+            %span.fa.fa-usd{title: t('trip.paid')}
 
         %p.track
           %b= t('account.track.track') + ":"
