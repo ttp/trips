@@ -39,6 +39,7 @@ en:
   site:
     meta_keywords: 'trips, mountain, tracking, hiking'
     meta_description: 'mountain trips, mountain hiking, manage hikings, search members for the hiking, search hiking, hiking calendar'
+    not_found: Not found
 
   home:
     title: 'Search and manage trips'
@@ -47,6 +48,7 @@ en:
       а надати для цього зручний інструмент.
     list:
       text_calendar: 'Всі заплановані походи доступні в календарі походів.'
+      in_calendar: 'in calendar'
       text_join_add: 'Ви можете приєднатись до вже існуючого походу або додати свій.'
       text_profile: 'Кожен користувач має туристичний профайл по якому організатор походу вирішує чи приймати заявку на похід.'
     more: 'More about project'
@@ -63,6 +65,7 @@ en:
     current_password: 'Current password'
     current_password_hint: 'Enter you current password to confirm your changes'
     remember_me: 'Remember me'
+    login: "Sign in"
 
   user_profile:
     about_me: "About me"
@@ -101,6 +104,7 @@ en:
     paid: Paid
     has_guide_desc: "Paid trips"
     organizer: 'Organizer'
+    menu: 'Menu'
 
   comments:
     title: 'Comments'
@@ -135,6 +139,7 @@ en:
     tracks: "Tracks"
     new_track: "Add track"
     track:
+      track: Track
       new: 'New track'
       edit: 'Edit track'
       add: 'Add track'
@@ -149,6 +154,7 @@ en:
 # Trips
     trips: "Trips"
     trip:
+      trip: Trip
       new: "New trip"
       edit: "Edit trip"
       add: "Add trip"
@@ -176,9 +182,18 @@ en:
     Turkey: Turkey
     Romania: Romania
     Nepal: Nepal
+
   menu:
+    about_warning_html: |
+      Menu builder works in demo mode.
+    meta_description: Конструктор меню в похід.
+    meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
+
     menu: Menu Builder
+    my_menu: My menus
+    examples: Examples
     add: New menu
+    to_add_menu: щоб створити своє меню
     new: New menu
     create: Create menu
     edit: Edit menu
