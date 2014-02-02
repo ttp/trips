@@ -172,6 +172,10 @@ en:
 
       scheduled: 'Scheduled trips'
       archive: 'Archived trips'
+# Admin
+    admin:
+      admin_panel: Admin panel
+      switch_user: Switch User
 # Regions
   region:
     region: Region

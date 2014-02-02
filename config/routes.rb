@@ -39,5 +39,7 @@ Pohody::Application.routes.draw do
 
     resources :tracks
     resources :trips
+    get 'admin' => 'admin#index'
+    get 'admin/switch_user' => 'admin#switch_user'
   end
 end

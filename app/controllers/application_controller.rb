@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :configure_permitted_parameters, :if => :devise_controller?
   protect_from_forgery
+  helper_method :admin?
 
 protected
   def store_location
@@ -36,5 +37,9 @@ protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:account_update) << :name
+  end
+
+  def admin?
+    current_user.admin? || session[:admin]
   end
 end

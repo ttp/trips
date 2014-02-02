@@ -175,6 +175,11 @@ ua:
 
       scheduled: 'Заплановані походи'
       archive: 'Минулі походи'
+
+# Admin
+    admin:
+      admin_panel: Адміністрування
+      switch_user: Змінити користувача
 # Regions
   region:
     region: Регіон

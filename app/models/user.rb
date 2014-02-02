@@ -1,6 +1,10 @@
 require 'digest/md5'
 
 class User < ActiveRecord::Base
+  ROLE  = [
+    ADMIN = 'admin'
+  ]
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -19,5 +23,9 @@ class User < ActiveRecord::Base
 
   def can_view_private?(user)
     user.id = self.id
+  end
+
+  def admin?
+    role == ADMIN
   end
 end
