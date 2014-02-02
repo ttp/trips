@@ -2,7 +2,7 @@ Pohody::Application.routes.draw do
 
   post "users/ulogin" => "users#ulogin"
   get "users/edit-profile" => "users#edit_profile", as: :user_profile
-  put "users/edit-profile" => "users#update_profile"
+  patch "users/edit-profile" => "users#update_profile"
   post "users/edit-profile" => "users#update_profile"
 
   get "trips" => "trips#index"
@@ -14,7 +14,7 @@ Pohody::Application.routes.draw do
 
   get "trips/:trip_id/comments" => "trip_comments#index"
   post "trips/:trip_id/comments" => "trip_comments#create"
-  put "trips/:trip_id/comments/:comment_id" => "trip_comments#update"
+  patch "trips/:trip_id/comments/:comment_id" => "trip_comments#update"
   delete "trips/:trip_id/comments/:comment_id" => "trip_comments#destroy"
 
   get "calendar" => "calendar#index"
