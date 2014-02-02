@@ -13,6 +13,9 @@ _.namespace "App.views"
       has_guide: (item) ->
         I18n.t "trip.has_guide_" + item[0]
 
+      user_name: (item) ->
+        item[0]
+
     initialize: (options) ->
       @options = options
       @_trips = App.collections.TripCollection

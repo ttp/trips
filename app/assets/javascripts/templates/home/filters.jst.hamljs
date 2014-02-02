@@ -15,3 +15,12 @@
         %input{type: "checkbox", name: "has_guide", value: item[0]}
         %span= I18n.t('trip.has_guide_' + item[0])
       %span.count= item[1]
+
+%h5{title: I18n.t('trip.organizer')}= I18n.t('trip.organizer')
+.user_name
+  :each item in trips_by_user_name
+    %div
+      %label
+        %input{type: "checkbox", name: "user_name", value: item[0]}
+        %span= item[0]
+      %span.count= item[1]
