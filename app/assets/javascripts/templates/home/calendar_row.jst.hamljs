@@ -1,5 +1,5 @@
 .row{class: class_name}
   :each date in dates
     .col-md-6
-      .month
+      .month.well.well-sm
         != calendar.render(date.getFullYear(), date.getMonth())
