@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004114517) do
+ActiveRecord::Schema.define(version: 20140202104840) do
 
   create_table "menu_day_entities", force: true do |t|
     t.integer "parent_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.integer "sort_order",            default: 0, null: false
   end
 
-  add_index "menu_day_entities", ["day_id"], name: "index_menu_day_entities_on_day_id"
+  add_index "menu_day_entities", ["day_id"], name: "index_menu_day_entities_on_day_id", using: :btree
 
   create_table "menu_days", force: true do |t|
     t.integer "menu_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.decimal "coverage", precision: 3, scale: 2, default: 0.0, null: false
   end
 
-  add_index "menu_days", ["menu_id"], name: "index_menu_days_on_menu_id"
+  add_index "menu_days", ["menu_id"], name: "index_menu_days_on_menu_id", using: :btree
 
   create_table "menu_dish_categories", force: true do |t|
   end
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.string   "name"
   end
 
-  add_index "menu_dish_category_translations", ["locale"], name: "index_menu_dish_category_translations_on_locale"
-  add_index "menu_dish_category_translations", ["menu_dish_category_id"], name: "index_menu_dish_category_translations_on_menu_dish_category_id"
+  add_index "menu_dish_category_translations", ["locale"], name: "index_menu_dish_category_translations_on_locale", using: :btree
+  add_index "menu_dish_category_translations", ["menu_dish_category_id"], name: "index_menu_dish_category_translations_on_menu_dish_category_id", using: :btree
 
   create_table "menu_dish_products", force: true do |t|
     t.integer "dish_id"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.string   "name"
   end
 
-  add_index "menu_dish_translations", ["locale"], name: "index_menu_dish_translations_on_locale"
-  add_index "menu_dish_translations", ["menu_dish_id"], name: "index_menu_dish_translations_on_menu_dish_id"
+  add_index "menu_dish_translations", ["locale"], name: "index_menu_dish_translations_on_locale", using: :btree
+  add_index "menu_dish_translations", ["menu_dish_id"], name: "index_menu_dish_translations_on_menu_dish_id", using: :btree
 
   create_table "menu_dishes", force: true do |t|
     t.integer "dish_category_id"
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.string   "name"
   end
 
-  add_index "menu_meal_translations", ["locale"], name: "index_menu_meal_translations_on_locale"
-  add_index "menu_meal_translations", ["menu_meal_id"], name: "index_menu_meal_translations_on_menu_meal_id"
+  add_index "menu_meal_translations", ["locale"], name: "index_menu_meal_translations_on_locale", using: :btree
+  add_index "menu_meal_translations", ["menu_meal_id"], name: "index_menu_meal_translations_on_menu_meal_id", using: :btree
 
   create_table "menu_meals", force: true do |t|
   end
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.datetime "updated_at"
   end
 
-  add_index "menu_menus", ["is_public"], name: "index_menu_menus_on_is_public"
-  add_index "menu_menus", ["user_id"], name: "index_menu_menus_on_user_id"
+  add_index "menu_menus", ["is_public"], name: "index_menu_menus_on_is_public", using: :btree
+  add_index "menu_menus", ["user_id"], name: "index_menu_menus_on_user_id", using: :btree
 
   create_table "menu_product_categories", force: true do |t|
   end
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.string   "name"
   end
 
-  add_index "menu_product_category_translations", ["locale"], name: "index_menu_product_category_translations_on_locale"
-  add_index "menu_product_category_translations", ["menu_product_category_id"], name: "index_6680f3b847633177684d3ec6549dd62931982788"
+  add_index "menu_product_category_translations", ["locale"], name: "index_menu_product_category_translations_on_locale", using: :btree
+  add_index "menu_product_category_translations", ["menu_product_category_id"], name: "index_6680f3b847633177684d3ec6549dd62931982788", using: :btree
 
   create_table "menu_product_translations", force: true do |t|
     t.integer  "menu_product_id", null: false
@@ -119,8 +119,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.string   "name"
   end
 
-  add_index "menu_product_translations", ["locale"], name: "index_menu_product_translations_on_locale"
-  add_index "menu_product_translations", ["menu_product_id"], name: "index_menu_product_translations_on_menu_product_id"
+  add_index "menu_product_translations", ["locale"], name: "index_menu_product_translations_on_locale", using: :btree
+  add_index "menu_product_translations", ["menu_product_id"], name: "index_menu_product_translations_on_menu_product_id", using: :btree
 
   create_table "menu_products", force: true do |t|
     t.integer "product_category_id",             null: false
@@ -147,8 +147,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.integer  "user_id"
   end
 
-  add_index "tracks", ["region_id"], name: "index_tracks_on_region_id"
-  add_index "tracks", ["user_id"], name: "index_tracks_on_user_id"
+  add_index "tracks", ["region_id"], name: "index_tracks_on_region_id", using: :btree
+  add_index "tracks", ["user_id"], name: "index_tracks_on_user_id", using: :btree
 
   create_table "trip_comments", force: true do |t|
     t.integer  "user_id"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.datetime "updated_at"
   end
 
-  add_index "trip_comments", ["trip_id"], name: "index_trip_comments_on_trip_id"
+  add_index "trip_comments", ["trip_id"], name: "index_trip_comments_on_trip_id", using: :btree
 
   create_table "trip_users", force: true do |t|
     t.integer "trip_id"
@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.boolean "approved", default: false
   end
 
-  add_index "trip_users", ["trip_id"], name: "index_trip_users_on_trip_id"
-  add_index "trip_users", ["user_id"], name: "index_trip_users_on_user_id"
+  add_index "trip_users", ["trip_id"], name: "index_trip_users_on_trip_id", using: :btree
+  add_index "trip_users", ["user_id"], name: "index_trip_users_on_user_id", using: :btree
 
   create_table "trips", force: true do |t|
     t.integer  "track_id"
@@ -183,8 +183,8 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.integer  "menu_id"
   end
 
-  add_index "trips", ["start_date"], name: "index_trips_on_start_date"
-  add_index "trips", ["user_id"], name: "index_trips_on_user_id"
+  add_index "trips", ["start_date"], name: "index_trips_on_start_date", using: :btree
+  add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 
   create_table "user_profiles", force: true do |t|
     t.integer  "user_id"
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.datetime "updated_at"
   end
 
-  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true
+  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -216,10 +216,11 @@ ActiveRecord::Schema.define(version: 20131004114517) do
     t.string   "name"
     t.string   "email_hash"
     t.string   "authentication_token"
+    t.string   "role"
   end
 
-  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
