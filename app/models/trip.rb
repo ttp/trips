@@ -10,6 +10,8 @@ class Trip < ActiveRecord::Base
 
   validates :track_id, :dates_range, :available_places, :presence => true
 
+  before_save :cache_duration
+
   def dates_range
     (I18n.l(start_date) + " - " + I18n.l(end_date)) unless (start_date.nil? || end_date.nil?)
   end
@@ -26,7 +28,7 @@ class Trip < ActiveRecord::Base
     end_str = end_at.strftime('%Y-%m-') + '00'
 
     connection.select_all(
-      "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
+      "SELECT trips.id, trips.start_date, trips.end_date, trips.cached_duration, trips.track_id, trips.has_guide,
         tracks.name as track_name,
         regions.name as region_name,
         trips.user_id, users.name as user_name
@@ -86,5 +88,10 @@ class Trip < ActiveRecord::Base
 
   def user_can_join?(user_id)
     users.where("users.id = ?", user_id).count() == 0 && available_places > 0
+  end
+
+  def cache_duration
+    duration = (self.end_date.to_time - self.start_date.to_time).to_i + 1.day.to_i
+    self.cached_duration = (duration / 86400).round
   end
 end

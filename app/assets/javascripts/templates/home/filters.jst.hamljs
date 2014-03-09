@@ -24,3 +24,7 @@
         %input{type: "checkbox", name: "user_name", value: item[0]}
         %span= item[0]
       %span.count= item[1]
+
+%h5{title: I18n.t('trip.duration')}= I18n.t('trip.duration')
+.duration
+  %input.duration{type: "text", class: "span2"}

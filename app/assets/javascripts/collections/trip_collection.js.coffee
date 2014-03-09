@@ -1,4 +1,6 @@
 #= require models/trip_model
+#= require models/filters
+
 _.namespace "App.collections"
 (->
   App.collections.TripCollection = new (Backbone.Collection.extend(
@@ -11,32 +13,38 @@ _.namespace "App.collections"
     getFilters: ->
       @_filters
 
-    setFilter: (type, value) ->
-      @_filters[type] = []  if _.isUndefined(@_filters[type])
-      @_filters[type] = [value]
+    getFilter: (field) ->
+      @_filters[field]
+
+    setFilter: (field, filter) ->
+      @_filters[field] = filter
       @trigger "filter:changed"
 
-    addFilter: (type, value) ->
-      @_filters[type] = []  if _.isUndefined(@_filters[type])
-      @_filters[type].push value
+    addFilterValue: (field, value) ->
+      if _.isUndefined(@_filters[field])
+        @setFilter(field, new App.FilterInclude([value]))
+      else
+        @_filters[field].add value
       @_cleanHiddenFilters()
       @trigger "filter:changed"
 
     _cleanHiddenFilters: ->
       grouped = undefined
-      _.each @_filters, ((values, type) ->
-        grouped = _.groupBy(@filtered(false, type), (row) ->
-          row.get type
+      _.each @_filters, ((filter, field) ->
+        return if filter.constructor != App.FilterInclude
+        grouped = _.groupBy(@filtered(false, field), (row) ->
+          row.get field
         )
-        hiddenValues = _.difference(values, _.keys(grouped))
+        hiddenValues = _.difference(filter.values, _.keys(grouped))
         _.each hiddenValues, ((hiddenValue) ->
-          @removeFilter type, hiddenValue
+          @removeFilterValue field, hiddenValue
         ), this
       ), this
 
-    removeFilter: (type, value) ->
-      @_filters[type] = _.without(@_filters[type], value)
-      delete @_filters[type]  unless @_filters[type].length
+    removeFilterValue: (field, value) ->
+      @_filters[field].remove value
+      delete @_filters[field]  unless @_filters[field].values.length
+      @_cleanHiddenFilters()
       @trigger "filter:changed"
 
     filtered: (filters, skip) ->
@@ -47,9 +55,9 @@ _.namespace "App.collections"
       return @toArray()  unless _.size(filters)
       @filter ((item) ->
         match = true
-        for type of filters
-          continue  if skip and type is skip
-          match = match and ((if _.isArray(filters[type]) then _.contains(filters[type], item.get(type) + "") else item.get(type) is filters[type]))
+        for field of filters
+          continue  if skip and field is skip
+          match = match and filters[field].match(item.get(field) + "")
         match
       ), this
 

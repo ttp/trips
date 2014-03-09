@@ -105,6 +105,7 @@ en:
     has_guide_desc: "Paid trips"
     organizer: 'Organizer'
     menu: 'Menu'
+    duration: Duration
 
   comments:
     title: 'Comments'

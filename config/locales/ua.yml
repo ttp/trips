@@ -108,6 +108,7 @@ ua:
     has_guide_desc: "Платні походи"
     organizer: 'Організатор'
     menu: 'Меню походу'
+    duration: Тривалість
 
   comments:
     title: 'Коментарі'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202104840) do
+ActiveRecord::Schema.define(version: 20140215071046) do
 
   create_table "menu_day_entities", force: true do |t|
     t.integer "parent_id"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20140202104840) do
     t.integer  "available_places",                 null: false
     t.boolean  "has_guide",        default: false, null: false
     t.integer  "menu_id"
+    t.integer  "cached_duration"
   end
 
   add_index "trips", ["start_date"], name: "index_trips_on_start_date", using: :btree

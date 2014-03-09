@@ -1,4 +1,5 @@
 #= require collections/trip_collection
+#= require models/filters
 _.namespace "App.views"
 (->
   App.views.HomeFiltersView = Backbone.View.extend(
@@ -24,7 +25,23 @@ _.namespace "App.views"
     render: ->
       data = @_getFilterOptions()
       @$el.html JST["templates/home/filters"](data)
-      @_checkSelected()
+      @_initSelected()
+
+    initSlider: ->
+      filter = @_trips.getFilter('cached_duration')
+      options = @_getDurationOptions()
+      input = @$el.find('input.duration')
+      input.slider(
+        min: options.min
+        max: options.max
+        value: if filter then filter.values else [options.min, options.max]
+      )
+      self = this
+      input.on 'slideStop', ->
+        _.defer ->
+          values = _.map(input.val().split(','), (value) -> parseInt(value))
+          self._trips.setFilter('cached_duration', new App.FilterRange(values))
+          self.render()
 
     _getFilterOptions: ->
       options = {}
@@ -38,20 +55,29 @@ _.namespace "App.views"
       ), this
       options
 
-    _checkSelected: ->
-      _.each @_trips.getFilters(), ((values, filter) ->
-        inputs = $("input[name=\"" + filter + "\"]")
-        _.each values, ((value) ->
+    _getDurationOptions: ->
+      min = 100
+      max = 1
+      @_trips.each (row) ->
+        min = Math.min(min, row.get('cached_duration'))
+        max = Math.max(max, row.get('cached_duration'))
+      {min: min, max: max}
+
+    _initSelected: ->
+      _.each @_trips.getFilters(), ((filter, field) ->
+        inputs = $("input[name=\"" + field + "\"]")
+        _.each filter.values, ((value) ->
           inputs.filter("[value=\"" + value + "\"]").attr "checked", true
         ), this
       ), this
+      @initSlider()
 
     updateFilter: (e) ->
       input = $(e.target)
       if input.is(":checked")
-        @_trips.addFilter input.attr("name"), input.val()
+        @_trips.addFilterValue input.attr("name"), input.val()
       else
-        @_trips.removeFilter input.attr("name"), input.val()
+        @_trips.removeFilterValue input.attr("name"), input.val()
       @render()
   )
 )()
