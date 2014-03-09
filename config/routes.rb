@@ -15,6 +15,7 @@ Pohody::Application.routes.draw do
   get "trips/:trip_id/comments" => "trip_comments#index"
   post "trips/:trip_id/comments" => "trip_comments#create"
   patch "trips/:trip_id/comments/:comment_id" => "trip_comments#update"
+  put "trips/:trip_id/comments/:comment_id" => "trip_comments#update"
   delete "trips/:trip_id/comments/:comment_id" => "trip_comments#destroy"
 
   get "calendar" => "calendar#index"
