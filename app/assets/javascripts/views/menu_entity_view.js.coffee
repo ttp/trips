@@ -1,5 +1,5 @@
-#= require libs/typeahead
-#= require libs/backbone-validation
+#= require typeahead
+#= require backbone-validation
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model

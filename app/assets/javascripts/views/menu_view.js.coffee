@@ -11,10 +11,10 @@
 #= require collections/menu_dish_collection
 #= require collections/menu_dish_product_collection
 #= require collections/menu_meal_collection
-#= require libs/rivets.min
-#= require libs/rivets-backbone
-#= require libs/rivets-formatters
-#= require libs/backbone-validation
+#= require rivets.min
+#= require rivets-backbone
+#= require rivets-formatters
+#= require backbone-validation
 _.namespace "App.views"
 (->
   App.views.MenuView = Backbone.View.extend(

@@ -1,4 +1,4 @@
-//= require libs/jquery.markitup
+//= require jquery.markitup
 
 $ ->
   markitupTextile =

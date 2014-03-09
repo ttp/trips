@@ -1,5 +1,5 @@
-//= require libs/date
-//= require libs/daterangepicker
+//= require date
+//= require daterangepicker
 
 $(function () {
     $('#trip_dates_range').daterangepicker({

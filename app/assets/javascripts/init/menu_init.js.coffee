@@ -1,5 +1,5 @@
 #= require views/menu_view
-#= require libs/backbone-validation
+#= require backbone-validation
 $ ->
   Backbone.Validation.configure
     forceUpdate: true

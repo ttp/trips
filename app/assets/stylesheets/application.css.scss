@@ -9,7 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree ./libs
+ *= require bootstrap-select
+ *= require daterangepicker
+ *= require markitup
+ *= require slider
+ *= require typeahead.js-bootstrap
  *= require_tree ./all
 */
 @import "bootstrap/bootstrap";

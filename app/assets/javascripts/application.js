@@ -1,10 +1,11 @@
 //= require jquery
 //= require jquery_ujs
-//= require libs/jquery-ui-1.10.3.custom
+//= require jquery-ui-1.10.3.custom
 //= require bootstrap
-//= require libs/underscore
-//= require libs/underscore-ux
-//= require libs/backbone
+//= require underscore
+//= require underscore-ux
+//= require backbone
+//= require bootstrap-slider
 //= require_tree ./templates
 //= require i18n
 //= require i18n/translations

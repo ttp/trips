@@ -1,5 +1,5 @@
-#= require libs/calendar
-#= require libs/date
+#= require calendar
+#= require date
 #= require collections/trip_collection
 _.namespace "App.views"
 (->
