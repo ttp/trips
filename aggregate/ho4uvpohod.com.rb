@@ -24,7 +24,7 @@ $month_map = {
 }
 
 def get_dates(dates_str)
-  year = 2013
+  year = 2014
   dates = dates_str.scan(/\d{2}/)
   start_date = "#{year}-#{dates[1]}-#{dates[0]}"
   end_date = "#{year}-#{dates[3]}-#{dates[2]}"
@@ -34,10 +34,13 @@ end
 def get_region_name(region)
   case region
     when /кр[иы]{1}м/i then 'Crimea'
-    when /карпат[иы]{1}/i then 'Carpathian'
+    when /карпат/i then 'Carpathian'
     when /непал/i then 'Nepal'
     when /кавказ/i then 'Caucasus'
+    when /абхаз/i then 'Caucasus'
+    when /грузи/i then 'Caucasus'
     when /румун/i then 'Romania'
+    when /турц/i then 'Turkey'
     else 'Other'
   end
 end

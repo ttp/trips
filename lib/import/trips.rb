@@ -53,6 +53,8 @@ module Import
           if !trip.save
             @logger.debug(trip.errors)
           end
+        else
+          @logger.info "skip existing trip"
         end
       end
     end
