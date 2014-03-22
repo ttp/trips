@@ -30,9 +30,10 @@
               %span /
               %span{"data-text" => 'menu.days_count | number'}
           .col.col-lg-4
-            %label.control-label.pull-left{for: 'is_public'}= t('menu.is_public') + ':'
-            %input.form-control.is_public{:name => 'is_public', :id => 'is_public',
-              :type => 'checkbox', "data-value" => 'menu.is_public', :checked => @menu.is_public}
+            %label{for: 'is_public'}
+              = t('menu.is_public') + ':'
+              %input.is_public{:name => 'is_public', :id => 'is_public',
+                :type => 'checkbox', "data-value" => 'menu.is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs

@@ -18,13 +18,13 @@
             %button.btn.btn-default.move-right{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
               %i.glyphicon.glyphicon-arrow-right
           .btn-group.btn-group-xs
-            %button.btn.btn-default.icon-copy.copy{type: 'button', title: I18n.t('helpers.links.copy'), tabindex: "-1"}
-            %button.btn.btn-default.icon-paste.paste{type: 'button', title: I18n.t('helpers.links.paste'), tabindex: "-1"}
+            %button.btn.btn-default.fa.fa-files-o.copy{type: 'button', title: I18n.t('helpers.links.copy'), tabindex: "-1"}
+            %button.btn.btn-default.fa.fa-clipboard.paste{type: 'button', title: I18n.t('helpers.links.paste'), tabindex: "-1"}
             %button.btn.btn-default.remove{type: 'button', title: I18n.t('helpers.links.destroy'), tabindex: "-1"}
               %i.glyphicon.glyphicon-remove
 
   .panel-body.body
     .noitems
-      Drop products here
+      = I18n.t('menu.drop_products')
   .panel-footer
     Summary goes here
