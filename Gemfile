@@ -3,7 +3,7 @@ gem 'rails', '>= 4.0.0'
 gem 'protected_attributes'
 gem 'sqlite3', :group => [:development, :test]
 gem "mysql2"
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails'
 gem 'uglifier'
 gem "i18n-js"
