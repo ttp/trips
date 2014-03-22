@@ -1,7 +1,7 @@
 - content_for :description, t('menu.meta_description')
 - content_for :keywords, t('menu.meta_keywords')
 
-%p.text-danger= t('menu.about_warning_html')
+%h3= t 'nav.menu_builder'
 
 %ul.nav.nav-tabs
   %li.active
@@ -24,3 +24,5 @@
         %td= menu.users_count
         %td
           #{round_precision(menu.coverage)} / #{menu.days_count}
+
+= render 'shared/add_this'

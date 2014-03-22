@@ -12,9 +12,11 @@
         %i.glyphicon.glyphicon-chevron-right
   .row
     #calendar.col-md-8
-    #filters.col-md-4
-    #trips.col-md-4
+    #filters.col-md-4.pull-right
+    #trips.col-md-4.pull-right
       %h4.trips-header
         %span= t('account.trips')
         %button.close ×
       .trips-body
+    .col-md-8
+      = render 'shared/add_this'

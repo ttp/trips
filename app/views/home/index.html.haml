@@ -16,6 +16,9 @@
         %p
           %a{href: '/about'}= t('home.more')
 
+    %br{clear: 'all'}
+    = render 'shared/add_this'
+
   #trips.col-md-4
     %h4.trips-header= t('home.upcoming_trips')
     .trips-body
