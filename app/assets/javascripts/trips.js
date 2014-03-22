@@ -1,9 +1,9 @@
-//= require date
+//= require moment
 //= require daterangepicker
 
 $(function () {
     $('#trip_dates_range').daterangepicker({
-        format: 'dd.MM.yyyy',
+        format: 'DD-MM-YYYY',
         locale: {
             applyLabel: 'OK',
             clearLabel: "Очистити",
