@@ -1,6 +1,9 @@
 class Menu::Product < ActiveRecord::Base
   attr_accessible :name, :calories, :proteins, :fats, :carbohydrates
   belongs_to :product_category
+
+  scope :by_category, ->(id) { where(product_category_id: id)}
+
   translates :name
   class Translation
     attr_accessible :locale

@@ -1,0 +1,33 @@
+.rows
+  #products.col-md-9
+    %ol.breadcrumb
+      %li Proucts
+      %li Category
+
+    %h3
+      - if params[:category]
+        = @category.name
+      - else
+        = t 'menu.products.products'
+
+    = link_to 'New Product', new_menu_product_path
+
+    - @menu_products.each do |menu_product|
+      .product
+        %img.img-thumbnail.pull-left{src: asset_path('no-image.png')}
+        .description
+          %div
+            = link_to menu_product.name, menu_product_path(menu_product.id)
+          %div
+            = link_to 'Edit', edit_menu_product_path(menu_product.id)
+            |
+            = link_to 'Destroy', menu_product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    = will_paginate @menu_products
+
+  #categories.col-md-3
+    %h4= t 'menu.categories'
+    %ul.nav.nav-pills.nav-stacked
+      - @product_categories.each do |category|
+        %li{class: ("active" if params[:category] && params[:category].to_i == category['id'])}
+          %a{href: menu_products_path(category: category['id'])}= category['name']

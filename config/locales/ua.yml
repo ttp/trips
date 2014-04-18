@@ -236,6 +236,7 @@ ua:
     examples: Приклади меню
     quick_add: Швидке додавання
     is_public: Загальнодоступне
+    categories: Категорії
     coverage:
       full: Повний день
       two_meals: 2 трапези 80%
@@ -249,3 +250,5 @@ ua:
       enter_name: Введіть назву меню
       enter_weight: Введіть кількість продукту у грамах
       incorrect: Некоректне значення
+    products:
+      products: Продукти

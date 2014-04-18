@@ -4,7 +4,7 @@ $ ->
   Backbone.Validation.configure
     forceUpdate: true
   $.ajax
-    url: "/menu/products"
+    url: "/menu/menus/products"
     type: "GET"
     dataType: "json"
     success: (data) ->
