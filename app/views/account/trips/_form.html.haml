@@ -9,7 +9,7 @@
   = f.input :dates_range, :label => t('account.trip.dates')
   = f.input :available_places, :label => t('account.trip.available_places')
   = f.input :trip_details, :hint => t('account.trip.details_hint'), input_html: {:rows => 10, :class => 'textile'}, :label => t('account.trip.details')
-  = f.input :has_guide, :label => t('account.trip.has_guide'), :wrapper => :checkbox, :as => :inline_checkbox
+  = f.input :has_guide, :label => t('account.trip.has_guide'), wrapper: :vertical_boolean
   = f.input :menu_id, :collection => Menu::Menu.find_all_by_user_id(current_user.id), :label => t('trip.menu')
   = f.input :url, :label => t('account.trip.url')
   .form-actions

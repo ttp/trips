@@ -2,7 +2,8 @@
 = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical row col-md-6' }) do |f|
   = f.input :email, :autofocus => true
   = f.input :password, :label => t('user.password')
-  = f.input :remember_me, :label => t('user.remember_me'), :as => :inline_checkbox, :wrapper => :checkbox if devise_mapping.rememberable?
+  - if devise_mapping.rememberable?
+    = f.input :remember_me, :label => t('user.remember_me'), wrapper: :vertical_boolean, as: :boolean
   .form-actions
     = f.button :submit, t('helpers.links.sign_in'), :class => 'btn-primary'
     .pull-right
