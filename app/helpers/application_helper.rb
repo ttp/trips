@@ -41,4 +41,8 @@ module ApplicationHelper
   def return_here_path(path)
     path + '?return=' + u(request.fullpath)
   end
+
+  def back_url(path = nil)
+    params[:back_url] || request.referer || path
+  end
 end

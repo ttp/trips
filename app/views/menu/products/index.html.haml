@@ -5,12 +5,13 @@
       %li Category
 
     %h3
-      - if params[:category]
+      - if params[:category].present?
         = @category.name
       - else
         = t 'menu.products.products'
 
-    = link_to 'New Product', new_menu_product_path
+    - if user_signed_in?
+      = link_to t('menu.products.add_product'), new_menu_product_path, :class => 'btn btn-primary'
 
     - @menu_products.each do |menu_product|
       .product

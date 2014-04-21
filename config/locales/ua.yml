@@ -215,7 +215,6 @@ ua:
     move: Змістити
     meals: Трапези
     dishes: Страви
-    products: Продукти
     recommended: Рекомендовано
     weight: Вага
     calories: Калорії
@@ -252,3 +251,15 @@ ua:
       incorrect: Некоректне значення
     products:
       products: Продукти
+      add_product: Додати продукт
+      new: Новий продукт
+      edit: Редагувати продукт
+      name: Назва
+      category: Категорія
+      calories: Калорії
+      proteins: Білки
+      fats: Жири
+      carbohydrates: Вуглеводи
+      description: Опис
+      norm: Норма, г.
+      norm_info: Норма(інформація)

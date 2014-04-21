@@ -4,7 +4,7 @@ class Menu::ProductsController < ApplicationController
   # GET /menu/products
   def index
     @menu_products = Menu::Product.with_translations(I18n.locale)
-    if params[:category]
+    if params[:category].present?
       @menu_products = @menu_products.by_category(params[:category])
       @category = Menu::ProductCategory.find(params[:category])
     end
@@ -30,7 +30,7 @@ class Menu::ProductsController < ApplicationController
     @menu_product = Menu::Product.new(menu_product_params)
 
     if @menu_product.save
-      redirect_to @menu_product, notice: 'Product was successfully created.'
+      redirect_to back(menu_products_path), notice: 'Product was successfully created.'
     else
       render action: 'new'
     end
@@ -39,7 +39,7 @@ class Menu::ProductsController < ApplicationController
   # PATCH/PUT /menu/products/1
   def update
     if @menu_product.update(menu_product_params)
-      redirect_to @menu_product, notice: 'Product was successfully updated.'
+      redirect_to back(menu_products_path), notice: 'Product was successfully updated.'
     else
       render action: 'edit'
     end
@@ -52,12 +52,10 @@ class Menu::ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_menu_product
       @menu_product = Menu::Product.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def menu_product_params
       params[:menu_product]
     end

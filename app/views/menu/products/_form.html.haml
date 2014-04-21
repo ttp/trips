@@ -1,7 +1,29 @@
-= simple_form_for(@menu_product) do |f|
+= javascript_include_tag "init/textile_init"
+
+= simple_form_for(@menu_product, :html => { :class => 'row col-md-9' }) do |f|
   = f.error_notification
 
-  .form-inputs
+  = hidden_field_tag :back_url, back_url
+  = f.input :name, label: t('menu.products.name')
+  = f.input :product_category_id, :collection => Menu::ProductCategory.all, :label => t('menu.products.category')
+  .row
+    .col-sm-3
+      = f.input :calories, label: t('menu.products.calories')
+  .row
+    .col-sm-2
+      = f.input :proteins, label: t('menu.products.proteins')
+    .col-sm-2
+      = f.input :fats, label: t('menu.products.fats')
+    .col-sm-2
+      = f.input :carbohydrates, label: t('menu.products.carbohydrates')
+
+  = f.input :description, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
+
+  .row
+    .col-sm-3
+      = f.input :norm, label: t('menu.products.norm')
+  = f.input :norm_info, label: t('menu.products.norm_info'), input_html: {:rows => 5}
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, :class => 'btn-primary', :value => t('helpers.links.save')
+    = link_to t("helpers.links.cancel"), back_url(menu_products_path), :class => 'btn'
