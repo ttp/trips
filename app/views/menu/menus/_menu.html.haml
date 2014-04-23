@@ -28,7 +28,7 @@
               %th= t('menu.person_per_day')
 
               %td= (@menu.total[:calories] / @menu.coverage).to_i
-              %td= weight(@menu.total[:weight] / @menu.days_count)
+              %td= weight(@menu.total[:weight] / @menu.coverage)
               %td= (@menu.total[:proteins] / @menu.coverage).to_i
               %td= (@menu.total[:fats] / @menu.coverage).to_i
               %td= (@menu.total[:carbohydrates] / @menu.coverage).to_i
