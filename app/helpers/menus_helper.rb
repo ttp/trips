@@ -22,7 +22,7 @@ module MenusHelper
   end
 
   def weight(number)
-    (number.to_f / 1000).to_s + t('menu.kg')
+    (number.to_f / 1000).round(3).to_s + t('menu.kg')
   end
 
   def round_precision(number)
