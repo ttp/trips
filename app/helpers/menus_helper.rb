@@ -33,14 +33,14 @@ module MenusHelper
     end
   end
 
-  def can_view?
+  def menu_can_view?
     @menu.is_public? or
       (user_signed_in? and @menu.user_id == current_user.id) or
       (params[:key] and [@menu.edit_key, @menu.read_key].include?(params[:key]))
   end
 
-  def can_edit?
-    (user_signed_in? and @menu.user_id == current_user.id) or
+  def menu_can_edit?
+    (user_signed_in? and (@menu.user_id == current_user.id || admin?)) or
       (params[:key] and @menu.edit_key == params[:key])
   end
 
@@ -49,6 +49,10 @@ module MenusHelper
   end
 
   def guest_owner_menu_path(menu)
-    menu_menu_path(@menu) + "?key=#{@menu.edit_key}"
+    menu_menu_path(menu) + "?key=#{menu.edit_key}"
+  end
+
+  def menu_share_path(menu)
+    menu_menu_path(menu, key: menu.read_key)
   end
 end
