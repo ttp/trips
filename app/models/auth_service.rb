@@ -28,7 +28,7 @@ class AuthService
 
   def ulogin_response(token)
     path = "/token.php?token=#{token}" +
-        "&host=localhost"
+        "&host=pohody.com.ua"
 
     http = Net::HTTP.new('ulogin.ru')
     res = http.get(path)
