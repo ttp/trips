@@ -6,6 +6,5 @@
   .form-actions
     = f.button :submit, t('helpers.links.sign_in'), :class => 'btn-primary'
     .pull-right
-      <script src="//ulogin.ru/js/ulogin.js"></script>
-      <div id="uLogin" data-ulogin="verify=1;display=panel;fields=first_name,last_name,email;providers=vkontakte,yandex,google,facebook,twitter;hidden=mailru,odnoklassniki,livejournal,linkedin,liveid,openid;redirect_uri=http%3A%2F%2F#{Rails.application.config.site[:host]}%2Fusers%2Fulogin"></div>
+      <script src="//ulogin.ru/js/ulogin.js"></script><div id="uLogin1" data-uloginid="f4c60325"></div>
 = render "devise/shared/links"

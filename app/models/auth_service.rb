@@ -3,7 +3,6 @@ require 'net/http'
 class AuthService
   def authenticate(token)
     data = ulogin_response(token)
-    p data
 
     if data.has_key?('error') || data['verified_email'] != '1'
       return false
@@ -24,7 +23,7 @@ class AuthService
     user.name = data['first_name'] + ' ' + data['last_name']
     # user.skip_confirmation!
     user.save
-    return user
+    user
   end
 
   def ulogin_response(token)
