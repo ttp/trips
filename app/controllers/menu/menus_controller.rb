@@ -26,7 +26,7 @@ class Menu::MenusController < ApplicationController
   def show
     @menu = Menu::Menu.find(params[:id])
 
-    redirect_to menu_menus_url and return unless can_view?
+    redirect_to menu_menus_url and return unless menu_can_view?
   end
 
   def new
@@ -43,7 +43,7 @@ class Menu::MenusController < ApplicationController
 
   def edit
     @menu = Menu::Menu.find(params[:id])
-    redirect_to menu_menus_url and return unless can_edit?
+    redirect_to menu_menus_url and return unless menu_can_edit?
   end
 
   # POST /menu
@@ -86,7 +86,7 @@ class Menu::MenusController < ApplicationController
   # PUT /menu/1.json
   def update
     @menu = Menu::Menu.find(params[:id])
-    redirect_to menu_menus_url and return unless can_edit?
+    redirect_to menu_menus_url and return unless menu_can_edit?
 
     data = JSON.parse(params[:data])
     set_menu_data(data['menu'])

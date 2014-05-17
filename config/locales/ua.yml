@@ -236,6 +236,7 @@ ua:
     quick_add: Швидке додавання
     is_public: Загальнодоступне
     categories: Категорії
+    share_link: Поділитись
     coverage:
       full: Повний день
       two_meals: 2 трапези 80%

@@ -2,10 +2,13 @@
 
 %h3
   = title @menu.name
-  -if !user_signed_in? && can_edit?
+  - if menu_can_edit?
     .btn-group.btn-group-xs.pull-right.hidden-print
       %a.btn.btn-default{href: guest_menu_edit_path(@menu), title: t("helpers.links.edit")}
         %i.glyphicon.glyphicon-edit.edit
         = t("helpers.links.edit")
+      %a.btn.btn-default{href: menu_share_path(@menu), title: t("menu.share_link")}
+        %i.glyphicon.glyphicon-share
+        = t("menu.share_link")
 
 = render :partial => 'menu'
