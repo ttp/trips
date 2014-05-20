@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421055355) do
+ActiveRecord::Schema.define(version: 20140520150952) do
 
   create_table "menu_day_entities", force: true do |t|
     t.integer "parent_id"
@@ -125,13 +125,15 @@ ActiveRecord::Schema.define(version: 20140421055355) do
   add_index "menu_product_translations", ["menu_product_id"], name: "index_menu_product_translations_on_menu_product_id", using: :btree
 
   create_table "menu_products", force: true do |t|
-    t.integer "product_category_id",              null: false
-    t.integer "calories",            default: 0,  null: false
-    t.integer "proteins",            default: 0,  null: false
-    t.integer "fats",                default: 0,  null: false
-    t.integer "carbohydrates",       default: 0,  null: false
-    t.string  "icon",                default: "", null: false
-    t.integer "norm",                default: 0,  null: false
+    t.integer "product_category_id",                 null: false
+    t.integer "calories",            default: 0,     null: false
+    t.integer "proteins",            default: 0,     null: false
+    t.integer "fats",                default: 0,     null: false
+    t.integer "carbohydrates",       default: 0,     null: false
+    t.string  "icon",                default: "",    null: false
+    t.integer "norm",                default: 0,     null: false
+    t.integer "user_id"
+    t.boolean "is_public",           default: false, null: false
   end
 
   create_table "regions", force: true do |t|

@@ -25,7 +25,9 @@ Pohody::Application.routes.draw do
     resources :menus do
       get 'products', on: :collection
     end
-    resources :products
+    resources :products do
+      get 'category/:category', on: :collection, action: :category, as: :by_category
+    end
   end
 
   get "about" => "home#about", as: :about

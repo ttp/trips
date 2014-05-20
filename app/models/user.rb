@@ -2,7 +2,10 @@ require 'digest/md5'
 
 class User < ActiveRecord::Base
   ROLE  = [
-    ADMIN = 'admin'
+    ADMIN = 'admin',
+    USER = 'user',
+    MODERATOR = 'moderator',
+    MENU_MODERATOR = 'menu_moderator'
   ]
 
   # Include default devise modules. Others available are:
@@ -26,6 +29,14 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    role == ADMIN
+    roles.include? ADMIN
+  end
+
+  def roles
+    @roles ||= role ? role.split(',') : []
+  end
+
+  def role?(role_name)
+    roles.include? role_name
   end
 end

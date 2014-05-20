@@ -24,6 +24,9 @@
       = f.input :norm, label: t('menu.products.norm')
   = f.input :norm_info, label: t('menu.products.norm_info'), input_html: {:rows => 5}
 
+  - if permissions_for('Menu').allowed? 'moderate'
+    = f.input :is_public, :label => t('menu.products.is_public'), wrapper: :vertical_boolean, as: :boolean
+
   .form-actions
     = f.button :submit, :class => 'btn-primary', :value => t('helpers.links.save')
     = link_to t("helpers.links.cancel"), back_url(menu_products_path), :class => 'btn'

@@ -1,14 +1,13 @@
 .rows
   #products.col-md-9
-    %ol.breadcrumb
-      %li Proucts
-      %li Category
+    - if params[:category].present?
+      = render 'shared/breadcrumbs'
 
     %h3
       - if params[:category].present?
-        = @category.name
+        = title @category.name
       - else
-        = t 'menu.products.products'
+        = title t('menu.products.products')
 
     - if user_signed_in?
       = link_to t('menu.products.add_product'), new_menu_product_path, :class => 'btn btn-primary'
@@ -19,10 +18,11 @@
         .description
           %div
             = link_to menu_product.name, menu_product_path(menu_product.id)
-          %div
-            = link_to 'Edit', edit_menu_product_path(menu_product.id)
-            |
-            = link_to 'Destroy', menu_product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - if admin?
+            %div
+              = link_to 'Edit', edit_menu_product_path(menu_product.id)
+              |
+              = link_to 'Destroy', menu_product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
     = will_paginate @menu_products
 
@@ -31,4 +31,4 @@
     %ul.nav.nav-pills.nav-stacked
       - @product_categories.each do |category|
         %li{class: ("active" if params[:category] && params[:category].to_i == category['id'])}
-          %a{href: menu_products_path(category: category['id'])}= category['name']
+          %a{href: by_category_menu_products_path(category['id'])}= category['name']

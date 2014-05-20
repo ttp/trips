@@ -57,6 +57,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    breadcrumbs_on_rails (2.3.0)
     builder (3.1.4)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -242,6 +243,7 @@ DEPENDENCIES
   better_errors (>= 0.6.0)
   binding_of_caller (>= 0.7.1)
   bootstrap-sass!
+  breadcrumbs_on_rails
   capybara (>= 2.0.2)
   coffee-rails
   cucumber-rails

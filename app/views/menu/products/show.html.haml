@@ -1,6 +1,25 @@
-%p#notice= notice
+= render 'shared/breadcrumbs'
+%h3
+  = title @menu_product.name
+  - if permissions_for('UserResource').allowed?('edit', @menu_product) || permissions_for('Menu').allowed?('moderate')
+    .btn-group.btn-group-xs.pull-right.hidden-print
+      %a.btn.btn-default{href: edit_menu_product_path(@menu_product), title: t("helpers.links.edit")}
+        %i.glyphicon.glyphicon-edit.edit
+        = t("helpers.links.edit")
 
+.row
+  .col-sm-5
+    %table.table
+      %tr
+        %th= t('menu.products.calories')
+        %th= t('menu.products.proteins')
+        %th= t('menu.products.fats')
+        %th= t('menu.products.carbohydrates')
+      %tr
+        %td= @menu_product.calories
+        %td= @menu_product.proteins
+        %td= @menu_product.fats
+        %td= @menu_product.carbohydrates
 
-= link_to 'Edit', edit_menu_product_path(@menu_product)
-\|
-= link_to 'Back', menu_products_path
+- if !@menu_product.description.blank?
+  .description= raw RedCloth.new(@menu_product.description, [:filter_html]).to_html

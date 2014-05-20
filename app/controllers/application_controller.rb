@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, :if => :devise_controller?
   protect_from_forgery
   helper_method :admin?
+  helper_method :permissions_for
 
 protected
   def store_location
@@ -40,6 +41,14 @@ protected
   end
 
   def admin?
-    current_user.admin? || session[:admin]
+    current_user && current_user.admin? || session[:admin]
+  end
+
+  def permissions
+    @permissions ||= Permissions::Acl.new(current_user)
+  end
+
+  def permissions_for(resource)
+    permissions.for_resource(resource)
   end
 end
