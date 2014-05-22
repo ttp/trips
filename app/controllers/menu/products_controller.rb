@@ -46,7 +46,7 @@ class Menu::ProductsController < ApplicationController
     @menu_product.user_id = current_user.id
 
     if @menu_product.save
-      redirect_to back(menu_products_path), notice: 'Product was successfully created.'
+      redirect_to back(menu_products_path), notice: t('menu.products.was_created')
     else
       render action: 'new'
     end
@@ -59,7 +59,7 @@ class Menu::ProductsController < ApplicationController
   # PATCH/PUT /menu/products/1
   def update
     if @menu_product.update(menu_product_params)
-      redirect_to back(menu_products_path), notice: 'Product was successfully updated.'
+      redirect_to back(menu_products_path), notice: t('menu.products.was_updated')
     else
       render action: 'edit'
     end
@@ -68,7 +68,7 @@ class Menu::ProductsController < ApplicationController
   # DELETE /menu/products/1
   def destroy
     @menu_product.destroy
-    redirect_to menu_products_url, notice: 'Product was successfully destroyed.'
+    redirect_to (request.referer || menu_menus_url), notice: t('menu.products.was_destroyed')
   end
 
   private

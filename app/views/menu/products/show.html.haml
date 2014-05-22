@@ -4,9 +4,22 @@
   - if permissions_for('UserResource').allowed?('edit', @menu_product) || permissions_for('Menu').allowed?('moderate')
     .btn-group.btn-group-xs.pull-right.hidden-print
       %a.btn.btn-default{href: edit_menu_product_path(@menu_product), title: t("helpers.links.edit")}
-        %i.glyphicon.glyphicon-edit.edit
+        %i.glyphicon.glyphicon-edit
         = t("helpers.links.edit")
+      %a.btn.btn-default{href: menu_products_path(@menu_product), :method => :delete, :data => { :confirm => t('helpers.links.confirm')}}
+        %i.glyphicon.glyphicon-remove
+        = t("helpers.links.destroy")
 
+- if !@menu_product.description.blank?
+  .description= raw safe_textile(@menu_product.description)
+
+- if !@menu_product.norm_info.blank?
+  .norm-info
+    %h4= t('menu.products.norm')
+    %p
+      =raw h(@menu_product.norm_info).gsub("\n", '<br/>')
+
+%h4= t 'menu.products.caloric'
 .row
   .col-sm-5
     %table.table
@@ -20,6 +33,3 @@
         %td= @menu_product.proteins
         %td= @menu_product.fats
         %td= @menu_product.carbohydrates
-
-- if !@menu_product.description.blank?
-  .description= raw RedCloth.new(@menu_product.description, [:filter_html]).to_html

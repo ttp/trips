@@ -2,6 +2,7 @@ class Menu::Product < ActiveRecord::Base
   attr_accessible :name, :calories, :proteins, :fats, :carbohydrates, :product_category_id, :icon,
                   :description, :norm_info, :norm, :is_public
   belongs_to :product_category
+  belongs_to :user
 
   scope :by_category, ->(id) { where(product_category_id: id)}
   scope :for_user, -> (user) {

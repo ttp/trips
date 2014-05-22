@@ -257,11 +257,16 @@ ua:
       edit: Редагувати продукт
       name: Назва
       category: Категорія
+      caloric: Калорійність
       calories: Калорії
       proteins: Білки
       fats: Жири
       carbohydrates: Вуглеводи
       description: Опис
-      norm: Норма, г.
-      norm_info: Норма(інформація)
+      norm_default: Норма, г.
+      norm: Нормування
       is_public: Доступний всім
+      was_created: 'Продукт створено.'
+      was_updated: 'Продукт оновлено.'
+      was_destroyed: 'Продукт видалено.'
+

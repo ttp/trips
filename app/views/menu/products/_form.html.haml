@@ -21,8 +21,8 @@
 
   .row
     .col-sm-3
-      = f.input :norm, label: t('menu.products.norm')
-  = f.input :norm_info, label: t('menu.products.norm_info'), input_html: {:rows => 5}
+      = f.input :norm, label: t('menu.products.norm_default')
+  = f.input :norm_info, label: t('menu.products.norm'), input_html: {:rows => 5}
 
   - if permissions_for('Menu').allowed? 'moderate'
     = f.input :is_public, :label => t('menu.products.is_public'), wrapper: :vertical_boolean, as: :boolean

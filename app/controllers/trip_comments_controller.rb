@@ -1,4 +1,5 @@
 class TripCommentsController < ApplicationController
+  include ApplicationHelper
   before_filter :authenticate_user!
 
   # GET /trip/:trip_id/comments
@@ -43,7 +44,7 @@ class TripCommentsController < ApplicationController
 
     comment.comment = params[:comment]
     if comment.save
-      render json: {message: RedCloth.new(comment.comment, [:filter_html]).to_html}, status: :ok
+      render json: {message: safe_textile(comment.comment)}, status: :ok
     else
       render json: comment.errors
     end

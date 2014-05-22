@@ -19,10 +19,21 @@
           %div
             = link_to menu_product.name, menu_product_path(menu_product.id)
           - if admin?
-            %div
-              = link_to 'Edit', edit_menu_product_path(menu_product.id)
-              |
-              = link_to 'Destroy', menu_product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            .admin-info
+              - if menu_product.user_id
+                Added by:
+                = link_to menu_product.user.name, user_path(menu_product.user)
+                %br/
+              - if menu_product.is_public
+                = t 'menu.products.is_public'
+                %br/
+              .btn-group.btn-group-xs
+                %a.btn.btn-default{href: edit_menu_product_path(menu_product), title: t("helpers.links.edit")}
+                  %i.glyphicon.glyphicon-edit
+                  = t("helpers.links.edit")
+                %a.btn.btn-default{href: menu_product_path(menu_product), :data => {:method => :delete,  :confirm => t('helpers.links.confirm')}}
+                  %i.glyphicon.glyphicon-remove
+                  = t("helpers.links.destroy")
 
     = will_paginate @menu_products
 

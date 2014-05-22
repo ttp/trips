@@ -45,11 +45,11 @@
 
         - if !@trip.trip_details.empty?
           %h5= t('account.trip.details')
-          .description= raw RedCloth.new(@trip.trip_details, [:filter_html]).to_html
+          .description= raw safe_textile(@trip.trip_details)
 
         - if !@track.description.empty?
           %h5= t('account.track.description')
-          .description= raw RedCloth.new(@track.description, [:filter_html]).to_html
+          .description= raw safe_textile(@track.description)
         
         - if @menu
           %button.btn.btn-default.btn-xs.menu{:type => 'button', 'data-toggle' => 'collapse', 'data-target' => '#menu'}
