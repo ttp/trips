@@ -20,10 +20,15 @@ class Menu::Product < ActiveRecord::Base
     attr_accessible :locale
   end
 
-  def self.by_lang(lang)
-    connection.select_all(
-      "SELECT p.*, pt.name FROM menu_products p
+  def self.list_by_user(user, lang)
+    sql = "SELECT p.*, pt.name FROM menu_products p
       JOIN menu_product_translations pt ON pt.menu_product_id = p.id
-      WHERE pt.locale = #{quote_value(lang)}")
+      WHERE pt.locale = #{quote_value(lang)}"
+    if user
+      sql += " and (p.is_public = 1 or p.user_id = #{user.id})"
+    else
+      sql += " and p.is_public = 1"
+    end
+    connection.select_all(sql)
   end
 end
