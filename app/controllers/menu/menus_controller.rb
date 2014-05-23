@@ -5,11 +5,7 @@ class Menu::MenusController < ApplicationController
   around_filter :catch_not_found, :only => [:show, :edit, :update, :destroy]
 
   def index
-    if user_signed_in?
-      my
-    else
-      examples
-    end
+
   end
 
   def my

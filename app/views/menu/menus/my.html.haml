@@ -1,9 +1,4 @@
-%h3= t 'nav.menu_builder'
-
-%ul.nav.nav-tabs
-  %li= link_to t('menu.examples'), menu_examples_path
-  %li.active
-    %a{href: "#"}= title t('menu.my_menu')
+%h3= t 'menu.my_menu'
 
 %p
   = link_to t('menu.create'), new_menu_menu_path, :class => 'btn btn-primary'
