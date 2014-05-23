@@ -5,7 +5,7 @@ class Menu::Product < ActiveRecord::Base
   belongs_to :user
 
   scope :by_category, ->(id) { where(product_category_id: id)}
-  scope :for_user, -> (user) {
+  scope :for_user, ->(user) {
     if user
       where('is_public = 1 or user_id = ?', user.id)
     else
