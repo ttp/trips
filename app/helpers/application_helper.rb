@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module ApplicationHelper
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
