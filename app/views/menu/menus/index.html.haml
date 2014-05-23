@@ -1,0 +1,34 @@
+%h3= title t('menu.menu')
+
+.row
+  .col-md-5
+    .well.well-sm
+      %h4= t('menu.examples')
+      %p= t('menu.dashboard.examples_info')
+      .pull-right
+        = link_to t('menu.dashboard.goto_menus'), examples_menu_menus_path
+      .clearfix
+  .col-md-5.col-md-offset-1
+    .well.well-sm
+      %h4= t('menu.my_menu')
+      - if user_signed_in?
+        %p= t('menu.dashboard.my_menu_info_user')
+        .pull-right= link_to t('menu.dashboard.goto_menus'), my_menu_menus_path
+        .clearfix
+      - else
+        %p= t('menu.dashboard.my_menu_info_guest')
+        .pull-right= link_to t('menu.create'), new_menu_menu_path, :class => 'btn btn-primary'
+        .clearfix
+.row
+  .col-md-5
+    .well.well-sm
+      %h4= t('menu.dishes')
+      %p= t('menu.dashboard.dishes_info')
+  .col-md-5.col-md-offset-1
+    .well.well-sm
+      %h4= t('menu.products.products')
+      %p= t('menu.dashboard.products_info')
+      .pull-right= link_to t('menu.dashboard.goto_products'), menu_products_path
+      .clearfix
+
+= render 'shared/add_this'

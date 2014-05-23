@@ -55,4 +55,8 @@ module MenusHelper
   def menu_share_path(menu)
     menu_menu_path(menu, key: menu.read_key)
   end
+
+  def product_icon_path(icon)
+    icon.blank? ? asset_path('no-image.png') : media_path("products/#{icon}")
+  end
 end

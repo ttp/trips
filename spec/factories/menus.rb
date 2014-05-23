@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
 
   factory :menu_product_category, :class => Menu::ProductCategory do
-    name "Category name - product"
+    name "Category name"
   end
 
   factory :menu_product, :class => Menu::Product do

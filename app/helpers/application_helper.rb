@@ -41,4 +41,17 @@ module ApplicationHelper
   def return_here_path(path)
     path + '?return=' + u(request.fullpath)
   end
+
+  def back_url(path = nil)
+    params[:back_url] || request.referer || path
+  end
+
+  def safe_textile(message)
+    message = message.gsub(/javascript/i, 'jаvаsсrірt')
+    RedCloth.new(message, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
+  end
+
+  def media_path(filename)
+    "/media/#{filename}"
+  end
 end

@@ -6,26 +6,26 @@
 
 - if !@profile.nil?
   %p
-    = raw RedCloth.new(@profile.about, [:filter_html]).to_html
+    = raw safe_textile(@profile.about)
 
   %h4= t 'user_profile.experience'
   %p
-    = raw RedCloth.new(@profile.experience, [:filter_html]).to_html
+    = raw safe_textile(@profile.experience)
 
   %h4= t 'user_profile.equipment'
   %p
-    = raw RedCloth.new(@profile.equipment, [:filter_html]).to_html
+    = raw safe_textile(@profile.equipment)
 
   %h4= t 'user_profile.contacts'
   %p
-    = raw RedCloth.new(@profile.contacts, [:filter_html]).to_html
+    = raw safe_textile(@profile.contacts)
 
   -if user_signed_in? && current_user.can_view_private?(@user)
     -if !@profile.private_contacts.empty?
       %h4= t 'user_profile.private_contacts'
       %p
-        = raw RedCloth.new(@profile.private_contacts, [:filter_html]).to_html
+        = raw safe_textile(@profile.private_contacts)
     -if !@profile.private_info.empty?
       %h4= t 'user_profile.private_info'
       %p
-        = raw RedCloth.new(@profile.private_info, [:filter_html]).to_html
+        = raw safe_textile(@profile.private_info)

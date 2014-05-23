@@ -1,5 +1,7 @@
 class TextileController < ActionController::Base
+  include ApplicationHelper
+
   def preview
-    render text: RedCloth.new(params[:data], [:filter_html]).to_html
+    render text: safe_textile(params[:data])
   end
 end

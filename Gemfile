@@ -33,3 +33,4 @@ gem 'globalize', '~> 4.0.0.alpha.3'
 gem "selenium-webdriver", "~> 2.39.0", :group => :test
 gem 'font-awesome-sass'
 gem "switch_user"
+gem "breadcrumbs_on_rails"

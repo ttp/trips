@@ -1,0 +1,45 @@
+.rows
+  #products-grid.col-md-9
+    - if params[:category].present?
+      = render 'shared/breadcrumbs'
+
+    %h3
+      - if params[:category].present?
+        = title @category.name
+      - else
+        = title t('menu.products.products')
+
+    - if user_signed_in?
+      = link_to t('menu.products.add_product'), new_menu_product_path, :class => 'btn btn-primary'
+
+    - @menu_products.each do |menu_product|
+      .product
+        %img.img-thumbnail.pull-left{src: product_icon_path(menu_product.icon)}
+        .description
+          %div
+            = link_to menu_product.name, menu_product_path(menu_product.id)
+          - if admin?
+            .admin-info
+              - if menu_product.user_id
+                Added by:
+                = link_to menu_product.user.name, user_path(menu_product.user)
+                %br/
+              - if menu_product.is_public
+                = t 'menu.products.is_public'
+                %br/
+              .btn-group.btn-group-xs
+                %a.btn.btn-default{href: edit_menu_product_path(menu_product), title: t("helpers.links.edit")}
+                  %i.glyphicon.glyphicon-edit
+                  = t("helpers.links.edit")
+                %a.btn.btn-default{href: menu_product_path(menu_product), :data => {:method => :delete,  :confirm => t('helpers.links.confirm')}}
+                  %i.glyphicon.glyphicon-remove
+                  = t("helpers.links.destroy")
+
+    = will_paginate @menu_products
+
+  #categories.col-md-3
+    %h4= t 'menu.categories'
+    %ul.nav.nav-pills.nav-stacked
+      - @product_categories.each do |category|
+        %li{class: ("active" if params[:category] && params[:category].to_i == category['id'])}
+          %a{href: by_category_menu_products_path(category['id'])}= category['name']

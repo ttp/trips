@@ -82,7 +82,7 @@ _.namespace "App.views"
       if entity_type <= 2
         conf.push $.extend {}, base_conf,
           local: App.collections.MenuProductCollection.typeahead()
-          header: "<div class='dropdown-header'>#{I18n.t('menu.products')}</div>"
+          header: "<div class='dropdown-header'>#{I18n.t('menu.products.products')}</div>"
       conf
 
     initTypeahead: (input) ->

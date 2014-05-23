@@ -21,9 +21,15 @@ Pohody::Application.routes.draw do
   get "calendar" => "calendar#index"
 
   namespace :menu do
-    get "products" => "menus#products", as: :menu_products
-    get "examples" => "menus#examples", as: :examples
-    resources :menus
+    get "dashboard" => "menus#index", as: :dashboard
+    resources :menus do
+      get 'examples', on: :collection
+      get 'my', on: :collection
+      get 'products', on: :collection
+    end
+    resources :products do
+      get 'category/:category', on: :collection, action: :category, as: :by_category
+    end
   end
 
   get "about" => "home#about", as: :about
