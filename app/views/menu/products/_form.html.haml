@@ -25,6 +25,7 @@
   = f.input :norm_info, label: t('menu.products.norm'), input_html: {:rows => 5}
 
   - if permissions_for('Menu').allowed? 'moderate'
+    = f.input :icon, :label => t('menu.products.icon')
     = f.input :is_public, :label => t('menu.products.is_public'), wrapper: :vertical_boolean, as: :boolean
 
   .form-actions

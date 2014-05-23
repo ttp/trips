@@ -79,7 +79,7 @@ class Menu::ProductsController < ApplicationController
 
   def menu_product_params
     product_params = params[:menu_product].dup
-    product_params = product_params.except(:is_public) unless permissions_for('Menu').allowed?('moderate')
+    product_params = product_params.except(:is_public, :icon) unless permissions_for('Menu').allowed?('moderate')
     product_params
   end
 

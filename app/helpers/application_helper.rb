@@ -50,4 +50,8 @@ module ApplicationHelper
     message = message.gsub(/javascript/i, 'jаvаsсrірt')
     RedCloth.new(message, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
   end
+
+  def media_path(filename)
+    "/media/#{filename}"
+  end
 end
