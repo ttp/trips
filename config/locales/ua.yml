@@ -266,7 +266,8 @@ ua:
       norm_default: Норма, г.
       norm: Нормування
       is_public: Доступний всім
-      was_created: 'Продукт створено.'
-      was_updated: 'Продукт оновлено.'
-      was_destroyed: 'Продукт видалено.'
+      was_created: Продукт створено.
+      was_updated: Продукт оновлено.
+      was_destroyed: Продукт видалено.
+      icon: Іконка
 
