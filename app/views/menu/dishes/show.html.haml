@@ -1,0 +1,20 @@
+= render 'shared/breadcrumbs'
+%h3
+  = title @menu_dish.name
+  - if permissions_for('UserResource').allowed?('edit', @menu_dish) || permissions_for('Menu').allowed?('moderate')
+    .btn-group.btn-group-xs.pull-right.hidden-print
+      %a.btn.btn-default{href: edit_menu_dish_path(@menu_dish), title: t("helpers.links.edit")}
+        %i.glyphicon.glyphicon-edit
+        = t("helpers.links.edit")
+      %a.btn.btn-default{href: menu_dish_path(@menu_dish), :data => {:method => :delete, :confirm => t('helpers.links.confirm')}}
+        %i.glyphicon.glyphicon-remove
+        = t("helpers.links.destroy")
+
+.dish-products
+  - @dish_products.each do |dish_product|
+    %div
+      = dish_product['name'] + ': ' + dish_product['weight'].to_s + t('menu.g')
+
+
+- if !@menu_dish.description.blank?
+  %p.description= raw safe_textile(@menu_dish.description)

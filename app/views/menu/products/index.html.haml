@@ -10,7 +10,7 @@
         = title t('menu.products.products')
 
     - if user_signed_in?
-      = link_to t('menu.products.add_product'), new_menu_product_path, :class => 'btn btn-primary'
+      = link_to t('menu.products.add'), new_menu_product_path, :class => 'btn btn-primary'
 
     - @menu_products.each do |menu_product|
       .product

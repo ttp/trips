@@ -268,7 +268,7 @@ ua:
       incorrect: Некоректне значення
     products:
       products: Продукти
-      add_product: Додати продукт
+      add: Додати продукт
       new: Новий продукт
       edit: Редагувати продукт
       name: Назва
@@ -286,4 +286,16 @@ ua:
       was_updated: Продукт оновлено.
       was_destroyed: Продукт видалено.
       icon: Іконка
-
+    dishes:
+      dishes: Страви
+      add: Додати страву
+      new: Нова страва
+      edit: Редагувати страву
+      name: Назва
+      category: Категорія
+      description: Опис
+      is_public: Доступна всім
+      was_created: Страву створено.
+      was_updated: Страву оновлено.
+      was_destroyed: Страву видалено.
+      icon: Іконка

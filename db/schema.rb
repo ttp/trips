@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520150952) do
+ActiveRecord::Schema.define(version: 20140531071742) do
 
   create_table "menu_day_entities", force: true do |t|
     t.integer "parent_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140520150952) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.text     "description"
   end
 
   add_index "menu_dish_translations", ["locale"], name: "index_menu_dish_translations_on_locale", using: :btree
@@ -65,6 +66,9 @@ ActiveRecord::Schema.define(version: 20140520150952) do
 
   create_table "menu_dishes", force: true do |t|
     t.integer "dish_category_id"
+    t.string  "icon",             default: "",    null: false
+    t.integer "user_id"
+    t.boolean "is_public",        default: false, null: false
   end
 
   create_table "menu_meal_translations", force: true do |t|

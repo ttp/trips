@@ -1,0 +1,40 @@
+= javascript_include_tag "init/textile_init"
+= javascript_include_tag "init/menu_dish_form_init"
+
+.row
+  .col-md-8
+    = simple_form_for(@menu_dish) do |f|
+      = f.error_notification
+
+      = hidden_field_tag :back_url, back_url
+      = f.input :name, label: t('menu.dishes.name')
+      = f.input :dish_category_id, :collection => Menu::DishCategory.all, :label => t('menu.dishes.category')
+
+      %script#dish_products_map{type: "text/json"}
+        = raw ActiveSupport::JSON.encode(@dish_products_map)
+      #dish_products
+        .panel.panel-default
+          .panel-heading
+            .toolbar
+              .btn-toolbar
+                .btn-group.btn-group-xs
+                  %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
+          .panel-body.body
+            .noitems
+              = I18n.t('menu.drop_products')
+
+      = f.input :description, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
+
+      - if permissions_for('Menu').allowed? 'moderate'
+        = f.input :icon, :label => t('menu.dishes.icon')
+        = f.input :is_public, :label => t('menu.dishes.is_public'), wrapper: :vertical_boolean, as: :boolean
+
+      .form-actions
+        = f.button :submit, :class => 'btn-primary', :value => t('helpers.links.save')
+        = link_to t("helpers.links.cancel"), back_url(menu_dishes_path), :class => 'btn'
+  .col-md-4.sidebar
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => '#product_list'}= t('menu.products.products')
+    .tab-content
+      #product_list.tab-pane.tree.active

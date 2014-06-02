@@ -78,7 +78,7 @@ _.namespace "App.views"
       if entity_type <= 1
         conf.push $.extend {}, base_conf,
           local: App.collections.MenuDishCollection.typeahead()
-          header: "<div class='dropdown-header'>#{I18n.t('menu.dishes')}</div>"
+          header: "<div class='dropdown-header'>#{I18n.t('menu.dishes.dishes')}</div>"
       if entity_type <= 2
         conf.push $.extend {}, base_conf,
           local: App.collections.MenuProductCollection.typeahead()
