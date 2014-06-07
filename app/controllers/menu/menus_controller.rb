@@ -5,7 +5,12 @@ class Menu::MenusController < ApplicationController
   around_filter :catch_not_found, :only => [:show, :edit, :update, :destroy]
 
   def index
-
+    @public_cnt = Menu::Menu.where(is_public: true).count
+    if current_user
+      @my_cnt = Menu::Menu.where(user_id: current_user.id).count
+    end
+    @dishes_cnt = Menu::Dish.for_user(current_user).count
+    @products_cnt = Menu::Product.for_user(current_user).count
   end
 
   def my
@@ -117,7 +122,7 @@ class Menu::MenusController < ApplicationController
     data[:product_categories] = Menu::ProductCategory.by_lang(I18n.locale)
     data[:products] = Menu::Product.list_by_user(current_user, I18n.locale)
     data[:dish_categories] = Menu::DishCategory.by_lang(I18n.locale)
-    data[:dishes] = Menu::Dish.by_lang(I18n.locale)
+    data[:dishes] = Menu::Dish.list_by_user(current_user, I18n.locale)
     data[:dish_products] = Menu::DishProduct.all
     data[:meals] = Menu::Meal.by_lang(I18n.locale)
     render :json => data

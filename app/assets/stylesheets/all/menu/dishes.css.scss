@@ -1,0 +1,32 @@
+$hover_color: #ffa;
+
+#dish_products {
+  .ui-state-active {
+    background-color: #ffa;
+  }
+
+  input.weight {
+    margin: 0 0 0 5px;
+    padding: 0;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    display: inline-block;
+  }
+
+  .product {
+    border: 1px solid #ebebeb;
+    background-color: #fff;
+    border-radius: 4px;
+    margin: 2px 1px;
+    padding: 3px;
+
+    .glyphicon-move {
+      margin-right: 5px;
+    }
+  }
+
+  .toolbar {
+    display: inline-block;
+  }
+}

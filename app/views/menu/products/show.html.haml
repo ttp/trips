@@ -6,7 +6,7 @@
       %a.btn.btn-default{href: edit_menu_product_path(@menu_product), title: t("helpers.links.edit")}
         %i.glyphicon.glyphicon-edit
         = t("helpers.links.edit")
-      %a.btn.btn-default{href: menu_products_path(@menu_product), :method => :delete, :data => { :confirm => t('helpers.links.confirm')}}
+      %a.btn.btn-default{href: menu_product_path(@menu_product), :method => :delete, :data => { :confirm => t('helpers.links.confirm')}}
         %i.glyphicon.glyphicon-remove
         = t("helpers.links.destroy")
 

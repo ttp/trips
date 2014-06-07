@@ -3,14 +3,14 @@
 .row
   .col-md-5
     .well.well-sm
-      %h4= t('menu.examples')
+      %h4= t('menu.examples') + "(#{@public_cnt})"
       %p= t('menu.dashboard.examples_info')
       .pull-right
         = link_to t('menu.dashboard.goto_menus'), examples_menu_menus_path
       .clearfix
   .col-md-5.col-md-offset-1
     .well.well-sm
-      %h4= t('menu.my_menu')
+      %h4= t('menu.my_menu') + (current_user ? "(#{@my_cnt})" : '')
       - if user_signed_in?
         %p= t('menu.dashboard.my_menu_info_user')
         .pull-right= link_to t('menu.dashboard.goto_menus'), my_menu_menus_path
@@ -22,11 +22,13 @@
 .row
   .col-md-5
     .well.well-sm
-      %h4= t('menu.dishes')
+      %h4= t('menu.dishes.dishes') + "(#{@dishes_cnt})"
       %p= t('menu.dashboard.dishes_info')
+      .pull-right= link_to t('menu.dashboard.goto_dishes'), menu_dishes_path
+      .clearfix
   .col-md-5.col-md-offset-1
     .well.well-sm
-      %h4= t('menu.products.products')
+      %h4= t('menu.products.products') + "(#{@products_cnt})"
       %p= t('menu.dashboard.products_info')
       .pull-right= link_to t('menu.dashboard.goto_products'), menu_products_path
       .clearfix
