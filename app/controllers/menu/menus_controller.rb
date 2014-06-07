@@ -5,7 +5,12 @@ class Menu::MenusController < ApplicationController
   around_filter :catch_not_found, :only => [:show, :edit, :update, :destroy]
 
   def index
-
+    @public_cnt = Menu::Menu.where(is_public: true).count
+    if current_user
+      @my_cnt = Menu::Menu.where(user_id: current_user.id).count
+    end
+    @dishes_cnt = Menu::Dish.for_user(current_user).count
+    @products_cnt = Menu::Product.for_user(current_user).count
   end
 
   def my
