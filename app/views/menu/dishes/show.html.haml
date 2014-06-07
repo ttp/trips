@@ -10,11 +10,19 @@
         %i.glyphicon.glyphicon-remove
         = t("helpers.links.destroy")
 
+- unless @menu_dish.icon.blank?
+  %p
+    %img.img-thumbnail{src: dish_icon_path(@menu_dish.icon)}
+
 .dish-products
-  - @dish_products.each do |dish_product|
+  %h4= t('menu.dishes.ingredients')
+  - @dish_products_list.each do |dish_product|
     %div
+      %a.glyphicon.glyphicon-link{href: menu_product_path(dish_product['product_id'])}
+      -#= link_to dish_product['name'], menu_product_path(dish_product['product_id'])
       = dish_product['name'] + ': ' + dish_product['weight'].to_s + t('menu.g')
 
 
 - if !@menu_dish.description.blank?
+  %h4= t('menu.dishes.description')
   %p.description= raw safe_textile(@menu_dish.description)

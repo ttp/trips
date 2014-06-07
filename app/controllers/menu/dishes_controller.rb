@@ -30,7 +30,7 @@ class Menu::DishesController < ApplicationController
     add_breadcrumb @menu_dish.dish_category.name, by_category_menu_dishes_path(@menu_dish.dish_category_id)
     add_breadcrumb @menu_dish.name
 
-    @dish_products = @menu_dish.products_list(I18n.locale)
+    @dish_products_list = @menu_dish.products_list(I18n.locale)
   end
 
   # GET /menu/dishes/new
@@ -38,7 +38,7 @@ class Menu::DishesController < ApplicationController
     redirect_to menu_dishes_path unless permissions_for('Menu').allowed?('create')
 
     @menu_dish = Menu::Dish.new
-    prepare_products_map
+    prepare_dish_products
   end
 
   # POST /menu/dishes
@@ -52,14 +52,14 @@ class Menu::DishesController < ApplicationController
       save_products
       redirect_to back(menu_dishes_path), notice: t('menu.dishes.was_created')
     else
-      prepare_products_map
+      prepare_dish_products
       render action: 'new'
     end
   end
 
   # GET /menu/dishes/1/edit
   def edit
-    prepare_products_map
+    prepare_dish_products
   end
 
   # PATCH/PUT /menu/dishes/1
@@ -68,7 +68,7 @@ class Menu::DishesController < ApplicationController
       save_products
       redirect_to back(menu_dishes_path), notice: t('menu.dishes.was_updated')
     else
-      prepare_products_map
+      prepare_dish_products
       render action: 'edit'
     end
   end
@@ -97,11 +97,11 @@ class Menu::DishesController < ApplicationController
     redirect_to menu_dishes_path unless permissions_for('Menu').allowed?('edit', @menu_dish)
   end
 
-  def prepare_products_map
+  def prepare_dish_products
     if params.has_key? :products
-      @dish_products_map = params[:products]
+      @dish_products = params[:products].map {|key, value| {product_id: key, weight: value} }
     else
-      @dish_products_map = @menu_dish.dish_products_map
+      @dish_products = @menu_dish.dish_products
     end
   end
 
@@ -115,6 +115,7 @@ class Menu::DishesController < ApplicationController
     end
 
     # update/create
+    sort_order = 0
     products.each do |product_id, weight|
       next unless Menu::Product.exists? product_id
       if exists_products.has_key? product_id.to_i
@@ -125,7 +126,9 @@ class Menu::DishesController < ApplicationController
         product.dish_id = @menu_dish.id
       end
       product.weight = weight
+      product.sort_order = sort_order
       product.save
+      sort_order += 1
     end
   end
 end

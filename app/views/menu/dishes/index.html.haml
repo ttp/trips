@@ -14,7 +14,7 @@
 
     - @menu_dishes.each do |menu_dish|
       .product
-        %img.img-thumbnail.pull-left{src: product_icon_path(menu_dish.icon)}
+        %img.img-thumbnail.pull-left{src: dish_icon_path(menu_dish.icon)}
         .description
           %div
             = link_to menu_dish.name, menu_dish_path(menu_dish.id)

@@ -24,6 +24,8 @@
     .well.well-sm
       %h4= t('menu.dishes.dishes')
       %p= t('menu.dashboard.dishes_info')
+      .pull-right= link_to t('menu.dashboard.goto_dishes'), menu_dishes_path
+      .clearfix
   .col-md-5.col-md-offset-1
     .well.well-sm
       %h4= t('menu.products.products')

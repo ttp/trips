@@ -59,4 +59,8 @@ module MenusHelper
   def product_icon_path(icon)
     icon.blank? ? asset_path('no-image.png') : media_path("products/#{icon}")
   end
+
+  def dish_icon_path(icon)
+    icon.blank? ? asset_path('no-image.png') : media_path("dishes/#{icon}")
+  end
 end

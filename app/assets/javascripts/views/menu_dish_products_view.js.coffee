@@ -15,8 +15,8 @@ _.namespace "App.views"
       @render options.dish_products
 
     render: (dish_products) ->
-      _.each dish_products, (item, key) ->
-        dish_product = new App.models.MenuDishProductModel(product_id: key, weight: item)
+      _.each dish_products, (item) ->
+        dish_product = new App.models.MenuDishProductModel(item)
         @renderProduct(dish_product)
       , this
 
@@ -55,7 +55,6 @@ _.namespace "App.views"
 
     getTypeaheadConf: ->
       local: App.collections.MenuProductCollection.typeahead()
-#      header: "<div class='dropdown-header'>#{I18n.t('menu.products.products')}</div>"
       items: 5,
       minLength: 3,
       valueKey: 'name'

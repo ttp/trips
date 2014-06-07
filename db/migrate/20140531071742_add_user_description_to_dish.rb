@@ -7,6 +7,8 @@ class AddUserDescriptionToDish < ActiveRecord::Migration
     add_column :menu_dishes, :user_id, :integer
     add_column :menu_dishes, :is_public, :boolean, null: false, default: false
     Menu::Dish.update_all is_public: true
+
+    add_column :menu_dish_products, :sort_order, :integer, null: false, default: 0
   end
 
   def down

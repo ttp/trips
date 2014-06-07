@@ -117,7 +117,7 @@ class Menu::MenusController < ApplicationController
     data[:product_categories] = Menu::ProductCategory.by_lang(I18n.locale)
     data[:products] = Menu::Product.list_by_user(current_user, I18n.locale)
     data[:dish_categories] = Menu::DishCategory.by_lang(I18n.locale)
-    data[:dishes] = Menu::Dish.by_lang(I18n.locale)
+    data[:dishes] = Menu::Dish.list_by_user(current_user, I18n.locale)
     data[:dish_products] = Menu::DishProduct.all
     data[:meals] = Menu::Meal.by_lang(I18n.locale)
     render :json => data

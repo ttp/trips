@@ -5,7 +5,7 @@
 
   = hidden_field_tag :back_url, back_url
   = f.input :name, label: t('menu.products.name')
-  = f.input :product_category_id, :collection => Menu::ProductCategory.all, :label => t('menu.products.category')
+  = f.input :product_category_id, :collection => Menu::ProductCategory.with_translations(I18n.locale).order('name'), :label => t('menu.products.category')
   .row
     .col-sm-3
       = f.input :calories, label: t('menu.products.calories')

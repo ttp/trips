@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140531071742) do
     t.integer "dish_id"
     t.integer "product_id"
     t.integer "weight"
+    t.integer "sort_order", default: 0, null: false
   end
 
   create_table "menu_dish_translations", force: true do |t|
