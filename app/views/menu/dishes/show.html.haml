@@ -26,3 +26,5 @@
 - if !@menu_dish.description.blank?
   %h4= t('menu.dishes.description')
   %p.description= raw safe_textile(@menu_dish.description)
+
+= render 'shared/disqus'
