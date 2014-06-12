@@ -10,15 +10,15 @@
       .clearfix
   .col-md-5.col-md-offset-1
     .well.well-sm
-      %h4= t('menu.my_menu') + (current_user ? "(#{@my_cnt})" : '')
+      %h4
+        = t('menu.my_menu') + (current_user ? "(#{@my_cnt})" : '')
+        .pull-right= link_to t('menu.create'), new_menu_menu_path, :class => 'btn btn-primary'
       - if user_signed_in?
         %p= t('menu.dashboard.my_menu_info_user')
         .pull-right= link_to t('menu.dashboard.goto_menus'), my_menu_menus_path
         .clearfix
       - else
         %p= t('menu.dashboard.my_menu_info_guest')
-        .pull-right= link_to t('menu.create'), new_menu_menu_path, :class => 'btn btn-primary'
-        .clearfix
 .row
   .col-md-5
     .well.well-sm
