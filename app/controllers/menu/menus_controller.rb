@@ -28,6 +28,12 @@ class Menu::MenusController < ApplicationController
     @menu = Menu::Menu.find(params[:id])
 
     redirect_to menu_menus_url and return unless menu_can_view?
+
+    unless params[:users].blank?
+      users_count = params[:users].to_i
+      users_count = 1 unless (1..100).include? users_count
+      @menu.users_count = users_count
+    end
   end
 
   def new
@@ -70,6 +76,8 @@ class Menu::MenusController < ApplicationController
         trip.save
       end
     end
+
+    NotificationsMailer.new_menu_added_email(@menu).deliver
 
     respond_to do |format|
       format.html {

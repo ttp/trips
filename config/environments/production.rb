@@ -84,4 +84,5 @@ Pohody::Application.configure do
 
   config.site[:host] = 'pohody.com.ua'
   config.site[:analytics] = true
+  config.site[:notification_email] = 'human.ttp@gmail.com'
 end

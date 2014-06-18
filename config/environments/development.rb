@@ -26,6 +26,8 @@ Pohody::Application.configure do
     :authentication => :plain
   }
 
+  config.site[:notification_email] = 'human.ttp@gmail.com'
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 

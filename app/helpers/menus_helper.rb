@@ -27,9 +27,9 @@ module MenusHelper
 
   def round_precision(number)
     if number.to_i == number
-      return number.to_i
+      number.to_i
     else
-      return number
+      number
     end
   end
 
@@ -45,15 +45,15 @@ module MenusHelper
   end
 
   def guest_menu_edit_path(menu)
-    edit_menu_menu_path(menu) + "?key=#{menu.edit_key}"
+    edit_menu_menu_url(menu, key: menu.edit_key)
   end
 
   def guest_owner_menu_path(menu)
-    menu_menu_path(menu) + "?key=#{menu.edit_key}"
+    menu_menu_url(menu, key: menu.edit_key)
   end
 
   def menu_share_path(menu)
-    menu_menu_path(menu, key: menu.read_key)
+    menu_menu_url(menu, key: menu.read_key)
   end
 
   def product_icon_path(icon)

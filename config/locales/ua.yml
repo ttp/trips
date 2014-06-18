@@ -130,6 +130,10 @@ ua:
     join_request_owner_email:
       subject: "Нова заявка на участь у поході"
 
+  notifications_mailer:
+    new_menu_added_email:
+      subject: Нове меню
+
   food:
     title: 'Розкладка їжі'
 
