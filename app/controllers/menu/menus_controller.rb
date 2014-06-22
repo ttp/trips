@@ -29,8 +29,8 @@ class Menu::MenusController < ApplicationController
 
     redirect_to menu_menus_url and return unless menu_can_view?
 
-    unless params[:users].blank?
-      users_count = params[:users].to_i
+    unless params[:users_count].blank?
+      users_count = params[:users_count].to_i
       users_count = 1 unless (1..100).include? users_count
       @menu.users_count = users_count
     end

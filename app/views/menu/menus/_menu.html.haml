@@ -14,6 +14,13 @@
     .summary
       %h4= t('menu.summary')
       .well.well-small
+        %div
+          %b= t('menu.persons') + ':'
+          %span#users_count.editable.editable-click= @menu.users_count
+          = render partial: 'shared/inline_form', locals: {name: 'users_count', action: menu_menu_path, type: 'number'}
+          ,
+          %b= t('menu.days_coverage') + ':'
+          #{round_precision(@menu.coverage)} / #{@menu.days_count}
         %table.table
           %thead
             %tr
@@ -57,11 +64,7 @@
               %td -
               %td -
               %td -
-        %div
-          %b= t('menu.persons') + ':'
-          #{@menu.users_count},
-          %b= t('menu.days_coverage') + ':'
-          #{round_precision(@menu.coverage)} / #{@menu.days_count}
+
 
   .products
     %h4= t 'menu.products.products'

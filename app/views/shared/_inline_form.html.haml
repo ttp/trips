@@ -1,0 +1,13 @@
+%form.hidden.form-inline{id: "form_#{name}", method: 'GET', action: action}
+  - request.query_parameters.each do |key, value|
+    - if key != name
+      = hidden_field_tag key, value
+  .control-group.form-group
+    %div
+      .editable-input{style: "position: relative;"}
+        %input.form-control.input-sm{required: 1, type: type, name: name}/
+      .editable-buttons
+        %button.btn.btn-primary.btn-sm.editable-submit{type: "submit"}
+          %i.glyphicon.glyphicon-ok
+        %button.btn.btn-default.btn-sm.editable-cancel{type: "button"}
+          %i.glyphicon.glyphicon-remove

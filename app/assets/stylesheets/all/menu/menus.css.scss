@@ -189,3 +189,14 @@ $hover_color: #ffa;
     }
   }
 }
+
+#form_users_count {
+  display: inline-block;
+  input {
+    width: 80px;
+  }
+}
+
+.editable-click {
+  cursor: pointer;
+}
