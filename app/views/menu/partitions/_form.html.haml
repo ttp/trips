@@ -1,0 +1,27 @@
+= javascript_include_tag "init/partition_init"
+
+%script{type: "application/json", id: "menu_item"}
+  = @menu.to_json.html_safe
+%script{type: "application/json", id: "menu_days"}
+  = @menu.menu_days.to_json.html_safe
+%script{type: "application/json", id: "menu_entities"}
+  = @menu.entities.to_json.html_safe
+
+.row
+  .col-md-7
+    #menu.menu
+      = form_for [:menu, @partition] do
+        = hidden_field_tag :back_url, params[:back_url] || request.referer
+        .days
+          %ul.nav.nav-tabs
+          .tab-content
+        %textarea.hide{name: 'data'}
+        .form-actions
+          %button.btn.btn-primary.save= t('helpers.links.save')
+          = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
+  .col-md-5
+    %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
+      #partition_porters
+        %h4= t 'menu.partitions.porters'
+        %button.add Add
+        .body

@@ -1,5 +1,8 @@
 #= require typeahead
 #= require backbone-validation
+#= require rivets.min
+#= require rivets-backbone
+#= require rivets-formatters
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model

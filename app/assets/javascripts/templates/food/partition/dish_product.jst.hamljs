@@ -1,0 +1,15 @@
+.product{id: 'product_' + dish_product.get('product_id'), 'data-product-id': dish_product.get('product_id')}
+  %i.glyphicon.glyphicon-move
+  %span.product-name= product.get('name')
+  %input{name: ('products[' + dish_product.get('product_id') + ']'), \
+         type: 'text', class: 'form-control weight transparent', \
+         value: dish_product.get('weight')}
+  .toolbar.pull-right
+    .btn-toolbar
+      .btn-group.btn-group-xs
+        %button.btn.btn-default.info{type: 'button', title: product.infoText().join('<br/>'), tabindex: "-1"}
+          %i.glyphicon.glyphicon-info-sign
+      .btn-group.btn-group-xs
+        %button.btn.btn-default.remove{type: 'button', title: I18n.t('helpers.links.destroy'), tabindex: "-1"}
+          %i.glyphicon.glyphicon-remove
+  .clearfix

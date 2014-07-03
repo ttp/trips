@@ -1,0 +1,3 @@
+%span.name= porter.name()
+%span.currenty_total= porter.currently_weight(day)
+%span.total= porter.total_weight()

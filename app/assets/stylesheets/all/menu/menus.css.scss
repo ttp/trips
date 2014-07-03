@@ -118,6 +118,10 @@ $hover_color: #ffa;
         .entity {
           margin-left: 20px;
         }
+
+        .entity-weight {
+          margin-left: 10px;
+        }
       }
       .entity-1, .entity-2 {
         padding: 0px 5px 3px 3px;
@@ -199,4 +203,21 @@ $hover_color: #ffa;
 
 .editable-click {
   cursor: pointer;
+}
+
+#partition_porters {
+  .porter {
+    .name, .currenty_total {
+      margin-right: 5px;
+      padding-right: 5px;
+    }
+
+    > span {
+      display: inline-block;
+    }
+
+    .name {
+      width: 150px;
+    }
+  }
 }

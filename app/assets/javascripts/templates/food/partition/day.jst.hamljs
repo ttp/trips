@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    %button.auto Auto
+
+  .panel-body.body
+    .noitems
+      No products
+  .panel-footer
+    Summary goes here

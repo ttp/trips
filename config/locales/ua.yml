@@ -305,3 +305,7 @@ ua:
       was_updated: Страву оновлено.
       was_destroyed: Страву видалено.
       icon: Іконка
+    partitions:
+      new: Новий розподіл
+      new_for: Новий розподіл для "%{name}"
+      porters: Учасники

@@ -1,0 +1,7 @@
+.header
+  %span.entity-name= entity.getName()
+  :if entity.isProduct()
+    %span.entity-weight= entity.get('weight')
+    .toolbar.pull-right
+.clearfix
+.body
