@@ -2,6 +2,8 @@
   %span.entity-name= entity.getName()
   :if entity.isProduct()
     %span.entity-weight= entity.get('weight')
-    .toolbar.pull-right
+    = "-"
+    %span.entity-total-weight= total_weight
+    .entity-porter.pull-right
 .clearfix
 .body

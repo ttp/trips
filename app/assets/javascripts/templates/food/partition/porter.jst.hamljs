@@ -1,3 +1,9 @@
-%span.name= porter.name()
-%span.currenty_total= porter.currently_weight(day)
-%span.total= porter.total_weight()
+%div.panel-heading
+  %h4.panel-title
+    %a.name{data-toggle: "collapse", href: "#porter" + porter.get('id'), data-porter-id: porter.get('id')}
+      = porter.name()
+    .pull-right
+      %span.today_total= porter.today_weight(day)
+      %span.total= porter.total_weight()
+%div.panel-collapse.collapse{id: 'porter' + porter.get('id')}
+  %div.panel-body

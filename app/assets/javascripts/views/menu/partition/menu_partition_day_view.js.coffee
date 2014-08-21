@@ -13,6 +13,7 @@ _.namespace "App.views"
       "click button.auto": "auto"
 
     initialize: (options) ->
+      @options = options
       @model = options.model
       @days = App.collections.MenuDayCollection
       @entities = App.collections.MenuDayEntityCollection

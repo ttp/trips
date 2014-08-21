@@ -22,6 +22,7 @@ _.namespace "App.views"
       "click button.remove-entity": "removeEntity"
 
     initialize: (options) ->
+      @options = options
       @model = options.model
       @entities = App.collections.MenuDayEntityCollection
       @render()

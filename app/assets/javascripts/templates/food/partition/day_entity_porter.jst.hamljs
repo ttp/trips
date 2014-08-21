@@ -1,0 +1,9 @@
+:if porter
+  %span
+    %i.glyphicon.glyphicon-magnet.assign-all
+
+    %span.porter-name
+      = porter.name()
+      %i.glyphicon.glyphicon-remove.remove-porter
+:else
+  %i.glyphicon.glyphicon-plus.add-porter

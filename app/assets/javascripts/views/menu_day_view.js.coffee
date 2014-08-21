@@ -22,6 +22,7 @@ _.namespace "App.views"
       "blur input.quick-add": "toggleToolbar"
 
     initialize: (options) ->
+      @options = options
       @model = options.model
       @days = App.collections.MenuDayCollection
       @entities = App.collections.MenuDayEntityCollection

@@ -1,0 +1,10 @@
+%table
+  %tbody
+    :each porter in porters
+      %tr.porter
+        %td
+          %span.name{data-porter-id: porter.get('id')}= porter.name()
+        %td.today_total
+          %span= porter.today_weight(day)
+        %td.total
+          %span= porter.total_weight()

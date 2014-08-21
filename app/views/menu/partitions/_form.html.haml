@@ -20,8 +20,8 @@
           %button.btn.btn-primary.save= t('helpers.links.save')
           = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
   .col-md-5
-    %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
+    %div.sidebar
       #partition_porters
         %h4= t 'menu.partitions.porters'
         %button.add Add
-        .body
+        .body.porters-list.panel-group
