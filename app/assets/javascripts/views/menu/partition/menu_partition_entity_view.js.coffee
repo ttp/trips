@@ -71,15 +71,18 @@ _.namespace "App.views"
         day_entity_id: @model.get('id')
       porter_entities.push @current_porter_entity
 
+      @bindEntityEvents()
+      @renderPorter()
+
+    bindEntityEvents: ->
       @current_porter_entity.on('add', @onPorterEntityAdd, this)
       @current_porter_entity.on('remove', @onPorterEntityRemove, this)
-      @porters.get(porter_id).on('change:name', @onPorterNameChange, this)
-
-      @renderPorter()
+      @current_porter_entity.porter().on('change:name', @onPorterNameChange, this)
 
     onPorterEntityAdd: (porter_entity) ->
       if porter_entity.get('day_entity_id') == @model.get('id')
         @current_porter_entity = porter_entity
+        @bindEntityEvents()
         @renderPorter()
 
     onPorterEntityRemove: ->
