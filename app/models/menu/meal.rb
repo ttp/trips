@@ -9,6 +9,6 @@ class Menu::Meal < ActiveRecord::Base
     connection.select_all(
       "SELECT m.id, mt.name FROM menu_meals m
       JOIN menu_meal_translations mt ON mt.menu_meal_id = m.id
-      WHERE mt.locale = #{quote_value(lang)}")
+      WHERE mt.locale = #{connection.quote(lang)}")
   end
 end

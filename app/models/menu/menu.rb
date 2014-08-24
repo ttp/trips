@@ -33,7 +33,8 @@ class Menu::Menu < ActiveRecord::Base
     return @products if @products
 
     ids = entities_by_type(Menu::DayEntity::PRODUCT).map(&:entity_id).uniq
-    @products = Menu::Product.with_translations(I18n.locale).where('menu_products.id in(?)', ids)
+    @products = Menu::Product.with_translations(I18n.locale)
+                             .where('menu_products.id in(?)', ids).to_a
     @products.sort! do |a, b| a.name <=> b.name end
     @products = @products.index_by(&:id)
     @products

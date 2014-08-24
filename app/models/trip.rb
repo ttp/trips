@@ -36,7 +36,7 @@ class Trip < ActiveRecord::Base
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
       INNER JOIN users ON users.id = trips.user_id
-      WHERE trips.start_date BETWEEN #{quote_value(start_str)} AND #{quote_value(end_str)}")
+      WHERE trips.start_date BETWEEN #{connection.quote(start_str)} AND #{connection.quote(end_str)}")
   end
 
   def self.upcoming(num)
@@ -51,7 +51,7 @@ class Trip < ActiveRecord::Base
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
       INNER JOIN users ON users.id = trips.user_id
-      WHERE trips.start_date > #{quote_value(start_str)}
+      WHERE trips.start_date > #{connection.quote(start_str)}
       ORDER BY trips.start_date
       LIMIT #{num}")
   end
