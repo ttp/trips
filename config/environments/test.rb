@@ -36,4 +36,5 @@ Pohody::Application.configure do
   config.action_mailer.default_url_options = { :host => 'example.com' }
   config.i18n.default_locale = :en
   config.active_record.whitelist_attributes = false
+  config.eager_load = false
 end

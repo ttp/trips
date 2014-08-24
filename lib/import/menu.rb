@@ -21,6 +21,7 @@ module Import
           product.proteins = row.field('proteins')
           product.fats = row.field('fats')
           product.carbohydrates = row.field('carbohydrates')
+          product.is_public = true
           LOCALES.each do |locale|
             Globalize.with_locale(locale) do
               product.name = row.field(locale.to_s)
@@ -43,7 +44,7 @@ module Import
           end
           category.save
         elsif row.field('type') == '2'
-          dish = category.dishes.create
+          dish = category.dishes.create is_public: true
           LOCALES.each do |locale|
             Globalize.with_locale(locale) do
               dish.name = row.field(locale.to_s)

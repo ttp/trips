@@ -7,7 +7,7 @@ class Menu::Product < ActiveRecord::Base
   scope :by_category, ->(id) { where(product_category_id: id)}
   scope :for_user, ->(user) {
     if user
-      where('is_public = 1 or user_id = ?', user.id)
+      where('is_public = ? or user_id = ?', true, user.id)
     else
       where(is_public: true)
     end
@@ -23,11 +23,11 @@ class Menu::Product < ActiveRecord::Base
   def self.list_by_user(user, lang)
     sql = "SELECT p.*, pt.name FROM menu_products p
       JOIN menu_product_translations pt ON pt.menu_product_id = p.id
-      WHERE pt.locale = #{quote_value(lang)}"
+      WHERE pt.locale = #{connection.quote(lang)}"
     if user
-      sql += " and (p.is_public = 1 or p.user_id = #{user.id})"
+      sql += " and (p.is_public = #{connection.quote(true)} or p.user_id = #{user.id})"
     else
-      sql += " and p.is_public = 1"
+      sql += " and p.is_public = #{connection.quote(true)}"
     end
     connection.select_all(sql)
   end
