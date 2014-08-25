@@ -1,0 +1,9 @@
+:each product in products
+  %div
+    %span.product_name= product.product.get('name')
+    %span= product.cnt
+    .pull-right
+      :if product.today_total > 0
+        %span.today-total-weight= product.today_total
+      %span.total-weight= product.total
+    %br{clear: 'all'}

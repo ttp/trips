@@ -1,7 +1,7 @@
 #= require collections/menu_partition_porter_collection
 #= require collections/menu_partition_porter_day_entity_collection
 #= require collections/menu_day_collection
-
+# TODO remove porter, rename porter, css
 _.namespace "App.views"
 (->
   days = App.collections.MenuDayCollection
@@ -18,8 +18,13 @@ _.namespace "App.views"
       @bindEvents()
 
     render: ->
-      @$el.html $(JST["templates/food/partition/porter"](porter: @model, day: @currentDay()))
+      @$el.html JST["templates/food/partition/porter"](porter: @model, day: @currentDay())
+      @renderProducts()
       @options.renderTo.append @$el
+
+    renderProducts: ->
+      html = JST["templates/food/partition/porter_products"](products: @model.products_totals(@currentDay()))
+      @$el.find('.panel-body').html html
 
     bindEvents: ->
       @model.on('change:position', @updateName, this)
@@ -32,12 +37,15 @@ _.namespace "App.views"
       day_id = @days_tabs.find('li.active').data('day_id')
       days.get(day_id)
 
-    onDayChange: -> @updateTotals()
+    onDayChange: ->
+      @updateTotals()
+      @renderProducts()
 
     onRemove: -> @$el.remove()
 
     onPorterEntitiesUpdate: (porter_entity) ->
       @updateTotals()
+      @renderProducts()
 
     updateData: ->
       @updateName()

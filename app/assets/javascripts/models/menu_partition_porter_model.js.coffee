@@ -29,33 +29,42 @@ _.namespace "App.models"
     porter_entities: ->
       porter_entities.where(partition_porter_id: @get('id'))
 
-    currently_weight: (current_day) ->
+    day_entities: ->
+      _.map @porter_entities(), (porter_entity)->
+        entities.get(porter_entity.get('day_entity_id'))
+
+    _is_entity_from_day: (entity, day) ->
+      entity_day = days.get(entity.get('day_id'))
+      entity_day.get('num') == day.get('num')
+
+    products_totals: (current_day) ->
       cnt = @porters.length
-      total = 0
-      _.each @porter_entities(), (porter_entity) ->
-        entity = entities.get(porter_entity.get('day_entity_id'))
-        entity_day = days.get(entity.get('day_id'))
-        return true if entity_day.get('num') > current_day.get('num')
-        total += entity.get('weight') * cnt
+      totals = {}
+      _.each @day_entities(), (day_entity) ->
+        product = day_entity.getEntityModel()
+        if !totals[product.get('id')]
+          totals[product.get('id')] = product: product, total: 0, today_total: 0, cnt: 0
+        record = totals[product.get('id')]
+        record.total += day_entity.get('weight') * cnt
+        record.cnt += 1
+        if @_is_entity_from_day(day_entity, current_day)
+          record.today_total += day_entity.get('weight') * cnt
       , this
-      total
+      _.sortBy totals, (item)-> item.product.get('name')
 
     today_weight: (current_day) ->
       cnt = @porters.length
       total = 0
-      _.each @porter_entities(), (porter_entity) ->
-        entity = entities.get(porter_entity.get('day_entity_id'))
-        entity_day = days.get(entity.get('day_id'))
-        return true if entity_day.get('num') != current_day.get('num')
-        total += entity.get('weight') * cnt
+      _.each @day_entities(), (entity) ->
+        if @_is_entity_from_day(entity, current_day)
+          total += entity.get('weight') * cnt
       , this
       total
 
     total_weight: ->
       cnt = @porters.length
       total = 0
-      _.each @porter_entities(), (porter_entity) ->
-        entity = entities.get(porter_entity.get('day_entity_id'))
+      _.each @day_entities(), (entity) ->
         total += entity.get('weight') * cnt
       , this
       total
