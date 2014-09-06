@@ -5,7 +5,7 @@
   = hidden_field_tag :back_url, params[:back_url] || request.referer
 
   = f.input :track_id, :collection => grouped_by_region(Track.find_all_by_user_id(current_user.id), Region.sorted),
-    :as => :grouped_select, :group_method => :last, :label => t('account.track.track')
+    :as => :grouped_select, :group_method => :last, :label => t('account.track.track'), :include_blank => t('account.new_track')
   = f.input :dates_range, :label => t('account.trip.dates')
   = f.input :available_places, :label => t('account.trip.available_places')
   = f.input :trip_details, :hint => t('account.trip.details_hint'), input_html: {:rows => 10, :class => 'textile'}, :label => t('account.trip.details')
