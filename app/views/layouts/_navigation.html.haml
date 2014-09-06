@@ -5,11 +5,11 @@
     %span.icon-bar
     %span.icon-bar
 
-  = link_to t('account.trips'), root_path, :class => 'navbar-brand'
+  = link_to image_tag('logo.png', :class => 'logo-nav'), root_path, :class => 'navbar-brand'
 .collapse.navbar-collapse.bs-navbar-collapse
   %ul.nav.navbar-nav
     %li.active
-      = link_to t('account.trip.new'), new_account_trip_url
+      = link_to t('account.trip.new'), new_account_trip_url(return: new_account_trip_url)
     %li
       = link_to t('nav.home'), root_path
     %li

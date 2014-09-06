@@ -16,4 +16,12 @@ $(function () {
             firstDay: 1
         }
     });
+    $('option').mouseup(function(element) {
+        if(0 == this.index){
+            addTrack();
+        }
+    });
 });
+function addTrack(){
+    $( "#dialog" ).dialog();
+}
