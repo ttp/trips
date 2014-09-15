@@ -22,6 +22,8 @@
   .col-md-5
     %div.sidebar
       #partition_porters
-        %h4= t 'menu.partitions.porters'
-        %button.add Add
+        %h4
+          = t 'menu.partitions.porters'
+          %input.name{placeholder: 'Enter name'}
+          %button.add Add
         .body.porters-list.panel-group

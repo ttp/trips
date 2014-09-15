@@ -51,7 +51,7 @@ _.namespace "App.views"
         renderTo: @$el.find('.panel-body')
 
     renderSummary: ->
-      @$el.find('.panel-footer').html JST["templates/food/day_summary"](@model.summary())
+      @$el.find('.panel-footer').html JST["templates/food/partition/day_summary"](@model.summary())
 
     show: ->
       @tabEl.find('a').tab('show')

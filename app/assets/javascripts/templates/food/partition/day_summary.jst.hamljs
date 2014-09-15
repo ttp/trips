@@ -1,15 +1,9 @@
+%span Weight per porter:
+%span.weight= weight
 %table.table
   %thead
     %tr
-      %th= I18n.t('menu.calories')
       %th= I18n.t('menu.weight')
-      %th= I18n.t('menu.proteins')
-      %th= I18n.t('menu.fats')
-      %th= I18n.t('menu.carbohydrates')
   %tbody
     %tr
-      %td= parseInt(calories)
       %td= weight
-      %td= parseInt(proteins)
-      %td= parseInt(fats)
-      %td= parseInt(carbohydrates)

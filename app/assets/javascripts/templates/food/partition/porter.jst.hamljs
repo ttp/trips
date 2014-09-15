@@ -1,5 +1,6 @@
 %div.panel-heading
   %h4.panel-title
+    %i.glyphicon.glyphicon-remove
     %a.name{data-toggle: "collapse", href: "#porter" + porter.get('id'), data-porter-id: porter.get('id')}
       = porter.name()
     .pull-right

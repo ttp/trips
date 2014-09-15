@@ -11,6 +11,7 @@ _.namespace "App.views"
 
     initialize: (options) ->
       @porters = App.collections.MenuPartitionPorterCollection
+      @name_input = @$el.find('input.name')
 
     render: ->
       @porters.each (porter) ->
@@ -27,8 +28,10 @@ _.namespace "App.views"
       e.preventDefault()
       porter = new App.models.MenuPartitionPorterModel
         position: @porters.length + 1
+        name: @name_input.val()
       @porters.add porter
       @renderPorter(porter)
+      @name_input.val('')
 
     updateData: ->
 

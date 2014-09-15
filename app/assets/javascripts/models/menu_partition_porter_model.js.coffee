@@ -15,10 +15,11 @@ _.namespace "App.models"
 
         @set "id", @cid
         @set "new", 1
-        if num <= 5
-          @set 'name', names[num - 1]
-        else
-          @set 'name', "User" + num
+        if @get('name') == ''
+          if num <= 5
+            @set 'name', names[num - 1]
+          else
+            @set 'name', "User" + num
         num++
       @porters = App.collections.MenuPartitionPorterCollection
       @on 'remove', @onRemove, this

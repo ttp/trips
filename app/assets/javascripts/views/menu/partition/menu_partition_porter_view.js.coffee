@@ -8,11 +8,14 @@ _.namespace "App.views"
   App.views.MenuPartitionPorterView = Backbone.View.extend(
     tagName: 'div'
     className: 'porter panel panel-default'
+    events:
+      'click .glyphicon-remove': 'remove'
 
     initialize: (options) ->
       @options = options
       @model = options.model
       @days_tabs = options.days_tabs
+      @porters = App.collections.MenuPartitionPorterCollection
       @porter_entities = App.collections.MenuPartitionPorterDayEntityCollection
       @render()
       @bindEvents()
@@ -28,7 +31,7 @@ _.namespace "App.views"
 
     bindEvents: ->
       @model.on('change:position', @updateName, this)
-      @model.on('remove', $.proxy(@onRemove, this))
+      @model.on('remove', $.proxy(@onModelRemove, this))
       @days_tabs.on 'click', $.proxy(@onDayChange, this)
       @porter_entities.on 'add', $.proxy(@onPorterEntitiesUpdate, this)
       @porter_entities.on 'remove', $.proxy(@onPorterEntitiesUpdate, this)
@@ -41,7 +44,10 @@ _.namespace "App.views"
       @updateTotals()
       @renderProducts()
 
-    onRemove: -> @$el.remove()
+    remove: ->
+      @porters.remove @model
+
+    onModelRemove: -> @$el.remove()
 
     onPorterEntitiesUpdate: (porter_entity) ->
       @updateTotals()
