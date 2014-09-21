@@ -15,7 +15,7 @@ _.namespace "App.views"
       @_trips = App.collections.TripCollection
       @bindEvents()
       @render()
-      @_trips.fetch()
+      @_trips.fetch(reset: true)
 
     bindEvents: ->
       @_trips.on "reset", @showCalendarTrips, this
