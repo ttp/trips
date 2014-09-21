@@ -8,6 +8,6 @@ _.namespace "App.collections"
     total_weight: ->
 
     byEntity: (entity) ->
-      @findWhere(day_entity_id: entity.get('id'))
+      @where(day_entity_id: entity.get('id'))
   ))
 )()

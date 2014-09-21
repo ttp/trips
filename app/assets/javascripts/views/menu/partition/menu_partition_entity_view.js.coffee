@@ -20,7 +20,6 @@ _.namespace "App.views"
       @entities = App.collections.MenuDayEntityCollection
       @porters = App.collections.MenuPartitionPorterCollection
       @porter_entities = App.collections.MenuPartitionPorterDayEntityCollection
-      @current_porter_entity = @_currentPorterEntity()
       @render()
       @bindEvents()
 
@@ -29,7 +28,7 @@ _.namespace "App.views"
       @$el.attr('id', "entity_#{@model.id}").addClass("entity-#{@model.get('entity_type')}")
       @options.renderTo.append @$el
 
-      @renderPorter() if @model.isProduct()
+      @renderPorters() if @model.isProduct()
 
     renderEntities: (entities) ->
       _.each(entities, ((entity) ->
@@ -51,9 +50,9 @@ _.namespace "App.views"
         @porters.on 'remove', $.proxy(@updateTotalWeight, this)
         @porter_entities.on 'add', $.proxy(@onPorterEntityAdd, this)
 
-    renderPorter: ->
-      html = $(JST["templates/food/partition/day_entity_porter"](porter: @_currentPorter()))
-      @$el.find('.entity-porter').html(html)
+    renderPorters: ->
+      html = $(JST["templates/food/partition/day_entity_porter"](porter_entities: @_porterEntities()))
+      @$el.find('.entity-porters').html(html)
 
     showPortersDropdown: (e) ->
       e.stopPropagation()
@@ -65,34 +64,23 @@ _.namespace "App.views"
 
     createPorterEntity: (e)->
       porter_id = $(e.currentTarget).find('.name').data('porter-id')
-
-      @current_porter_entity = new App.models.MenuPartitionPorterDayEntityModel
+      porter_entity = new App.models.MenuPartitionPorterDayEntityModel
         partition_porter_id: porter_id
         day_entity_id: @model.get('id')
-      porter_entities.push @current_porter_entity
+      porter_entities.push porter_entity
 
-      @bindEntityEvents()
-      @renderPorter()
-
-    bindEntityEvents: ->
-      @current_porter_entity.on('add', @onPorterEntityAdd, this)
-      @current_porter_entity.on('remove', @onPorterEntityRemove, this)
-      @current_porter_entity.porter().on('change:name', @onPorterNameChange, this)
+    bindEntityEvents: (porter_entity)->
+      porter_entity.on('remove', @renderPorters, this)
+      porter_entity.porter().on('change:name', @renderPorters, this)
 
     onPorterEntityAdd: (porter_entity) ->
       if porter_entity.get('day_entity_id') == @model.get('id')
-        @current_porter_entity = porter_entity
-        @bindEntityEvents()
-        @renderPorter()
+        @bindEntityEvents(porter_entity)
+        @renderPorters()
 
-    onPorterEntityRemove: ->
-      @current_porter_entity = null
-      @renderPorter()
-
-    onPorterNameChange: ->
-      @renderPorter()
-
-    onPortersUpdate: ->
+    onPorterEntityRemove: (porter_entity) ->
+      if porter_entity.get('day_entity_id') == @model.get('id')
+        @renderPorters()
 
     updateTotalWeight: ->
       @$el.find('.entity-total-weight').html(@_totalWeight())
@@ -100,17 +88,20 @@ _.namespace "App.views"
     _totalWeight: ->
       @model.get('weight') * @porters.length
 
-    removePorter: ->
-      @porter_entities.remove([@current_porter_entity])
+    removePorter: (e) ->
+      @porter_entities.remove @_porterEntityFromEvent(e)
 
-    assignAll: ->
-      porter = @_currentPorter()
+    _porterEntityFromEvent: (e) ->
+      entity_id = $(e.target).closest('.btn-group').data('entity-id')
+      porter_entities.get(entity_id)
+
+    assignAll: (e)->
+      e.preventDefault()
+      setTimeout (-> $('body').trigger('click')), 1
+      porter = @_porterEntityFromEvent(e).porter()
 
       _.each(@entities.allAs(@model), (entity) ->
-        return true if entity.get('id') == @model.get('id')
-
-        porter_entity = @porter_entities.byEntity(entity)
-        @porter_entities.remove porter_entity if porter_entity
+        @_cleanAssignedEntities entity
 
         porter_entity = new App.models.MenuPartitionPorterDayEntityModel
           partition_porter_id: porter.get('id')
@@ -119,10 +110,10 @@ _.namespace "App.views"
 
       , this)
 
-    _currentPorterEntity: ->
-      @porter_entities.byEntity @model
+    _cleanAssignedEntities: (entity) ->
+      @porter_entities.remove @porter_entities.byEntity(entity)
 
-    _currentPorter: ->
-      if @current_porter_entity then @current_porter_entity.porter() else null
+    _porterEntities: ->
+      @porter_entities.byEntity @model
   )
 )()

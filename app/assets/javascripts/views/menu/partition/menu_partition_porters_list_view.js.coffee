@@ -15,9 +15,9 @@ _.namespace "App.views"
 
     render: ->
       @porters.each (porter) ->
-        @renderPorter(porter)
+        @renderPorters(porter)
 
-    renderPorter: (porter) ->
+    renderPorters: (porter) ->
       $body = @$el.find('.body')
       view = new App.views.MenuPartitionPorterView
         renderTo: $body
@@ -30,7 +30,7 @@ _.namespace "App.views"
         position: @porters.length + 1
         name: @name_input.val()
       @porters.add porter
-      @renderPorter(porter)
+      @renderPorters(porter)
       @name_input.val('')
 
     updateData: ->

@@ -4,6 +4,6 @@
     %span.entity-weight= entity.get('weight')
     = "-"
     %span.entity-total-weight= total_weight
-    .entity-porter.pull-right
+    .entity-porters.pull-right
 .clearfix
 .body

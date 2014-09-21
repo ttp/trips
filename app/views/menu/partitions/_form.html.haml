@@ -24,6 +24,9 @@
       #partition_porters
         %h4
           = t 'menu.partitions.porters'
-          %input.name{placeholder: 'Enter name'}
-          %button.add Add
+          .input-group
+            %input.form-control.input-sm.name{placeholder: 'Enter name'}
+            %span.input-group-btn
+              %button.btn.btn-default.btn-sm.add
+                %i.glyphicon.glyphicon-plus
         .body.porters-list.panel-group

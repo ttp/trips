@@ -1,9 +1,20 @@
-:if porter
-  %span
-    %i.glyphicon.glyphicon-magnet.assign-all
+:if porter_entities.length > 0
+  :if porter_entities.length > 1
+    %button.btn.btn-default.btn-xs.split-weight{type: "button"}
+      %i.glyphicon.glyphicon-stats
 
-    %span.porter-name
-      = porter.name()
-      %i.glyphicon.glyphicon-remove.remove-porter
-:else
-  %i.glyphicon.glyphicon-plus.add-porter
+  :each porter_entity in porter_entities
+    %span.btn-group{data-entity-id: porter_entity.get('id')}
+      %button.btn.btn-default.btn-xs.dropdown-toggle{type: "button", data-toggle: "dropdown"}
+        = porter_entity.porter().name()
+        %i.glyphicon.glyphicon-cog
+      %ul.dropdown-menu{role: "menu"}
+        %li
+          %a.assign-all{href: "#"}
+            %i.glyphicon.glyphicon-pushpin
+            Всі такі продукти
+      %button.btn.btn-default.btn-xs.remove-porter{type: "button"}
+        %i.glyphicon.glyphicon-remove
+%button.btn.btn-default.btn-xs.add-porter{type: "button"}
+  %i.glyphicon.glyphicon-plus
+  %span.caret
