@@ -31,11 +31,12 @@ _.namespace "App.views"
     hide: ->
       @$el.hide()
 
-    onSelect: (callback) ->
+    onSelect: (callback, scope) ->
       @selectCallback = callback
+      @selectCallbackScope = scope
 
     selectPorter: (e) ->
-      @selectCallback(e)
+      @selectCallback.call(@selectCallbackScope, e)
 
   )
 )()
