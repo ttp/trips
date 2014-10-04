@@ -32,32 +32,25 @@ _.namespace "App.views"
     bindEvents: ->
       @model.on('change:position', @updateName, this)
       @model.on('remove', $.proxy(@onModelRemove, this))
-      @days_tabs.on 'click', $.proxy(@onDayChange, this)
-      @porter_entities.on 'add', $.proxy(@onPorterEntitiesUpdate, this)
-      @porter_entities.on 'remove', $.proxy(@onPorterEntitiesUpdate, this)
+      @days_tabs.on 'click', $.proxy(@renderData, this)
+      @porter_entities.on 'add', $.proxy(@renderData, this)
+      @porter_entities.on 'remove', $.proxy(@renderData, this)
+      @porters.on 'add remove', $.proxy(@renderData, this)
 
     currentDay: ->
       day_id = @days_tabs.find('li.active').data('day_id')
       days.get(day_id)
-
-    onDayChange: ->
-      @updateTotals()
-      @renderProducts()
 
     remove: ->
       @porters.remove @model
 
     onModelRemove: -> @$el.remove()
 
-    onPorterEntitiesUpdate: (porter_entity) ->
-      @updateTotals()
+    renderData: ->
+      @renderTotals()
       @renderProducts()
 
-    updateData: ->
-      @updateName()
-      @updateTotals()
-
-    updateTotals: () ->
+    renderTotals: () ->
       day = @currentDay()
       @$el.find('.today_total').text(@model.today_weight(day))
       @$el.find('.total').text(@model.total_weight())

@@ -2,12 +2,12 @@ _.namespace "App.views"
 (->
   porters_dropdown_view = new App.views.MenuPortersDropdownView
     days_tabs: '#menu .nav-tabs'
-  porter_entities = App.collections.MenuPartitionPorterDayEntityCollection
 
   App.views.MenuPartitionEntityPortersView = Backbone.View.extend(
     initialize: (options) ->
       @$el = options.renderTo
       @entity = options.entity
+      @entities = App.collections.MenuDayEntityCollection
       @porters = App.collections.MenuPartitionPorterCollection
       @porter_entities = App.collections.MenuPartitionPorterDayEntityCollection
       @render()
@@ -18,9 +18,12 @@ _.namespace "App.views"
       @$el.on('click', '.assign-all', $.proxy(@assignAll, this))
       @$el.on('click', '.remove-porter', $.proxy(@removePorter, this))
       @porter_entities.on 'add', $.proxy(@onPorterEntityAdd, this)
+      @porter_entities.on 'remove', $.proxy(@onPorterEntityRemove, this)
+      @porters.on 'add', $.proxy(@onPorterAddRemove, this)
+      @porters.on 'remove', $.proxy(@onPorterAddRemove, this)
 
     render: ->
-      html = $(JST["templates/food/partition/day_entity_porter"](porter_entities: @_porterEntities()))
+      html = $(JST["templates/food/partition/day_entity_porter"](porter_entities: @porterEntities()))
       @$el.html(html)
 
     showPortersDropdown: (e) ->
@@ -37,7 +40,7 @@ _.namespace "App.views"
         partition_porter_id: porter_id
         day_entity_id: @entity.get('id')
         weight: @entity.get('weight')
-      porter_entities.push porter_entity
+      @porter_entities.push porter_entity
 
     bindEntityEvents: (porter_entity)->
       porter_entity.on('remove', @render, this)
@@ -46,46 +49,66 @@ _.namespace "App.views"
     onPorterEntityAdd: (porter_entity) ->
       if porter_entity.get('day_entity_id') == @entity.get('id')
         @bindEntityEvents(porter_entity)
+        @shareWeight()
         @render()
 
     onPorterEntityRemove: (porter_entity) ->
       if porter_entity.get('day_entity_id') == @entity.get('id')
+        @shareWeight()
         @render()
 
-    updateTotalWeight: ->
-      @$el.find('.entity-total-weight').html(@_totalWeight() + I18n.t('menu.g'))
+    onPorterAddRemove: ->
+      @shareWeight()
+      @render()
 
-    _totalWeight: ->
+    updateTotalWeight: ->
+      @$el.find('.entity-total-weight').html(@totalWeight() + I18n.t('menu.g'))
+
+    totalWeight: ->
       @entity.get('weight') * @porters.length
 
     removePorter: (e) ->
       e.preventDefault()
-      @porter_entities.remove @_porterEntityFromEvent(e)
+      @porter_entities.remove @porterEntityFromEvent(e)
 
-    _porterEntityFromEvent: (e) ->
+    porterEntityFromEvent: (e) ->
       entity_id = $(e.target).closest('.btn-group').data('entity-id')
-      porter_entities.get(entity_id)
+      @porter_entities.get(entity_id)
 
     assignAll: (e)->
       e.preventDefault()
       setTimeout (-> $('body').trigger('click')), 1
-      porter = @_porterEntityFromEvent(e).porter()
+      porter = @porterEntityFromEvent(e).porter()
 
       _.each(@entities.allAs(@entity), (entity) ->
-        @_cleanAssignedEntities entity
+        @cleanAssignedEntities entity
 
         porter_entity = new App.models.MenuPartitionPorterDayEntityModel
           partition_porter_id: porter.get('id')
           day_entity_id: entity.get('id')
-          weight: entity.get('weight')
-        porter_entities.push porter_entity
+          weight: @totalWeight()
+        @porter_entities.push porter_entity
 
       , this)
 
-    _cleanAssignedEntities: (entity) ->
+    cleanAssignedEntities: (entity) ->
       @porter_entities.remove @porter_entities.byEntity(entity)
 
-    _porterEntities: ->
+    porterEntities: ->
       @porter_entities.byEntity @entity
+
+    shareWeight: ->
+      entities = @porterEntities()
+      weight = @sharedWeight(entities.length)
+      _.each entities, (entity, i) ->
+        is_last_porter = i == entities.length - 1
+        entity.set 'weight', if is_last_porter then weight.last_porter else weight.per_porter
+
+    sharedWeight: (porters_count) ->
+      total_weight = @totalWeight()
+      weight_per_porter = Math.round(total_weight / porters_count)
+      last_porter_weight = total_weight - (weight_per_porter * (porters_count - 1))
+      per_porter: weight_per_porter, last_porter: last_porter_weight
+
   )
 )()

@@ -17,9 +17,10 @@ _.namespace "App.views"
       @entities = App.collections.MenuDayEntityCollection
       @porters = App.collections.MenuPartitionPorterCollection
       @render()
+      @bindEvents()
 
     render: ->
-      @$el.html($(JST["templates/food/partition/day_entity"](entity: @model, total_weight: @_totalWeight())))
+      @$el.html($(JST["templates/food/partition/day_entity"](entity: @model, total_weight: @totalWeight())))
       @$el.attr('id', "entity_#{@model.id}").addClass("entity-#{@model.get('entity_type')}")
       @options.renderTo.append @$el
 
@@ -27,6 +28,11 @@ _.namespace "App.views"
         @portersView = new App.views.MenuPartitionEntityPortersView
           renderTo: @$el.find('.entity-porters')
           entity: @model
+
+    bindEvents: ->
+      if @model.isProduct()
+        @porters.on 'add', $.proxy(@updateTotalWeight, this)
+        @porters.on 'remove', $.proxy(@updateTotalWeight, this)
 
     renderEntities: (entities) ->
       _.each(entities, ((entity) ->
@@ -40,9 +46,9 @@ _.namespace "App.views"
         renderTo: @$el.find('> .body')
 
     updateTotalWeight: ->
-      @$el.find('.entity-total-weight').html(@_totalWeight() + I18n.t('menu.g'))
+      @$el.find('.entity-total-weight').html(@totalWeight() + I18n.t('menu.g'))
 
-    _totalWeight: ->
+    totalWeight: ->
       @model.get('weight') * @porters.length
   )
 )()

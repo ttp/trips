@@ -1,7 +1,7 @@
 :if porter_entities.length > 0
-  :if porter_entities.length > 1
-    %button.btn.btn-default.btn-xs.split-weight{type: "button"}
-      %i.glyphicon.glyphicon-stats
+  -#:if porter_entities.length > 1
+  -#  %button.btn.btn-default.btn-xs.split-weight{type: "button"}
+  -#    %i.glyphicon.glyphicon-stats
 
   :each porter_entity in porter_entities
     %span.btn-group{data-entity-id: porter_entity.get('id')}
