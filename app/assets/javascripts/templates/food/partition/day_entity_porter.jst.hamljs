@@ -9,7 +9,7 @@
         = porter_entity.porter().name()
         :if porter_entities.length > 1
           &nbsp;
-          = porter_entity.get('weight') + I18n.t('menu.g')
+          = porter_entity.weight() + I18n.t('menu.g')
         &nbsp;
         %i.glyphicon.glyphicon-cog
       %ul.dropdown-menu{role: "menu"}

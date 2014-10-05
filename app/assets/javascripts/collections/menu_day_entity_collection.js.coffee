@@ -25,7 +25,7 @@ _.namespace "App.collections"
       , this)
 
     allAs: (day_entity) ->
-      @where entity_id: day_entity.get('entity_id')
+      @where entity_id: day_entity.get('entity_id'), entity_type: day_entity.get('entity_type')
 
     siblings: (entity) ->
       @where

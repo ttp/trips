@@ -32,10 +32,7 @@ _.namespace "App.models"
 
     day_entities: ->
       _.map @porter_entities(), (porter_entity)->
-        entities.get(porter_entity.get('day_entity_id'))
-
-    day_entity: (porter_entity) ->
-      entities.get(porter_entity.get('day_entity_id'))
+        porter_entity.day_entity()
 
     is_entity_from_day: (entity, day) ->
       entity_day = days.get(entity.get('day_id'))
@@ -44,13 +41,13 @@ _.namespace "App.models"
     products_totals: (current_day) ->
       totals = {}
       _.each @porter_entities(), (porter_entity) ->
-        day_entity = @day_entity(porter_entity)
+        day_entity = porter_entity.day_entity()
         product = day_entity.getEntityModel()
         if !totals[product.get('id')]
           totals[product.get('id')] = product: product, total: 0, today_total: 0, cnt: 0
         record = totals[product.get('id')]
-        record.total += porter_entity.get('weight')
-        record.today_total += porter_entity.get('weight') if @is_entity_from_day(day_entity, current_day)
+        record.total += porter_entity.weight()
+        record.today_total += porter_entity.weight() if @is_entity_from_day(day_entity, current_day)
         record.cnt += 1
       , this
       _.sortBy totals, (item)-> item.product.get('name')
@@ -58,17 +55,17 @@ _.namespace "App.models"
     today_weight: (current_day) ->
       cnt = @porters.length
       total = 0
-      _.each @porter_entities(), (entity) ->
-        day_entity = @day_entity(entity)
+      _.each @porter_entities(), (porter_entity) ->
+        day_entity = porter_entity.day_entity()
         if @is_entity_from_day(day_entity, current_day)
-          total += entity.get('weight')
+          total += porter_entity.weight()
       , this
       total
 
     total_weight: ->
       total = 0
-      _.each @porter_entities(), (entity) ->
-        total += entity.get('weight')
+      _.each @porter_entities(), (porter_entity) ->
+        total += porter_entity.weight()
       , this
       total
 

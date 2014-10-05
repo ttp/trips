@@ -39,7 +39,6 @@ _.namespace "App.views"
       porter_entity = new App.models.MenuPartitionPorterDayEntityModel
         partition_porter_id: porter_id
         day_entity_id: @entity.get('id')
-        weight: @entity.get('weight')
       @porter_entities.push porter_entity
 
     bindEntityEvents: (porter_entity)->
@@ -49,16 +48,13 @@ _.namespace "App.views"
     onPorterEntityAdd: (porter_entity) ->
       if porter_entity.get('day_entity_id') == @entity.get('id')
         @bindEntityEvents(porter_entity)
-        @shareWeight()
         @render()
 
     onPorterEntityRemove: (porter_entity) ->
       if porter_entity.get('day_entity_id') == @entity.get('id')
-        @shareWeight()
         @render()
 
     onPorterAddRemove: ->
-      @shareWeight()
       @render()
 
     updateTotalWeight: ->
@@ -86,7 +82,6 @@ _.namespace "App.views"
         porter_entity = new App.models.MenuPartitionPorterDayEntityModel
           partition_porter_id: porter.get('id')
           day_entity_id: entity.get('id')
-          weight: @totalWeight()
         @porter_entities.push porter_entity
 
       , this)
@@ -96,19 +91,5 @@ _.namespace "App.views"
 
     porterEntities: ->
       @porter_entities.byEntity @entity
-
-    shareWeight: ->
-      entities = @porterEntities()
-      weight = @sharedWeight(entities.length)
-      _.each entities, (entity, i) ->
-        is_last_porter = i == entities.length - 1
-        entity.set 'weight', if is_last_porter then weight.last_porter else weight.per_porter
-
-    sharedWeight: (porters_count) ->
-      total_weight = @totalWeight()
-      weight_per_porter = Math.round(total_weight / porters_count)
-      last_porter_weight = total_weight - (weight_per_porter * (porters_count - 1))
-      per_porter: weight_per_porter, last_porter: last_porter_weight
-
   )
 )()
