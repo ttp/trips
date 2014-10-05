@@ -8,6 +8,8 @@
 #= require collections/menu_dish_collection
 #= require collections/menu_dish_product_collection
 #= require collections/menu_meal_collection
+#= require collections/menu_partition_porter_collection
+#= require collections/menu_partition_porter_day_entity_collection
 
 _.namespace "App.views"
 (->
@@ -34,12 +36,10 @@ _.namespace "App.views"
       ), this
       @$el.find('.nav-tabs li:eq(0) a').tab('show')
 
-    save: ->
-      menu_data =
-        menu: @menu.toJSON()
-        days: _.indexBy(@days.toJSON(), "id")
-        entities: _.indexBy(@entities.toJSON(), "id")
-
-      @$el.find("textarea.hide").val JSON.stringify(menu_data)
+    save: (e) ->
+      data =
+        porters: _.indexBy(App.collections.MenuPartitionPorterCollection.toJSON(), 'id')
+        porter_products: App.collections.MenuPartitionPorterDayEntityCollection.toJSON()
+      @$el.find("textarea.hide").val JSON.stringify(data)
   )
 )()

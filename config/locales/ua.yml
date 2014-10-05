@@ -308,4 +308,5 @@ ua:
     partitions:
       new: Новий розподіл
       new_for: Новий розподіл для "%{name}"
+      for: Розподіл для "%{name}"
       porters: Учасники

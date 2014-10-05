@@ -203,6 +203,8 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
     sexp_processor (4.4.2)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -268,6 +270,7 @@ DEPENDENCIES
   ruby-haml-js!
   sass-rails (~> 4.0.0)
   selenium-webdriver (~> 2.39.0)
+  shoulda-matchers
   simple_form!
   sqlite3
   switch_user
