@@ -1,23 +1,32 @@
 module MenusHelper
-  def render_entities(menu, day_id, parent_id)
+  def render_entities(menu, day_id, parent_id, partition = nil)
     items = menu.entities_children(day_id, parent_id)
     return '' if items.nil?
 
     html = ''
     items.each do |item|
-      html += render_entity(item, menu)
+      html += render_entity(item, menu, partition)
     end
     html.html_safe
   end
 
-  def render_entity(entity, menu)
+  def render_entity(entity, menu, partition = nil)
     model = menu.entity_model(entity)
     html = "<div class='entity entity-#{entity.entity_type}'>
       <span class='entity-name'>#{model.name}</span>"
     if entity.product?
       html += " <span class='weight'>#{entity.weight}#{t('menu.g')}</span>"
+      html += render_porters(entity, partition) if partition.present?
     end
-    html += "#{render_entities(menu, entity.day_id, entity.id)}</div>"
+    html += "#{render_entities(menu, entity.day_id, entity.id, partition)}</div>"
+    html.html_safe
+  end
+
+  def render_porters(entity, partition)
+    html = ""
+    partition.porters_by_entity(entity).each do |item|
+      html += content_tag(:span, item[:porter].name + ' ' + item[:weight].to_s + t('menu.g'))
+    end
     html.html_safe
   end
 
