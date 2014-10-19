@@ -18,3 +18,15 @@
         %div
           %span.name= product.name
           %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')
+
+  .porters
+    - @partition.porters_products_total.total.each do |id, porter_total|
+      %div.porter_products{id: "porter_products#{id}"}
+        %h4
+          = porter_total[:porter].name
+          %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"
+        .products_list
+          - porter_total[:products].each do |id, product_total|
+            .product
+              %span= product_total[:product].name
+              %span.weight= product_total[:weight].to_s + t('menu.g')
