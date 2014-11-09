@@ -1,4 +1,6 @@
 .menu
+  = render :partial => 'users_count'
+
   %ul.nav.nav-tabs.hidden-print
     - @menu.days.each_with_index do |day, i|
       %li{:class => ('active' if i == 0)}
@@ -11,12 +13,11 @@
           %h4.visible-print= t('menu.day') + ' ' + day.num.to_s
           = render_entities(@menu, day.id, 0, @partition)
 
-  = render 'menu/menus/summary', menu: @menu
-
   .porters
+    %h4= t 'menu.products.products'
     - @partition.porters_products_total.total.each do |id, porter_total|
       %div.porter_products{id: "porter_products#{id}"}
-        %h4
+        %h5
           = porter_total[:porter].name
           %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"
         .products_list
@@ -32,3 +33,5 @@
         %div
           %span.name= product.name
           %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')
+
+  = render 'menu/menus/summary', menu: @menu
