@@ -25,5 +25,12 @@
   }
   .content {
     padding: 0 !important;
+    margin: 0 !important;
   }
+}
+
+@page
+{
+  size: auto;   /* auto is the current printer page size */
+  margin: 2cm 0mm;  /* this affects the margin in the printer settings */
 }

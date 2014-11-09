@@ -11,13 +11,7 @@
           %h4.visible-print= t('menu.day') + ' ' + day.num.to_s
           = render_entities(@menu, day.id, 0, @partition)
 
-  .products
-    %h4= t 'menu.products.products'
-    .well.well-small
-      - @menu.products.each do |product_id, product|
-        %div
-          %span.name= product.name
-          %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')
+  = render 'menu/menus/summary', menu: @menu
 
   .porters
     - @partition.porters_products_total.total.each do |id, porter_total|
@@ -30,3 +24,11 @@
             .product
               %span= product_total[:product].name
               %span.weight= product_total[:weight].to_s + t('menu.g')
+
+  .products
+    %h4= t 'menu.products.products'
+    .well.well-small
+      - @menu.products.each do |product_id, product|
+        %div
+          %span.name= product.name
+          %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')

@@ -12,10 +12,10 @@ module MenusHelper
 
   def render_entity(entity, menu, partition = nil)
     model = menu.entity_model(entity)
-    html = "<div class='entity entity-#{entity.entity_type}'>
+    html = "<div class='entity entity-#{entity.entity_type} clearfix'>
       <span class='entity-name'>#{model.name}</span>"
     if entity.product?
-      html += " <span class='weight'>#{entity.weight}#{t('menu.g')}</span>"
+      html += " <span class='weight'>#{entity.weight}#{t('menu.g')}/#{entity.weight * menu.users_count}#{t('menu.g')}</span>"
       html += render_porters(entity, partition) if partition.present?
     end
     html += "#{render_entities(menu, entity.day_id, entity.id, partition)}</div>"
@@ -23,10 +23,11 @@ module MenusHelper
   end
 
   def render_porters(entity, partition)
-    html = ""
+    html = "<span class='entity-porters pull-right'>"
     partition.porters_by_entity(entity).each do |item|
-      html += content_tag(:span, item[:porter].name + ' ' + item[:weight].to_s + t('menu.g'))
+      html += content_tag(:span, item[:porter].name + ' ' + item[:weight].to_s + t('menu.g'), class: 'porter')
     end
+    html += '</span>'
     html.html_safe
   end
 

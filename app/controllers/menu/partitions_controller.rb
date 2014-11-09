@@ -6,6 +6,7 @@ class Menu::PartitionsController < ApplicationController
   before_filter :find_partition, only: [:show, :edit, :update, :destroy]
 
   def show
+    @menu.users_count = @partition.partition_porters.count
   end
 
   def new
