@@ -1,4 +1,4 @@
-%div.users_count
+%div.count_info
   %b= t('menu.persons') + ':'
   %span#users_count.editable.editable-click= @menu.users_count
   = render partial: 'shared/inline_form', locals: {name: 'users_count', action: menu_menu_path, type: 'number'}

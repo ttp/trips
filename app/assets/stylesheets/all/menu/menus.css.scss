@@ -170,6 +170,14 @@ $hover_color: #ffa;
   }
 }
 
+body.menus, body.partitions {
+  &.show .content {
+    .nav, .count_info {
+      margin-bottom: 10px;
+    }
+  }
+}
+
 .tree {
   overflow: auto;
   position: relative;

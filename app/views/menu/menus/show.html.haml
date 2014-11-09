@@ -12,4 +12,24 @@
         %i.glyphicon.glyphicon-share
         = t("menu.share_link")
 
-= render :partial => 'menu'
+= render 'menu/menus/users_count'
+
+%ul.nav.nav-tabs.hidden-print{role: "tablist"}
+  %li.active{role: "presentation"}
+    %a{href: "#menu", role: 'tab', "data-toggle" => 'tab'}= t 'menu.menu'
+  %li{role: "presentation"}
+    %a{href: "#products", role: 'tab', "data-toggle" => 'tab'}= t 'menu.products.products'
+  %li{role: "presentation"}
+    %a{href: "#summary", role: 'tab', "data-toggle" => 'tab'}= t('menu.summary')
+  %li{role: "presentation"}
+    %a{href: "#partitions", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.title'
+
+.tab-content
+  .tab-pane.active{role: 'tabpanel', id: 'menu'}
+    = render 'menu/menus/menu'
+  .tab-pane{role: 'tabpanel', id: 'products'}
+    = render 'menu/menus/menu_products'
+  .tab-pane{role: 'tabpanel', id: 'summary'}
+    = render 'menu/menus/summary', menu: @menu
+  .tab-pane{role: 'tabpanel', id: 'partitions'}
+    = render 'menu/partitions/list', menu: @menu

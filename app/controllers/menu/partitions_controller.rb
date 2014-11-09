@@ -7,6 +7,7 @@ class Menu::PartitionsController < ApplicationController
 
   def show
     @menu.users_count = @partition.partition_porters.count
+    render 'menu/menus/show'
   end
 
   def new
