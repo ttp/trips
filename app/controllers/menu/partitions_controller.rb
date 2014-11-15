@@ -1,11 +1,15 @@
 class Menu::PartitionsController < ApplicationController
   include MenusHelper
+  include Menu::PartitionsHelper
 
   before_filter :authenticate_user!
   before_filter :find_menu
   before_filter :find_partition, only: [:show, :edit, :update, :destroy]
 
   def show
+    add_breadcrumb @menu.name, menu_menu_path(@menu)
+    add_breadcrumb partition_name(@partition)
+
     @menu.users_count = @partition.partition_porters.count
     render 'menu/menus/show'
   end
@@ -31,6 +35,7 @@ class Menu::PartitionsController < ApplicationController
     @porters = @partition.partition_porters.index_by(&:id)
     save_porters(data['porters']) if data['porters'].present?
     save_products(data['porter_products']) if data['porter_products'].present?
+    redirect_to menu_menu_partition_path(@menu, @partition)
   end
 
   def destroy
@@ -49,6 +54,7 @@ class Menu::PartitionsController < ApplicationController
   end
 
   def save_porters(porters)
+    remove_porters(porters)
     porters.each do |porter_id, porter_data|
       if porter_data.has_key?('new')
         porter = @partition.partition_porters.build
@@ -57,6 +63,12 @@ class Menu::PartitionsController < ApplicationController
       end
 
       save_porter(porter, porter_data) if porter.present?
+    end
+  end
+
+  def remove_porters(porters)
+    @porters.each do |id, porter|
+      porter.destroy unless porters.has_key?(porter.id.to_s)
     end
   end
 
@@ -78,8 +90,8 @@ class Menu::PartitionsController < ApplicationController
   def save_products(porter_entities)
     grouped_entities = porter_entities.group_by {|entity| entity['partition_porter_id'].to_s }
     cached_porters.each do |porter_id, porter|
-      if grouped_entities.has_key? porter_id
-        porter.day_entity_ids = grouped_entities[porter_id].map {|entity| entity['day_entity_id']}
+      if grouped_entities.has_key? porter_id.to_s
+        porter.day_entity_ids = grouped_entities[porter_id.to_s].map {|entity| entity['day_entity_id']}
       else
         porter.porter_products.destroy_all
       end

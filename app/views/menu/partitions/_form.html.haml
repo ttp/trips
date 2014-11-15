@@ -7,10 +7,16 @@
 %script{type: "application/json", id: "menu_entities"}
   = @menu.entities.to_json.html_safe
 
+- unless @partition.new_record?
+  %script{type: "application/json", id: "porters"}
+    = @partition.partition_porters.to_json.html_safe
+  %script{type: "application/json", id: "porters_products"}
+    = @partition.porter_products.to_json.html_safe
+
 .row
   .col-md-7
     #menu.menu
-      = form_for [:menu, @partition] do
+      = form_for @partition, url: (@partition.new_record? ? menu_menu_partitions_path(@menu) : menu_menu_partition_path(@menu, @partition)) do
         = hidden_field_tag :back_url, params[:back_url] || request.referer
         .days
           %ul.nav.nav-tabs

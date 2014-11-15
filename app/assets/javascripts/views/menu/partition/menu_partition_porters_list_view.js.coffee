@@ -16,6 +16,7 @@ _.namespace "App.views"
     render: ->
       @porters.each (porter) ->
         @renderPorters(porter)
+      , this
 
     renderPorters: (porter) ->
       $body = @$el.find('.body')

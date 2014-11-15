@@ -1,8 +1,13 @@
 = stylesheet_link_tag "print/menu", :media => "print"
 = javascript_include_tag "init/menu_show_init"
 
+- if @partition.present?
+  = render 'shared/breadcrumbs'
+
 %h3
   = title @menu.name
+  - if @partition.present?
+    = ' - ' + partition_name(@partition)
   - if menu_can_edit?
     .btn-group.btn-group-xs.pull-right.hidden-print
       %a.btn.btn-default{href: guest_menu_edit_path(@menu), title: t("helpers.links.edit")}
