@@ -307,7 +307,7 @@ ua:
       was_destroyed: Страву видалено.
       icon: Іконка
     partitions:
-      title: Розподіл продуктів
+      title: Розподіли продуктів
       partition: Розподіл
       partition_num: Розподіл %{num}
       new: Новий розподіл

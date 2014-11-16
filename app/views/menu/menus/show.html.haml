@@ -24,6 +24,9 @@
     %a{href: "#menu", role: 'tab', "data-toggle" => 'tab'}= t 'menu.menu'
   %li{role: "presentation"}
     %a{href: "#products", role: 'tab', "data-toggle" => 'tab'}= t 'menu.products.products'
+  - if @partition.present?
+    %li{role: "presentation"}
+      %a{href: "#products_partition", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.partition'
   %li{role: "presentation"}
     %a{href: "#summary", role: 'tab', "data-toggle" => 'tab'}= t('menu.summary')
   %li{role: "presentation"}
@@ -34,6 +37,9 @@
     = render 'menu/menus/menu'
   .tab-pane{role: 'tabpanel', id: 'products'}
     = render 'menu/menus/menu_products'
+  - if @partition.present?
+    .tab-pane{role: 'tabpanel', id: 'products_partition'}
+      = render 'menu/menus/menu_products_partition'
   .tab-pane{role: 'tabpanel', id: 'summary'}
     = render 'menu/menus/summary', menu: @menu
   .tab-pane{role: 'tabpanel', id: 'partitions'}

@@ -1,0 +1,11 @@
+.porters.row
+  - @partition.porters_products_total.total.each do |id, porter_total|
+    %div.porter_products.col-md-4{id: "porter_products#{id}"}
+      %h5
+        %span.porter_name= porter_total[:porter].name
+        %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"
+      .products_list
+        - porter_total[:products].each do |id, product_total|
+          .product
+            %span= product_total[:product].name
+            %span.weight= product_total[:weight].to_s + t('menu.g')
