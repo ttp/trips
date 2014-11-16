@@ -8,7 +8,6 @@ _.namespace "App.models"
   porter_entities = App.collections.MenuPartitionPorterDayEntityCollection
   entities = App.collections.MenuDayEntityCollection
   num = 1
-  names = ['Тарас', "Костя", "Рома", "Сіма", "Оля"]
   App.models.MenuPartitionPorterModel = Backbone.Model.extend(
     initialize: ->
       unless @id
@@ -16,10 +15,7 @@ _.namespace "App.models"
         @set "id", @cid
         @set "new", 1
         if @get('name') == ''
-          if num <= 5
-            @set 'name', names[num - 1]
-          else
-            @set 'name', "User" + num
+          @set 'name', I18n.t('menu.partitions.porter') + num
         num++
       @porters = App.collections.MenuPartitionPorterCollection
       @on 'remove', @onRemove, this

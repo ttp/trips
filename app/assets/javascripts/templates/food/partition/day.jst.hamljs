@@ -1,6 +1,5 @@
 .panel.panel-default
   .panel-heading
-    %button.auto Auto
 
   .panel-body.body
     .noitems

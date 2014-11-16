@@ -6,7 +6,7 @@ _.namespace "App.views"
   days = App.collections.MenuDayCollection
   App.views.MenuPortersDropdownView = Backbone.View.extend(
     tagName: 'div'
-    className: 'porters-list well well-sm'
+    className: 'porters-dropdown well well-sm'
     events:
       'click .porter': 'selectPorter'
 

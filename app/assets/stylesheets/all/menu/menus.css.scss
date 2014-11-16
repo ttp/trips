@@ -217,34 +217,44 @@ body.menus, body.partitions {
   cursor: pointer;
 }
 
-// Dropdown list and sidebar list
-.porters-list {
-  .porter {
-    .name, .today_total {
-      margin-right: 5px;
-      padding-right: 5px;
-    }
-
-    .total, .today_total {
-      width: 80px;
-    }
-
-    > span {
-      display: inline-block;
-    }
-
+#partition_porters {
+  .glyphicon {
+    cursor: default;
   }
-  tr {
-    .name {
-      width: 150px;
+  .panel-heading {
+    .today_total, .total {
+      width: 60px;
+      text-align: right;
       display: inline-block;
+    }
+  }
+  .panel-body {
+    table {
+      width: 100%;
+
+      td {
+        padding: 2px 0;
+      }
+
+      td.today_total, td.total {
+        width: 60px;
+        text-align: right;
+      }
+      td.today_total {
+        span {
+          padding-right: 3px;
+        }
+      }
+      .product_use_count {
+        margin-left: 3px;
+      }
     }
   }
 }
 
 .entity {
   // porters dropdown
-  .porters-list {
+  .porters-dropdown {
     background-color: #fff;
     position: absolute;
     right: 0;
@@ -253,6 +263,23 @@ body.menus, body.partitions {
 
     .porter:hover {
       background-color: #f5f5f5;
+    }
+
+    .porter {
+      .total, .today_total {
+        width: 60px;
+      }
+
+      > span {
+        display: inline-block;
+      }
+
+    }
+    tr {
+      .name {
+        width: 150px;
+        display: inline-block;
+      }
     }
   }
 

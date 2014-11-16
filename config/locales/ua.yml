@@ -315,3 +315,8 @@ ua:
       for: Розподіл для "%{name}"
       porters: Учасники
       view: Переглянути
+      porter: Учасник
+      enter_porter_name: Введіть ім'я учасника
+      product_usage_count: Кількість використань
+      today_weight: Вага на сьогодні
+      total_weight: Вага на всі дні

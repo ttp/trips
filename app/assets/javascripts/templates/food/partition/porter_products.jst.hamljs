@@ -1,9 +1,11 @@
-:each product in products
-  %div
-    %span.product_name= product.product.get('name')
-    %span= product.cnt
-    .pull-right
-      :if product.today_total > 0
-        %span.today-total-weight= product.today_total
-      %span.total-weight= product.total
-    %br{clear: 'all'}
+%table
+  :each product in products
+    %tr
+      %td
+        %span.product_name= product.product.get('name')
+        %small.product_use_count{title: I18n.t('menu.partitions.product_usage_count')}= '(' + product.cnt + ')'
+      %td.today_total
+        :if product.today_total > 0
+          %span.today-total-weight{title: I18n.t('menu.partitions.today_weight')}= product.today_total
+      %td.total
+        %span.total-weight{title: I18n.t('menu.partitions.total_weight')}= product.total
