@@ -34,6 +34,7 @@ class Menu::PartitionsController < ApplicationController
   def update
     data = JSON.parse(params[:data])
     @porters = @partition.partition_porters.index_by(&:id)
+    remove_porters(data['porters']) if data['porters'].present?
     save_porters(data['porters']) if data['porters'].present?
     save_products(data['porter_products']) if data['porter_products'].present?
     redirect_to menu_menu_partition_path(@menu, @partition)
@@ -55,7 +56,6 @@ class Menu::PartitionsController < ApplicationController
   end
 
   def save_porters(porters)
-    remove_porters(porters)
     porters.each do |porter_id, porter_data|
       if porter_data.has_key?('new')
         porter = @partition.partition_porters.build
