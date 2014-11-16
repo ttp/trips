@@ -63,7 +63,7 @@ ua:
     password_hint: 'Залиште пустим, якщо ви не хочете змінювати пароль'
     password_confirmation: 'Повторіть пароль'
     current_password: 'Поточний пароль'
-    current_password_hint: 'Введіть свій поточний парль щоб підтвердити зміни'
+    current_password_hint: 'Введіть свій поточний пароль щоб підтвердити зміни'
     remember_me: 'Запам"ятати мене'
     login: "Увійдіть"
 

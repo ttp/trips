@@ -13,6 +13,10 @@ class Menu::Menu < ActiveRecord::Base
     end
   end
 
+  def owner?(user)
+    user_id.present? && user_id == user.id
+  end
+
   def days
     @days ||= menu_days.order('num')
   end

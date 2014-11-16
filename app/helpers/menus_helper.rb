@@ -44,14 +44,11 @@ module MenusHelper
   end
 
   def menu_can_view?
-    @menu.is_public? or
-      (user_signed_in? and @menu.user_id == current_user.id) or
-      (params[:key] and [@menu.edit_key, @menu.read_key].include?(params[:key]))
+    Pundit.policy(current_user, @menu).show? params[:key]
   end
 
   def menu_can_edit?
-    (user_signed_in? and (@menu.user_id == current_user.id || admin?)) or
-      (params[:key] and @menu.edit_key == params[:key])
+    Pundit.policy(current_user, @menu).edit? params[:key]
   end
 
   def guest_menu_edit_path(menu)

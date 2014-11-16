@@ -5,6 +5,7 @@ class Menu::PartitionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_menu
   before_filter :find_partition, only: [:show, :edit, :update, :destroy]
+  before_filter :authorize_menu!
 
   def show
     add_breadcrumb @menu.name, menu_menu_path(@menu)
@@ -96,5 +97,11 @@ class Menu::PartitionsController < ApplicationController
         porter.porter_products.destroy_all
       end
     end
+  end
+
+  private
+
+  def authorize_menu!
+    authorize @menu, :manage_partitions?
   end
 end

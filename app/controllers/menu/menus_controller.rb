@@ -87,7 +87,7 @@ class Menu::MenusController < ApplicationController
           redirect_to guest_owner_menu_path(@menu)
         end
       }
-      format.json { render json: @menu, status: :created, location: @trip }
+      format.json { render json: @menu, status: :created, location: @menu }
     end
   end
 

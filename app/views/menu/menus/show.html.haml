@@ -29,8 +29,9 @@
       %a{href: "#products_partition", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.partition'
   %li{role: "presentation"}
     %a{href: "#summary", role: 'tab', "data-toggle" => 'tab'}= t('menu.summary')
-  %li{role: "presentation"}
-    %a{href: "#partitions", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.title'
+  - if policy(@menu).manage_partitions?
+    %li{role: "presentation"}
+      %a{href: "#partitions", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.title'
 
 .tab-content
   .tab-pane.active{role: 'tabpanel', id: 'menu'}
