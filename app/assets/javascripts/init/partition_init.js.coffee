@@ -13,8 +13,9 @@ $ ->
       App.collections.MenuDishProductCollection.reset data["dish_products"]
       App.collections.MenuMealCollection.reset data["meals"]
 
-      App.collections.MenuPartitionPorterCollection.reset JSON.parse($("#porters").html())
-      App.collections.MenuPartitionPorterDayEntityCollection.reset JSON.parse($("#porters_products").html())
+      if $("#porters").length > 0
+        App.collections.MenuPartitionPorterCollection.reset JSON.parse($("#porters").html())
+        App.collections.MenuPartitionPorterDayEntityCollection.reset JSON.parse($("#porters_products").html())
 
       partitionView = new App.views.MenuPartitionView(
         menu: JSON.parse($("#menu_item").html())
