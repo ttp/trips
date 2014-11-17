@@ -6,12 +6,10 @@ _.namespace "App.models"
 (->
   days = App.collections.MenuDayCollection
   porter_entities = App.collections.MenuPartitionPorterDayEntityCollection
-  entities = App.collections.MenuDayEntityCollection
   num = 1
   App.models.MenuPartitionPorterModel = Backbone.Model.extend(
     initialize: ->
       unless @id
-
         @set "id", @cid
         @set "new", 1
         if @get('name') == ''
@@ -49,7 +47,6 @@ _.namespace "App.models"
       _.sortBy totals, (item)-> item.product.get('name')
 
     today_weight: (current_day) ->
-      cnt = @porters.length
       total = 0
       _.each @porter_entities(), (porter_entity) ->
         day_entity = porter_entity.day_entity()

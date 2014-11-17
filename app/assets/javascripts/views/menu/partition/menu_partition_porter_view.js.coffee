@@ -9,7 +9,10 @@ _.namespace "App.views"
     tagName: 'div'
     className: 'porter panel panel-default'
     events:
-      'click .glyphicon-remove': 'remove'
+      'click button.remove': 'remove',
+      'click button.edit': 'edit',
+      'keydown input': 'processKey',
+      'focusout input': 'setName'
 
     initialize: (options) ->
       @options = options
@@ -30,7 +33,7 @@ _.namespace "App.views"
       @$el.find('.panel-body').html html
 
     bindEvents: ->
-      @model.on('change:position', @updateName, this)
+      @model.on('change:name', @updateName, this)
       @model.on('remove', $.proxy(@onModelRemove, this))
       @days_tabs.on 'click', $.proxy(@renderData, this)
       @porter_entities.on 'add', $.proxy(@renderData, this)
@@ -42,15 +45,31 @@ _.namespace "App.views"
       days.get(day_id)
 
     remove: ->
-      @porters.remove @model
+      if confirm(I18n.t('helpers.links.confirm'))
+        @porters.remove @model
 
     onModelRemove: -> @$el.remove()
+
+    edit: ->
+      @$el.find('a.name').hide()
+      @$el.find('input.name-input').show().focus()
+
+    processKey: (e) ->
+      @setName() if e.which == 13
+
+    setName: ->
+      nameInput = @$el.find('input.name-input').hide()
+      @model.set('name', nameInput.val());
+      @$el.find('.name').show()
+
+    test: ->
+      alert('OK')
 
     renderData: ->
       @renderTotals()
       @renderProducts()
 
-    renderTotals: () ->
+    renderTotals: ->
       day = @currentDay()
       @$el.find('.today_total').text(@model.today_weight(day))
       @$el.find('.total').text(@model.total_weight())

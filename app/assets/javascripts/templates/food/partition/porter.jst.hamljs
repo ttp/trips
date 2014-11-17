@@ -1,8 +1,16 @@
 %div.panel-heading
   %h4.panel-title
-    %i.glyphicon.glyphicon-remove
     %a.name{data-toggle: "collapse", href: "#porter" + porter.get('id'), data-porter-id: porter.get('id')}
       = porter.name()
+    %input.name-input{value: porter.name()}
+
+    %span.btn-group.btn-group-xs
+      %button.btn.btn-default.edit{type: 'button'}
+        %i.glyphicon.glyphicon-edit
+      %button.btn.btn-default.remove{type: 'button'}
+        %i.glyphicon.glyphicon-remove
+
+
     .pull-right
       %span.today_total{title: I18n.t('menu.partitions.today_weight')}= porter.today_weight(day)
       %span.total{title: I18n.t('menu.partitions.total_weight')}= porter.total_weight()

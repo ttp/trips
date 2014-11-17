@@ -227,6 +227,13 @@ body.menus, body.partitions {
       text-align: right;
       display: inline-block;
     }
+    .btn-group {
+      margin-left: 3px;
+    }
+    input.name-input {
+      display: none;
+      max-width: 150px;
+    }
   }
   .panel-body {
     table {

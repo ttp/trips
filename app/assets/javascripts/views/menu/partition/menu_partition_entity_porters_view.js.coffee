@@ -21,6 +21,9 @@ _.namespace "App.views"
       @porter_entities.on 'remove', $.proxy(@onPorterEntityRemove, this)
       @porters.on 'add', $.proxy(@onPorterAddRemove, this)
       @porters.on 'remove', $.proxy(@onPorterAddRemove, this)
+      _.each @porterEntities(), (porter_entity) ->
+        @bindEntityEvents(porter_entity)
+      , this
 
     render: ->
       html = $(JST["templates/food/partition/day_entity_porter"](porter_entities: @porterEntities()))

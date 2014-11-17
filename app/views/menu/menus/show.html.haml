@@ -8,7 +8,13 @@
   = title @menu.name
   - if @partition.present?
     = ' - ' + partition_name(@partition)
-  - if menu_can_edit?
+
+    .btn-group.btn-group-xs.pull-right.hidden-print
+      %a.btn.btn-default{href: edit_menu_menu_partition_path(@menu, @partition), title: t("helpers.links.edit")}
+        %i.glyphicon.glyphicon-edit.edit
+        = t("helpers.links.edit")
+
+  - elsif menu_can_edit?
     .btn-group.btn-group-xs.pull-right.hidden-print
       %a.btn.btn-default{href: guest_menu_edit_path(@menu), title: t("helpers.links.edit")}
         %i.glyphicon.glyphicon-edit.edit
