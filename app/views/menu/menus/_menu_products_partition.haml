@@ -1,7 +1,8 @@
+%h4.visible-print= t 'menu.partitions.partition'
 .porters.row
   - porter_num = 0
   - @partition.porters_products_total.total.each do |id, porter_total|
-    %div.porter_products.col-md-4{id: "porter_products#{id}", class: (porter_num % 3 == 0 ? 'new-row' : '')}
+    %div.porter_products.col-md-4{id: "porter_products#{id}", class: cell_class(porter_num)}
       %h5
         %span.porter_name= porter_total[:porter].name
         %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"

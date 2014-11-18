@@ -1,4 +1,4 @@
-.menu {
+.menus, .partitions {
   h3 {
     margin-top: 0 !important;
   }
@@ -8,17 +8,37 @@
         border: none;
         background-color: transparent;
       }
+
+      .entity-1 {
+        page-break-inside: avoid;
+      }
     }
   }
   .tab-pane {
-    display: block !important;
+    display: block;
   }
   .summary, .products {
     page-break-before: always;
   }
+  #partitions {
+    display: none;
+  }
+
+  .porter_products {
+    width: 45%;
+    float: left;
+    page-break-inside: avoid;
+
+    &.cell3 {
+      clear: none !important;
+    }
+    &.cell2 {
+      clear: left;
+    }
+  }
 }
 
-.body {
+body {
   padding-top: 0 !important;
   .navbar {
     display: none !important;
@@ -27,10 +47,14 @@
     padding: 0 !important;
     margin: 0 !important;
   }
+
+  .breadcrumb {
+    display: none;
+  }
 }
 
 @page
 {
-  size: auto;   /* auto is the current printer page size */
-  margin: 2cm 0mm;  /* this affects the margin in the printer settings */
+  size: auto;
+  margin: 2cm 0mm 2cm 1cm;
 }
