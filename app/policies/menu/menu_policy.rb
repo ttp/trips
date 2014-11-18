@@ -18,4 +18,12 @@ class Menu::MenuPolicy
   def manage_partitions?
     user.admin? || menu.owner?(user)
   end
+
+  def view_all?
+    user.admin?
+  end
+
+  def destroy?
+    user.admin? || menu.owner?(user)
+  end
 end

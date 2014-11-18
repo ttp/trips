@@ -1,0 +1,36 @@
+%h3= t 'menu.all_menus'
+
+%p
+  = link_to t('menu.create'), new_menu_menu_path, :class => 'btn btn-primary'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t('menu.name')
+      %th= t('menu.owner')
+      %th= t('menu.persons')
+      %th= t('menu.days_coverage')
+      %th= t('menu.is_public')
+      %th= t('fields.created')
+      %th= t('fields.updated')
+      %th= t('helpers.actions')
+  %tbody
+    - @menus.each do |menu|
+      %tr.menu-item
+        %td= link_to menu.name, menu_menu_path(menu.id)
+        %td
+          &nbsp;
+          - if menu.user.present?
+            = link_to menu.user.name, user_path(menu.user.id)
+        %td= menu.users_count
+        %td
+          #{round_precision(menu.coverage)} / #{menu.days_count}
+        %td= menu.is_public? ? 1 : 0
+        %td= menu.created_at.strftime("%Y-%m-%d")
+        %td= menu.updated_at.strftime("%Y-%m-%d")
+        %td
+          = link_to t("helpers.links.edit"), edit_menu_menu_path(menu), :class => 'btn btn-mini'
+          = link_to t("helpers.links.destroy"), menu_menu_path(menu),
+            :method => :delete, :data => { :confirm => t('helpers.links.confirm')}, :class => 'btn btn-mini btn-danger'
+
+= will_paginate @menus

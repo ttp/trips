@@ -26,6 +26,7 @@ Pohody::Application.routes.draw do
       resources :partitions
       get 'examples', on: :collection
       get 'my', on: :collection
+      get 'all', on: :collection
       get 'products', on: :collection
     end
     resources :products do

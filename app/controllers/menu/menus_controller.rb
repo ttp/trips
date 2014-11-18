@@ -13,6 +13,13 @@ class Menu::MenusController < ApplicationController
     @products_cnt = Menu::Product.for_user(current_user).count
   end
 
+  def all
+    authorize Menu::Menu, :view_all?
+
+    @menus = Menu::Menu.preload(:user).order('id desc').paginate(page: params[:page], per_page: 10)
+    render 'all'
+  end
+
   def my
     @title = t('menu.my_menu')
     @menus = Menu::Menu.where(user_id: current_user.id)
@@ -140,9 +147,7 @@ class Menu::MenusController < ApplicationController
   # DELETE /trips/1.json
   def destroy
     menu = Menu::Menu.find(params[:id])
-    if menu.user_id != current_user.id
-      redirect_to menu_menus_url and return
-    end
+    authorize menu, :destroy?
     menu.destroy
 
     respond_to do |format|

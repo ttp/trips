@@ -23,7 +23,8 @@ ua:
       confirm_instr_question: "Не отримали інструкцій по підвтердженню?"
     actions: "Дії"
   fields:
-    created: "Створений"
+    created: "Створено"
+    updated: "Оновлено"
 
   nav:
     home: 'Головна'
@@ -230,6 +231,8 @@ ua:
     new: Нове меню
     create: Створити меню
     edit: Редагувати меню
+    all_menus: Всі меню
+    owner: Власник
     day: День
     days: Днів
     days_coverage: Покриття/днів
