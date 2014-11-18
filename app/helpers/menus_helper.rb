@@ -1,23 +1,33 @@
 module MenusHelper
-  def render_entities(menu, day_id, parent_id)
+  def render_entities(menu, day_id, parent_id, partition = nil)
     items = menu.entities_children(day_id, parent_id)
     return '' if items.nil?
 
     html = ''
     items.each do |item|
-      html += render_entity(item, menu)
+      html += render_entity(item, menu, partition)
     end
     html.html_safe
   end
 
-  def render_entity(entity, menu)
+  def render_entity(entity, menu, partition = nil)
     model = menu.entity_model(entity)
-    html = "<div class='entity entity-#{entity.entity_type}'>
+    html = "<div class='entity entity-#{entity.entity_type} clearfix'>
       <span class='entity-name'>#{model.name}</span>"
     if entity.product?
-      html += " <span class='weight'>#{entity.weight}#{t('menu.g')}</span>"
+      html += " <span class='weight'>#{entity.weight}#{t('menu.g')}/#{entity.weight * menu.users_count}#{t('menu.g')}</span>"
+      html += render_porters(entity, partition) if partition.present?
     end
-    html += "#{render_entities(menu, entity.day_id, entity.id)}</div>"
+    html += "#{render_entities(menu, entity.day_id, entity.id, partition)}</div>"
+    html.html_safe
+  end
+
+  def render_porters(entity, partition)
+    html = "<span class='entity-porters pull-right'>"
+    partition.porters_by_entity(entity).each do |item|
+      html += content_tag(:span, item[:porter].name + ' ' + item[:weight].to_s + t('menu.g'), class: 'porter')
+    end
+    html += '</span>'
     html.html_safe
   end
 
@@ -33,15 +43,19 @@ module MenusHelper
     end
   end
 
+  def cell_class(cell_num)
+    class_name = ''
+    class_name += 'cell2' if (cell_num % 2 == 0)
+    class_name += 'cell3' if (cell_num % 3 == 0)
+    class_name
+  end
+
   def menu_can_view?
-    @menu.is_public? or
-      (user_signed_in? and @menu.user_id == current_user.id) or
-      (params[:key] and [@menu.edit_key, @menu.read_key].include?(params[:key]))
+    Pundit.policy(current_user, @menu).show? params[:key]
   end
 
   def menu_can_edit?
-    (user_signed_in? and (@menu.user_id == current_user.id || admin?)) or
-      (params[:key] and @menu.edit_key == params[:key])
+    Pundit.policy(current_user, @menu).edit? params[:key]
   end
 
   def guest_menu_edit_path(menu)

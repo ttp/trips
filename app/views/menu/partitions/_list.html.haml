@@ -1,0 +1,18 @@
+%p
+  = link_to t('menu.partitions.new'), new_menu_menu_partition_path(menu), class: 'btn btn-primary'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th #ID
+      %th= t('menu.persons')
+      %th= t('helpers.actions')
+  %tbody
+    - menu.partitions.each_with_index do |partition, num|
+      %tr.menu-item
+        %td= link_to partition_name(partition), menu_menu_partition_path(menu, partition)
+        %td= partition.partition_porters.count
+        %td
+          = link_to t("helpers.links.edit"), edit_menu_menu_partition_path(menu, partition), class: 'btn btn-mini'
+          = link_to t("helpers.links.destroy"), menu_menu_partition_path(menu, partition),
+            method: :delete, data: { confirm: t('helpers.links.confirm')}, class: 'btn btn-mini btn-danger'

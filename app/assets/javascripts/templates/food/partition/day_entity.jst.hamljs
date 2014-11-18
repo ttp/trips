@@ -1,0 +1,9 @@
+.header
+  %span.entity-name= entity.getName()
+  :if entity.isProduct()
+    %span.entity-weight= entity.get('weight') + I18n.t('menu.g')
+    = " / "
+    %span.entity-total-weight= total_weight + I18n.t('menu.g')
+    .entity-porters.pull-right
+.clearfix
+.body

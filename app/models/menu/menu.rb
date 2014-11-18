@@ -4,12 +4,17 @@ class Menu::Menu < ActiveRecord::Base
   attr_accessible :name, :users_count, :is_public
   belongs_to :user
   has_many :menu_days, :class_name => 'Menu::Day'
+  has_many :partitions, class_name: 'Menu::Partition'
 
   after_initialize do |menu|
     if menu.read_key.empty?
       menu.read_key = SecureRandom.urlsafe_base64(16)
       menu.edit_key = SecureRandom.urlsafe_base64(16)
     end
+  end
+
+  def owner?(user)
+    user_id.present? && user_id == user.id
   end
 
   def days

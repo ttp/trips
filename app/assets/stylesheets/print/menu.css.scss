@@ -1,4 +1,9 @@
-.menu {
+.avoid-page-break {
+  page-break-inside: avoid;
+  position: relative;
+}
+
+.menus, .partitions {
   h3 {
     margin-top: 0 !important;
   }
@@ -8,22 +13,49 @@
         border: none;
         background-color: transparent;
       }
+
+      .entity-1 {
+        @extend .avoid-page-break;
+      }
     }
   }
   .tab-pane {
-    display: block !important;
+    display: block;
   }
   .summary, .products {
     page-break-before: always;
   }
+  #partitions {
+    display: none;
+  }
+
+  .porter_products {
+    @extend .avoid-page-break;
+    width: 45%;
+    float: left;
+
+    &.cell3 {
+      clear: none !important;
+    }
+    &.cell2 {
+      clear: left;
+    }
+  }
 }
 
-.body {
+body {
   padding-top: 0 !important;
   .navbar {
     display: none !important;
   }
-  .content {
-    padding: 0 !important;
+
+  .breadcrumb {
+    display: none;
   }
+}
+
+@page
+{
+  size: auto;
+  margin: 2cm 0mm 2cm 1cm;
 }

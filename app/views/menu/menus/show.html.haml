@@ -1,9 +1,20 @@
 = stylesheet_link_tag "print/menu", :media => "print"
 = javascript_include_tag "init/menu_show_init"
 
+- if @partition.present?
+  = render 'shared/breadcrumbs'
+
 %h3
   = title @menu.name
-  - if menu_can_edit?
+  - if @partition.present?
+    = ' - ' + partition_name(@partition)
+
+    .btn-group.btn-group-xs.pull-right.hidden-print
+      %a.btn.btn-default{href: edit_menu_menu_partition_path(@menu, @partition), title: t("helpers.links.edit")}
+        %i.glyphicon.glyphicon-edit.edit
+        = t("helpers.links.edit")
+
+  - elsif menu_can_edit?
     .btn-group.btn-group-xs.pull-right.hidden-print
       %a.btn.btn-default{href: guest_menu_edit_path(@menu), title: t("helpers.links.edit")}
         %i.glyphicon.glyphicon-edit.edit
@@ -12,4 +23,31 @@
         %i.glyphicon.glyphicon-share
         = t("menu.share_link")
 
-= render :partial => 'menu'
+= render 'menu/menus/users_count'
+
+%ul.nav.nav-tabs.hidden-print{role: "tablist"}
+  %li.active{role: "presentation"}
+    %a{href: "#menu", role: 'tab', "data-toggle" => 'tab'}= t 'menu.menu'
+  %li{role: "presentation"}
+    %a{href: "#products", role: 'tab', "data-toggle" => 'tab'}= t 'menu.products.products'
+  - if @partition.present?
+    %li{role: "presentation"}
+      %a{href: "#products_partition", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.partition'
+  %li{role: "presentation"}
+    %a{href: "#summary", role: 'tab', "data-toggle" => 'tab'}= t('menu.summary')
+  - if policy(@menu).manage_partitions?
+    %li{role: "presentation"}
+      %a{href: "#partitions", role: 'tab', "data-toggle" => 'tab'}= t 'menu.partitions.title'
+
+.tab-content
+  .tab-pane.active{role: 'tabpanel', id: 'menu'}
+    = render 'menu/menus/menu'
+  .tab-pane{role: 'tabpanel', id: 'products'}
+    = render 'menu/menus/menu_products'
+  - if @partition.present?
+    .tab-pane{role: 'tabpanel', id: 'products_partition'}
+      = render 'menu/menus/menu_products_partition'
+  .tab-pane{role: 'tabpanel', id: 'summary'}
+    = render 'menu/menus/summary', menu: @menu
+  .tab-pane{role: 'tabpanel', id: 'partitions'}
+    = render 'menu/partitions/list', menu: @menu

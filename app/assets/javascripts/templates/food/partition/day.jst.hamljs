@@ -1,0 +1,8 @@
+.panel.panel-default
+  .panel-heading
+
+  .panel-body.body
+    .noitems
+      No products
+  .panel-footer
+    Summary goes here

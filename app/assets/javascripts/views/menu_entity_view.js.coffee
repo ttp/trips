@@ -1,5 +1,8 @@
 #= require typeahead
 #= require backbone-validation
+#= require rivets.min
+#= require rivets-backbone
+#= require rivets-formatters
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/menu_day_entity_model
@@ -19,6 +22,7 @@ _.namespace "App.views"
       "click button.remove-entity": "removeEntity"
 
     initialize: (options) ->
+      @options = options
       @model = options.model
       @entities = App.collections.MenuDayEntityCollection
       @render()

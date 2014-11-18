@@ -118,6 +118,14 @@ $hover_color: #ffa;
         .entity {
           margin-left: 20px;
         }
+
+        .entity-weight {
+          margin-left: 8px;
+        }
+
+        .porter {
+          margin-left: 10px;
+        }
       }
       .entity-1, .entity-2 {
         padding: 0px 5px 3px 3px;
@@ -162,6 +170,18 @@ $hover_color: #ffa;
   }
 }
 
+body.menus, body.partitions {
+  &.show .content {
+    .nav, .count_info {
+      margin-bottom: 10px;
+    }
+
+    .cell3 {
+      clear: left;
+    }
+  }
+}
+
 .tree {
   overflow: auto;
   position: relative;
@@ -199,4 +219,90 @@ $hover_color: #ffa;
 
 .editable-click {
   cursor: pointer;
+}
+
+#partition_porters {
+  .glyphicon {
+    cursor: default;
+  }
+  .panel-heading {
+    .today_total, .total {
+      width: 60px;
+      text-align: right;
+      display: inline-block;
+    }
+    .btn-group {
+      margin-left: 3px;
+    }
+    input.name-input {
+      display: none;
+      max-width: 150px;
+    }
+  }
+  .panel-body {
+    table {
+      width: 100%;
+
+      td {
+        padding: 2px 0;
+      }
+
+      td.today_total, td.total {
+        width: 60px;
+        text-align: right;
+      }
+      td.today_total {
+        span {
+          padding-right: 3px;
+        }
+      }
+      .product_use_count {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+.entity {
+  // porters dropdown
+  .porters-dropdown {
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    min-width: 230px;
+    z-index: 2;
+
+    .porter:hover {
+      background-color: #f5f5f5;
+    }
+
+    .porter {
+      .total, .today_total {
+        width: 60px;
+      }
+
+      > span {
+        display: inline-block;
+      }
+
+    }
+    tr {
+      .name {
+        width: 150px;
+        display: inline-block;
+      }
+    }
+  }
+
+  .entity-porters {
+    .btn-group {
+      margin: 0 1px;
+    }
+  }
+
+  li {
+    i.glyphicon {
+      margin-right: 3px;
+    }
+  }
 }

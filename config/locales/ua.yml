@@ -63,7 +63,7 @@ ua:
     password_hint: 'Залиште пустим, якщо ви не хочете змінювати пароль'
     password_confirmation: 'Повторіть пароль'
     current_password: 'Поточний пароль'
-    current_password_hint: 'Введіть свій поточний парль щоб підтвердити зміни'
+    current_password_hint: 'Введіть свій поточний пароль щоб підтвердити зміни'
     remember_me: 'Запам"ятати мене'
     login: "Увійдіть"
 
@@ -221,7 +221,8 @@ ua:
     meta_description: Конструктор меню в похід.
     meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
     drop_products: Перемістіть продукти сюди або скористайтесь швидким додаванням за назвою
-    menu: Розкладка Меню
+    menu: Меню
+    title: Розкладка Меню
     my_menu: Мої меню
     examples: Приклади меню
     add: Додати меню
@@ -305,3 +306,17 @@ ua:
       was_updated: Страву оновлено.
       was_destroyed: Страву видалено.
       icon: Іконка
+    partitions:
+      title: Розподіли продуктів
+      partition: Розподіл
+      partition_num: Розподіл %{num}
+      new: Новий розподіл
+      new_for: Новий розподіл для "%{name}"
+      for: Розподіл для "%{name}"
+      porters: Учасники
+      view: Переглянути
+      porter: Учасник
+      enter_porter_name: Введіть ім'я учасника
+      product_usage_count: Кількість використань
+      today_weight: Вага на сьогодні
+      total_weight: Вага на всі дні

@@ -50,5 +50,8 @@
 
     sortOrder: (change_by) ->
       @set 'sort_order', @get('sort_order') + change_by
+
+    totalWeightByAllPorters: ->
+      @get('weight') * App.collections.MenuPartitionPorterCollection.length
   )
 )()

@@ -24,6 +24,9 @@ _.namespace "App.collections"
         item.set 'sort_order', i
       , this)
 
+    allAs: (day_entity) ->
+      @where entity_id: day_entity.get('entity_id'), entity_type: day_entity.get('entity_type')
+
     siblings: (entity) ->
       @where
         parent_id: entity.get 'parent_id'

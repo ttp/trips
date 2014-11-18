@@ -156,6 +156,8 @@ GEM
     polyglot (0.3.4)
     protected_attributes (1.0.7)
       activemodel (>= 4.0.1, < 5.0)
+    pundit (0.3.0)
+      activesupport (>= 3.0.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -203,6 +205,8 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
     sexp_processor (4.4.2)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -262,12 +266,14 @@ DEPENDENCIES
   launchy (>= 2.2.0)
   mysql2
   protected_attributes
+  pundit
   quiet_assets (>= 1.0.1)
   rails (>= 4.0.0)
   rspec-rails (>= 2.12.2)
   ruby-haml-js!
   sass-rails (~> 4.0.0)
   selenium-webdriver (~> 2.39.0)
+  shoulda-matchers
   simple_form!
   sqlite3
   switch_user

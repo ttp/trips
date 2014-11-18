@@ -1,0 +1,3 @@
+%b
+  = I18n.t('menu.weight') + ': '
+%span.weight= weight

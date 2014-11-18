@@ -34,3 +34,5 @@ gem "selenium-webdriver", "~> 2.39.0", :group => :test
 gem 'font-awesome-sass'
 gem "switch_user"
 gem "breadcrumbs_on_rails"
+gem 'shoulda-matchers', :group => :test
+gem "pundit"
