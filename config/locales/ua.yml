@@ -320,3 +320,5 @@ ua:
       product_usage_count: Кількість використань
       today_weight: Вага на сьогодні
       total_weight: Вага на всі дні
+      auto: Автоматично
+      auto_info: Розподілити всі продукти автоматично

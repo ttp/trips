@@ -10,7 +10,7 @@ _.namespace "App.views"
     tagName: 'div'
     className: 'day tab-pane'
     events:
-      "click button.auto": "auto"
+      "click button.auto-split": "autoSplit"
 
     initialize: (options) ->
       @options = options
@@ -62,9 +62,10 @@ _.namespace "App.views"
         updateSummary() if entity.get('day_id') is @model.id
       , this
 
-    auto: (e) ->
+    autoSplit: (e) ->
       e.preventDefault()
-      alert('auto')
+      splitter = new App.models.MenuPartitionAutoSplitter
+      splitter.split()
 
   )
 )()
