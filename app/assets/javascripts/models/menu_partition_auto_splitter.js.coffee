@@ -10,7 +10,7 @@ class App.models.MenuPartitionAutoSplitter
   initUsers: ->
     @users = []
     @porters.each (porter) ->
-      @users.push { porter: porter, weight: porter.total_weight(), name: porter.get('name') }
+      @users.push porter: porter, weight: porter.total_weight(), name: porter.get('name')
     , this
 
   split: ->
@@ -25,7 +25,7 @@ class App.models.MenuPartitionAutoSplitter
     , this)
 
   userWithMinWeight: ->
-    _.min @users, (user) -> user.weight
+    _.min @users, (user) -> user.weight * 100 / user.porter.get('weight_rank')
 
   sortedDayEntities: (day) ->
     dayEntities = @entities.where(day_id: day.get('id'), entity_type: 3)

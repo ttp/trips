@@ -1,7 +1,6 @@
 #= require views/menu/partition/menu_partition_day_view
 #= require models/menu_model
 #= require models/menu_day_model
-#= require models/menu_partition_auto_splitter
 #= require collections/menu_day_collection
 #= require collections/menu_product_category_collection
 #= require collections/menu_product_collection

@@ -3,6 +3,7 @@
 #= require models/menu_day_entity_model
 #= require models/menu_clipboard
 #= require views/menu/partition/menu_partition_entity_view
+#= require views/menu/partition/menu_partition_split_popup_view
 _.namespace "App.views"
 (->
   clipboard = App.models.MenuClipboard
@@ -62,10 +63,12 @@ _.namespace "App.views"
         updateSummary() if entity.get('day_id') is @model.id
       , this
 
+    splitPopup: ->
+      @splitPopupView ?= new App.views.MenuPartitionSplitPopupView
+
     autoSplit: (e) ->
       e.preventDefault()
-      splitter = new App.models.MenuPartitionAutoSplitter
-      splitter.split()
-
+      @splitPopup().render()
+      @splitPopup().show()
   )
 )()

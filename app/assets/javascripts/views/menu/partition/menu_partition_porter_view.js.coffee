@@ -35,10 +35,12 @@ _.namespace "App.views"
     bindEvents: ->
       @model.on('change:name', @updateName, this)
       @model.on('remove', $.proxy(@onModelRemove, this))
-      @days_tabs.on 'click', $.proxy(@renderData, this)
-      @porter_entities.on 'add', $.proxy(@renderData, this)
-      @porter_entities.on 'remove', $.proxy(@renderData, this)
-      @porters.on 'add remove', $.proxy(@renderData, this)
+
+      renderData = _.throttle $.proxy(@renderData, this), 100
+      @days_tabs.on 'click', renderData
+      @porter_entities.on 'add', renderData
+      @porter_entities.on 'remove', renderData
+      @porters.on 'add remove', renderData
 
     currentDay: ->
       day_id = @days_tabs.find('li.active').data('day_id')
