@@ -8,7 +8,7 @@ describe Menu::PartitionsController do
   let(:product_entity2) { create :menu_day_entity_product  }
 
   before do
-    sign_in create :user
+    sign_in create(:user, :admin)
   end
 
   describe 'POST create' do

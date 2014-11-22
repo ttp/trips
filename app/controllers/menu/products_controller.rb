@@ -68,7 +68,7 @@ class Menu::ProductsController < ApplicationController
   # DELETE /menu/products/1
   def destroy
     @menu_product.destroy
-    redirect_to (request.referer || menu_menus_url), notice: t('menu.products.was_destroyed')
+    redirect_to back(menu_products_path), notice: t('menu.products.was_destroyed')
   end
 
   private
