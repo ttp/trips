@@ -9,17 +9,22 @@ _.namespace "App.models"
   num = 1
   App.models.MenuPartitionPorterModel = Backbone.Model.extend(
     initialize: ->
-      unless @id
-        @set "id", @cid
-        @set "new", 1
-        if @get('name') == ''
-          @set 'name', I18n.t('menu.partitions.porter') + num
-        num++
-      @porters = App.collections.MenuPartitionPorterCollection
+      @initNewRecord() unless @id
+      @initWeightRank()
       @on 'remove', @onRemove, this
 
     name: ->
       @get('name')
+
+    initNewRecord: ->
+      @set "id", @cid
+      @set "new", 1
+      if @get('name') == ''
+        @set 'name', I18n.t('menu.partitions.porter') + num
+      num++
+
+    initWeightRank: ->
+      @set 'weight_rank', 100
 
     porter_entities: ->
       porter_entities.where(partition_porter_id: @get('id'))

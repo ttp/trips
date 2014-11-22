@@ -13,6 +13,8 @@
   %script{type: "application/json", id: "porters_products"}
     = @partition.porter_products.to_json.html_safe
 
+= render 'split_popup'
+
 .row
   .col-md-7
     #menu.menu

@@ -1,5 +1,9 @@
 .panel.panel-default
   .panel-heading
+    .btn-toolbar
+      .btn-group.btn-group-sm
+        %button.btn.btn-default.auto-split{type: 'button', title: I18n.t('menu.partitions.auto_info')}
+          = I18n.t('menu.partitions.auto')
 
   .panel-body.body
     .noitems

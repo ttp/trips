@@ -1,0 +1,12 @@
+%table.table
+  %thead
+    %tr
+      %th &nbsp;
+      %th= I18n.t('menu.partitions.weight_rank')
+  %tbody
+    :each porter in porters
+      %tr.porter
+        %td
+          %span.name= porter.name()
+        %td.today_total
+          %input.form-control.input-sm{data-porter-id: porter.get('id'), value: porter.get('weight_rank')}
