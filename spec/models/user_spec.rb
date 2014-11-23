@@ -100,4 +100,18 @@ describe User do
 
   end
 
+  describe "#set_default_role" do
+    it "set default role" do
+      user = User.create!(@attr)
+      expect(user.role).to eq User::USER
+    end
+
+    it "do not change existing role" do
+      user = User.create!(@attr)
+      user.role = 'admin'
+      user.save
+      expect(user.role).to eq User::ADMIN
+    end
+  end
+
 end
