@@ -11,6 +11,7 @@
 puts 'DEFAULT USERS'
 user = User.create_with(
   name: ENV['ADMIN_NAME'].dup,
+  role: 'user',
   password: ENV['ADMIN_PASSWORD'].dup,
   password_confirmation: ENV['ADMIN_PASSWORD'].dup
 ).find_or_create_by(email: ENV['ADMIN_EMAIL'].dup)
