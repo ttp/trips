@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Track do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:region) }
+  it { should belong_to(:user) }
+  it { should have_many(:trips) }
 end

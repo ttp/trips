@@ -77,7 +77,7 @@ describe User do
     end
 
     it "should reject short passwords" do
-      short = "a" * 5
+      short = "a" * 2
       hash = @attr.merge(:password => short, :password_confirmation => short)
       User.new(hash).should_not be_valid
     end
@@ -98,6 +98,20 @@ describe User do
       @user.encrypted_password.should_not be_blank
     end
 
+  end
+
+  describe "#set_default_role" do
+    it "set default role" do
+      user = User.create!(@attr)
+      expect(user.role).to eq User::USER
+    end
+
+    it "do not change existing role" do
+      user = User.create!(@attr)
+      user.role = 'admin'
+      user.save
+      expect(user.role).to eq User::ADMIN
+    end
   end
 
 end
