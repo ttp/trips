@@ -19,17 +19,17 @@
           %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
             :placeholder => t('menu.name'), "data-value" => 'menu.name'}
         .row.fields
-          .col.col-lg-4
+          .col.col-md-4
             %label.control-label.pull-left{for: 'users_count'}= t('menu.persons') + ':'
             %input.form-control.users_count{:name => 'users_count', "data-value" => 'menu.users_count',
               :value => @menu.users_count}
-          .col.col-lg-4
+          .col.col-md-4
             %label.control-label.pull-left= t('menu.days_coverage') + ':'
             .days_count
               %span{"data-text" => 'menu.coverage | number'}
               %span /
               %span{"data-text" => 'menu.days_count | number'}
-          .col.col-lg-4
+          .col.col-md-4
             %label{for: 'is_public'}
               = t('menu.is_public') + ':'
               %input.is_public{:name => 'is_public', :id => 'is_public',
