@@ -2,20 +2,32 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
-    @user = user
+    @user = user || User.new
     @record = record
   end
 
+  def admin?
+    user.admin?
+  end
+
+  def guest?
+    user.new_record?
+  end
+
+  def owner?
+    record.user_id == user.id
+  end
+
   def index?
-    false
+    admin?
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+    admin?
   end
 
   def create?
-    false
+    admin?
   end
 
   def new?
@@ -23,7 +35,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    admin?
   end
 
   def edit?
@@ -31,7 +43,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    admin?
   end
 
   def scope
@@ -42,12 +54,20 @@ class ApplicationPolicy
     attr_reader :user, :scope
 
     def initialize(user, scope)
-      @user = user
+      @user = user || User.new
       @scope = scope
     end
 
     def resolve
       scope
+    end
+
+    def admin?
+      user.admin?
+    end
+
+    def guest?
+      user.new_record?
     end
   end
 end

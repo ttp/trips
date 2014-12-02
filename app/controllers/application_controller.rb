@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, :if => :devise_controller?
   protect_from_forgery
   helper_method :admin?
-  helper_method :permissions_for
 
-protected
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  protected
+
   def store_location
     if request.get? and controller_name != "user_sessions" and controller_name != "sessions"
       session[:return_to] = request.fullpath
@@ -45,11 +47,10 @@ protected
     current_user && current_user.admin? || session[:admin]
   end
 
-  def permissions
-    @permissions ||= Permissions::Acl.new(current_user)
-  end
+  private
 
-  def permissions_for(resource)
-    permissions.for_resource(resource)
+  def user_not_authorized
+    flash[:error] = I18n.t 'site.access_denied'
+    redirect_to(request.referrer || root_path)
   end
 end

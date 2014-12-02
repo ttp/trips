@@ -24,8 +24,9 @@
       = f.input :norm, label: t('menu.products.norm_default')
   = f.input :norm_info, label: t('menu.products.norm'), input_html: {:rows => 5}
 
-  - if permissions_for('Menu').allowed? 'moderate'
+  - if policy(Menu::Product).change_icon?
     = f.input :icon, :label => t('menu.products.icon')
+  - if policy(Menu::Product).make_public?
     = f.input :is_public, :label => t('menu.products.is_public'), wrapper: :vertical_boolean, as: :boolean
 
   .form-actions

@@ -10,7 +10,7 @@ class Menu::MenusController < ApplicationController
       @my_cnt = Menu::Menu.where(user_id: current_user.id).count
     end
     @dishes_cnt = Menu::Dish.for_user(current_user).count
-    @products_cnt = Menu::Product.for_user(current_user).count
+    @products_cnt = policy_scope(Menu::Product).count
   end
 
   def all
@@ -22,7 +22,7 @@ class Menu::MenusController < ApplicationController
 
   def my
     @title = t('menu.my_menu')
-    @menus = Menu::Menu.where(user_id: current_user.id)
+    @menus = policy_scope(Menu::Menu)
     render 'my'
   end
 

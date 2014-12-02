@@ -1,31 +1,30 @@
 class Menu::DishesController < ApplicationController
   before_action :set_menu_dish, only: [:show, :edit, :update, :destroy]
-  before_action :validate_access, only: [:edit, :update, :destroy]
 
   # GET /menu/dishes
   def index
-    @menu_dishes = Menu::Dish.with_translations(I18n.locale)
-    @menu_dishes = @menu_dishes.for_user(current_user) unless permissions_for('Menu').allowed?('moderate')
-    @menu_dishes = @menu_dishes.order('name').paginate(:page => params[:page], :per_page => 25)
-    @dish_categories = Menu::DishCategory.by_lang(I18n.locale).to_hash
+    fetch_categories
+    fetch_dishes
+    paginate_records
   end
 
   # GET /menu/dishes/category/1
   def category
-    @menu_dishes = Menu::Dish.with_translations(I18n.locale)
-    @menu_dishes = @menu_dishes.for_user(current_user) unless permissions_for('Menu').allowed?('moderate')
+    fetch_categories
+    fetch_dishes
     @menu_dishes = @menu_dishes.by_category(params[:category])
     @category = Menu::DishCategory.find(params[:category])
 
     add_breadcrumb t('menu.dishes.dishes'), menu_dishes_path
     add_breadcrumb @category.name
-    @menu_dishes = @menu_dishes.order('name').paginate(:page => params[:page], :per_page => 25)
-    @dish_categories = Menu::DishCategory.by_lang(I18n.locale).to_hash
+    paginate_records
     render :index
   end
 
   # GET /menu/dishes/1
   def show
+    authorize @menu_dish, :show?
+
     add_breadcrumb t('menu.dishes.dishes'), menu_dishes_path
     add_breadcrumb @menu_dish.dish_category.name, by_category_menu_dishes_path(@menu_dish.dish_category_id)
     add_breadcrumb @menu_dish.name
@@ -35,7 +34,7 @@ class Menu::DishesController < ApplicationController
 
   # GET /menu/dishes/new
   def new
-    redirect_to menu_dishes_path unless permissions_for('Menu').allowed?('create')
+    authorize Menu::Dish, :create?
 
     @menu_dish = Menu::Dish.new
     prepare_dish_products
@@ -43,7 +42,7 @@ class Menu::DishesController < ApplicationController
 
   # POST /menu/dishes
   def create
-    redirect_to menu_dishes_path unless permissions_for('Menu').allowed?('create')
+    authorize Menu::Dish, :create?
 
     @menu_dish = Menu::Dish.new(menu_dish_params)
     @menu_dish.user_id = current_user.id
@@ -59,11 +58,15 @@ class Menu::DishesController < ApplicationController
 
   # GET /menu/dishes/1/edit
   def edit
+    authorize @menu_dish, :update?
+
     prepare_dish_products
   end
 
   # PATCH/PUT /menu/dishes/1
   def update
+    authorize @menu_dish, :update?
+
     if @menu_dish.update(menu_dish_params)
       save_products
       redirect_to back(menu_dishes_path), notice: t('menu.dishes.was_updated')
@@ -75,11 +78,26 @@ class Menu::DishesController < ApplicationController
 
   # DELETE /menu/dishes/1
   def destroy
+    authorize @menu_dish, :destroy?
+
     @menu_dish.destroy
     redirect_to (request.referer || menu_dishes_path), notice: t('menu.dishes.was_destroyed')
   end
 
   private
+
+  def fetch_dishes
+    @menu_dishes = Menu::Dish.with_translations(I18n.locale)
+    @menu_dishes = policy_scope(@menu_dishes)
+  end
+
+  def paginate_records
+    @menu_dishes = @menu_dishes.order('name').paginate(:page => params[:page], :per_page => 25)
+  end
+
+  def fetch_categories
+    @dish_categories = Menu::DishCategory.by_lang(I18n.locale).to_hash
+  end
 
   def set_menu_dish
     @menu_dish = Menu::Dish.find(params[:id])
@@ -89,12 +107,8 @@ class Menu::DishesController < ApplicationController
 
   def menu_dish_params
     product_params = params[:menu_dish].dup
-    product_params = product_params.except(:is_public, :icon) unless permissions_for('Menu').allowed?('moderate')
+    product_params = product_params.except(:is_public, :icon) unless policy(Menu::Dish).make_public?
     product_params
-  end
-
-  def validate_access
-    redirect_to menu_dishes_path unless permissions_for('Menu').allowed?('edit', @menu_dish)
   end
 
   def prepare_dish_products

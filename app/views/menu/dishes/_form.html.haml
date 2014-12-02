@@ -25,8 +25,9 @@
 
       = f.input :description, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
 
-      - if permissions_for('Menu').allowed? 'moderate'
+      - if policy(Menu::Dish).change_icon?
         = f.input :icon, :label => t('menu.dishes.icon')
+      - if policy(Menu::Dish).make_public?
         = f.input :is_public, :label => t('menu.dishes.is_public'), wrapper: :vertical_boolean, as: :boolean
 
       .form-actions

@@ -1,14 +1,16 @@
 = render 'shared/breadcrumbs'
 %h3
   = title @menu_dish.name
-  - if permissions_for('UserResource').allowed?('edit', @menu_dish) || permissions_for('Menu').allowed?('moderate')
+  - if policy(@menu_dish).edit? || policy(@menu_dish).destroy?
     .btn-group.btn-group-xs.pull-right.hidden-print
-      %a.btn.btn-default{href: edit_menu_dish_path(@menu_dish), title: t("helpers.links.edit")}
-        %i.glyphicon.glyphicon-edit
-        = t("helpers.links.edit")
-      %a.btn.btn-default{href: menu_dish_path(@menu_dish), :data => {:method => :delete, :confirm => t('helpers.links.confirm')}}
-        %i.glyphicon.glyphicon-remove
-        = t("helpers.links.destroy")
+      - if policy(@menu_dish).edit?
+        %a.btn.btn-default{href: edit_menu_dish_path(@menu_dish), title: t("helpers.links.edit")}
+          %i.glyphicon.glyphicon-edit
+          = t("helpers.links.edit")
+      - if policy(@menu_dish).destroy?
+        %a.btn.btn-default{href: menu_dish_path(@menu_dish), :data => {:method => :delete, :confirm => t('helpers.links.confirm')}}
+          %i.glyphicon.glyphicon-remove
+          = t("helpers.links.destroy")
 
 - unless @menu_dish.icon.blank?
   %p
@@ -19,7 +21,6 @@
   - @dish_products_list.each do |dish_product|
     %div
       %a.glyphicon.glyphicon-link{href: menu_product_path(dish_product['product_id'])}
-      -#= link_to dish_product['name'], menu_product_path(dish_product['product_id'])
       = dish_product['name'] + ': ' + dish_product['weight'].to_s + t('menu.g')
 
 

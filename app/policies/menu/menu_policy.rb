@@ -1,4 +1,10 @@
-class Menu::MenuPolicy
+class Menu::MenuPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope.where(user_id: user.id)
+    end
+  end
+
   attr_reader :user, :menu
 
   def initialize(user, menu)
@@ -7,16 +13,20 @@ class Menu::MenuPolicy
   end
 
   def show?(key = nil)
-    menu.is_public? || user.admin? || menu.owner?(user) ||
+    menu.is_public? || user.admin? || owner? ||
       [menu.edit_key, menu.read_key].include?(key)
   end
 
   def edit?(key = nil)
-    user.admin? || menu.owner?(user) || menu.edit_key == key
+    user.admin? || owner? || menu.edit_key == key
+  end
+
+  def owner?
+    menu.owner?(user)
   end
 
   def manage_partitions?
-    user.admin? || menu.owner?(user)
+    user.admin? || owner?
   end
 
   def view_all?
@@ -24,6 +34,6 @@ class Menu::MenuPolicy
   end
 
   def destroy?
-    user.admin? || menu.owner?(user)
+    user.admin? || owner?
   end
 end

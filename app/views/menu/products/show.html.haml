@@ -1,14 +1,16 @@
 = render 'shared/breadcrumbs'
 %h3
   = title @menu_product.name
-  - if permissions_for('UserResource').allowed?('edit', @menu_product) || permissions_for('Menu').allowed?('moderate')
+  - if policy(@menu_product).edit? || policy(@menu_product).destroy?
     .btn-group.btn-group-xs.pull-right.hidden-print
-      %a.btn.btn-default{href: edit_menu_product_path(@menu_product), title: t("helpers.links.edit")}
-        %i.glyphicon.glyphicon-edit
-        = t("helpers.links.edit")
-      %a.btn.btn-default{href: menu_product_path(@menu_product), data: { confirm: t('helpers.links.confirm'), method: :delete }}
-        %i.glyphicon.glyphicon-remove
-        = t("helpers.links.destroy")
+      - if policy(@menu_product).edit?
+        %a.btn.btn-default{href: edit_menu_product_path(@menu_product), title: t("helpers.links.edit")}
+          %i.glyphicon.glyphicon-edit
+          = t("helpers.links.edit")
+      - if policy(@menu_product).destroy?
+        %a.btn.btn-default{href: menu_product_path(@menu_product), data: { confirm: t('helpers.links.confirm'), method: :delete }}
+          %i.glyphicon.glyphicon-remove
+          = t("helpers.links.destroy")
 
 - if !@menu_product.description.blank?
   .description= raw safe_textile(@menu_product.description)
