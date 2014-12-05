@@ -4,6 +4,9 @@ ua:
     registrations:
       user:
         signed_up: "Ви успішно зареєструвались в системі"
+    failure:
+      user:
+        not_found_in_database: Такого користувача немає в нашій базі
   helpers:
     links:
       add: "Додати"
