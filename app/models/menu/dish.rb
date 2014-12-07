@@ -12,6 +12,7 @@ class Menu::Dish < ActiveRecord::Base
       where(is_public: true)
     end
   }
+  scope :is_public, -> { where(is_public: true) }
 
   validates :name, :dish_category_id, :presence => true
 
@@ -44,7 +45,7 @@ class Menu::Dish < ActiveRecord::Base
     Menu::Dish.connection.select_all(
       "SELECT dp.*, pt.name, dp.weight FROM menu_dish_products dp
        JOIN menu_product_translations pt ON pt.menu_product_id = dp.product_id
-       WHERE dp.dish_id = #{self.id} and pt.locale = #{connection.quote(lang)}
+       WHERE dp.dish_id = #{self.id} and pt.locale = #{self.class.connection.quote(lang)}
        ORDER BY dp.sort_order"
     )
   end

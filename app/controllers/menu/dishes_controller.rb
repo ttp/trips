@@ -1,14 +1,12 @@
 class Menu::DishesController < ApplicationController
   before_action :set_menu_dish, only: [:show, :edit, :update, :destroy]
 
-  # GET /menu/dishes
   def index
     fetch_categories
     fetch_dishes
     paginate_records
   end
 
-  # GET /menu/dishes/category/1
   def category
     fetch_categories
     fetch_dishes
@@ -21,7 +19,6 @@ class Menu::DishesController < ApplicationController
     render :index
   end
 
-  # GET /menu/dishes/1
   def show
     authorize @menu_dish, :show?
 
@@ -32,7 +29,6 @@ class Menu::DishesController < ApplicationController
     @dish_products_list = @menu_dish.products_list(I18n.locale)
   end
 
-  # GET /menu/dishes/new
   def new
     authorize Menu::Dish, :create?
 
@@ -40,7 +36,6 @@ class Menu::DishesController < ApplicationController
     prepare_dish_products
   end
 
-  # POST /menu/dishes
   def create
     authorize Menu::Dish, :create?
 
@@ -56,14 +51,12 @@ class Menu::DishesController < ApplicationController
     end
   end
 
-  # GET /menu/dishes/1/edit
   def edit
     authorize @menu_dish, :update?
 
     prepare_dish_products
   end
 
-  # PATCH/PUT /menu/dishes/1
   def update
     authorize @menu_dish, :update?
 
@@ -76,7 +69,6 @@ class Menu::DishesController < ApplicationController
     end
   end
 
-  # DELETE /menu/dishes/1
   def destroy
     authorize @menu_dish, :destroy?
 

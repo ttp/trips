@@ -26,7 +26,7 @@ class Menu::ProductPolicy <  ApplicationPolicy
   class Scope < Scope
     def resolve
       return scope if user.admin? || user.moderator?
-      return scope.public if guest?
+      return scope.is_public if guest?
       scope.for_user(user)
     end
   end

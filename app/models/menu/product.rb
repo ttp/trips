@@ -8,7 +8,7 @@ class Menu::Product < ActiveRecord::Base
   scope :for_user, ->(user) {
     where('is_public = ? or user_id = ?', true, user.id)
   }
-  scope :public, -> { where(is_public: true) }
+  scope :is_public, -> { where(is_public: true) }
 
   validates :name, :product_category_id, :calories, :proteins, :fats, :carbohydrates, :presence => true
 

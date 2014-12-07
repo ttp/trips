@@ -1,14 +1,12 @@
 class Menu::ProductsController < ApplicationController
   before_action :set_menu_product, only: [:show, :edit, :update, :destroy]
 
-  # GET /menu/products
   def index
     fetch_categories
     fetch_products
     paginate_records
   end
 
-  # GET /menu/products/category/1
   def category
     fetch_categories
     fetch_products
@@ -21,7 +19,6 @@ class Menu::ProductsController < ApplicationController
     render :index
   end
 
-  # GET /menu/products/1
   def show
     authorize @menu_product, :show?
 
@@ -30,14 +27,12 @@ class Menu::ProductsController < ApplicationController
     add_breadcrumb @menu_product.name
   end
 
-  # GET /menu/products/new
   def new
     authorize Menu::Product, :create?
 
     @menu_product = Menu::Product.new
   end
 
-  # POST /menu/products
   def create
     authorize Menu::Product, :create?
 
@@ -51,12 +46,10 @@ class Menu::ProductsController < ApplicationController
     end
   end
 
-  # GET /menu/products/1/edit
   def edit
     authorize @menu_product, :update?
   end
 
-  # PATCH/PUT /menu/products/1
   def update
     authorize @menu_product, :update?
 
@@ -67,7 +60,6 @@ class Menu::ProductsController < ApplicationController
     end
   end
 
-  # DELETE /menu/products/1
   def destroy
     authorize @menu_product, :destroy?
 
