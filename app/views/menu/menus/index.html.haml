@@ -33,4 +33,11 @@
       .pull-right= link_to t('menu.dashboard.goto_products'), menu_products_path
       .clearfix
 
+%h3
+  = t 'menu.videos'
+  %i.fa.fa-youtube
+%p
+  = link_to t('menu.view_create_demonstration'), "https://www.youtube.com/watch?v=I2iDm_fXqtU"
+
+%hr
 = render 'shared/add_this'
