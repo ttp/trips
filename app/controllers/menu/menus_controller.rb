@@ -13,6 +13,10 @@ class Menu::MenusController < ApplicationController
     @products_cnt = policy_scope(Menu::Product).count
   end
 
+  def dashboard
+    redirect_to menu_dashboard_path
+  end
+
   def all
     authorize Menu::Menu, :view_all?
 

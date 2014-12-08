@@ -22,6 +22,7 @@ Pohody::Application.routes.draw do
 
   namespace :menu do
     get "/" => "menus#index", as: :dashboard
+    get "dashboard" => "menus#dashboard"
     resources :menus do
       resources :partitions
       get 'examples', on: :collection
