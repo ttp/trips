@@ -21,7 +21,7 @@ Pohody::Application.routes.draw do
   get "calendar" => "calendar#index"
 
   namespace :menu do
-    get "dashboard" => "menus#index", as: :dashboard
+    get "/" => "menus#index", as: :dashboard
     resources :menus do
       resources :partitions
       get 'examples', on: :collection

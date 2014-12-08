@@ -21,12 +21,18 @@ class Menu::MenusController < ApplicationController
   end
 
   def my
+    add_breadcrumb t('menu.title'), menu_dashboard_path
+    add_breadcrumb t('menu.my_menu')
+
     @title = t('menu.my_menu')
     @menus = policy_scope(Menu::Menu)
     render 'my'
   end
 
   def examples
+    add_breadcrumb t('menu.title'), menu_dashboard_path
+    add_breadcrumb t('menu.examples')
+
     @menus = Menu::Menu.where(is_public: true)
     render 'examples'
   end
@@ -35,6 +41,8 @@ class Menu::MenusController < ApplicationController
     @menu = Menu::Menu.find(params[:id])
 
     redirect_to menu_menus_url and return unless menu_can_view?
+
+    set_show_breadcrumbs
 
     unless params[:users_count].blank?
       users_count = params[:users_count].to_i
@@ -60,8 +68,6 @@ class Menu::MenusController < ApplicationController
     redirect_to menu_menus_url and return unless menu_can_edit?
   end
 
-  # POST /menu
-  # POST /menu.json
   def create
     data = JSON.parse(params[:data])
     @menu = Menu::Menu.new
@@ -98,8 +104,6 @@ class Menu::MenusController < ApplicationController
     end
   end
 
-  # PUT /menu/1
-  # PUT /menu/1.json
   def update
     @menu = Menu::Menu.find(params[:id])
     redirect_to menu_menus_url and return unless menu_can_edit?
@@ -143,8 +147,6 @@ class Menu::MenusController < ApplicationController
     render :json => data
   end
 
-  # DELETE /trips/1
-  # DELETE /trips/1.json
   def destroy
     menu = Menu::Menu.find(params[:id])
     authorize menu, :destroy?
@@ -205,6 +207,16 @@ private
         @day_cid_to_id[day_id] = day.id
       end
     end
+  end
+
+  def set_show_breadcrumbs
+    add_breadcrumb t('menu.title'), menu_dashboard_path
+    if @menu.owner?(current_user)
+      add_breadcrumb t('menu.my_menu'), my_menu_menus_path
+    elsif @menu.is_public?
+      add_breadcrumb t('menu.examples'), examples_menu_menus_path
+    end
+    add_breadcrumb @menu.name
   end
 
   def catch_not_found

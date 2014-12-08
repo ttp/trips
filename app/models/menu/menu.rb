@@ -14,7 +14,7 @@ class Menu::Menu < ActiveRecord::Base
   end
 
   def owner?(user)
-    user_id.present? && user_id == user.id
+    user && user_id.present? && user_id == user.id
   end
 
   def days

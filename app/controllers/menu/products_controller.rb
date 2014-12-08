@@ -1,7 +1,10 @@
 class Menu::ProductsController < ApplicationController
   before_action :set_menu_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_breadcrumb, only: [:index, :category, :show]
 
   def index
+    add_breadcrumb t('menu.products.products')
+
     fetch_categories
     fetch_products
     paginate_records
@@ -90,5 +93,9 @@ class Menu::ProductsController < ApplicationController
     product_params = params[:menu_product].dup
     product_params = product_params.except(:is_public, :icon) unless policy(Menu::Product).make_public?
     product_params
+  end
+
+  def set_breadcrumb
+    add_breadcrumb t('menu.title'), menu_dashboard_path
   end
 end

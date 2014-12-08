@@ -17,6 +17,10 @@
         = render 'layouts/navigation'
     .container.content
       = render 'layouts/messages'
+
+      - if breadcrumbs.size > 0
+        = render 'shared/breadcrumbs'
+
       = yield
     %footer
     - if Rails.application.config.site[:analytics]

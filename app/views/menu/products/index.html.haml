@@ -1,8 +1,5 @@
 .rows
   #products-grid.col-md-9
-    - if params[:category].present?
-      = render 'shared/breadcrumbs'
-
     %h3
       - if params[:category].present?
         = title @category.name

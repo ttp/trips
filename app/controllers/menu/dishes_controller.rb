@@ -1,7 +1,10 @@
 class Menu::DishesController < ApplicationController
+  before_action :set_breadcrumb, only: [:index, :category, :show]
   before_action :set_menu_dish, only: [:show, :edit, :update, :destroy]
 
   def index
+    add_breadcrumb t('menu.dishes.dishes')
+
     fetch_categories
     fetch_dishes
     paginate_records
@@ -136,5 +139,9 @@ class Menu::DishesController < ApplicationController
       product.save
       sort_order += 1
     end
+  end
+
+  def set_breadcrumb
+    add_breadcrumb t('menu.title'), menu_dashboard_path
   end
 end
