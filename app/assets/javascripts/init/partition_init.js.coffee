@@ -1,5 +1,6 @@
 #= require views/menu/partition/menu_partition_view
 #= require views/menu/partition/menu_partition_porters_list_view
+#= require views/menu/partition/menu_partition_graph_view
 $ ->
   $.ajax
     url: "/menu/menus/products"
@@ -26,6 +27,8 @@ $ ->
 
       portersView = new App.views.MenuPartitionPortersListView
       portersView.render()
+
+      graphView = new App.views.MenuPartitionGraphView
 
     context: this
 

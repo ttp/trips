@@ -168,6 +168,10 @@ $hover_color: #ffa;
       cursor: move;
     }
   }
+
+  #weightGraph {
+    height: 300px;
+  }
 }
 
 body.menus, body.partitions {
