@@ -8,8 +8,7 @@ class Menu::PartitionsController < ApplicationController
   before_filter :authorize_menu!
 
   def show
-    add_breadcrumb @menu.name, menu_menu_path(@menu)
-    add_breadcrumb partition_name(@partition)
+    set_breadcrumbs
 
     @menu.users_count = @partition.partition_porters.count
     render 'menu/menus/show'
@@ -100,6 +99,17 @@ class Menu::PartitionsController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb t('menu.title'), menu_dashboard_path
+    if @menu.owner?(current_user)
+      add_breadcrumb t('menu.my_menu'), my_menu_menus_path
+    elsif @menu.is_public?
+      add_breadcrumb t('menu.examples'), examples_menu_menus_path
+    end
+    add_breadcrumb @menu.name, menu_menu_path(@menu)
+    add_breadcrumb partition_name(@partition)
+  end
 
   def authorize_menu!
     authorize @menu, :manage_partitions?

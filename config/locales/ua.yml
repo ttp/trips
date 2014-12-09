@@ -318,7 +318,7 @@ ua:
     partitions:
       title: Розподіли продуктів
       partition: Розподіл
-      partition_num: Розподіл %{num}
+      partition_num: Розподіл продуктів %{num}
       new: Новий розподіл
       new_for: Новий розподіл для "%{name}"
       for: Розподіл для "%{name}"
