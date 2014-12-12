@@ -1,4 +1,3 @@
-#= require Chart
 #= require highcharts-custom
 #= require collections/menu_partition_porter_collection
 #= require collections/menu_partition_porter_day_entity_collection
