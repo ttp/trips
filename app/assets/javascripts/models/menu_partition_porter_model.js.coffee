@@ -51,7 +51,7 @@ _.namespace "App.models"
       , this
       _.sortBy totals, (item)-> item.product.get('name')
 
-    today_weight: (current_day) ->
+    dayWeight: (current_day) ->
       total = 0
       _.each @porter_entities(), (porter_entity) ->
         day_entity = porter_entity.day_entity()
@@ -65,6 +65,13 @@ _.namespace "App.models"
       _.each @porter_entities(), (porter_entity) ->
         total += porter_entity.weight()
       , this
+      total
+
+    productTotalWeight: (product) ->
+      total = 0
+      _.each @porter_entities(), (porter_entity) ->
+        day_entity = porter_entity.day_entity()
+        total += porter_entity.weight() if day_entity.getEntityModel().get('id') == product.get('id')
       total
 
     onRemove: ->

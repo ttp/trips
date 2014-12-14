@@ -21,7 +21,9 @@ _.namespace "App.views"
 
     render: ->
       @$el.html($(JST["templates/food/partition/day_entity"](entity: @model, total_weight: @totalWeight())))
-      @$el.attr('id', "entity_#{@model.id}").addClass("entity-#{@model.get('entity_type')}")
+      @$el.attr('id', "entity_#{@model.id}")
+          .attr('data-entity-id', @model.id)
+          .addClass("entity-#{@model.get('entity_type')}")
       @options.renderTo.append @$el
 
       if @model.isProduct()

@@ -73,7 +73,7 @@ _.namespace "App.views"
 
     renderTotals: ->
       day = @currentDay()
-      @$el.find('.today_total').text(@model.today_weight(day))
+      @$el.find('.today_total').text(@model.dayWeight(day))
       @$el.find('.total').text(@model.total_weight())
 
     updateName: ->

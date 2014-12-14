@@ -30,7 +30,9 @@ _.namespace "App.views"
 
     render: ->
       @$el.html($(JST["templates/food/day_entity"](entity: @model)))
-      @$el.attr('id', "entity_#{@model.id}").addClass("entity-#{@model.get('entity_type')}")
+      @$el.attr('id', "entity_#{@model.id}")
+          .attr('data-entity-id', @model.id)
+          .addClass("entity-#{@model.get('entity_type')}")
 
       unless @model.isProduct()
         @$el.droppable

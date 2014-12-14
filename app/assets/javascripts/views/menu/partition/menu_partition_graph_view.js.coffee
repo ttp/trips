@@ -53,7 +53,7 @@ _.namespace "App.views"
     porterData: (porter) ->
       data = [porter.total_weight()]
       days.each (day, i) ->
-        data.push(data[i] - porter.today_weight(day))
+        data.push(data[i] - porter.dayWeight(day))
       data
   )
 )()

@@ -53,5 +53,8 @@
 
     totalWeightByAllPorters: ->
       @get('weight') * App.collections.MenuPartitionPorterCollection.length
+
+    day: ->
+      App.collections.MenuDayCollection.get(@get('day_id'))
   )
 )()

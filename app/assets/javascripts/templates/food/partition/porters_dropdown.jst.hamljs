@@ -5,6 +5,9 @@
         %td
           %span.name{data-porter-id: porter.get('id')}= porter.name()
         %td.today_total
-          %span= porter.today_weight(day)
+          %span= porter.dayWeight(day)
         %td.total
           %span= porter.total_weight()
+    %tr.each-porter
+      %td{colspan: 3}
+        = I18n.t('menu.partitions.to_each_porter')

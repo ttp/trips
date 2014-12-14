@@ -1,3 +1,5 @@
+#= require models/entity_assigner_to_porter
+
 _.namespace "App.views"
 (->
   porters_dropdown_view = new App.views.MenuPortersDropdownView
@@ -31,20 +33,10 @@ _.namespace "App.views"
 
     showPortersDropdown: (e) ->
       e.stopPropagation()
-
-      return alert('No porters') if (@porters.length == 0)
-
-      porters_dropdown_view.onSelect(@createPorterEntity, this)
+      return alert(I18n.t('menu.partitions.no_porters')) if (@porters.length == 0)
       porters_dropdown_view.renderTo(@$el.closest('.entity'))
 
-    createPorterEntity: (e)->
-      porter_id = $(e.currentTarget).find('.name').data('porter-id')
-      porter_entity = new App.models.MenuPartitionPorterDayEntityModel
-        partition_porter_id: porter_id
-        day_entity_id: @entity.get('id')
-      @porter_entities.push porter_entity
-
-    bindEntityEvents: (porter_entity)->
+    bindEntityEvents: (porter_entity) ->
       porter_entity.on('remove', @render, this)
       porter_entity.porter().on('change:name', @render, this)
 
@@ -74,23 +66,11 @@ _.namespace "App.views"
       entity_id = $(e.target).closest('.btn-group').data('entity-id')
       @porter_entities.get(entity_id)
 
-    assignAll: (e)->
+    assignAll: (e) ->
       e.preventDefault()
       setTimeout (-> $('body').trigger('click')), 1
       porter = @porterEntityFromEvent(e).porter()
-
-      _.each(@entities.allAs(@entity), (entity) ->
-        @cleanAssignedEntities entity
-
-        porter_entity = new App.models.MenuPartitionPorterDayEntityModel
-          partition_porter_id: porter.get('id')
-          day_entity_id: entity.get('id')
-        @porter_entities.push porter_entity
-
-      , this)
-
-    cleanAssignedEntities: (entity) ->
-      @porter_entities.remove @porter_entities.byEntity(entity)
+      new App.models.EntityAssignerToPorter(@entity, porter).assign()
 
     porterEntities: ->
       @porter_entities.byEntity @entity

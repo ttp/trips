@@ -12,7 +12,7 @@
 
 
     .pull-right
-      %span.today_total{title: I18n.t('menu.partitions.today_weight')}= porter.today_weight(day)
+      %span.today_total{title: I18n.t('menu.partitions.today_weight')}= porter.dayWeight(day)
       %span.total{title: I18n.t('menu.partitions.total_weight')}= porter.total_weight()
 %div.panel-collapse.collapse{id: 'porter' + porter.get('id')}
   %div.panel-body

@@ -16,11 +16,11 @@
         %li
           %a.assign-all{href: "#"}
             %i.glyphicon.glyphicon-pushpin
-            Всі такі продукти
+            = I18n.t('menu.partitions.all_similar')
         %li
           %a.remove-porter{href: "#"}
             %i.glyphicon.glyphicon-remove
-            Видалити
+            = I18n.t('helpers.links.destroy')
 %button.btn.btn-default.btn-xs.add-porter{type: "button"}
   %i.glyphicon.glyphicon-plus
   %span.caret
