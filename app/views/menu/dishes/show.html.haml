@@ -11,9 +11,9 @@
           %i.glyphicon.glyphicon-remove
           = t("helpers.links.destroy")
 
-- unless @menu_dish.icon.blank?
+- unless @menu_dish.photo.blank?
   %p
-    %img.img-thumbnail{src: dish_icon_path(@menu_dish.icon)}
+    = image_tag @menu_dish.photo.url(:thumb), class: 'img-thumbnail'
 
 .dish-products
   %h4= t('menu.dishes.ingredients')
