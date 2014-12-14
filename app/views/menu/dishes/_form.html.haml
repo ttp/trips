@@ -26,7 +26,10 @@
       = f.input :description, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
 
       - if policy(Menu::Dish).change_icon?
-        = f.input :icon, :label => t('menu.dishes.icon')
+        = f.input :photo, label: t('menu.products.icon'), as: :file, wrapper: :vertical_file_input
+        - if @menu_dish.persisted? && @menu_dish.photo.present?
+          = image_tag @menu_dish.photo.url(:thumb), class: 'img-thumbnail'
+
       - if policy(Menu::Dish).make_public?
         = f.input :is_public, :label => t('menu.dishes.is_public'), wrapper: :vertical_boolean, as: :boolean
 

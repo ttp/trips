@@ -102,7 +102,7 @@ class Menu::DishesController < ApplicationController
 
   def menu_dish_params
     product_params = params[:menu_dish].dup
-    product_params = product_params.except(:is_public, :icon) unless policy(Menu::Dish).make_public?
+    product_params = product_params.except(:is_public, :photo) unless policy(Menu::Dish).make_public?
     product_params
   end
 

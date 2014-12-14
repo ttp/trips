@@ -1,8 +1,11 @@
 class Menu::Dish < ActiveRecord::Base
-  attr_accessible :name, :dish_category_id, :description, :icon, :is_public
+  attr_accessible :name, :dish_category_id, :description, :icon, :is_public, :photo
   has_many :dish_products, ->{ order 'sort_order' }, dependent: :destroy
   belongs_to :dish_category
   belongs_to :user
+
+  has_attached_file :photo, styles: { thumb: "64x64>"  }, default_url: "/assets/:style/no-image.png"
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
   scope :by_category, ->(id) { where(dish_category_id: id)}
   scope :for_user, ->(user) {

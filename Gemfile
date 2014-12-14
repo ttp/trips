@@ -36,3 +36,4 @@ gem "switch_user"
 gem "breadcrumbs_on_rails"
 gem 'shoulda-matchers', :group => :test
 gem "pundit"
+gem "paperclip", "~> 4.2"

@@ -11,7 +11,7 @@
 
     - @menu_dishes.each do |menu_dish|
       .product
-        %img.img-thumbnail.pull-left{src: dish_icon_path(menu_dish.icon)}
+        = image_tag menu_dish.photo.url(:thumb), class: 'img-thumbnail pull-left'
         .description
           %div
             = link_to menu_dish.name, menu_dish_path(menu_dish.id)

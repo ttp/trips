@@ -1,8 +1,11 @@
 class Menu::Product < ActiveRecord::Base
   attr_accessible :name, :calories, :proteins, :fats, :carbohydrates, :product_category_id, :icon,
-                  :description, :norm_info, :norm, :is_public
+                  :description, :norm_info, :norm, :is_public, :photo
   belongs_to :product_category
   belongs_to :user
+
+  has_attached_file :photo, styles: { thumb: "64x64>"  }, default_url: "/assets/:style/no-image.png"
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
   scope :by_category, ->(id) { where(product_category_id: id)}
   scope :for_user, ->(user) {
