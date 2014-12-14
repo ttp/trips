@@ -8,6 +8,7 @@ _.namespace "App.views"
     el: "#partition_porters"
     events:
       "click button.add": "createPorter"
+      'keydown input.name': 'processKey',
 
     initialize: (options) ->
       @porters = App.collections.MenuPartitionPorterCollection
@@ -32,10 +33,9 @@ _.namespace "App.views"
         name: @name_input.val()
       @porters.add porter
       @renderPorters(porter)
-      @name_input.val('')
+      @name_input.val('').focus()
 
-    updateData: ->
-
-    updateName: ->
+    processKey: (e) ->
+      @createPorter(e) if e.which == 13
   )
 )()
