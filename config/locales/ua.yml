@@ -326,6 +326,7 @@ ua:
       view: Переглянути
       porter: Учасник
       enter_porter_name: Введіть ім'я учасника
+      no_porters: Додайте учасників
       product_usage_count: Кількість використань
       today_weight: Вага на сьогодні
       total_weight: Вага на всі дні
@@ -335,3 +336,5 @@ ua:
       split: Розподілити
       weight_rank: Коефіцієнт навантаження %
       weight_graph: Графік розвантаження
+      all_similar: Всі такі продукти
+      to_each_porter: Кожному учаснику
