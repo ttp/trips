@@ -86,13 +86,7 @@ class Menu::MenusController < ApplicationController
     entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
     save_entities(entities, '0')
 
-    if params[:trip] != '0'
-      trip = Trip.find_by(id: params[:trip])
-      if trip.user_id == current_user.id
-        trip.menu_id = @menu.id
-        trip.save
-      end
-    end
+    set_trip_menu
 
     NotificationsMailer.new_menu_added_email(@menu).deliver
 
@@ -105,6 +99,16 @@ class Menu::MenusController < ApplicationController
         end
       }
       format.json { render json: @menu, status: :created, location: @menu }
+    end
+  end
+
+  def set_trip_menu
+    if params[:trip] != '0'
+      trip = Trip.find_by(id: params[:trip])
+      if trip.user_id == current_user.id
+        trip.menu_id = @menu.id
+        trip.save
+      end
     end
   end
 
@@ -126,7 +130,7 @@ class Menu::MenusController < ApplicationController
     # update/remove entities
     @entities = @menu.entities.index_by(&:id)
     @entities.each do |id, entity|
-      entity.delete unless data['entities'].has_key?(id.to_s)
+      entity.destroy unless data['entities'].has_key?(id.to_s)
     end
     entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
     save_entities(entities, '0')
