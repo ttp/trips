@@ -4,7 +4,7 @@ class Menu::Product < ActiveRecord::Base
   belongs_to :product_category
   belongs_to :user
 
-  has_attached_file :photo, styles: { thumb: "64x64>"  }, default_url: "/assets/:style/no-image.png"
+  has_attached_file :photo, styles: { thumb: "64x64>"  }, default_url: ":style/no-image.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
   scope :by_category, ->(id) { where(product_category_id: id)}
