@@ -1,4 +1,6 @@
 # config/unicorn.rb
+listen "/home/rails/www/pohody.com.ua/tmp/sockets/unicorn.sock"
+stderr_path "/home/rails/www/pohody.com.ua/shared/log/unicorn.stderr.log"
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 2)
 timeout 15
 preload_app true
