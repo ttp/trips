@@ -56,4 +56,8 @@ module ApplicationHelper
   def media_path(filename)
     "/media/#{filename}"
   end
+
+  def return_path
+    request.original_fullpath.include?('return=') ? root_path : request.original_fullpath
+  end
 end
