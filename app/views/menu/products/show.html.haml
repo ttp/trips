@@ -10,6 +10,8 @@
         %a.btn.btn-default{href: menu_product_path(@menu_product), data: { confirm: t('helpers.links.confirm'), method: :delete }}
           %i.glyphicon.glyphicon-remove
           = t("helpers.links.destroy")
+%div.product-img
+  = image_tag @menu_product.photo.url, class: 'img-responsive'
 
 - if !@menu_product.description.blank?
   .description= raw safe_textile(@menu_product.description)
