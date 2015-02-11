@@ -23,6 +23,14 @@ class Menu::DishPolicy <  ApplicationPolicy
     admin? || user.moderator?
   end
 
+  def permitted_attributes
+    if admin? || user.moderator?
+      [:name, :dish_category_id, :description, :is_public, :photo]
+    else
+      [:name, :dish_category_id, :description]
+    end
+  end
+
   class Scope < Scope
     def resolve
       return scope if user.admin? || user.moderator?

@@ -90,9 +90,7 @@ class Menu::ProductsController < ApplicationController
   end
 
   def menu_product_params
-    product_params = params[:menu_product].dup
-    product_params = product_params.except(:is_public, :photo) unless policy(Menu::Product).make_public?
-    product_params
+    params.require(:menu_product).permit(policy(@menu_product || Menu::Product).permitted_attributes)
   end
 
   def set_breadcrumb

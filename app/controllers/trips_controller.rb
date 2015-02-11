@@ -49,8 +49,8 @@ class TripsController < ApplicationController
     end
 
     trip.trip_users.create({user_id: current_user.id, approved: false})
-    TripJoinMailer.join_request_user_email(current_user, trip).deliver
-    TripJoinMailer.join_request_owner_email(current_user, trip).deliver
+    TripJoinMailer.join_request_user_email(current_user, trip).deliver_now
+    TripJoinMailer.join_request_owner_email(current_user, trip).deliver_now
 
     respond_to do |format|
       format.html { redirect_to trip_url, :notice => t("trip.join_request_added") }
@@ -63,7 +63,7 @@ class TripsController < ApplicationController
     request = TripUser.find_request(params[:id], current_user.id)
     if request
       request.destroy
-      TripJoinMailer.leave_email(current_user, request.trip).deliver
+      TripJoinMailer.leave_email(current_user, request.trip).deliver_now
     end
     render json: {status: :ok, available_places: request.trip.available_places}
   end
@@ -78,7 +78,7 @@ class TripsController < ApplicationController
       user = request.user
       trip = request.trip
       request.destroy
-      TripJoinMailer.decline_email(user, trip, params[:message]).deliver
+      TripJoinMailer.decline_email(user, trip, params[:message]).deliver_now
     end
     render json: {status: :ok, available_places: trip.available_places}, status: :ok
   end
@@ -97,7 +97,7 @@ class TripsController < ApplicationController
         trip.available_places -= 1
         trip.save
       end
-      TripJoinMailer.approve_email(request.user, trip).deliver
+      TripJoinMailer.approve_email(request.user, trip).deliver_now
     end
     render json: {status: :ok, available_places: trip.available_places}, status: :ok
   end

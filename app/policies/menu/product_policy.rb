@@ -23,6 +23,16 @@ class Menu::ProductPolicy <  ApplicationPolicy
     admin? || user.moderator?
   end
 
+  def permitted_attributes
+    if admin? || user.moderator?
+      [:name, :calories, :proteins, :fats, :carbohydrates, :product_category_id,
+       :description, :norm_info, :norm, :is_public, :photo]
+    else
+      [:name, :calories, :proteins, :fats, :carbohydrates, :product_category_id,
+       :description,:norm_info, :norm]
+    end
+  end
+
   class Scope < Scope
     def resolve
       return scope if user.admin? || user.moderator?

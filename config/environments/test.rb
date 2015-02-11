@@ -8,7 +8,7 @@ Pohody::Application.configure do
   config.cache_classes = true
 
   # Configure static asset server for tests with Cache-Control for performance
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching
@@ -37,4 +37,6 @@ Pohody::Application.configure do
   config.i18n.default_locale = :en
   config.active_record.whitelist_attributes = false
   config.eager_load = false
+
+  config.site[:notification_email] = 'notifications@example.com'
 end

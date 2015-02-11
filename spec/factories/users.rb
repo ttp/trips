@@ -2,12 +2,11 @@
 
 FactoryGirl.define do
   factory :user do
-    name 'Test User'
-    sequence(:email){|n| "user#{n}@factory.com" }
+    sequence(:name) {|n| "user#{n}" }
+    sequence(:email) {|n| "user#{n}@factory.com" }
     password 'password'
     password_confirmation 'password'
-    # required if the Devise Confirmable module is used
-    # confirmed_at Time.now
+    role 'user'
 
     trait :admin do
       role 'admin'

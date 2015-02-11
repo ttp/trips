@@ -1,40 +1,55 @@
 source 'https://rubygems.org'
-gem 'rails', '>= 4.0.0'
+
+gem 'rails', '~> 4.2.0'
+gem 'mysql2'
 gem 'protected_attributes'
-gem 'sqlite3', :group => [:development, :test]
-gem "mysql2"
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails'
+gem 'figaro', '~> 1.1.0'
+
 gem 'uglifier'
-gem "i18n-js"
-gem 'ruby-haml-js', :git => "git://github.com/ttp/ruby-haml-js.git"
+gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
-gem "unicorn", :group => :production
-gem "haml-rails", ">= 0.4"
-gem "html2haml", ">= 1.0.1", :group => :development
-gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
-gem "database_cleaner", "<= 1.0.1", :group => :test
-gem "email_spec", ">= 1.4.0", :group => :test
-gem "cucumber-rails", :group => :test, :require => false
-gem "launchy", ">= 2.2.0", :group => :test
-gem "capybara", ">= 2.0.2", :group => :test
-gem "factory_girl_rails", ">= 4.2.0", :group => [:development, :test]
-gem "bootstrap-sass", :git => "git://github.com/thomas-mcdonald/bootstrap-sass.git"
-gem "devise", ">= 3.2.2"
-gem "simple_form", :github => "plataformatec/simple_form"
-gem "quiet_assets", ">= 1.0.1", :group => :development
-gem "figaro", ">= 0.5.3"
-gem "better_errors", ">= 0.6.0", :group => :development
-gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
+gem 'i18n-js'
+gem 'ruby-haml-js', git: 'git://github.com/ttp/ruby-haml-js.git'
+gem 'haml-rails'
+gem 'sass-rails', '~> 5.0.1'
+gem 'bootstrap-sass', '~> 3.3.3'
+
+gem 'devise'
+gem 'switch_user'
+gem 'pundit'
+
+gem 'simple_form'
 gem 'will_paginate'
-gem 'RedCloth'
 gem 'gravatar_image_tag'
-gem 'globalize', '~> 4.0.0.alpha.3'
-gem "selenium-webdriver", "~> 2.39.0", :group => :test
+gem 'RedCloth'
 gem 'font-awesome-sass'
-gem "switch_user"
-gem "breadcrumbs_on_rails"
-gem 'shoulda-matchers', :group => :test
-gem "pundit"
-gem "paperclip", "~> 4.2"
-gem 'letter_opener', :group => [:development, :test]
+gem 'breadcrumbs_on_rails'
+
+gem 'globalize', '~> 5.0'
+gem 'paperclip', '~> 4.2'
+
+group :development, :test do
+  gem 'html2haml'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', require: false
+  gem 'sqlite3'
+  gem 'letter_opener'
+  gem 'better_errors'
+  gem 'quiet_assets'
+  gem 'faker'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'cucumber-rails', require: false
+  gem 'launchy'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'poltergeist'
+  gem 'selenium-webdriver', "2.45.0.dev3"
+end
+
+group :production do
+  gem 'unicorn'
+end

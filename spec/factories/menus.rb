@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :menu, :class => Menu::Menu do
+  factory :menu, class: Menu::Menu do
     user
 
     name "New menu"
@@ -16,38 +16,25 @@ FactoryGirl.define do
     end
   end
 
-  factory :menu_product_category, :class => Menu::ProductCategory do
-    name "Category name"
-  end
-
-  factory :menu_product, :class => Menu::Product do
-    name "Product name"
-    association :product_category, factory: :menu_product_category
-    calories {Random.rand(50..500)}
-    proteins {Random.rand(10..100)}
-    fats {Random.rand(10..100)}
-    carbohydrates {Random.rand(10..100)}
-  end
-
-  factory :menu_dish_category, :class => Menu::DishCategory do
+  factory :menu_dish_category, class: Menu::DishCategory do
     name "Category name - dish"
   end
 
-  factory :menu_dish, :class => Menu::Dish do
+  factory :menu_dish, class: Menu::Dish do
     name "Dish name"
     association :dish_category, factory: :menu_dish_category
   end
 
-  factory :menu_meal, :class => Menu::Meal do
+  factory :menu_meal, class: Menu::Meal do
     name "Meal name"
   end
 
-  factory :menu_day, :class => Menu::Day do
+  factory :menu_day, class: Menu::Day do
     menu
     num 1
 
     factory :day_with_meals do
-      ignore do
+      transient do
         meals_count 3
       end
 
@@ -57,7 +44,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :menu_day_entity, :class => Menu::DayEntity do
+  factory :menu_day_entity, class: Menu::DayEntity do
     weight {Random.rand(50..100)}
     association :day, factory: :menu_day
     
@@ -71,7 +58,7 @@ FactoryGirl.define do
       association :entity, factory: :menu_dish
 
       factory :entity_dish_with_products do
-        ignore do
+        transient do
           products_count 3
         end
 
@@ -87,7 +74,7 @@ FactoryGirl.define do
       association :entity, factory: :menu_meal
 
       factory :entity_meal_with_dishes do
-        ignore do
+        transient do
           dishes_count 2
         end
 

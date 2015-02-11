@@ -88,7 +88,7 @@ class Menu::MenusController < ApplicationController
 
     set_trip_menu
 
-    NotificationsMailer.new_menu_added_email(@menu).deliver
+    NotificationsMailer.new_menu_added_email(@menu).deliver_now
 
     respond_to do |format|
       format.html {
