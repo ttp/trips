@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Menu::Partition do
   it { should belong_to(:menu) }

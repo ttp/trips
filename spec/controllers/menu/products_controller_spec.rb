@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Menu::ProductsController do
   let(:category) { FactoryGirl.create :menu_product_category }
@@ -73,14 +73,14 @@ describe Menu::ProductsController do
         it "assigns a newly created but unsaved menu_product as @menu_product" do
           # Trigger the behavior that occurs when invalid params are submitted
           Menu::Product.any_instance.stub(:save).and_return(false)
-          post :create, {:menu_product => {  }}
+          post :create, { :menu_product => { name: ''  } }
           assigns(:menu_product).should be_a_new(Menu::Product)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           Menu::Product.any_instance.stub(:save).and_return(false)
-          post :create, {:menu_product => {  }}
+          post :create, { :menu_product => { name: ''  } }
           response.should render_template("new")
         end
       end
@@ -90,8 +90,8 @@ describe Menu::ProductsController do
       describe "with valid params" do
         it "updates the requested menu_product" do
           product = Menu::Product.create! valid_attributes
-          Menu::Product.any_instance.should_receive(:update).with({ "these" => "params" })
-          put :update, {:id => product.to_param, :menu_product => { "these" => "params" }}
+          Menu::Product.any_instance.should_receive(:update).with({ "name" => "new name" })
+          put :update, {:id => product.to_param, :menu_product => { "name" => "new name" }}
         end
 
         it "assigns the requested menu_product as @menu_product" do
@@ -111,7 +111,7 @@ describe Menu::ProductsController do
         it "assigns the menu_product as @menu_product" do
           product = Menu::Product.create! valid_attributes
           Menu::Product.any_instance.stub(:update).and_return(false)
-          put :update, {:id => product.to_param, :menu_product => {  }}
+          put :update, { :id => product.to_param, :menu_product => { name: ''  } }
           assigns(:menu_product).should eq(product)
         end
 

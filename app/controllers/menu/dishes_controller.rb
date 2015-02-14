@@ -101,7 +101,7 @@ class Menu::DishesController < ApplicationController
   end
 
   def menu_dish_params
-    params.require(:menu_product).permit(policy(@menu_dish || Menu::Dish).permitted_attributes)
+    params.require(:menu_dish).permit(policy(@menu_dish || Menu::Dish).permitted_attributes)
   end
 
   def prepare_dish_products

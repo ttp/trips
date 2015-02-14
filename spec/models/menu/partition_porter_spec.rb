@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Menu::PartitionPorter do
   it { should belong_to(:partition) }

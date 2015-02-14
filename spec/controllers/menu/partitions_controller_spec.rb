@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Menu::PartitionsController do
   let(:valid_attributes) { {  } }

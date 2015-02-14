@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Menu::Menu do
   it { should have_many(:menu_days) }

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Menu::DishesController do
   let(:category) { FactoryGirl.create :menu_dish_category }
@@ -69,14 +69,14 @@ describe Menu::DishesController do
         it "assigns a newly created but unsaved menu_dish as @menu_dish" do
           # Trigger the behavior that occurs when invalid params are submitted
           Menu::Dish.any_instance.stub(:save).and_return(false)
-          post :create, {:menu_dish => {  }}
+          post :create, {:menu_dish => { name: '' }}
           assigns(:menu_dish).should be_a_new(Menu::Dish)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           Menu::Dish.any_instance.stub(:save).and_return(false)
-          post :create, {:menu_dish => {  }}
+          post :create, {:menu_dish => { name: '' }}
           response.should render_template("new")
         end
       end
@@ -86,8 +86,8 @@ describe Menu::DishesController do
       describe "with valid params" do
         it "updates the requested menu_dish" do
           dish = Menu::Dish.create! valid_attributes
-          Menu::Dish.any_instance.should_receive(:update).with({ "these" => "params" })
-          put :update, {:id => dish.to_param, :menu_dish => { "these" => "params" }}
+          Menu::Dish.any_instance.should_receive(:update).with({ "name" => "new name" })
+          put :update, {:id => dish.to_param, :menu_dish => { "name" => "new name" }}
         end
 
         it "assigns the requested menu_dish as @menu_dish" do
@@ -107,7 +107,7 @@ describe Menu::DishesController do
         it "assigns the menu_dish as @menu_dish" do
           dish = Menu::Dish.create! valid_attributes
           Menu::Dish.any_instance.stub(:update).and_return(false)
-          put :update, {:id => dish.to_param, :menu_dish => {  }}
+          put :update, {:id => dish.to_param, :menu_dish => { name: '' }}
           assigns(:menu_dish).should eq(dish)
         end
 
