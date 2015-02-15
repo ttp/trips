@@ -1,5 +1,5 @@
 class TripUser < ActiveRecord::Base
-  attr_accessible :user_id, :trip_id, :approved
+  # attr_accessible :user_id, :trip_id, :approved
   belongs_to :trip
   belongs_to :user
   before_destroy :update_available_places

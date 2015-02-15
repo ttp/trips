@@ -22,21 +22,23 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/edit-profile
   def edit_profile
-    @profile = current_user.user_profile
-    @profile = UserProfile.new if @profile.nil?
+    @profile = current_user.user_profile || current_user.build_user_profile
   end
 
-  # PUT/POST /users/edit-profile
   def update_profile
-    @profile = current_user.user_profile
-    @profile = current_user.create_user_profile if @profile.nil?
+    @profile = current_user.user_profile || current_user.build_user_profile
 
-    if @profile.update_attributes(params[:user_profile])
+    if @profile.update_attributes(profile_params)
       redirect_to user_path(current_user), notice: I18n.t('user_profile.was_updated')
     else
       render action: "edit_profile"
     end
+  end
+
+  private
+
+  def profile_params
+    params.require(:user_profile).permit(:about, :experience, :equipment, :contacts, :private_contacts, :private_info)
   end
 end

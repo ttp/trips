@@ -1,5 +1,5 @@
 class TripComment < ActiveRecord::Base
-  attr_accessible :comment
+  # attr_accessible :comment
   belongs_to :user
   belongs_to :trip
 

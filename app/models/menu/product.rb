@@ -1,6 +1,6 @@
 class Menu::Product < ActiveRecord::Base
-  attr_accessible :name, :calories, :proteins, :fats, :carbohydrates, :product_category_id, :icon,
-                  :description, :norm_info, :norm, :is_public, :photo
+  # attr_accessible :name, :calories, :proteins, :fats, :carbohydrates, :product_category_id, :icon,
+  #                 :description, :norm_info, :norm, :is_public, :photo
   belongs_to :product_category
   belongs_to :user
 
@@ -17,7 +17,7 @@ class Menu::Product < ActiveRecord::Base
 
   translates :name, :description, :norm_info
   class Translation
-    attr_accessible :locale
+    # attr_accessible :locale
   end
 
   def self.list_by_user(user, lang)

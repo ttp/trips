@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class Menu::Menu < ActiveRecord::Base
-  attr_accessible :name, :users_count, :is_public
+  # attr_accessible :name, :users_count, :is_public
   belongs_to :user
   has_many :menu_days, :class_name => 'Menu::Day'
   has_many :partitions, class_name: 'Menu::Partition'

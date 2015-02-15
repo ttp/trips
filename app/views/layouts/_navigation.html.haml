@@ -24,14 +24,15 @@
           %b.caret
         %ul.dropdown-menu
           %li
+            = link_to t('account.trips'), account_trips_url
+          %li
+            = link_to t('account.tracks'), account_tracks_url
+          %li.dropdown-header= t('account.trip.participation')
+          %li
             = link_to t('nav.scheduled'), account_trips_scheduled_path
           %li
             = link_to t('nav.archive'), account_trips_archive_path
-          %li.dropdown-header= t('nav.manage')
-          %li
-            = link_to t('account.tracks'), account_tracks_url
-          %li
-            = link_to t('account.trips'), account_trips_url
+
 
   %ul.nav.navbar-nav.pull-right
     - if user_signed_in?

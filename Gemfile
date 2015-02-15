@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
 gem 'mysql2'
-gem 'protected_attributes'
 gem 'figaro', '~> 1.1.0'
 
 gem 'uglifier'

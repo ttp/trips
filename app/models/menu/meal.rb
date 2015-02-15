@@ -1,8 +1,8 @@
 class Menu::Meal < ActiveRecord::Base
-  attr_accessible :name
+  # attr_accessible :name
   translates :name
   class Translation
-    attr_accessible :locale
+    # attr_accessible :locale
   end
 
   def self.by_lang(lang)

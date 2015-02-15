@@ -1,5 +1,5 @@
 class Menu::Dish < ActiveRecord::Base
-  attr_accessible :name, :dish_category_id, :description, :icon, :is_public, :photo
+  # attr_accessible :name, :dish_category_id, :description, :icon, :is_public, :photo
   has_many :dish_products, ->{ order 'sort_order' }, dependent: :destroy
   belongs_to :dish_category
   belongs_to :user
@@ -22,7 +22,7 @@ class Menu::Dish < ActiveRecord::Base
   translates :name, :description
 
   class Translation
-    attr_accessible :locale
+    # attr_accessible :locale
   end
 
   def self.by_lang(lang)

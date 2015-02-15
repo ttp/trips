@@ -1,112 +1,78 @@
 class Account::TripsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_trip, only: [:edit, :update, :destroy]
 
   def initialize
     super
-    @sortable_fields = {
-        "id"     => "trips.id",
-        "track" => "track_id",
-        "start_date"   => "start_date",
-        "region"   => "region_id"
-    }
+    @sortable_fields = { "id"     => "trips.id",
+                         "track" => "track_id",
+                         "start_date"   => "start_date",
+                         "region"   => "region_id" }
     @default_sort = 'trips.id desc'
   end
 
-  # GET /trips
-  # GET /trips.json
   def index
-    @trips = Trip.joins(:track).includes(:track => [:region]).where("trips.user_id = ?", current_user.id)
-                 .paginate(:page => params[:page], :per_page => 10).order(order)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @trips }
-    end
+    authorize(Trip)
+    @trips = Trip.joins(:track).includes(:track => [:region]).where(user_id: current_user.id)
+                 .paginate(:page => params[:page]).order(order)
   end
 
-  # GET /trips/1
-  # GET /trips/1.json
-  def show
-    @trip = Trip.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @trip }
-    end
-  end
-
-  # GET /trips/new
-  # GET /trips/new.json
   def new
+    authorize(Trip)
     @trip = Trip.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @trip }
-    end
   end
 
-  # GET /trips/1/edit
-  def edit
-    @trip = Trip.find(params[:id])
-    redirect_to account_trips_url and return if @trip.user_id != current_user.id
-  end
-
-  # POST /trips
-  # POST /trips.json
   def create
-    @trip = Trip.new(params[:trip])
+    authorize(Trip)
+    @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
 
-    respond_to do |format|
-      if @trip.save
-        format.html { redirect_to back(account_trips_url), notice: I18n.t('account.trip.was_created') }
-        format.json { render json: @trip, status: :created, location: @trip }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @trip.errors, status: :unprocessable_entity }
-      end
+    if @trip.save
+      redirect_to back(account_trips_url), notice: I18n.t('account.trip.was_created')
+    else
+      render action: "new"
     end
   end
 
-  # PUT /trips/1
-  # PUT /trips/1.json
+  def edit
+    authorize(@trip)
+  end
+
   def update
-    @trip = Trip.find(params[:id])
-    redirect_to account_trips_url and return if @trip.user_id != current_user.id
+    authorize(@trip)
 
-    respond_to do |format|
-      if @trip.update_attributes(params[:trip])
-        format.html { redirect_to back(account_trips_url), notice: I18n.t('account.trip.was_updated') }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @trip.errors, status: :unprocessable_entity }
-      end
+    if @trip.update_attributes(trip_params)
+      redirect_to back(account_trips_url), notice: I18n.t('account.trip.was_updated')
+    else
+      render action: "edit"
     end
   end
 
-  # DELETE /trips/1
-  # DELETE /trips/1.json
   def destroy
-    @trip = Trip.find(params[:id])
-    redirect_to account_trips_url and return if @trip.user_id != current_user.id
-    @trip.destroy
+    authorize(@trip)
 
-    respond_to do |format|
-      format.html { redirect_to request.referer || account_trips_url }
-      format.json { head :no_content }
-    end
+    @trip.destroy
+    redirect_to request.referer || account_trips_url
   end
 
   def scheduled
     @default_sort = 'trips.id'
     @trips = Trip.scheduled(current_user.id)
-                 .paginate(:page => params[:page], :per_page => 10).order(order)
+                 .paginate(:page => params[:page]).order(order)
   end
 
   def archive
     @trips = Trip.archive(current_user.id)
-                 .paginate(:page => params[:page], :per_page => 10).order(order)
+                 .paginate(:page => params[:page]).order(order)
+  end
+
+  private
+
+  def set_trip
+    @trip = Trip.find(params[:id])
+  end
+
+  def trip_params
+    params.require(:trip).permit(policy(Trip).permitted_attributes)
   end
 end
