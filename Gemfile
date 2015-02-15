@@ -26,6 +26,7 @@ gem 'breadcrumbs_on_rails'
 
 gem 'globalize', '~> 5.0'
 gem 'paperclip', '~> 4.2'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'html2haml'
