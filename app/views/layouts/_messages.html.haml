@@ -1,5 +1,5 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    %div{:class => "alert alert-" + (name == :notice ? "success" : "danger")}
+    %div{:class => "alert " + alert_class(name)}
       %button{:type => 'button', :class => 'close', 'data-dismiss' => 'alert', 'area-hidden' => 'true'} &times;
       = content_tag :div, msg, :id => "flash_#{name}"

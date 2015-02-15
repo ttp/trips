@@ -37,7 +37,7 @@ module ApplicationHelper
 
   def title(page_title)
     content_for(:title, page_title.to_s + ' - ')
-    return page_title
+    page_title
   end
 
   def return_here_path(path)
@@ -59,5 +59,20 @@ module ApplicationHelper
 
   def return_path
     request.original_fullpath.include?('return=') ? root_path : request.original_fullpath
+  end
+
+  def alert_class(flash_type)
+    case flash_type
+    when 'success'
+      "alert-success" # Green
+    when 'error'
+      "alert-danger" # Red
+    when 'alert'
+      "alert-warning" # Yellow
+    when 'notice'
+      "alert-info" # Blue
+    else
+      flash_type.to_s
+    end
   end
 end
