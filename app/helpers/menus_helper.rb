@@ -77,4 +77,12 @@ module MenusHelper
   def dish_icon_path(icon)
     icon.blank? ? asset_path('no-image.png') : media_path("dishes/#{icon}")
   end
+
+  def menu_cache_key(menu)
+    "#{menu.id}-#{menu.updated_at}-#{menu.users_count}"
+  end
+
+  def menu_partition_cache_key(menu, partition)
+    menu_cache_key(menu) + "-#{partition.id}-#{partition.updated_at}"
+  end
 end

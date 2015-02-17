@@ -1,29 +1,30 @@
 = javascript_include_tag "init/partition_show_init"
 
-%script{type: "application/json", id: "menu_days"}
-  = @menu.menu_days.to_json.html_safe
-%script{type: "application/json", id: "menu_entities"}
-  = @menu.entities.to_json.html_safe
-%script{type: "application/json", id: "porters"}
-  = @partition.partition_porters.to_json.html_safe
-%script{type: "application/json", id: "porters_products"}
-  = @partition.porter_products.to_json.html_safe
+- cache ['menu_partition', menu_partition_cache_key(@menu, @partition)] do
+  %script{type: "application/json", id: "menu_days"}
+    = @menu.menu_days.to_json.html_safe
+  %script{type: "application/json", id: "menu_entities"}
+    = @menu.entities.to_json.html_safe
+  %script{type: "application/json", id: "porters"}
+    = @partition.partition_porters.to_json.html_safe
+  %script{type: "application/json", id: "porters_products"}
+    = @partition.porter_products.to_json.html_safe
 
-%h4.visible-print= t 'menu.partitions.partition'
-.porters.row
-  - porter_num = 0
-  - @partition.porters_products_total.total.each do |id, porter_total|
-    %div.porter_products.col-md-4{id: "porter_products#{id}", class: cell_class(porter_num)}
-      %h5
-        %span.porter_name= porter_total[:porter].name
-        %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"
-      .products_list
-        - porter_total[:products].each do |id, product_total|
-          .product
-            %span= product_total[:product].name
-            %span.weight= product_total[:weight].to_s + t('menu.g')
-    - porter_num += 1
+  %h4.visible-print= t 'menu.partitions.partition'
+  .porters.row
+    - porter_num = 0
+    - @partition.porters_products_total.total.each do |id, porter_total|
+      %div.porter_products.col-md-4{id: "porter_products#{id}", class: cell_class(porter_num)}
+        %h5
+          %span.porter_name= porter_total[:porter].name
+          %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"
+        .products_list
+          - porter_total[:products].each do |id, product_total|
+            .product
+              %span= product_total[:product].name
+              %span.weight= product_total[:weight].to_s + t('menu.g')
+      - porter_num += 1
 
-.hidden-print
-  %hr
-  #weightGraph
+  .hidden-print
+    %hr
+    #weightGraph
