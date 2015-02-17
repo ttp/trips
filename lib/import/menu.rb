@@ -41,11 +41,22 @@ module Import
       category
     end
 
+    def create_dish_category(row)
+      category = ::Menu::DishCategory.new
+      LOCALES.each do |locale|
+        Globalize.with_locale(locale) do
+          category.name = row.field(locale.to_s)
+        end
+      end
+      category.save
+      category
+    end
+
     def import_dishes(filename)
       category = dish = nil
       CSV.foreach(filename, headers: true) do |row|
         if row.field('type') == '1'
-          category = create_product_category(row)
+          category = create_dish_category(row)
         elsif row.field('type') == '2'
           dish = create_dish(category, row)
         else
