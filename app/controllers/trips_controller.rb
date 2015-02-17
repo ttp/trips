@@ -1,9 +1,9 @@
 class TripsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:join, :leave, :decline, :approve]
+  before_action :authenticate_user!, only: [:join, :leave, :decline, :approve]
 
   def index
     @trips = Trip.for_year
-    render json: @trips and return
+    render(json: @trips) && return
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,27 +34,27 @@ class TripsController < ApplicationController
 
     if trip.available_places == 0
       respond_to do |format|
-        format.html { redirect_to trip_url, flash: {error: t("trip.no_available_places")} }
-        format.json { render json: {error: t("trip.no_available_places"), status: :unprocessable_entity} }
+        format.html { redirect_to trip_url, flash: { error: t('trip.no_available_places') } }
+        format.json { render json: { error: t('trip.no_available_places'), status: :unprocessable_entity } }
       end
       return
     end
 
-    if !trip.user_can_join?(current_user.id)
+    unless trip.user_can_join?(current_user.id)
       respond_to do |format|
-        format.html { redirect_to trip_url, flash: {error: t("trip.already_joined")} }
-        format.json { render json: {error: t("trip.already_joined")}, status: :unprocessable_entity }
+        format.html { redirect_to trip_url, flash: { error: t('trip.already_joined') } }
+        format.json { render json: { error: t('trip.already_joined') }, status: :unprocessable_entity }
       end
       return
     end
 
-    trip.trip_users.create({user_id: current_user.id, approved: false})
+    trip.trip_users.create(user_id: current_user.id, approved: false)
     TripJoinMailer.join_request_user_email(current_user, trip).deliver_now
     TripJoinMailer.join_request_owner_email(current_user, trip).deliver_now
 
     respond_to do |format|
-      format.html { redirect_to trip_url, :notice => t("trip.join_request_added") }
-      format.json { render json: {status: :ok}, status: :ok }
+      format.html { redirect_to trip_url, notice: t('trip.join_request_added') }
+      format.json { render json: { status: :ok }, status: :ok }
     end
   end
 
@@ -65,7 +65,7 @@ class TripsController < ApplicationController
       request.destroy
       TripJoinMailer.leave_email(current_user, request.trip).deliver_now
     end
-    render json: {status: :ok, available_places: request.trip.available_places}
+    render json: { status: :ok, available_places: request.trip.available_places }
   end
 
   # POST /trips/1/decline/:user_id
@@ -73,14 +73,14 @@ class TripsController < ApplicationController
     request = TripUser.find_request(params[:id], params[:user_id])
     if request
       if request.trip.user_id != current_user.id
-        render json: {status: :not_trip_owner}, status: :unprocessable_entity and return
+        render(json: { status: :not_trip_owner }, status: :unprocessable_entity) && return
       end
       user = request.user
       trip = request.trip
       request.destroy
       TripJoinMailer.decline_email(user, trip, params[:message]).deliver_now
     end
-    render json: {status: :ok, available_places: trip.available_places}, status: :ok
+    render json: { status: :ok, available_places: trip.available_places }, status: :ok
   end
 
   # POST /trips/1/approve/:user_id
@@ -88,7 +88,7 @@ class TripsController < ApplicationController
     request = TripUser.find_request(params[:id], params[:user_id])
     if request
       if request.trip.user_id != current_user.id
-        render json: {status: :not_trip_owner}, status: :unprocessable_entity and return
+        render(json: { status: :not_trip_owner }, status: :unprocessable_entity) && return
       end
       request.approved = true
       request.save
@@ -99,6 +99,6 @@ class TripsController < ApplicationController
       end
       TripJoinMailer.approve_email(request.user, trip).deliver_now
     end
-    render json: {status: :ok, available_places: trip.available_places}, status: :ok
+    render json: { status: :ok, available_places: trip.available_places }, status: :ok
   end
 end

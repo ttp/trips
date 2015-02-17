@@ -45,7 +45,7 @@ module MenusHelper
 
   def cell_class(cell_num)
     class_name = ''
-    class_name += 'cell2' if (cell_num % 2 == 0)
+    class_name += 'cell2' if cell_num.even?
     class_name += 'cell3' if (cell_num % 3 == 0)
     class_name
   end

@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :trip_comment do
-    comment "MyText"
+    comment 'MyText'
   end
 end

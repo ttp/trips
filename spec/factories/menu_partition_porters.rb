@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :menu_partition_porter, class: 'Menu::PartitionPorter' do
-    name "MyString"
+    name 'MyString'
     association :partition, factory: :menu_partition
   end
 end

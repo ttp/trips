@@ -4,9 +4,9 @@ class Account::TracksController < ApplicationController
 
   def initialize
     super
-    @sortable_fields = { "id"     => "id",
-                         "region" => "region_id",
-                         "name"   => "name" }
+    @sortable_fields = { 'id'     => 'id',
+                         'region' => 'region_id',
+                         'name'   => 'name' }
     @default_sort = 'id desc'
   end
 
@@ -14,7 +14,7 @@ class Account::TracksController < ApplicationController
     authorize(Track)
 
     @tracks = Track.where(user_id: current_user.id).includes(:region)
-                   .order(order).paginate(:page => params[:page])
+              .order(order).paginate(page: params[:page])
   end
 
   def new
@@ -30,7 +30,7 @@ class Account::TracksController < ApplicationController
     if @track.save
       redirect_to back(account_tracks_url), notice: I18n.t('account.track.was_created')
     else
-      render action: "new"
+      render action: 'new'
     end
   end
 
@@ -44,7 +44,7 @@ class Account::TracksController < ApplicationController
     if @track.update_attributes(track_params)
       redirect_to back(account_tracks_url), notice: I18n.t('account.track.was_updated')
     else
-      render action: "edit"
+      render action: 'edit'
     end
   end
 

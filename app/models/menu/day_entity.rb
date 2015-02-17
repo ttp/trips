@@ -4,10 +4,10 @@ class Menu::DayEntity < ActiveRecord::Base
   PRODUCT = 3
 
   belongs_to :day
-  has_many :partition_porter_products, :class_name => 'Menu::PartitionPorterProduct', dependent: :delete_all
+  has_many :partition_porter_products, class_name: 'Menu::PartitionPorterProduct', dependent: :delete_all
 
   def entity=(entity)
-  	self.entity_id = entity.id
+    self.entity_id = entity.id
   end
 
   def product?

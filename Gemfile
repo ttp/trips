@@ -47,7 +47,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'poltergeist'
-  gem 'selenium-webdriver', "2.45.0.dev3"
+  gem 'selenium-webdriver', '2.45.0.dev3'
 end
 
 group :production do

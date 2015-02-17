@@ -40,7 +40,7 @@ def get_track(url)
     content = f.read
   end
   doc = Nokogiri::HTML(content)
-  track_node_head = doc.css("table.route td").select { |el| el.inner_text =~ /Нитка маршрута/i }.first
+  track_node_head = doc.css('table.route td').select { |el| el.inner_text =~ /Нитка маршрута/i }.first
   track_node = track_node_head.next_element
   track_node.inner_text.strip
 end
@@ -54,16 +54,16 @@ open(calendar_page) do |f|
 end
 doc = Nokogiri::HTML(content)
 
-table_rows = doc.css("#table tr")
+table_rows = doc.css('#table tr')
 region = nil
 name = nil
 dates = nil
 url = nil
 
-puts ["name", "start_date", "end_date", "region", "track", "url", "has_guide", "available_places"].to_csv
+puts %w(name start_date end_date region track url has_guide available_places).to_csv
 table_rows.each_with_index do |row, i|
   next if i == 0
-  cells = row.css("td")
+  cells = row.css('td')
   if cells.size == 1
     region_h1 = row.at_css('h1[align="center"]') || row.at_css('div[align="center"] h1')
     if region_h1
@@ -74,32 +74,32 @@ table_rows.each_with_index do |row, i|
     next if dates.nil? || region.nil?
 
     puts [
-       name,
-       dates[0],
-       dates[1],
-       get_region_name(region),
-       '',
-       url,
-       "yes",
-       10
-   ].to_csv
+      name,
+      dates[0],
+      dates[1],
+      get_region_name(region),
+      '',
+      url,
+      'yes',
+      10
+    ].to_csv
   else # trip row
     dates = get_dates(cells[0].inner_text.strip)
     link_node = row.css('a').select { |el| !el.inner_text.strip.empty? }.first
     name = link_node.inner_text.strip
-    url = link_node.attr("href")
+    url = link_node.attr('href')
 
     next if dates.nil? || region.nil?
 
     puts [
-       name,
-       dates[0],
-       dates[1],
-       get_region_name(region),
-       '',
-       url,
-       "yes",
-       10
-   ].to_csv
+      name,
+      dates[0],
+      dates[1],
+      get_region_name(region),
+      '',
+      url,
+      'yes',
+      10
+    ].to_csv
   end
 end

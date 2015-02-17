@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :track do
-    name "Track name"
-    description "Track description"
-    track "Track"
-    url "track site"
-    
+    name 'Track name'
+    description 'Track description'
+    track 'Track'
+    url 'track site'
+
     region
     user
   end

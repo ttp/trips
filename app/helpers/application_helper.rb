@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
 module ApplicationHelper
-  def display_base_errors resource
-    return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
+  def display_base_errors(resource)
+    return '' if (resource.errors.empty?) || (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
     html = <<-HTML
     <div class="alert alert-error alert-block">
@@ -16,16 +16,14 @@ module ApplicationHelper
   def sortable_header(field, label)
     classes = 'sortable'
     sort_params = {
-        sort: field,
-        dir: 'asc'
+      sort: field,
+      dir: 'asc'
     }
     if params[:sort] === field
       classes += ' sorted'
       classes += params[:dir] == 'asc' ? ' headerSortUp' : ' headerSortDown'
       sort_params[:dir] = 'desc' if params[:dir] == 'asc'
     end
-
-
 
     html = <<-HTML
     <th class="#{classes}">
@@ -64,13 +62,13 @@ module ApplicationHelper
   def alert_class(flash_type)
     case flash_type
     when 'success'
-      "alert-success" # Green
+      'alert-success' # Green
     when 'error'
-      "alert-danger" # Red
+      'alert-danger' # Red
     when 'alert'
-      "alert-warning" # Yellow
+      'alert-warning' # Yellow
     when 'notice'
-      "alert-info" # Blue
+      'alert-info' # Blue
     else
       flash_type.to_s
     end

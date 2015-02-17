@@ -9,7 +9,7 @@ class PorterProductsTotal
   end
 
   def porter_products(porter)
-    if @porters_products_total.has_key?(porter.id)
+    if @porters_products_total.key?(porter.id)
       @porters_products_total[porter.id][:products]
     else
       {}
@@ -32,14 +32,14 @@ class PorterProductsTotal
   end
 
   def init_porter_hash(porter)
-    unless @porters_products_total.has_key? porter.id
+    unless @porters_products_total.key? porter.id
       @porters_products_total[porter.id] = { products: {}, porter: porter, weight: 0 }
     end
   end
 
   def init_product_hash(porter, product)
     init_porter_hash(porter)
-    unless @porters_products_total[porter.id][:products].has_key? product.id
+    unless @porters_products_total[porter.id][:products].key? product.id
       @porters_products_total[porter.id][:products][product.id] = { product: product, weight: 0 }
     end
   end

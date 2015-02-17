@@ -9,7 +9,7 @@ class TripComment < ActiveRecord::Base
       FROM trip_comments tc
       INNER JOIN users u ON u.id = tc.user_id
       WHERE tc.trip_id=#{connection.quote(trip_id)}")
-    rows.each {|row| row['created_at'] = row['created_at'].to_time}
+    rows.each { |row| row['created_at'] = row['created_at'].to_time }
     rows
   end
 

@@ -54,35 +54,35 @@ end
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
-task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
+task setup: :environment do
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/log")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log")
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets"]
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids"]
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets")
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids")
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config")
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config/environments"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config/environments"]
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config/environments")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config/environments")
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/public/system"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/system"]
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/public/media"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/media"]
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/system")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/system")
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/media")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/media")
 
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/environment.rb"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/environments/production.rb"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config*'."]
+  queue! %(touch "#{deploy_to}/#{shared_path}/config/database.yml")
+  queue! %(touch "#{deploy_to}/#{shared_path}/config/environment.rb")
+  queue! %(touch "#{deploy_to}/#{shared_path}/config/environments/production.rb")
+  queue %(echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config*'.")
 end
 
-desc "Deploys the current version to the server."
-task :deploy => :environment do
+desc 'Deploys the current version to the server.'
+task deploy: :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
@@ -101,34 +101,34 @@ end
 
 namespace :unicorn do
   set :unicorn_pid, "#{app_path}/tmp/pids/unicorn.pid"
-  set :start_unicorn, %{
+  set :start_unicorn, %(
     cd #{app_path}
     bundle exec unicorn -c #{app_path}/config/unicorn.rb -E #{rails_env} -D
-  }
+    )
 
-# Start task
-# ------------------------------------------------------------------------------
-  desc "Start unicorn"
-  task :start => :environment do
+  # Start task
+  # ------------------------------------------------------------------------------
+  desc 'Start unicorn'
+  task start: :environment do
     queue 'echo "-----> Start Unicorn"'
     queue! start_unicorn
   end
 
-# Stop task
-# ------------------------------------------------------------------------------
-  desc "Stop unicorn"
+  # Stop task
+  # ------------------------------------------------------------------------------
+  desc 'Stop unicorn'
   task :stop do
     queue 'echo "-----> Stop Unicorn"'
-    queue! %{
+    queue! %(
       test -s "#{unicorn_pid}" && kill -QUIT `cat "#{unicorn_pid}"` && echo "Stop Ok" && exit 0
       echo >&2 "Not running"
-    }
+        )
   end
 
-# Restart task
-# ------------------------------------------------------------------------------
+  # Restart task
+  # ------------------------------------------------------------------------------
   desc "Restart unicorn using 'upgrade'"
-  task :restart => :environment do
+  task restart: :environment do
     invoke 'unicorn:stop'
     invoke 'unicorn:start'
   end
@@ -140,4 +140,3 @@ end
 #  - http://nadarei.co/mina/tasks
 #  - http://nadarei.co/mina/settings
 #  - http://nadarei.co/mina/helpers
-

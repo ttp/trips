@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  after_filter :store_location
-  before_filter :configure_permitted_parameters, :if => :devise_controller?
+  after_action :store_location
+  before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery
   helper_method :admin?
 
@@ -10,15 +10,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def store_location
-    if request.get? and controller_name != "user_sessions" and controller_name != "sessions"
+    if request.get? && controller_name != 'user_sessions' && controller_name != 'sessions'
       session[:return_to] = request.fullpath
     end
-    if params[:return] && !user_signed_in? and request.get? and !request.xhr?
+    if params[:return] && !user_signed_in? && request.get? && !request.xhr?
       session[:previous_url] = params[:return]
     end
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     if session[:previous_url].blank? || session[:previous_url].include?(new_user_session_path)
       root_path
     else
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def order
-    if !params[:sort].nil? && @sortable_fields.has_key?(params[:sort])
+    if !params[:sort].nil? && @sortable_fields.key?(params[:sort])
       @sortable_fields[params[:sort]] + ' ' + (params[:dir] == 'desc' ? 'desc' : 'asc')
     else
       @default_sort
