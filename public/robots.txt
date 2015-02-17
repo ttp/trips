@@ -7,6 +7,9 @@
 User-agent: AhrefsBot
 Disallow: /
 
+User-agent: BLEXBot
+Disallow: /
+
 User-agent: *
 Disallow: /users/sign_up
 Disallow: /users/sign_in
