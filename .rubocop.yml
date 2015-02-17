@@ -1,0 +1,22 @@
+AllCops:
+  Include:
+    - Rakefile
+    - Gemfile
+  Exclude:
+    - db/**/*
+    - config/boot.rb
+    - vendor/**/*
+    - bin/**/*
+    - features/**/*
+    - aggregate/**/*
+  RunRailsCops: true
+LineLength:
+  Enabled: false
+MethodLength:
+  Enabled: false
+  CountComments: false
+  Max: 10
+ClassLength:
+  Enabled: false
+Documentation:
+  Enabled: false

@@ -6,9 +6,7 @@ class ApplicationPolicy
     @record = record
   end
 
-  def admin?
-    user.admin?
-  end
+  delegate :admin?, to: :user
 
   def guest?
     user.new_record?
@@ -62,13 +60,10 @@ class ApplicationPolicy
       scope
     end
 
-    def admin?
-      user.admin?
-    end
+    delegate :admin?, to: :user
 
     def guest?
       user.new_record?
     end
   end
 end
-

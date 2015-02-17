@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :region do
-    name "MyRegion"
+    name 'MyRegion'
   end
 end

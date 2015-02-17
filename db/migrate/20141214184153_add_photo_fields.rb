@@ -1,14 +1,10 @@
 class AddPhotoFields < ActiveRecord::Migration
   class Menu::Product < ActiveRecord::Base
-    attr_accessible :icon, :photo
-
     has_attached_file :photo, styles: { thumb: "64x64>"  }, default_url: "/assets/:style/no-image.png"
     validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
   end
 
   class Menu::Dish < ActiveRecord::Base
-    attr_accessible :icon, :photo
-
     has_attached_file :photo, styles: { thumb: "64x64>"  }, default_url: "/assets/:style/no-image.png"
     validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
   end

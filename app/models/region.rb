@@ -3,7 +3,7 @@ class Region < ActiveRecord::Base
   has_many :tracks
 
   def t
-    I18n.t(name, :scope => "region")
+    I18n.t(name, scope: 'region')
   end
 
   def self.sorted

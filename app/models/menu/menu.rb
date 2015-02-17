@@ -3,7 +3,7 @@ require 'securerandom'
 class Menu::Menu < ActiveRecord::Base
   # attr_accessible :name, :users_count, :is_public
   belongs_to :user
-  has_many :menu_days, :class_name => 'Menu::Day'
+  has_many :menu_days, class_name: 'Menu::Day'
   has_many :partitions, class_name: 'Menu::Partition'
 
   after_initialize do |menu|
@@ -23,7 +23,7 @@ class Menu::Menu < ActiveRecord::Base
 
   def entities
     return [] if new_record?
-    @entities ||= Menu::DayEntity.order('sort_order').joins(day: :menu).where('menu_menus.id = ?', self.id).readonly(false)
+    @entities ||= Menu::DayEntity.order('sort_order').joins(day: :menu).where('menu_menus.id = ?', id).readonly(false)
   end
 
   def entity_model(day_entity)
@@ -39,8 +39,8 @@ class Menu::Menu < ActiveRecord::Base
 
     ids = entities_by_type(Menu::DayEntity::PRODUCT).map(&:entity_id).uniq
     @products = Menu::Product.with_translations(I18n.locale)
-                             .where('menu_products.id in(?)', ids).to_a
-    @products.sort! do |a, b| a.name <=> b.name end
+                .where('menu_products.id in(?)', ids).to_a
+    @products.sort! { |a, b| a.name <=> b.name }
     @products = @products.index_by(&:id)
     @products
   end
@@ -57,20 +57,20 @@ class Menu::Menu < ActiveRecord::Base
   end
 
   def entities_by_type(type)
-    entities.select {|entity| entity.entity_type == type}
+    entities.select { |entity| entity.entity_type == type }
   end
 
   def entities_grouped
     return @grouped if @grouped
 
-    @grouped = entities.group_by {|entity| entity.day_id}
+    @grouped = entities.group_by(&:day_id)
     @grouped.each do |day_id, group|
-      @grouped[day_id] = group.group_by {|entity| entity.parent_id || 0}
+      @grouped[day_id] = group.group_by { |entity| entity.parent_id || 0 }
     end
   end
 
   def entities_children(day_id, parent_id)
-    if entities_grouped.has_key?(day_id)
+    if entities_grouped.key?(day_id)
       return entities_grouped[day_id][parent_id]
     else
       return []
@@ -100,7 +100,7 @@ class Menu::Menu < ActiveRecord::Base
 
   def total_products
     return @total_products if @total_products
-    @total_products = entities_by_type(Menu::DayEntity::PRODUCT).group_by {|entity| entity.entity_id}
+    @total_products = entities_by_type(Menu::DayEntity::PRODUCT).group_by(&:entity_id)
     @total_products.each do |key, items|
       @total_products[key] = items.inject(0) { |mem, item| mem + item.weight }
     end

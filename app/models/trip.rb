@@ -3,20 +3,20 @@ require 'date'
 class Trip < ActiveRecord::Base
   belongs_to :track
   belongs_to :user
-  belongs_to :menu_menu, :class_name => 'Menu::Menu', :foreign_key => :menu_id
+  belongs_to :menu_menu, class_name: 'Menu::Menu', foreign_key: :menu_id
   has_many :trip_users
   has_many :trip_comments
 
-  validates :track_id, :dates_range, :available_places, :presence => true
+  validates :track_id, :dates_range, :available_places, presence: true
 
   before_save :cache_duration
 
   def dates_range
-    (I18n.l(start_date) + " - " + I18n.l(end_date)) unless (start_date.nil? || end_date.nil?)
+    (I18n.l(start_date) + ' - ' + I18n.l(end_date)) unless start_date.nil? || end_date.nil?
   end
 
   def dates_range=(value)
-    self.start_date, self.end_date = value.split(" - ")
+    self.start_date, self.end_date = value.split(' - ')
   end
 
   def self.for_year
@@ -57,40 +57,40 @@ class Trip < ActiveRecord::Base
 
   def self.scheduled(user_id)
     start_str = Time.now.strftime('%Y-%m-%d')
-    Trip.joins(:track).includes(:track => [:region])
-        .joins(:trip_users)
-        .where('trip_users.user_id = ?', user_id)
-        .where('trips.start_date > ?', start_str)
-        .order('trips.start_date')
+    Trip.joins(:track).includes(track: [:region])
+      .joins(:trip_users)
+      .where('trip_users.user_id = ?', user_id)
+      .where('trips.start_date > ?', start_str)
+      .order('trips.start_date')
   end
 
   def self.archive(user_id)
     start_str = Time.now.strftime('%Y-%m-%d')
-    Trip.joins(:track).includes(:track => [:region])
-        .joins(:trip_users)
-        .where('trip_users.user_id = ?', user_id)
-        .where('trips.start_date <= ?', start_str)
+    Trip.joins(:track).includes(track: [:region])
+      .joins(:trip_users)
+      .where('trip_users.user_id = ?', user_id)
+      .where('trips.start_date <= ?', start_str)
   end
 
   def joined_users
-    users.where("trip_users.approved = ?", true)
+    users.where('trip_users.approved = ?', true)
   end
 
   def want_to_join_users
-    users.where("trip_users.approved = ?", false)
+    users.where('trip_users.approved = ?', false)
   end
 
   def users
-    User.joins("join trip_users on trip_users.user_id = users.id")
-      .where("trip_users.trip_id = #{self.id}")
+    User.joins('join trip_users on trip_users.user_id = users.id')
+      .where("trip_users.trip_id = #{id}")
   end
 
   def user_can_join?(user_id)
-    users.where("users.id = ?", user_id).count() == 0 && available_places > 0
+    users.where('users.id = ?', user_id).count == 0 && available_places > 0
   end
 
   def cache_duration
-    duration = (self.end_date.to_time - self.start_date.to_time).to_i + 1.day.to_i
-    self.cached_duration = (duration / 86400).round
+    duration = (end_date.to_time - start_date.to_time).to_i + 1.day.to_i
+    self.cached_duration = (duration / 86_400).round
   end
 end

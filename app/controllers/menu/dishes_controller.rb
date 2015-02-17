@@ -87,7 +87,7 @@ class Menu::DishesController < ApplicationController
   end
 
   def paginate_records
-    @menu_dishes = @menu_dishes.order('name').paginate(:page => params[:page], :per_page => 25)
+    @menu_dishes = @menu_dishes.order('name').paginate(page: params[:page], per_page: 25)
   end
 
   def fetch_categories
@@ -105,8 +105,8 @@ class Menu::DishesController < ApplicationController
   end
 
   def prepare_dish_products
-    if params.has_key? :products
-      @dish_products = params[:products].map {|key, value| {product_id: key, weight: value} }
+    if params.key? :products
+      @dish_products = params[:products].map { |key, value| { product_id: key, weight: value } }
     else
       @dish_products = @menu_dish.dish_products
     end
@@ -118,14 +118,14 @@ class Menu::DishesController < ApplicationController
 
     # remove entities
     exists_products.each do |id, product|
-      product.destroy unless products.has_key?(id.to_s)
+      product.destroy unless products.key?(id.to_s)
     end
 
     # update/create
     sort_order = 0
     products.each do |product_id, weight|
       next unless Menu::Product.exists? product_id
-      if exists_products.has_key? product_id.to_i
+      if exists_products.key? product_id.to_i
         product = exists_products[product_id.to_i]
       else
         product = Menu::DishProduct.new

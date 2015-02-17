@@ -1,12 +1,12 @@
 class TripCommentsController < ApplicationController
   include ApplicationHelper
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   # GET /trip/:trip_id/comments
   def index
     comments = TripComment.with_users_hash(params[:trip_id])
 
-    render json: {comments: comments}
+    render json: { comments: comments }
   end
 
   # POST /trip/:trip_id/comments
@@ -22,12 +22,10 @@ class TripCommentsController < ApplicationController
       comment_attrs = comment.attributes
       comment_attrs['name'] = current_user.name
       comment_attrs['email'] = current_user.email
-      comment_bubble = render_to_string({
-        partial: 'trips/comment',
-        layout: false,
-        locals: {comment: comment_attrs, trip: trip}
-      })
-      render json: {comment: comment, bubble: comment_bubble}, status: :ok
+      comment_bubble = render_to_string(partial: 'trips/comment',
+                                        layout: false,
+                                        locals: { comment: comment_attrs, trip: trip })
+      render json: { comment: comment, bubble: comment_bubble }, status: :ok
     else
       render json: comment.errors, status: :unprocessable_entity
     end
@@ -37,14 +35,14 @@ class TripCommentsController < ApplicationController
   def update
     comment = TripComment.find(params[:comment_id])
     trip = comment.trip
-    if comment.user_id != current_user.id && trip.user_id != current_user.id and
-      render json: {error: 'incorrect_comment_owner'}, status: :unprocessable_entity
+    if comment.user_id != current_user.id && trip.user_id != current_user.id &&
+       render(json: { error: 'incorrect_comment_owner' }, status: :unprocessable_entity)
       return
     end
 
     comment.comment = params[:comment]
     if comment.save
-      render json: {message: safe_textile(comment.comment)}, status: :ok
+      render json: { message: safe_textile(comment.comment) }, status: :ok
     else
       render json: comment.errors
     end
@@ -54,13 +52,13 @@ class TripCommentsController < ApplicationController
   def destroy
     comment = TripComment.find(params[:comment_id])
     trip = comment.trip
-    if comment.user_id != current_user.id && trip.user_id != current_user.id and
-      render json: {error: 'incorrect_comment_owner'}, status: :unprocessable_entity
+    if comment.user_id != current_user.id && trip.user_id != current_user.id &&
+       render(json: { error: 'incorrect_comment_owner' }, status: :unprocessable_entity)
       return
     end
 
     comment.destroy
 
-    render json: {success: :ok}, status: :ok
+    render json: { success: :ok }, status: :ok
   end
 end

@@ -30,7 +30,7 @@ class EntityPortersInfo
   end
 
   def porter_products_by_entity(entity)
-    @porter_product_entities ||= partition.porter_products.to_a.group_by {|entity| entity.day_entity_id }
+    @porter_product_entities ||= partition.porter_products.to_a.group_by(&:day_entity_id)
     @porter_product_entities[entity.id]
   end
 

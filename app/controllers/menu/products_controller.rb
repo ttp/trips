@@ -78,7 +78,7 @@ class Menu::ProductsController < ApplicationController
   end
 
   def paginate_records
-    @menu_products = @menu_products.order('name').paginate(:page => params[:page], :per_page => 25)
+    @menu_products = @menu_products.order('name').paginate(page: params[:page], per_page: 25)
   end
 
   def fetch_categories

@@ -9,18 +9,18 @@ require 'cgi'
 require 'csv'
 
 $month_map = {
-    "січня" => "01",
-    "лютого" => "02",
-    "березня" => "03",
-    "квітня" => "04",
-    "травня" => "05",
-    "червня" => "06",
-    "липня" => "07",
-    "серпня" => "08",
-    "вересня" => "09",
-    "жовтня" => "10",
-    "листопада" => "11",
-    "грудня" => "12",
+  'січня' => '01',
+  'лютого' => '02',
+  'березня' => '03',
+  'квітня' => '04',
+  'травня' => '05',
+  'червня' => '06',
+  'липня' => '07',
+  'серпня' => '08',
+  'вересня' => '09',
+  'жовтня' => '10',
+  'листопада' => '11',
+  'грудня' => '12'
 }
 
 def get_dates(dates_str)
@@ -51,7 +51,7 @@ def get_track(url)
     content = f.read
   end
   doc = Nokogiri::HTML(content)
-  track_node_head = doc.css("table.route td").select { |el| el.inner_text =~ /Нитка маршрута/i }.first
+  track_node_head = doc.css('table.route td').select { |el| el.inner_text =~ /Нитка маршрута/i }.first
   track_node = track_node_head.next_element
   track_node.inner_text.strip
 end
@@ -64,7 +64,7 @@ open(site_root) do |f|
 end
 doc = Nokogiri::HTML(content)
 
-puts ["name", "start_date", "end_date", "region", "track", "url", "has_guide", "available_places"].to_csv
+puts %w(name start_date end_date region track url has_guide available_places).to_csv
 
 schedule = doc.at_css('#route_schedule')
 schedule.css('.route_schedule_block').each do |schedule_item|
@@ -72,15 +72,15 @@ schedule.css('.route_schedule_block').each do |schedule_item|
   region = get_region_name(link_node.attr('title'))
   dates_text = schedule_item.at_css('.route_schedule_dates').inner_text
   start_date, end_date = get_dates(dates_text)
-  url = site_root + '/' + link_node.attr("href")
+  url = site_root + '/' + link_node.attr('href')
   puts [
-           link_node.inner_text.strip,
-           start_date,
-           end_date,
-           region,
-           get_track(url),
-           url,
-           "yes",
-           10
-       ].to_csv
+    link_node.inner_text.strip,
+    start_date,
+    end_date,
+    region,
+    get_track(url),
+    url,
+    'yes',
+    10
+  ].to_csv
 end

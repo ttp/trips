@@ -10,7 +10,7 @@ feature 'View products' do
       Menu::ProductCategory.all.each do |category|
         expect(page).to have_link category.name
       end
-      expect(page).to have_css("#products-grid .product", count: 9)
+      expect(page).to have_css('#products-grid .product', count: 9)
     end
 
     scenario 'view by category' do
@@ -20,7 +20,7 @@ feature 'View products' do
       visit menu_products_path
       click_link category2.name
 
-      expect(page).to have_css("#products-grid .product", count: 3)
+      expect(page).to have_css('#products-grid .product', count: 3)
       category2.products.each do |product|
         expect(page).to have_text product.name
       end
@@ -57,12 +57,12 @@ feature 'View products' do
   def fill_in_product(category)
     product = build(:menu_product, product_category: category)
 
-    fill_in "menu_product_name", with: product.name
-    select category.name, from: "menu_product_product_category_id"
-    fill_in "menu_product_calories", with: product.calories
-    fill_in "menu_product_proteins", with: product.proteins
-    fill_in "menu_product_fats", with: product.fats
-    fill_in "menu_product_carbohydrates", with: product.carbohydrates
+    fill_in 'menu_product_name', with: product.name
+    select category.name, from: 'menu_product_product_category_id'
+    fill_in 'menu_product_calories', with: product.calories
+    fill_in 'menu_product_proteins', with: product.proteins
+    fill_in 'menu_product_fats', with: product.fats
+    fill_in 'menu_product_carbohydrates', with: product.carbohydrates
     product
   end
 end

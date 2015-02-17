@@ -2,10 +2,10 @@ class Menu::PartitionsController < ApplicationController
   include MenusHelper
   include Menu::PartitionsHelper
 
-  before_filter :authenticate_user!
-  before_filter :find_menu
-  before_filter :find_partition, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize_menu!
+  before_action :authenticate_user!
+  before_action :find_menu
+  before_action :find_partition, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_menu!
 
   def show
     set_breadcrumbs
@@ -27,7 +27,6 @@ class Menu::PartitionsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -56,9 +55,9 @@ class Menu::PartitionsController < ApplicationController
 
   def save_porters(porters)
     porters.each do |porter_id, porter_data|
-      if porter_data.has_key?('new')
+      if porter_data.key?('new')
         porter = @partition.partition_porters.build
-      elsif @porters.present? && @porters.has_key?(porter_id.to_i)
+      elsif @porters.present? && @porters.key?(porter_id.to_i)
         porter = @porters[porter_id.to_i]
       end
 
@@ -67,8 +66,8 @@ class Menu::PartitionsController < ApplicationController
   end
 
   def remove_porters(porters)
-    @porters.each do |id, porter|
-      porter.destroy unless porters.has_key?(porter.id.to_s)
+    @porters.each do |_id, porter|
+      porter.destroy unless porters.key?(porter.id.to_s)
     end
   end
 
@@ -88,10 +87,10 @@ class Menu::PartitionsController < ApplicationController
   end
 
   def save_products(porter_entities)
-    grouped_entities = porter_entities.group_by {|entity| entity['partition_porter_id'].to_s }
+    grouped_entities = porter_entities.group_by { |entity| entity['partition_porter_id'].to_s }
     cached_porters.each do |porter_id, porter|
-      if grouped_entities.has_key? porter_id.to_s
-        porter.day_entity_ids = grouped_entities[porter_id.to_s].map {|entity| entity['day_entity_id']}
+      if grouped_entities.key? porter_id.to_s
+        porter.day_entity_ids = grouped_entities[porter_id.to_s].map { |entity| entity['day_entity_id'] }
       else
         porter.porter_products.destroy_all
       end

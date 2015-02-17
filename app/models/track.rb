@@ -3,5 +3,5 @@ class Track < ActiveRecord::Base
   belongs_to :user
   has_many :trips
 
-  validates :name, :region_id, :presence => true
+  validates :name, :region_id, presence: true
 end

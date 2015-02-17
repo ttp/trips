@@ -11,19 +11,19 @@ Pohody::Application.configure do
   config.action_controller.perform_caching = false
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default charset: 'utf-8'
 
   config.action_mailer.smtp_settings = {
-    :user_name => 'human-ttp-fafad42cd8c1a1f5',
-    :password => 'a20644f731c6c661',
-    :address => 'mailtrap.io',
-    :port => '2525',
-    :authentication => :plain
+    user_name: 'human-ttp-fafad42cd8c1a1f5',
+    password: 'a20644f731c6c661',
+    address: 'mailtrap.io',
+    port: '2525',
+    authentication: :plain
   }
 
   config.site[:notification_email] = 'human.ttp@gmail.com'

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:ulogin, :show]
-  protect_from_forgery :except => [:ulogin]
+  before_action :authenticate_user!, except: [:ulogin, :show]
+  protect_from_forgery except: [:ulogin]
 
   def index
     @users = User.all
@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     auth_service = AuthService.new
     user = auth_service.authenticate(params[:token])
     if user
-      sign_in_and_redirect user, :bypass => true
+      sign_in_and_redirect user, bypass: true
     else
-      flash[:error] = "Unable to login"
+      flash[:error] = 'Unable to login'
       redirect_to new_user_session_path
     end
   end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if @profile.update_attributes(profile_params)
       redirect_to user_path(current_user), notice: I18n.t('user_profile.was_updated')
     else
-      render action: "edit_profile"
+      render action: 'edit_profile'
     end
   end
 

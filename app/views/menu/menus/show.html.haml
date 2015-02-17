@@ -46,5 +46,6 @@
       = render 'menu/menus/menu_products_partition'
   .tab-pane{role: 'tabpanel', id: 'summary'}
     = render 'menu/menus/summary', menu: @menu
-  .tab-pane{role: 'tabpanel', id: 'partitions'}
-    = render 'menu/partitions/list', menu: @menu
+  - if policy(@menu).manage_partitions?
+    .tab-pane{role: 'tabpanel', id: 'partitions'}
+      = render 'menu/partitions/list', menu: @menu

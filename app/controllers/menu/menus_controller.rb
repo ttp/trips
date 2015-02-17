@@ -1,14 +1,12 @@
 class Menu::MenusController < ApplicationController
   include MenusHelper
 
-  before_filter :authenticate_user!, :only => [:my]
-  around_filter :catch_not_found, :only => [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:my]
+  around_action :catch_not_found, only: [:show, :edit, :update, :destroy]
 
   def index
     @public_cnt = Menu::Menu.where(is_public: true).count
-    if current_user
-      @my_cnt = Menu::Menu.where(user_id: current_user.id).count
-    end
+    @my_cnt = Menu::Menu.where(user_id: current_user.id).count if current_user
     @dishes_cnt = Menu::Dish.for_user(current_user).count
     @products_cnt = policy_scope(Menu::Product).count
   end
@@ -43,33 +41,33 @@ class Menu::MenusController < ApplicationController
 
   def show
     @menu = Menu::Menu.find(params[:id])
-
-    redirect_to menu_menus_url and return unless menu_can_view?
-
+    raise NotAuthorizedError.new unless policy(@menu).show?(params[:key])
     set_show_breadcrumbs
+    @menu.users_count = users_count_param if params[:users_count].present?
+  end
 
-    unless params[:users_count].blank?
-      users_count = params[:users_count].to_i
-      users_count = 1 unless (1..100).include? users_count
-      @menu.users_count = users_count
-    end
+  def users_count_param
+    users_count = params[:users_count].to_i
+    users_count = 1 unless (1..100).include? users_count
+    users_count
   end
 
   def new
     @menu = Menu::Menu.new
-    if params[:trip]
-      trip = Trip.find_by(id: params[:trip])
-      if trip.user_id == current_user.id
-        @menu.name = trip.track.name + ' menu'
-        users_count = trip.joined_users.count
-        @menu.users_count = users_count if users_count > 0
-      end
-    end
+    init_menu_for_trip if params[:trip]
+  end
+
+  def init_menu_for_trip
+    trip = Trip.find_by(id: params[:trip])
+    authorize trip, :edit?
+    @menu.name = trip.track.name + ' menu'
+    users_count = trip.joined_users.count
+    @menu.users_count = users_count if users_count > 0
   end
 
   def edit
     @menu = Menu::Menu.find(params[:id])
-    redirect_to menu_menus_url and return unless menu_can_edit?
+    authorize @menu, :edit?
   end
 
   def create
@@ -83,22 +81,17 @@ class Menu::MenusController < ApplicationController
     save_days(data['days'])
 
     # save entities
-    entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
+    entities = data['entities'].values.group_by { |entity| entity['parent_id'].to_s }
     save_entities(entities, '0')
 
     set_trip_menu
 
     NotificationsMailer.new_menu_added_email(@menu).deliver_now
 
-    respond_to do |format|
-      format.html {
-        if @menu.user_id
-          redirect_to back(menu_menus_url), notice: I18n.t('menu.was_created')
-        else
-          redirect_to guest_owner_menu_path(@menu)
-        end
-      }
-      format.json { render json: @menu, status: :created, location: @menu }
+    if @menu.user_id
+      redirect_to back(menu_menus_url), notice: I18n.t('menu.was_created')
+    else
+      redirect_to guest_owner_menu_path(@menu)
     end
   end
 
@@ -114,7 +107,7 @@ class Menu::MenusController < ApplicationController
 
   def update
     @menu = Menu::Menu.find(params[:id])
-    redirect_to menu_menus_url and return unless menu_can_edit?
+    redirect_to(menu_menus_url) && return unless menu_can_edit?
 
     data = JSON.parse(params[:data])
     set_menu_data(data['menu'])
@@ -123,23 +116,23 @@ class Menu::MenusController < ApplicationController
     # update/remove days
     @days = @menu.menu_days.index_by(&:id)
     @days.each do |id, day|
-      day.delete unless data['days'].has_key?(id.to_s)
+      day.delete unless data['days'].key?(id.to_s)
     end
     save_days(data['days'])
 
     # update/remove entities
     @entities = @menu.entities.index_by(&:id)
     @entities.each do |id, entity|
-      entity.destroy unless data['entities'].has_key?(id.to_s)
+      entity.destroy unless data['entities'].key?(id.to_s)
     end
-    entities = data["entities"].values.group_by {|entity| entity['parent_id'].to_s}
+    entities = data['entities'].values.group_by { |entity| entity['parent_id'].to_s }
     save_entities(entities, '0')
 
     respond_to do |format|
-      format.html {
+      format.html do
         back_url = user_signed_in? ? menu_menus_url : guest_owner_menu_path(@menu)
         redirect_to back(back_url), notice: I18n.t('menu.was_updated')
-      }
+      end
       format.json { head :no_content }
     end
   end
@@ -152,7 +145,7 @@ class Menu::MenusController < ApplicationController
     data[:dishes] = Menu::Dish.list_by_user(current_user, I18n.locale)
     data[:dish_products] = Menu::DishProduct.all
     data[:meals] = Menu::Meal.by_lang(I18n.locale)
-    render :json => data
+    render json: data
   end
 
   def destroy
@@ -166,7 +159,8 @@ class Menu::MenusController < ApplicationController
     end
   end
 
-private
+  private
+
   def set_menu_data(data)
     @menu.name = data['name']
     @menu.users_count = data['users_count']
@@ -176,16 +170,16 @@ private
   end
 
   def save_entities(entities, parent_cid, parent_id = nil)
-    return unless entities.has_key?(parent_cid)
+    return unless entities.key?(parent_cid)
 
     entities[parent_cid].each do |entity_data|
-      if entity_data.has_key?('new')
+      if entity_data.key?('new')
         entity = Menu::DayEntity.new
         entity.parent_id = parent_id
         entity.entity_id = entity_data['entity_id']
         entity.entity_type = entity_data['entity_type']
         entity.day_id = @day_cid_to_id[entity_data['day_id'].to_s]
-      elsif @entities.has_key? entity_data['id']
+      elsif @entities.key? entity_data['id']
         entity = @entities[entity_data['id']]
       end
 
@@ -201,10 +195,10 @@ private
   def save_days(days)
     @day_cid_to_id = {}
     days.each do |day_id, day_data|
-      if day_data.has_key?('new')
+      if day_data.key?('new')
         day = Menu::Day.new
         day.menu = @menu
-      elsif @days.has_key?(day_id.to_i)
+      elsif @days.key?(day_id.to_i)
         day = @days[day_id.to_i]
       end
 
@@ -230,6 +224,6 @@ private
   def catch_not_found
     yield
   rescue ActiveRecord::RecordNotFound
-    redirect_to menu_menus_url, :flash => { :error => t('site.not_found') }
+    redirect_to menu_menus_url, flash: { error: t('site.not_found') }
   end
 end

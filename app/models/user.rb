@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   after_create :set_default_role
 
   def set_default_role
-    if self.role.blank?
+    if role.blank?
       self.role = USER
       save
     end
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def can_view_private?(user)
-    user.id = self.id
+    user.id = id
   end
 
   def admin?

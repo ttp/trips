@@ -45,7 +45,7 @@ module MenusHelper
 
   def cell_class(cell_num)
     class_name = ''
-    class_name += 'cell2' if (cell_num % 2 == 0)
+    class_name += 'cell2' if cell_num.even?
     class_name += 'cell3' if (cell_num % 3 == 0)
     class_name
   end
@@ -76,5 +76,13 @@ module MenusHelper
 
   def dish_icon_path(icon)
     icon.blank? ? asset_path('no-image.png') : media_path("dishes/#{icon}")
+  end
+
+  def menu_cache_key(menu)
+    "#{menu.id}-#{menu.updated_at}-#{menu.users_count}"
+  end
+
+  def menu_partition_cache_key(menu, partition)
+    menu_cache_key(menu) + "-#{partition.id}-#{partition.updated_at}"
   end
 end

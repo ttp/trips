@@ -22,6 +22,6 @@ module TripsHelper
       end
     end
 
-    return start_date_items.join(' ') + ' - ' + date_text(end_date);
+    start_date_items.join(' ') + ' - ' + date_text(end_date)
   end
 end

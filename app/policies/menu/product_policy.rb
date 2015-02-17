@@ -29,7 +29,7 @@ class Menu::ProductPolicy <  ApplicationPolicy
        :description, :norm_info, :norm, :is_public, :photo]
     else
       [:name, :calories, :proteins, :fats, :carbohydrates, :product_category_id,
-       :description,:norm_info, :norm]
+       :description, :norm_info, :norm]
     end
   end
 

@@ -11,7 +11,7 @@ feature 'Join trip', js: true do
   scenario 'I see login link' do
     visit trip_path(trip)
 
-    expect(trip_users_section).to  have_link('Login')
+    expect(trip_users_section).to have_link('Login')
   end
 
   scenario 'Join button adds user to Want to join list' do
@@ -31,7 +31,7 @@ feature 'Join trip', js: true do
     click_button 'Join'
     find('a.leave').click
 
-    expect(pending_users_section).not_to have_text  user.name
+    expect(pending_users_section).not_to have_text user.name
     expect(emails_count(trip.user.email, 'User has left trip')).to eq 1
   end
 
@@ -58,7 +58,7 @@ feature 'Join trip', js: true do
     within pending_users_section do
       find('a.decline').click
     end
-    find("#decline_reason .btn-primary").click
+    find('#decline_reason .btn-primary').click
 
     expect(pending_users_section).not_to have_text pending_user.name
     expect(emails_count(pending_user.email, 'Your join request has been declined')).to eq 1
@@ -67,19 +67,19 @@ feature 'Join trip', js: true do
   private
 
   def trip_users_section
-    find("#trip_users")
+    find('#trip_users')
   end
 
   def joined_users_section
-    find("#trip_users .trip-users")
+    find('#trip_users .trip-users')
   end
 
   def pending_users_section
-    find("#trip_users .want-to-join-users")
+    find('#trip_users .want-to-join-users')
   end
 
   def comments_section
-    find("#trip_comments")
+    find('#trip_comments')
   end
 
   def emails_count(address, subject)

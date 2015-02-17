@@ -5,7 +5,7 @@ class TripUser < ActiveRecord::Base
   before_destroy :update_available_places
 
   def self.find_request(trip_id, user_id)
-    where({trip_id: trip_id, user_id: user_id}).first
+    where(trip_id: trip_id, user_id: user_id).first
   end
 
   def update_available_places

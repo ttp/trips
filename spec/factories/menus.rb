@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :menu, class: Menu::Menu do
     user
 
-    name "New menu"
+    name 'New menu'
     users_count 5
     is_public true
 
@@ -10,23 +10,23 @@ FactoryGirl.define do
       days_count 3
       coverage 3
 
-      after(:create) do |menu, evaluator|
+      after(:create) do |menu, _evaluator|
         FactoryGirl.create_list(:day_with_meals, menu.days_count, menu: menu)
       end
     end
   end
 
   factory :menu_dish_category, class: Menu::DishCategory do
-    name "Category name - dish"
+    name 'Category name - dish'
   end
 
   factory :menu_dish, class: Menu::Dish do
-    name "Dish name"
+    name 'Dish name'
     association :dish_category, factory: :menu_dish_category
   end
 
   factory :menu_meal, class: Menu::Meal do
-    name "Meal name"
+    name 'Meal name'
   end
 
   factory :menu_day, class: Menu::Day do
@@ -45,9 +45,9 @@ FactoryGirl.define do
   end
 
   factory :menu_day_entity, class: Menu::DayEntity do
-    weight {Random.rand(50..100)}
+    weight { Random.rand(50..100) }
     association :day, factory: :menu_day
-    
+
     factory :menu_day_entity_product do
       entity_type Menu::DayEntity::PRODUCT
       association :entity, factory: :menu_product
@@ -64,7 +64,7 @@ FactoryGirl.define do
 
         after(:create) do |entity, evaluator|
           FactoryGirl.create_list(:menu_day_entity_product, evaluator.products_count,
-            {parent_id: entity.id, day: entity.day})
+                                  parent_id: entity.id, day: entity.day)
         end
       end
     end
@@ -79,8 +79,8 @@ FactoryGirl.define do
         end
 
         after(:create) do |entity, evaluator|
-          FactoryGirl.create_list(:entity_dish_with_products, evaluator.dishes_count, 
-            {parent_id: entity.id, day: entity.day})
+          FactoryGirl.create_list(:entity_dish_with_products, evaluator.dishes_count,
+                                  parent_id: entity.id, day: entity.day)
         end
       end
     end
