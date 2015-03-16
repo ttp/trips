@@ -1,10 +1,15 @@
 require 'securerandom'
 
 class Menu::Menu < ActiveRecord::Base
-  # attr_accessible :name, :users_count, :is_public
   belongs_to :user
   has_many :menu_days, class_name: 'Menu::Day'
+  has_many :menu_day_product_entities, class_name: 'Menu::DayEntity', through: :menu_days
+  has_many :menu_day_dish_entities, class_name: 'Menu::DayEntity', through: :menu_days
+  has_many :menu_products, class_name: 'Menu::Product', through: :menu_day_product_entities
+  has_many :menu_dishes, class_name: 'Menu::Dish', through: :menu_day_dish_entities
   has_many :partitions, class_name: 'Menu::Partition'
+
+  before_save :make_entities_public, if: :is_public?
 
   after_initialize do |menu|
     if menu.read_key.empty?
@@ -42,7 +47,6 @@ class Menu::Menu < ActiveRecord::Base
                 .where('menu_products.id in(?)', ids).to_a
     @products.sort! { |a, b| a.name <=> b.name }
     @products = @products.index_by(&:id)
-    @products
   end
 
   def dishes
@@ -71,9 +75,9 @@ class Menu::Menu < ActiveRecord::Base
 
   def entities_children(day_id, parent_id)
     if entities_grouped.key?(day_id)
-      return entities_grouped[day_id][parent_id]
+      entities_grouped[day_id][parent_id]
     else
-      return []
+      []
     end
   end
 
@@ -105,5 +109,20 @@ class Menu::Menu < ActiveRecord::Base
       @total_products[key] = items.inject(0) { |mem, item| mem + item.weight }
     end
     @total_products
+  end
+
+  def make_entities_public
+    private_products.update_all is_public: true
+    private_dishes.update_all is_public: true
+  end
+
+  private
+
+  def private_products
+    menu_products.is_private
+  end
+
+  def private_dishes
+    menu_dishes.is_private
   end
 end

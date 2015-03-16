@@ -16,6 +16,7 @@ class Menu::Dish < ActiveRecord::Base
     end
   }
   scope :is_public, -> { where(is_public: true) }
+  scope :is_private, -> { where(is_public: false) }
 
   validates :name, :dish_category_id, presence: true
 
