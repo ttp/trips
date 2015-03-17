@@ -25,10 +25,14 @@ _.namespace "App.views"
 
     initialize: (options) ->
       @model = @menu = new App.models.MenuModel(options.menu)
+
       @days = App.collections.MenuDayCollection
       @days.reset options.days
+
       @entities = App.collections.MenuDayEntityCollection
       @entities.reset options.entities
+
+      @makeEntitiesNew() if @menu.isNew()
       @bindEvents()
 
     bindEvents: ->
@@ -41,6 +45,7 @@ _.namespace "App.views"
 
     valid: (view, attr) ->
       view.$el.find("input[name=#{attr}]").removeClass('error').attr('title', '')
+
     invalid: (view, attr, error) ->
       view.$el.find("input[name=#{attr}]").addClass('error').attr('title', I18n.t(error))
 
@@ -85,5 +90,11 @@ _.namespace "App.views"
         entities: _.indexBy(@entities.toJSON(), "id")
 
       @$el.find("textarea.hide").val JSON.stringify(menu_data)
+
+    makeEntitiesNew: ->
+      @days.forEach (model)->
+        model.set 'new', true
+      @entities.forEach (model)->
+        model.set 'new', true
   )
 )()

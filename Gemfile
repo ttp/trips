@@ -21,7 +21,7 @@ gem 'simple_form'
 gem 'will_paginate'
 gem 'gravatar_image_tag'
 gem 'RedCloth'
-gem 'font-awesome-sass'
+gem 'font-awesome-rails'
 gem 'breadcrumbs_on_rails'
 
 gem 'globalize', '~> 5.0'

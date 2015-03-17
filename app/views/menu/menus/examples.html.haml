@@ -9,14 +9,17 @@
   %thead
     %tr
       %th= t('menu.name')
-      %th= t('menu.persons')
-      %th= t('menu.days_coverage')
+      %th= t('menu.days')
+      %th= t('helpers.actions')
   %tbody
     - @menus.each do |menu|
       %tr.menu-item
         %td= link_to menu.name, menu_menu_path(menu.id)
-        %td= menu.users_count
         %td
-          #{round_precision(menu.coverage)} / #{menu.days_count}
+          #{menu.days_count}
+        %td
+          .btn-group
+            = link_to new_menu_menu_path(create_from: menu), class: 'btn btn-default btn-sm', title: t('menu.clone') do
+              = fa_icon 'copy'
 
 = render 'shared/add_this'

@@ -55,6 +55,7 @@ class Menu::MenusController < ApplicationController
   def new
     @menu = Menu::Menu.new
     init_menu_for_trip if params[:trip]
+    init_from_clone if params.key?(:create_from)
   end
 
   def init_menu_for_trip
@@ -63,6 +64,13 @@ class Menu::MenusController < ApplicationController
     @menu.name = trip.track.name + ' menu'
     users_count = trip.joined_users.count
     @menu.users_count = users_count if users_count > 0
+  end
+
+  def init_from_clone
+    menu_clone = Menu::Menu.find(params[:create_from])
+    raise NotAuthorizedError.new unless policy(menu_clone).show?(params[:key])
+    @menu.menu_days = menu_clone.menu_days
+    @menu.entities = menu_clone.entities
   end
 
   def edit

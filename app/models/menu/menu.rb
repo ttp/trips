@@ -27,8 +27,17 @@ class Menu::Menu < ActiveRecord::Base
   end
 
   def entities
-    return [] if new_record?
-    @entities ||= Menu::DayEntity.order('sort_order').joins(day: :menu).where('menu_menus.id = ?', id).readonly(false)
+    return @entities if @entities
+    if new_record?
+      @entities = []
+    else
+      @entities = Menu::DayEntity.order('sort_order').joins(day: :menu).
+                                  where('menu_menus.id = ?', id).readonly(false)
+    end
+  end
+
+  def entities=(entities)
+    @entities = entities
   end
 
   def entity_model(day_entity)

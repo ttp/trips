@@ -15,5 +15,8 @@ _.namespace "App.models"
 
     initialize: ->
       @set "days_count", parseFloat(@get("days_count"))
+
+    isNew: ->
+      @get('id') == null
   )
 )()
