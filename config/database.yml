@@ -20,10 +20,10 @@ test: &test
 
 production:
   <<: *default
-    hostname: localhost
-    database: trips_prod
-    username: dev
-    password: 123654
+  hostname: localhost
+  database: trips_prod
+  username: dev
+  password: 123654
 
 cucumber:
   <<: *test
