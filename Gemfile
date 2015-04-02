@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
-gem 'mysql2'
+gem 'pg'
 gem 'figaro', '~> 1.1.0'
 
 gem 'uglifier'

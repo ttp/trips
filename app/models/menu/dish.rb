@@ -34,15 +34,13 @@ class Menu::Dish < ActiveRecord::Base
   end
 
   def self.list_by_user(user, lang)
-    sql = "SELECT d.id, d.dish_category_id, dt.name FROM menu_dishes d
-      JOIN menu_dish_translations dt ON dt.menu_dish_id = d.id
-      WHERE dt.locale = #{connection.quote(lang)}"
+    dishes = self.with_translations(lang)
     if user
-      sql += " and (d.is_public = #{connection.quote(true)} or d.user_id = #{user.id})"
+      dishes = dishes.where("menu_dishes.is_public = ? or menu_dishes.user_id = ?", true, user.id)
     else
-      sql += " and d.is_public = #{connection.quote(true)}"
+      dishes = dishes.is_public
     end
-    connection.select_all(sql)
+    dishes
   end
 
   def products_list(lang)

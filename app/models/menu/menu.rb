@@ -12,7 +12,7 @@ class Menu::Menu < ActiveRecord::Base
   before_save :make_entities_public, if: :is_public?
 
   after_initialize do |menu|
-    if menu.read_key.empty?
+    if menu.read_key.blank?
       menu.read_key = SecureRandom.urlsafe_base64(16)
       menu.edit_key = SecureRandom.urlsafe_base64(16)
     end

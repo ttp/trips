@@ -22,14 +22,12 @@ class Menu::Product < ActiveRecord::Base
   end
 
   def self.list_by_user(user, lang)
-    sql = "SELECT p.*, pt.name FROM menu_products p
-      JOIN menu_product_translations pt ON pt.menu_product_id = p.id
-      WHERE pt.locale = #{connection.quote(lang)}"
+    products = self.with_translations(lang)
     if user
-      sql += " and (p.is_public = #{connection.quote(true)} or p.user_id = #{user.id})"
+      products = products.where("menu_products.is_public = ? or menu_products.user_id = ?", true, user.id)
     else
-      sql += " and p.is_public = #{connection.quote(true)}"
+      products = products.is_public
     end
-    connection.select_all(sql)
+    products
   end
 end

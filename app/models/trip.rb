@@ -20,11 +20,8 @@ class Trip < ActiveRecord::Base
   end
 
   def self.for_year
-    start_at = Time.now
+    start_at = Time.now.beginning_of_month
     end_at = Time.new(start_at.year + 1, start_at.month, 1)
-
-    start_str = start_at.strftime('%Y-%m-') + '00'
-    end_str = end_at.strftime('%Y-%m-') + '00'
 
     connection.select_all(
       "SELECT trips.id, trips.start_date, trips.end_date, trips.cached_duration, trips.track_id, trips.has_guide,
@@ -35,11 +32,11 @@ class Trip < ActiveRecord::Base
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
       INNER JOIN users ON users.id = trips.user_id
-      WHERE trips.start_date BETWEEN #{connection.quote(start_str)} AND #{connection.quote(end_str)}")
+      WHERE trips.start_date BETWEEN #{connection.quote(start_at)} AND #{connection.quote(end_at)}")
   end
 
   def self.upcoming(num)
-    start_str = Time.now.strftime('%Y-%m-%d')
+    start_at = Time.now
 
     connection.select_all(
       "SELECT trips.id, trips.start_date, trips.end_date, trips.track_id, trips.has_guide,
@@ -50,26 +47,26 @@ class Trip < ActiveRecord::Base
       INNER JOIN tracks ON trips.track_id = tracks.id
       INNER JOIN regions ON tracks.region_id = regions.id
       INNER JOIN users ON users.id = trips.user_id
-      WHERE trips.start_date > #{connection.quote(start_str)}
+      WHERE trips.start_date > #{connection.quote(start_at)}
       ORDER BY trips.start_date
       LIMIT #{num}")
   end
 
   def self.scheduled(user_id)
-    start_str = Time.now.strftime('%Y-%m-%d')
+    start_at = Time.now
     Trip.joins(:track).includes(track: [:region])
       .joins(:trip_users)
       .where('trip_users.user_id = ?', user_id)
-      .where('trips.start_date > ?', start_str)
+      .where('trips.start_date > ?', start_at)
       .order('trips.start_date')
   end
 
   def self.archive(user_id)
-    start_str = Time.now.strftime('%Y-%m-%d')
+    start_at = Time.now
     Trip.joins(:track).includes(track: [:region])
       .joins(:trip_users)
       .where('trip_users.user_id = ?', user_id)
-      .where('trips.start_date <= ?', start_str)
+      .where('trips.start_date <= ?', start_at)
   end
 
   def joined_users
