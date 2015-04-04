@@ -67,6 +67,9 @@ task setup: :environment do
   queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config")
   queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config")
 
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config/initializers")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config/initializers")
+
   queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config/environments")
   queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config/environments")
 
@@ -76,16 +79,19 @@ task setup: :environment do
   queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/media")
 
   queue! %(touch "#{deploy_to}/#{shared_path}/config/database.yml")
+  queue! %(touch "#{deploy_to}/#{shared_path}/config/secrets.yml")
   queue! %(touch "#{deploy_to}/#{shared_path}/config/environment.rb")
   queue! %(touch "#{deploy_to}/#{shared_path}/config/environments/production.rb")
+  queue! %(touch "#{deploy_to}/#{shared_path}/config/initializers/devise.rb")
   queue %(echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config*'.")
 end
 
 desc 'Deploys the current version to the server.'
 task deploy: :environment do
   deploy do
-    # Put things that will set up an empty directory into a fully set-up
-    # instance of your project.
+    to :prepare do
+    end
+
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -94,9 +100,16 @@ task deploy: :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      invoke :'unicorn:restart'
+      invoke :'passenger:restart'
     end
   end
+end
+
+desc 'Seed data to the database'
+task seed: :environment do
+  queue "cd #{deploy_to}/#{current_path}/"
+  queue "bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  queue %(echo "-----> Rake Seeding Completed.")
 end
 
 namespace :unicorn do
@@ -134,9 +147,22 @@ namespace :unicorn do
   end
 end
 
-# For help in making your deploy script, see the Mina documentation:
-#
-#  - http://nadarei.co/mina
-#  - http://nadarei.co/mina/tasks
-#  - http://nadarei.co/mina/settings
-#  - http://nadarei.co/mina/helpers
+namespace :passenger do
+  task :restart do
+    queue "touch #{app_path}/tmp/restart.txt"
+  end
+end
+
+namespace :jobs do
+  task stop: :environment do
+    queue 'echo "stop background jobs"'
+    queue "cd #{app_path} && RAILS_ENV=#{rails_env} bin/delayed_job stop"
+    queue 'echo "done"'
+  end
+
+  task start: :environment do
+    queue 'echo "start background jobs"'
+    queue "cd #{app_path} && RAILS_ENV=#{rails_env} bin/delayed_job start"
+    queue 'echo "done"'
+  end
+end

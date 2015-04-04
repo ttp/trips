@@ -49,7 +49,3 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver', '2.45.0.dev3'
 end
-
-group :production do
-  gem 'unicorn'
-end
