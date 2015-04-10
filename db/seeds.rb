@@ -10,23 +10,23 @@
 # See http://railsapps.github.com/rails-environment-variables.html
 puts 'DEFAULT USERS'
 user = User.create_with(
-  name: ENV['ADMIN_NAME'].dup,
-  role: 'user',
-  password: ENV['ADMIN_PASSWORD'].dup,
-  password_confirmation: ENV['ADMIN_PASSWORD'].dup
-).find_or_create_by(email: ENV['ADMIN_EMAIL'].dup)
+  name: 'admin',
+  role: 'admin',
+  password: 'password',
+  password_confirmation: 'password'
+).find_or_create_by(email: 'admin@pohody.com.ua')
 puts 'user: ' << user.name
 
 
 puts 'Regions'
 Region.delete_all
 regions = [
-    {id: 1, name: "Carpathian"},
-    {id: 2, name: "Crimea"},
-    {id: 3, name: "Caucasus"},
-    {id: 4, name: "Turkey"},
-    {id: 5, name: "Romania"},
-    {id: 6, name: "Nepal"}
+    {id: 1, name: "Карпати"},
+    {id: 2, name: "Крим"},
+    {id: 3, name: "Кавказ"},
+    {id: 4, name: "Туреччина"},
+    {id: 5, name: "Румунія"},
+    {id: 6, name: "Непал"}
 ]
 regions.each do |region|
   row = Region.new(region)

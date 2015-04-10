@@ -25,6 +25,7 @@
 
   .panel-body.body
     .noitems
-      = I18n.t('menu.drop_products')
+      %p!= I18n.t('menu.drop_products')
+      %p!= I18n.t('menu.create_menu_help_html')
   .panel-footer
     Summary goes here

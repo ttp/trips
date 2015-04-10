@@ -60,8 +60,7 @@ _.namespace "App.views"
       ), this
       @$el.find('.nav-tabs li:eq(1) a').tab('show')
 
-    createDay: (e) ->
-      e.preventDefault()
+    createDay: ->
       day = new App.models.MenuDayModel(num: App.collections.MenuDayCollection.size() + 1)
       @days.add day
       dayView = new App.views.MenuDayView(

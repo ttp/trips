@@ -34,6 +34,7 @@ $ ->
         entities: JSON.parse($("#menu_entities").html())
       )
       menuView.render()
+      menuView.createDay() if menuView.days.length == 0
 
     context: this
 
