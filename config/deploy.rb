@@ -28,7 +28,6 @@ set :shared_paths, [
   'log',
   'tmp',
   'config/database.yml',
-  'config/environment.rb',
   'config/environments/production.rb',
   'config/secrets.yml',
   'config/initializers/devise.rb',
@@ -82,7 +81,6 @@ task setup: :environment do
 
   queue! %(touch "#{deploy_to}/#{shared_path}/config/database.yml")
   queue! %(touch "#{deploy_to}/#{shared_path}/config/secrets.yml")
-  queue! %(touch "#{deploy_to}/#{shared_path}/config/environment.rb")
   queue! %(touch "#{deploy_to}/#{shared_path}/config/environments/production.rb")
   queue! %(touch "#{deploy_to}/#{shared_path}/config/initializers/devise.rb")
   queue %(echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config*'.")
