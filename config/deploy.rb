@@ -30,6 +30,8 @@ set :shared_paths, [
   'config/database.yml',
   'config/environment.rb',
   'config/environments/production.rb',
+  'config/secrets.yml',
+  'config/initializers/devise.rb',
   'public/system',
   'public/media'
 ]
