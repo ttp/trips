@@ -75,7 +75,7 @@ class Menu::MenusController < ApplicationController
 
   def edit
     @menu = Menu::Menu.find(params[:id])
-    authorize @menu, :edit?
+    raise NotAuthorizedError.new unless policy(@menu).edit?(params[:key])
   end
 
   def create
