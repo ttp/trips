@@ -254,6 +254,7 @@ ua:
     dishes: Страви
     recommended: Рекомендовано
     weight: Вага
+    gram_per_person: Грам на людину
     calories: Калорії
     proteins: Білки
     fats: Жири

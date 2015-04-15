@@ -2,7 +2,7 @@
   %span.entity-name= entity.getName()
   :if entity.isProduct()
     %input{name: 'weight', type: 'text', class: 'form-control weight transparent',\
-           value: entity.get('weight'), data-value: 'entity.weight|number'}
+           title: I18n.t('menu.gram_per_person'), value: entity.get('weight'), data-value: 'entity.weight|number'}
   .toolbar.pull-right
     .btn-toolbar
       :if !entity.isProduct()
