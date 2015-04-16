@@ -17,12 +17,12 @@
     .col-sm-2
       = f.input :carbohydrates, label: t('menu.products.carbohydrates')
 
-  = f.input :description, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
+  = f.input :description, as: :text, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
 
   .row
     .col-sm-3
       = f.input :norm, label: t('menu.products.norm_default')
-  = f.input :norm_info, label: t('menu.products.norm'), input_html: {:rows => 5}
+  = f.input :norm_info, as: :text, label: t('menu.products.norm'), input_html: {:rows => 5}
 
   - if policy(Menu::Product).change_icon?
     = f.input :photo, label: t('menu.products.icon'), as: :file, wrapper: :vertical_file_input

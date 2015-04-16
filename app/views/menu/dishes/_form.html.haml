@@ -21,9 +21,9 @@
                   %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
           .panel-body.body
             .noitems
-              = I18n.t('menu.drop_products')
+              = I18n.t('menu.dishes.drop_products')
 
-      = f.input :description, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
+      = f.input :description, as: :text, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
 
       - if policy(Menu::Dish).change_icon?
         = f.input :photo, label: t('menu.products.icon'), as: :file, wrapper: :vertical_file_input
