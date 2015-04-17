@@ -137,6 +137,7 @@ class Menu::DishesController < ApplicationController
       product.save
       sort_order += 1
     end
+    @menu_dish.make_products_public
   end
 
   def set_breadcrumb

@@ -1,11 +1,12 @@
 class Menu::Dish < ActiveRecord::Base
-  # attr_accessible :name, :dish_category_id, :description, :icon, :is_public, :photo
   has_many :dish_products, -> { order 'sort_order' }, dependent: :destroy
+  has_many :products, :class_name => 'Menu::Product', through: :dish_products
   belongs_to :dish_category
   belongs_to :user
 
   has_attached_file :photo, styles: { thumb: '64x64>'  }, default_url: ':style/no-image.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+  validates :name, :dish_category_id, presence: true
 
   scope :by_category, ->(id) { where(dish_category_id: id) }
   scope :for_user, lambda { |user|
@@ -17,8 +18,6 @@ class Menu::Dish < ActiveRecord::Base
   }
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }
-
-  validates :name, :dish_category_id, presence: true
 
   translates :name, :description
 
@@ -50,5 +49,11 @@ class Menu::Dish < ActiveRecord::Base
        WHERE dp.dish_id = #{id} and pt.locale = #{self.class.connection.quote(lang)}
        ORDER BY dp.sort_order"
     )
+  end
+
+  def make_products_public
+    if persisted? && is_public?
+      products.is_private.update_all is_public: true
+    end
   end
 end
