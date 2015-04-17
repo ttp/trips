@@ -1,6 +1,6 @@
 .panel.panel-default
   .panel-heading
-    %select.coverage{data-value: 'day.coverage | number'}
+    %select.coverage{rv-value: 'day:coverage | number'}
       %option{value: 1}= I18n.t('menu.coverage.full')
       %option{value: 0.8}= I18n.t('menu.coverage.two_meals')
       %option{value: 0.6}= I18n.t('menu.coverage.one_meal_plus')

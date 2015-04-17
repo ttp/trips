@@ -1,6 +1,7 @@
 #= require typeahead
 #= require backbone-validation
-#= require rivets.min
+#= require sightglass
+#= require rivets
 #= require rivets-backbone
 #= require rivets-formatters
 #= require collections/menu_day_collection
@@ -20,6 +21,8 @@ _.namespace "App.views"
       "click button.copy-entity": "copyEntity"
       "click button.paste-entity": "pasteToEntity"
       "click button.remove-entity": "removeEntity"
+      "click span.entity-name": "toggleCustomNameInput"
+      "blur input.custom-name": "toggleCustomNameInput"
 
     initialize: (options) ->
       @options = options
@@ -63,8 +66,8 @@ _.namespace "App.views"
         renderTo: @$el.find('> .body')
 
     bindEvents: ->
+      rivets.bind @$el.find('> .header'), entity: @model
       if @model.isProduct()
-        rivets.bind @$el.find('> .header input.weight'), entity: @model
         Backbone.Validation.bind this,
           valid: @valid
           invalid: @invalid
@@ -195,5 +198,14 @@ _.namespace "App.views"
         entity.get('sort_order') is @model.get('sort_order') + 1
       , this).sortOrder(-1)
       @model.sortOrder(+1)
+
+    toggleCustomNameInput: (event) ->
+      event.stopPropagation()
+      @$el.find('> .header .entity-name').toggle()
+      input = @$el.find('> .header input.custom-name').toggleClass('hide')
+      if input.is(':visible')
+        input.val(@model.getName()).get(0).focus()
+      else
+        @model.set('custom_name', input.val())
   )
 )()

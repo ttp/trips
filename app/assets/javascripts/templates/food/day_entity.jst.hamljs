@@ -1,8 +1,10 @@
 .header
-  %span.entity-name= entity.getName()
+  %span.entity-name{rv-text: 'entity.getName < :custom_name'}
+  %input{name: 'custom_name', type: 'text', class: 'form-control custom-name hide',\
+         title: I18n.t('menu.gram_per_person'), value: entity.getName()}
   :if entity.isProduct()
     %input{name: 'weight', type: 'text', class: 'form-control weight transparent',\
-           title: I18n.t('menu.gram_per_person'), value: entity.get('weight'), data-value: 'entity.weight|number'}
+           title: I18n.t('menu.gram_per_person'), value: entity.get('weight'), rv-value: 'entity:weight | number'}
   .toolbar.pull-right
     .btn-toolbar
       :if !entity.isProduct()

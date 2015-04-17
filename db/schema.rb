@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416073638) do
+ActiveRecord::Schema.define(version: 20150417145843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20150416073638) do
     t.integer "entity_id",                         null: false
     t.integer "weight",                default: 0, null: false
     t.integer "sort_order",            default: 0, null: false
+    t.string  "custom_name"
+    t.string  "notes"
   end
 
   add_index "menu_day_entities", ["day_id"], name: "index_menu_day_entities_on_day_id", using: :btree
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150416073638) do
     t.integer "menu_id"
     t.integer "num"
     t.decimal "coverage", precision: 3, scale: 2, default: 0.0, null: false
+    t.string  "notes"
   end
 
   add_index "menu_days", ["menu_id"], name: "index_menu_days_on_menu_id", using: :btree
@@ -103,6 +106,7 @@ ActiveRecord::Schema.define(version: 20150416073638) do
     t.boolean  "is_public",                           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "notes"
   end
 
   add_index "menu_menus", ["is_public"], name: "index_menu_menus_on_is_public", using: :btree
