@@ -1,6 +1,10 @@
+#= require classes/loading_spin
 #= require views/menu_view
 #= require backbone-validation
 $ ->
+  spinner = new App.LoadingSpin($('#menu .days .tab-content')[0])
+  spinner.start()
+
   Backbone.Validation.configure
     forceUpdate: true
   $.ajax
@@ -35,6 +39,7 @@ $ ->
       )
       menuView.render()
       menuView.createDay() if menuView.days.length == 0
+      spinner.stop()
 
     context: this
 
