@@ -32,7 +32,7 @@
       @getEntityModel().get("name")
 
     resetCustomName: ->
-      @set('custom_name', null) if @get('custom_name') == @modelName()
+      @set('custom_name', null) if @get('custom_name') == @modelName() || @get('custom_name') == ''
 
     infoText: ->
       @getEntityModel().infoText()

@@ -193,6 +193,8 @@ class Menu::MenusController < ApplicationController
 
       unless entity.nil?
         entity.weight = entity_data['weight']
+        entity.custom_name = entity_data['custom_name']
+        entity.notes = entity_data['notes']
         entity.sort_order = entity_data['sort_order']
         entity.save if entity.changed? || entity.new_record?
         save_entities(entities, entity_data['id'].to_s, entity.id)
@@ -213,6 +215,7 @@ class Menu::MenusController < ApplicationController
       unless day.nil?
         day.num = day_data['num']
         day.coverage = day_data['coverage']
+        day.notes = day_data['notes']
         day.save if day.changed? || day.new_record?
         @day_cid_to_id[day_id] = day.id
       end

@@ -111,6 +111,10 @@ $hover_color: #ffa;
       background-color: $hover_color;
     }
     .panel-body {
+      .notes-text {
+        font-size: 90%;
+      }
+
       > .entity {
         border: 1px solid #ebebeb;
       }
@@ -137,9 +141,13 @@ $hover_color: #ffa;
         .porter {
           margin-left: 10px;
         }
+
+        .notes-text {
+          margin-left: 20px;
+        }
       }
       .entity-1, .entity-2 {
-        padding: 0px 5px 3px 3px;
+        padding: 0 5px 3px 3px;
         min-height: 30px;
         > .header .entity-name {
           font-weight: bold;

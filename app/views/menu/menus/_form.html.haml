@@ -10,14 +10,14 @@
 .row
   .col-md-8
     #menu.menu
-      = form_for @menu do
+      = form_for @menu, html: { autocomplete: 'off' } do
         = hidden_field_tag :back_url, params[:back_url] || request.referer
         = hidden_field_tag :trip, params[:trip] || 0
         - if params[:key]
           = hidden_field_tag :key, params[:key]
         %h3
           %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
-            :placeholder => t('menu.name'), "data-value" => 'menu.name'}
+            :placeholder => t('menu.name'), "rv-value" => 'menu:name'}
         .row.fields
           .col.col-md-4
             %label.control-label.pull-left{for: 'users_count'}= t('menu.persons') + ':'
@@ -26,14 +26,14 @@
           .col.col-md-4
             %label.control-label.pull-left= t('menu.days_coverage') + ':'
             .days_count
-              %span{"data-text" => 'menu.coverage | number'}
+              %span{"rv-text" => 'menu:coverage | number'}
               %span /
-              %span{"data-text" => 'menu.days_count | number'}
+              %span{"rv-text" => 'menu:days_count | number'}
           .col.col-md-4
             %label{for: 'is_public'}
               = t('menu.is_public') + ':'
               %input.is_public{:name => 'is_public', :id => 'is_public',
-                :type => 'checkbox', "data-value" => 'menu.is_public', :checked => @menu.is_public}
+                :type => 'checkbox', "rv-value" => 'menu.is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs

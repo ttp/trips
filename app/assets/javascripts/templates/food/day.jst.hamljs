@@ -17,6 +17,11 @@
               %i.glyphicon.glyphicon-arrow-left
             %button.btn.btn-default.move-right{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
               %i.glyphicon.glyphicon-arrow-right
+
+          .btn-group.btn-group-xs
+            %button.btn.btn-default.notes{type: 'button', tabindex: "-1", title: I18n.t('menu.notes')}
+              %i.glyphicon.glyphicon-pencil
+
           .btn-group.btn-group-xs
             %button.btn.btn-default.fa.fa-files-o.copy{type: 'button', title: I18n.t('helpers.links.copy'), tabindex: "-1"}
             %button.btn.btn-default.fa.fa-clipboard.paste{type: 'button', title: I18n.t('helpers.links.paste'), tabindex: "-1"}
@@ -24,6 +29,9 @@
               %i.glyphicon.glyphicon-remove
 
   .panel-body.body
+    .notes
+      %textarea.notes-input.form-control.hide{rows: '3', rv-value: 'day:notes', placeholder: I18n.t('menu.notes')}
+      .notes-text.text-warning{rv-text: 'day:notes'}
     .noitems
       %p!= I18n.t('menu.drop_products')
       %p!= I18n.t('menu.create_menu_help_html')
