@@ -175,6 +175,7 @@ class Menu::MenusController < ApplicationController
     @menu.days_count = data['days_count']
     @menu.coverage = data['coverage']
     @menu.is_public = data['is_public']
+    @menu.description = data['description']
   end
 
   def save_entities(entities, parent_cid, parent_id = nil)

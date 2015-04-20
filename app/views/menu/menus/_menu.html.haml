@@ -13,3 +13,8 @@
             - if day.notes.present?
               .notes-text.text-warning= day.notes
             = render_entities(@menu, day.id, 0, @partition)
+
+    - if @menu.description.present?
+      .description
+        %h4= t('menu.description')
+        = raw safe_textile(@menu.description)
