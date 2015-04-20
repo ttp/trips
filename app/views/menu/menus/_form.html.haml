@@ -18,11 +18,11 @@
           = hidden_field_tag :key, params[:key]
         %h3
           %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
-            :placeholder => t('menu.name'), "rv-value" => 'menu:name'}
+            :placeholder => t('menu.name'), :"rv-value" => 'menu:name'}
         .row.fields
           .col.col-md-4
             %label.control-label.pull-left{for: 'users_count'}= t('menu.persons') + ':'
-            %input.form-control.users_count{:name => 'users_count', "data-value" => 'menu.users_count',
+            %input.form-control.users_count{ :name => 'users_count', :"rv-value" => 'menu:users_count',
               :value => @menu.users_count}
           .col.col-md-4
             %label.control-label.pull-left= t('menu.days_coverage') + ':'
@@ -34,7 +34,7 @@
             %label{for: 'is_public'}
               = t('menu.is_public') + ':'
               %input.is_public{:name => 'is_public', :id => 'is_public',
-                :type => 'checkbox', "rv-value" => 'menu.is_public', :checked => @menu.is_public}
+                :type => 'checkbox', :"rv-value" => 'menu:is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs

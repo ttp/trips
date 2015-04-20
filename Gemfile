@@ -37,6 +37,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'faker'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
@@ -47,5 +49,5 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'poltergeist'
-  gem 'selenium-webdriver', '2.45.0.dev3'
+  gem 'selenium-webdriver', '2.45.0'
 end

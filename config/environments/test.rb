@@ -35,4 +35,5 @@ Pohody::Application.configure do
   config.eager_load = false
 
   config.site[:notification_email] = 'notifications@example.com'
+  config.active_record.maintain_test_schema = false
 end

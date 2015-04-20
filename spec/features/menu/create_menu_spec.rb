@@ -6,7 +6,6 @@ feature 'Create menu', js: true do
 
     click_link 'Create menu'
     fill_in 'name', with: 'Guest menu'
-    page.find('button.add-day').click
     click_button 'Save'
 
     menu = Menu::Menu.find_by(name: 'Guest menu')

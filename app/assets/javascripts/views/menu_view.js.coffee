@@ -35,10 +35,10 @@ _.namespace "App.views"
 
       @makeEntitiesNew() if @menu.isNew()
       @bindEvents()
+      @render()
 
     bindEvents: ->
-      rivets.bind @$el,
-        menu: @menu
+      rivets.bind @$el, menu: @menu
       Backbone.Validation.bind this,
         valid: @valid
         invalid: @invalid
