@@ -44,7 +44,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   Capybara.default_driver         = :rack_test
-  Capybara.javascript_driver      = :poltergeist
+  Capybara.javascript_driver      = :selenium
   Capybara.ignore_hidden_elements = false
   Capybara.default_wait_time      = 5
 
