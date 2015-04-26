@@ -250,6 +250,8 @@ ua:
     days_coverage: Покриття/днів
     add_day: Додати день
     move: Змістити
+    notes: Нотатки
+    description: Опис, нотатки
     meals: Трапези
     dishes: Страви
     recommended: Рекомендовано

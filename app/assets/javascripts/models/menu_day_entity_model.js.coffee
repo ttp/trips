@@ -23,9 +23,16 @@
         @set "id", @cid
         @set "new", 1
       @set "parent_id", 0  if _.isNull(@get("parent_id"))
+      @on 'change:custom_name', @resetCustomName, @
 
     getName: ->
-      @getEntityModel().get "name"
+      @get('custom_name') || @modelName()
+
+    modelName: ->
+      @getEntityModel().get("name")
+
+    resetCustomName: ->
+      @set('custom_name', null) if @get('custom_name') == @modelName() || @get('custom_name') == ''
 
     infoText: ->
       @getEntityModel().infoText()

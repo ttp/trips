@@ -13,11 +13,21 @@
 _.namespace("App");
 
 (function () {
-    App.getTokenHash = function () {
-        data = {};
-        var tokenFieldName = $('meta[name=csrf-param]').attr('content');
-        var tokenValue = $('meta[name=csrf-token]').attr('content');
-        data[tokenFieldName] = tokenValue;
-        return data;
-    }
+  App.getTokenHash = function () {
+    data = {};
+    var tokenFieldName = $('meta[name=csrf-param]').attr('content');
+    var tokenValue = $('meta[name=csrf-token]').attr('content');
+    data[tokenFieldName] = tokenValue;
+    return data;
+  };
+
+  /* Required to fix spec in poltergeist */
+  if (typeof Function.prototype.bind == 'undefined') {
+    Function.prototype.bind = function (target) {
+      var f = this;
+      return function () {
+        return f.apply(target, arguments);
+      };
+    };
+  }
 })();

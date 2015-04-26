@@ -1,6 +1,7 @@
 #= require typeahead
 #= require backbone-validation
-#= require rivets.min
+#= require sightglass
+#= require rivets
 #= require rivets-backbone
 #= require rivets-formatters
 #= require collections/menu_day_collection
@@ -14,12 +15,17 @@ _.namespace "App.views"
     tagName: 'div'
     className: 'entity'
     events:
-      "click button.move-up": "moveUp"
-      "click button.move-down": "moveDown"
+      "click button.move-up": 'moveUp'
+      "click button.move-down": 'moveDown'
 
-      "click button.copy-entity": "copyEntity"
-      "click button.paste-entity": "pasteToEntity"
-      "click button.remove-entity": "removeEntity"
+      "click button.copy-entity": 'copyEntity'
+      "click button.paste-entity": 'pasteToEntity'
+      "click button.remove-entity": 'removeEntity'
+      "click span.entity-name": 'toggleCustomNameInput'
+      "blur input.custom-name": 'toggleCustomNameInput'
+      "click button.notes": 'toggleNotes'
+      "click .notes-text": 'toggleNotes'
+      "blur .notes-input": 'toggleNotes'
 
     initialize: (options) ->
       @options = options
@@ -27,6 +33,12 @@ _.namespace "App.views"
       @entities = App.collections.MenuDayEntityCollection
       @render()
       @bindEvents()
+
+    header: ->
+      @$el.find('> .header')
+
+    notesWrapper: ->
+      @$el.find('> .notes')
 
     render: ->
       @$el.html($(JST["templates/food/day_entity"](entity: @model)))
@@ -41,7 +53,7 @@ _.namespace "App.views"
           activeClass: "ui-state-hover"
           hoverClass: "ui-state-active"
           drop: $.proxy(@onDrop, this)
-        @initTypeahead(@$el.find('> .header input.quick-add'))
+        @initTypeahead(@header().find('input.quick-add'))
       @options.renderTo.append @$el
 
       if @model.isProduct()
@@ -63,16 +75,18 @@ _.namespace "App.views"
         renderTo: @$el.find('> .body')
 
     bindEvents: ->
+      rivets.bind @header(), entity: @model
+      rivets.bind @notesWrapper(), entity: @model
       if @model.isProduct()
-        rivets.bind @$el.find('> .header input.weight'), entity: @model
         Backbone.Validation.bind this,
           valid: @valid
           invalid: @invalid
 
     valid: (view, attr) ->
-      view.$el.find("> .header input[name=#{attr}]").removeClass('error').attr('title', '')
+      view.header().find("input[name=#{attr}]").removeClass('error').attr('title', '')
+
     invalid: (view, attr, error) ->
-      view.$el.find("> .header input[name=#{attr}]").addClass('error').attr('title', I18n.t(error))
+      view.header().find("input[name=#{attr}]").addClass('error').attr('title', I18n.t(error))
 
     getTypeaheadConf: (entity_type = 0) ->
       conf = []
@@ -153,6 +167,7 @@ _.namespace "App.views"
         entity_type: entity.entity_type
         day_id: @model.get 'day_id'
         weight: entity.weight
+        custom_name: entity.custom_name
       @addEntity entity_model
 
     copyEntity: (event) ->
@@ -195,5 +210,24 @@ _.namespace "App.views"
         entity.get('sort_order') is @model.get('sort_order') + 1
       , this).sortOrder(-1)
       @model.sortOrder(+1)
+
+    toggleCustomNameInput: (event) ->
+      event.stopPropagation()
+      return if @model.isProduct()
+      header = @header()
+      header.find('.entity-name').toggle()
+      input = header.find('input.custom-name').toggleClass('hide')
+      if input.is(':visible')
+        input.val(@model.getName()).get(0).focus()
+      else
+        @model.set('custom_name', input.val())
+
+    toggleNotes: (event) ->
+      event.stopPropagation()
+      notes = @notesWrapper()
+      notes.find('.notes-text').toggle()
+      input = notes.find('.notes-input').toggleClass('hide')
+      input.get(0).focus() if input.is(':visible')
+
   )
 )()

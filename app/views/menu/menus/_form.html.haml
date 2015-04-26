@@ -1,3 +1,4 @@
+= javascript_include_tag "init/textile_init"
 = javascript_include_tag "init/menu_init"
 
 %script{type: "application/json", id: "menu_item"}
@@ -10,30 +11,30 @@
 .row
   .col-md-8
     #menu.menu
-      = form_for @menu do
+      = simple_form_for @menu, html: { autocomplete: 'off' } do |f|
         = hidden_field_tag :back_url, params[:back_url] || request.referer
         = hidden_field_tag :trip, params[:trip] || 0
         - if params[:key]
           = hidden_field_tag :key, params[:key]
         %h3
           %input.form-control.name.input-xxlarge{:value => @menu.name, :name => 'name', :type => 'text',
-            :placeholder => t('menu.name'), "data-value" => 'menu.name'}
+            :placeholder => t('menu.name'), :"rv-value" => 'menu:name'}
         .row.fields
           .col.col-md-4
             %label.control-label.pull-left{for: 'users_count'}= t('menu.persons') + ':'
-            %input.form-control.users_count{:name => 'users_count', "data-value" => 'menu.users_count',
+            %input.form-control.users_count{ :name => 'users_count', :"rv-value" => 'menu:users_count',
               :value => @menu.users_count}
           .col.col-md-4
             %label.control-label.pull-left= t('menu.days_coverage') + ':'
             .days_count
-              %span{"data-text" => 'menu.coverage | number'}
+              %span{"rv-text" => 'menu:coverage | number'}
               %span /
-              %span{"data-text" => 'menu.days_count | number'}
+              %span{"rv-text" => 'menu:days_count | number'}
           .col.col-md-4
             %label{for: 'is_public'}
               = t('menu.is_public') + ':'
               %input.is_public{:name => 'is_public', :id => 'is_public',
-                :type => 'checkbox', "data-value" => 'menu.is_public', :checked => @menu.is_public}
+                :type => 'checkbox', :"rv-value" => 'menu:is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs
@@ -42,6 +43,17 @@
                 %i.glyphicon.glyphicon-plus
                 = t('menu.day') + ':'
           .tab-content
+
+        #accordion.panel-group{ role: "tablist" }
+          .panel.panel-default
+            #headingDescription.panel-heading{ role: "tab" }
+              %h4.panel-title
+                %a{ href: "#collapseDescription", :'data-toggle' => "collapse" }= t('menu.description')
+            #collapseDescription.panel-collapse.collapse{:role => "tabpanel"}
+              .panel-body
+                = f.input :description, as: :text, label: false,
+                                        input_html: { rows: 10, class: 'textile', :'rv-value' => 'menu:description'}
+
         %textarea.hide{name: 'data'}
         .form-actions
           %button.btn.btn-primary.save= t('helpers.links.save')

@@ -13,7 +13,10 @@ module MenusHelper
   def render_entity(entity, menu, partition = nil)
     model = menu.entity_model(entity)
     html = "<div class='entity entity-#{entity.entity_type} clearfix'>
-      <span class='entity-name'>#{model.name}</span>"
+      <span class='entity-name'>#{entity.custom_name || model.name}</span>"
+    if entity.notes.present?
+      html += "<div class='notes-text text-warning'>#{entity.notes}</div>"
+    end
     if entity.product?
       html += " <span class='weight'>#{entity.weight}#{t('menu.g')}/#{entity.weight * menu.users_count}#{t('menu.g')}</span>"
       html += render_porters(entity, partition) if partition.present?

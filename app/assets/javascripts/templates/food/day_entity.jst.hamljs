@@ -1,13 +1,20 @@
 .header
-  %span.entity-name= entity.getName()
+  %span.entity-name{rv-text: 'entity.getName < :custom_name'}
+  %input{name: 'custom_name', type: 'text', class: 'form-control custom-name hide',\
+         title: I18n.t('menu.gram_per_person'), value: entity.getName()}
   :if entity.isProduct()
     %input{name: 'weight', type: 'text', class: 'form-control weight transparent',\
-           title: I18n.t('menu.gram_per_person'), value: entity.get('weight'), data-value: 'entity.weight|number'}
+           title: I18n.t('menu.gram_per_person'), value: entity.get('weight'), rv-value: 'entity:weight | number'}
   .toolbar.pull-right
     .btn-toolbar
       :if !entity.isProduct()
         .btn-group.btn-group-xs
           %input.form-control.quick-add{type: 'text', placeholder: I18n.t('menu.quick_add')}
+
+        .btn-group.btn-group-xs
+          %button.btn.btn-default.notes{type: 'button', tabindex: "-1", title: I18n.t('menu.notes')}
+            %i.glyphicon.glyphicon-pencil
+
       :if entity.isProduct()
         .btn-group.btn-group-xs
           %button.btn.btn-default.info{type: 'button', title: entity.infoText().join('<br/>'), tabindex: "-1"}
@@ -24,4 +31,7 @@
         %button.btn.btn-default.remove-entity{type: 'button', title: I18n.t('helpers.links.destroy'), tabindex: "-1"}
           %i.glyphicon.glyphicon-remove
 .clearfix
+.notes
+  %textarea.notes-input.form-control.hide{rows: '3', rv-value: 'entity:notes', placeholder: I18n.t('menu.notes')}
+  .notes-text.text-warning{rv-text: 'entity:notes'}
 .body

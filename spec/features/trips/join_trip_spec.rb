@@ -30,6 +30,7 @@ feature 'Join trip', js: true do
     visit trip_path(trip)
     click_button 'Join'
     find('a.leave').click
+    page.driver.browser.switch_to.alert.accept
 
     expect(pending_users_section).not_to have_text user.name
     expect(emails_count(trip.user.email, 'User has left trip')).to eq 1

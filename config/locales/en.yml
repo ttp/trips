@@ -230,6 +230,7 @@ en:
     examples: Menu examples
     quick_add: Quick add
     is_public: Public
+    description: Description
     coverage:
       full: Full day
       two_meals: 2 meals 80%

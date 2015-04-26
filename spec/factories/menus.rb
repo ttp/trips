@@ -16,17 +16,8 @@ FactoryGirl.define do
     end
   end
 
-  factory :menu_dish_category, class: Menu::DishCategory do
-    name 'Category name - dish'
-  end
-
-  factory :menu_dish, class: Menu::Dish do
-    name 'Dish name'
-    association :dish_category, factory: :menu_dish_category
-  end
-
   factory :menu_meal, class: Menu::Meal do
-    name 'Meal name'
+    sequence(:name) { |n| "Meal #{n}" }
   end
 
   factory :menu_day, class: Menu::Day do

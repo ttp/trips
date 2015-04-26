@@ -11,7 +11,8 @@
 #= require collections/menu_dish_collection
 #= require collections/menu_dish_product_collection
 #= require collections/menu_meal_collection
-#= require rivets.min
+#= require sightglass
+#= require rivets
 #= require rivets-backbone
 #= require rivets-formatters
 #= require backbone-validation
@@ -34,10 +35,10 @@ _.namespace "App.views"
 
       @makeEntitiesNew() if @menu.isNew()
       @bindEvents()
+      @render()
 
     bindEvents: ->
-      rivets.bind @$el,
-        menu: @menu
+      rivets.bind @$el, menu: @menu
       Backbone.Validation.bind this,
         valid: @valid
         invalid: @invalid

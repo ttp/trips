@@ -44,7 +44,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   Capybara.default_driver         = :rack_test
-  Capybara.javascript_driver      = :poltergeist
+  Capybara.javascript_driver      = :selenium
   Capybara.ignore_hidden_elements = false
   Capybara.default_wait_time      = 5
 
@@ -71,11 +71,21 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
 
   config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, :js => true) do
     DatabaseCleaner.strategy = :truncation
   end
+
   config.before(:each) do
     DatabaseCleaner.start
   end
+
   config.after(:each) do
     DatabaseCleaner.clean
   end

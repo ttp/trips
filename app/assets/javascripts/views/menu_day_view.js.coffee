@@ -21,6 +21,10 @@ _.namespace "App.views"
       "focus input.quick-add": "toggleToolbar"
       "blur input.quick-add": "toggleToolbar"
 
+      "click button.notes": 'toggleNotes'
+      "click .notes-text": 'toggleNotes'
+      "blur .notes-input": 'toggleNotes'
+
     initialize: (options) ->
       @options = options
       @model = options.model
@@ -49,21 +53,31 @@ _.namespace "App.views"
       @tabEl = @createTabEl()
       @options.renderTabTo.append @tabEl
       @$el.find('select.coverage').selectpicker()
+      @hideNoItems() if @model.get('notes')
 
     renderEntities: (entities) ->
       App.views.MenuEntityView.prototype.renderEntities.call this, entities
 
     renderEntity: (entity) ->
-      @$el.find('.noitems').hide()
+      @hideNoItems()
       new App.views.MenuEntityView
         model: entity
-        renderTo: @$el.find('.panel-body')
+        renderTo: @$panelBody()
 
     renderSummary: ->
       @$el.find('.panel-footer').html JST["templates/food/day_summary"](@model.summary())
 
     show: ->
       @tabEl.find('a').tab('show')
+
+    hideNoItems: ->
+      @$el.find('.noitems').hide()
+
+    $panelBody: ->
+      @$el.find('.panel-body')
+
+    $notes: ->
+      @$panelBody().find('> .notes')
 
     bindEvents: ->
       @model.on "change", ->
@@ -85,6 +99,7 @@ _.namespace "App.views"
       coverage = @$el.find("select.coverage")
       rivets.bind coverage, day: @model
       coverage.trigger('change')
+      rivets.bind @$notes(), day: @model
 
     initTypeahead: (input) ->
       conf = App.views.MenuEntityView.prototype.getTypeaheadConf.call this
@@ -169,5 +184,13 @@ _.namespace "App.views"
         day.get('num') is @model.get('num') + 1
       , this).num(-1)
       @model.num(+1)
+
+    toggleNotes: (event) ->
+      @hideNoItems()
+      event.stopPropagation()
+      notes = @$notes()
+      notes.find('.notes-text').toggle()
+      input = notes.find('.notes-input').toggleClass('hide')
+      input.get(0).focus() if input.is(':visible')
   )
 )()
