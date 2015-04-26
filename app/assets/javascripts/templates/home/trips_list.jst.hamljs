@@ -9,5 +9,5 @@
         %div
             %a.username{href: '/users/' + trip.get('user_id'), title: I18n.t('trip.organizer')}= trip.get('user_name')
             &nbsp;
-            :if trip.get('has_guide')
+            :if trip.get('has_guide') == 't'
                 %span.fa.fa-usd{title: I18n.t('trip.paid')}

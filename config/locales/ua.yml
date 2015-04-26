@@ -107,8 +107,8 @@ ua:
     cancel_request: "Відмінити заявку"
     leave_trip: "Покинути похід"
     has_guide: "Працює гід"
-    has_guide_0: "Ні"
-    has_guide_1: "Так"
+    has_guide_f: "Ні"
+    has_guide_t: "Так"
     paid: Платний
     has_guide_desc: "Платні походи"
     organizer: 'Організатор'
