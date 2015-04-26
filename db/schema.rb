@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20150417145843) do
     t.boolean  "is_public",                                       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "notes"
+    t.text     "description"
   end
 
   add_index "menu_menus", ["is_public"], name: "index_menu_menus_on_is_public", using: :btree
