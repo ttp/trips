@@ -6,7 +6,8 @@
           = I18n.t('menu.partitions.auto')
 
   .panel-body.body
-    .noitems
-      No products
+    :if day.get('notes')
+      .notes
+        .notes-text.text-warning= day.get('notes')
   .panel-footer
     Summary goes here
