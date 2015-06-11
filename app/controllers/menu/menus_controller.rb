@@ -115,6 +115,7 @@ class Menu::MenusController < ApplicationController
 
   def update
     @menu = Menu::Menu.find(params[:id])
+    @menu.touch
     redirect_to(menu_menus_url) && return unless menu_can_edit?
 
     data = JSON.parse(params[:data])
