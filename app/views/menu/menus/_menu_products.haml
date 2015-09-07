@@ -1,8 +1,10 @@
 - cache ['menu_products', menu_cache_key(@menu)] do
   .products
     %h4.visible-print= t 'menu.products.products'
-    .well.well-small
+    %table.table
       - @menu.products.each do |product_id, product|
-        %div
-          %span.name= product.name
-          %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')
+        %tr
+          %td
+            %span.name= product.name
+          %td
+            %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')
