@@ -1,4 +1,5 @@
 require 'net/http'
+require 'securerandom'
 
 class AuthService
   def authenticate(token)
@@ -18,7 +19,7 @@ class AuthService
   def create_user(data)
     user = User.new
     user.email = data['email']
-    user.password = 'password'
+    user.password = SecureRandom.hex
     user.authentication_token = data['identity']
     user.name = data['first_name'] + ' ' + data['last_name']
     # user.skip_confirmation!
