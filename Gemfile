@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.2.4'
 gem 'pg'
 gem 'figaro', '~> 1.1.0'
 
@@ -25,7 +25,7 @@ gem 'font-awesome-rails'
 gem 'breadcrumbs_on_rails'
 
 gem 'globalize', '~> 5.0'
-gem 'paperclip', '~> 4.2'
+gem 'paperclip', '~> 4.3'
 gem 'newrelic_rpm'
 
 group :development, :test do
