@@ -176,6 +176,28 @@ $hover_color: #ffa;
   }
 }
 
+/* Menu as table */
+.menu-table {
+  $lvl-indent: 20px;
+  .entity-1, .entity-2 {
+    .entity-name {
+      font-weight: bold;
+    }
+  }
+  .entity-3 {
+    .porter {
+      margin: 0 3px;
+    }
+  }
+  .entity-lvl-2 .entity-name {
+    margin-left: $lvl-indent;
+  }
+  .entity-lvl-3 .entity-name {
+    margin-left: $lvl-indent * 2;
+  }
+}
+
+
 .sidebar {
   &.affix {
     top: 60px;

@@ -256,6 +256,8 @@ ua:
     dishes: Страви
     recommended: Рекомендовано
     weight: Вага
+    total_entity_weight: Всього
+    porters: Несе
     gram_per_person: Грам на людину
     calories: Калорії
     proteins: Білки

@@ -18,11 +18,11 @@
         %h5
           %span.porter_name= porter_total[:porter].name
           %small.weight= "(#{porter_total[:weight].to_s + t('menu.g')})"
-        .products_list
+        %table.table
           - porter_total[:products].each do |id, product_total|
-            .product
-              %span= product_total[:product].name
-              %span.weight= product_total[:weight].to_s + t('menu.g')
+            %tr.product
+              %td= product_total[:product].name
+              %td.weight= product_total[:weight].to_s + t('menu.g')
       - porter_num += 1
 
   .hidden-print

@@ -18,3 +18,7 @@
       .description
         %h4= t('menu.description')
         = raw safe_textile(@menu.description)
+
+
+.menu
+  = Menu::TableRenderer.new(@menu, @partition, self).render
