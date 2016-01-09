@@ -49,7 +49,7 @@ _.namespace "App.views"
       unless @model.isProduct()
         @$el.droppable
           greedy: true
-          accept: (if @model.get("entity_type") is 1 then ".product, .dish" else ".product")
+          accept: '.product ' + (if @model.isMeal() then ', .dish' else '')
           activeClass: "ui-state-hover"
           hoverClass: "ui-state-active"
           drop: $.proxy(@onDrop, this)

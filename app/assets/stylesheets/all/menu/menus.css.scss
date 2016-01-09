@@ -79,6 +79,11 @@ $hover_color: #ffa;
     min-height: 30px;
     margin: 5px 0;
 
+    .sortable-placeholder {
+      border: 1px solid #000;
+      height: 22px;
+    }
+
     .print-block {
       display: none;
     }
@@ -130,7 +135,7 @@ $hover_color: #ffa;
         > .header {
           @include invisible-toolbar;
         }
-        .entity {
+        .entity, .sortable-placeholder {
           margin-left: 20px;
         }
 
@@ -151,6 +156,9 @@ $hover_color: #ffa;
         min-height: 30px;
         > .header .entity-name {
           font-weight: bold;
+        }
+        > .body {
+          min-height: 22px;
         }
       }
       .entity-1 {
@@ -348,4 +356,15 @@ body.menus, body.partitions {
     width: 55px;
     text-align: center;
   }
+}
+
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
 }

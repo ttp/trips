@@ -62,7 +62,7 @@ _.namespace "App.views"
       @hideNoItems()
       new App.views.MenuEntityView
         model: entity
-        renderTo: @$panelBody()
+        renderTo: @$body()
 
     renderSummary: ->
       @$el.find('.panel-footer').html JST["templates/food/day_summary"](@model.summary())
@@ -75,6 +75,9 @@ _.namespace "App.views"
 
     $panelBody: ->
       @$el.find('.panel-body')
+
+    $body: ->
+      @$panelBody().find('> .body')
 
     $notes: ->
       @$panelBody().find('> .notes')
@@ -95,11 +98,45 @@ _.namespace "App.views"
         hoverClass: "ui-state-active"
 
       @initTypeahead(@$el.find('.panel-heading input.quick-add'))
+      @initSortable()
 
       coverage = @$el.find("select.coverage")
       rivets.bind coverage, day: @model
       coverage.trigger('change')
       rivets.bind @$notes(), day: @model
+
+    initSortable: ->
+      @$body().sortable
+        containerSelector: '.body'
+        itemSelector: '.entity'
+        placeholder: '<div class="sortable-placeholder"></div>'
+        distance: 2,
+        onDrop: $.proxy(@onSortDrop, this)
+        isValidTarget: ($item, container) ->
+          $containerEntity = $(container.el).closest('.entity')
+          return true if $containerEntity.length == 0
+          if $containerEntity.hasClass('entity-1')
+            $item.hasClass('entity-2') || $item.hasClass('entity-3')
+          else
+            $item.hasClass('entity-3')
+
+    onSortDrop: ($item, container, _super, event) ->
+      $item.removeClass(container.group.options.draggedClass).removeAttr("style")
+      $("body").removeClass(container.group.options.bodyClass)
+
+      newParentId = $(container.el).closest('.entity').data('entity-id') || 0
+      entity = App.collections.MenuDayEntityCollection.get($item.data('entity-id'))
+      prevParentId = entity.get('parent_id')
+
+      if newParentId != prevParentId
+        entity.set('parent_id', newParentId)
+        prevParentEntities = App.collections.MenuDayEntityCollection.where(parent_id: prevParentId, day_id: @model.get('id'))
+        _.each prevParentEntities, (item, index) ->
+          item.set('sort_order', index)
+
+      $(container.el).find('> .entity').each (index) ->
+        itemEntity = App.collections.MenuDayEntityCollection.get($(this).data('entity-id'))
+        itemEntity.set('sort_order', index)
 
     initTypeahead: (input) ->
       conf = App.views.MenuEntityView.prototype.getTypeaheadConf.call this

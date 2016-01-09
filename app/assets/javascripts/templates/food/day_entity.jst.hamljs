@@ -34,4 +34,5 @@
 .notes
   %textarea.notes-input.form-control.hide{rows: '3', rv-value: 'entity:notes', placeholder: I18n.t('menu.notes')}
   .notes-text.text-warning{rv-text: 'entity:notes'}
-.body
+:if !entity.isProduct()
+  .body

@@ -185,7 +185,6 @@ class Menu::MenusController < ApplicationController
     entities[parent_cid].each do |entity_data|
       if entity_data.key?('new')
         entity = Menu::DayEntity.new
-        entity.parent_id = parent_id
         entity.entity_id = entity_data['entity_id']
         entity.entity_type = entity_data['entity_type']
         entity.day_id = @day_cid_to_id[entity_data['day_id'].to_s]
@@ -194,6 +193,7 @@ class Menu::MenusController < ApplicationController
       end
 
       unless entity.nil?
+        entity.parent_id = parent_id
         entity.weight = entity_data['weight']
         entity.custom_name = entity_data['custom_name']
         entity.notes = entity_data['notes']

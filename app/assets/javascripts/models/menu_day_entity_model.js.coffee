@@ -55,6 +55,9 @@
     isDish: ->
       @get("entity_type") is 2
 
+    isMeal: ->
+      @get("entity_type") is 1
+
     sortOrder: (change_by) ->
       @set 'sort_order', @get('sort_order') + change_by
 
