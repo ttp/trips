@@ -49,3 +49,9 @@
   - if policy(@menu).manage_partitions?
     .tab-pane{role: 'tabpanel', id: 'partitions'}
       = render 'menu/partitions/list', menu: @menu
+
+- if @menu.is_public?
+  .row
+    .col-md-8
+      #disqus_comments
+        = render 'shared/disqus'
