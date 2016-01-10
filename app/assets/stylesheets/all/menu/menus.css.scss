@@ -150,6 +150,9 @@ $hover_color: #ffa;
         .notes-text {
           margin-left: 20px;
         }
+        button.move {
+          cursor: move;
+        }
       }
       .entity-1, .entity-2 {
         padding: 0 5px 3px 3px;

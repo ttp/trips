@@ -110,7 +110,8 @@ _.namespace "App.views"
         containerSelector: '.body'
         itemSelector: '.entity'
         placeholder: '<div class="sortable-placeholder"></div>'
-        distance: 2,
+        distance: 2
+        handle: 'button.move'
         onDrop: $.proxy(@onSortDrop, this)
         isValidTarget: ($item, container) ->
           $containerEntity = $(container.el).closest('.entity')

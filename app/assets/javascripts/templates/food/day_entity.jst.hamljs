@@ -20,10 +20,8 @@
           %button.btn.btn-default.info{type: 'button', title: entity.infoText().join('<br/>'), tabindex: "-1"}
             %i.glyphicon.glyphicon-info-sign
       .btn-group.btn-group-xs
-        %button.btn.btn-default.move-up{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
-          %i.glyphicon.glyphicon-arrow-up
-        %button.btn.btn-default.move-down{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
-          %i.glyphicon.glyphicon-arrow-down
+        %button.btn.btn-default.move{type: 'button', title: I18n.t('menu.move'), tabindex: "-1"}
+          %i.glyphicon.glyphicon-move
       .btn-group.btn-group-xs
         %button.btn.btn-default.fa.fa-files-o.copy-entity{type: 'button', title: I18n.t('helpers.links.copy'), tabindex: "-1"}
         :if !entity.isProduct()

@@ -15,9 +15,6 @@ _.namespace "App.views"
     tagName: 'div'
     className: 'entity'
     events:
-      "click button.move-up": 'moveUp'
-      "click button.move-down": 'moveDown'
-
       "click button.copy-entity": 'copyEntity'
       "click button.paste-entity": 'pasteToEntity'
       "click button.remove-entity": 'removeEntity'
@@ -190,26 +187,6 @@ _.namespace "App.views"
         entity_view = @pasteEntity(obj.data.entity)
         entity_view.pasteEntities(obj.data.entities)
       false
-
-    moveUp: (event) ->
-      event.stopPropagation()
-      return if @model.get('sort_order') is 0
-
-      @$el.prev().insertAfter @$el
-      _.find(@entities.siblings(@model), (entity) ->
-        entity.get('sort_order') is @model.get('sort_order') - 1
-      , this).sortOrder(+1)
-      @model.sortOrder(-1)
-
-    moveDown: (event) ->
-      event.stopPropagation()
-      return unless @$el.next().length
-
-      @$el.insertAfter @$el.next()
-      _.find(@entities.siblings(@model), (entity) ->
-        entity.get('sort_order') is @model.get('sort_order') + 1
-      , this).sortOrder(-1)
-      @model.sortOrder(+1)
 
     toggleCustomNameInput: (event) ->
       event.stopPropagation()
