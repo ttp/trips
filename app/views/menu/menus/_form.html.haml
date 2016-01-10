@@ -30,11 +30,12 @@
               %span{"rv-text" => 'menu:coverage | number'}
               %span /
               %span{"rv-text" => 'menu:days_count | number'}
-          .col.col-md-4
-            %label{for: 'is_public'}
-              = t('menu.is_public') + ':'
-              %input.is_public{:name => 'is_public', :id => 'is_public',
-                :type => 'checkbox', :"rv-value" => 'menu:is_public', :checked => @menu.is_public}
+          - if policy(Menu::Product).permitted_attributes.include?(:is_public)
+            .col.col-md-4
+              %label{for: 'is_public'}
+                = t('menu.is_public') + ':'
+                %input.is_public{:name => 'is_public', :id => 'is_public',
+                  :type => 'checkbox', :"rv-value" => 'menu:is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs

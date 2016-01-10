@@ -175,7 +175,7 @@ class Menu::MenusController < ApplicationController
     @menu.users_count = data['users_count']
     @menu.days_count = data['days_count']
     @menu.coverage = data['coverage']
-    @menu.is_public = data['is_public']
+    @menu.is_public = data['is_public'] if policy(@menu).permitted_attributes.include?(:is_public)
     @menu.description = data['description']
   end
 

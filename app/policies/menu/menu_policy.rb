@@ -36,4 +36,10 @@ class Menu::MenuPolicy < ApplicationPolicy
   def destroy?
     user.admin? || owner?
   end
+
+  def permitted_attributes
+    attributes = [:name, :users_count]
+    attributes += [:is_public] if user.admin?
+    attributes
+  end
 end
