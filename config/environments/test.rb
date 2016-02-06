@@ -36,4 +36,5 @@ Pohody::Application.configure do
 
   config.site[:notification_email] = 'notifications@example.com'
   config.active_record.maintain_test_schema = false
+  config.react.variant = :development
 end

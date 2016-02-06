@@ -66,5 +66,18 @@
 
     day: ->
       App.collections.MenuDayCollection.get(@get('day_id'))
+
+    parent: ->
+      App.collections.MenuDayEntityCollection.get(@get('parent_id'))
+
+    path: ->
+      result = []
+      entity = @parent()
+      while true
+        break unless entity
+        result.push entity.getName()
+        entity = entity.parent()
+      result.push I18n.t('menu.day') + '-' + @day().get('num')
+      result.reverse()
   )
 )()

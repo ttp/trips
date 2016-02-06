@@ -185,6 +185,16 @@ $hover_color: #ffa;
       display: inline-block;
     }
   }
+
+  .menu-products {
+    .product-name {
+      cursor: pointer;
+
+      i {
+        font-size: 9px;
+      }
+    }
+  }
 }
 
 .sidebar {

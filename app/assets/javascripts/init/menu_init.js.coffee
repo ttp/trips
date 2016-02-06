@@ -38,6 +38,12 @@ $ ->
         entities: JSON.parse($("#menu_entities").html())
       )
       menuView.createDay() if menuView.days.length == 0
+
+      menuProductsList = React.createFactory(MenuProductsList)
+      ReactDOM.render(
+        menuProductsList({ entities: menuView.entities }),
+        document.getElementById("menu-products")
+      )
       spinner.stop()
 
     context: this
