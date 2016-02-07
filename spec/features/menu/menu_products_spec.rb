@@ -30,7 +30,7 @@ feature 'View products' do
   context 'As Guest' do
     scenario 'I dont see create button' do
       visit menu_products_path
-      expect(page).not_to have_link('Add')
+      expect(page).not_to have_link(I18n.t('menu.products.add'))
     end
   end
 
@@ -43,9 +43,9 @@ feature 'View products' do
       category = create :menu_product_category
 
       visit menu_products_path
-      click_link 'Add'
+      click_link I18n.t('menu.products.add')
       product = fill_in_product(category)
-      click_button 'Save'
+      click_button I18n.t('helpers.links.save')
 
       expect(current_path).to eq menu_products_path
       expect(page).to have_link(product.name)

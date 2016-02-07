@@ -10,7 +10,7 @@
       <script src="//ulogin.ru/js/ulogin.js"></script>
       - if Rails.env.production?
         <div id="uLogin1" data-uloginid="f4c60325"></div>
-      - else
+      - elsif Rails.env.development?
         <div id="uLogin_af6acb12" data-uloginid="af6acb12"></div>
 
 = render "devise/shared/links"

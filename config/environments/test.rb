@@ -31,7 +31,7 @@ Pohody::Application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'example.com' }
-  config.i18n.default_locale = :en
+  config.i18n.default_locale = :ua
   config.eager_load = false
 
   config.site[:notification_email] = 'notifications@example.com'

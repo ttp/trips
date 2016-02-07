@@ -2,20 +2,20 @@ require 'rails_helper'
 
 feature 'Calendar filters', js: true do
   background do
-    create_list :trip_in_region, 3, region_name: 'Carpathian'
-    create_list :trip_in_region, 2, region_name: 'Crimea'
+    create_list :trip_in_region, 3, region_name: I18n.t('region.Carpathian')
+    create_list :trip_in_region, 2, region_name: I18n.t('region.Crimea')
   end
 
   scenario 'show list of regions' do
     visit calendar_path
-    expect(page).to have_css('#filters', text: 'Carpathian')
-    expect(page).to have_css('#filters', text: 'Crimea')
+    expect(page).to have_css('#filters', text: I18n.t('region.Carpathian'))
+    expect(page).to have_css('#filters', text: I18n.t('region.Crimea'))
   end
 
   scenario 'filter trips in calendar' do
     visit calendar_path
 
-    find("#filters input[value='Carpathian']").click
+    find("#filters input[value='#{I18n.t('region.Carpathian')}']").click
 
     expect(number_of_events).to eq 3
   end

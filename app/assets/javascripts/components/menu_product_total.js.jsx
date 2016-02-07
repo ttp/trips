@@ -19,7 +19,7 @@ var MenuProductTotal = React.createClass({
     var classNames = 'entities collapse ' + (this.state.expanded ? 'in' : '' );
     var iconClass = 'glyphicon glyphicon-' + (this.state.expanded ? 'chevron-up' : 'chevron-down');
     return (
-      <div>
+      <div className="menu-used-product">
         <i className={iconClass}></i>
         <strong data-product-id={productTotal.product.get('id')} onClick={this.expandEntities} className="product-name">{productTotal.product.get('name')}</strong>
 
