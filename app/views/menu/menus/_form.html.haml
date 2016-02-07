@@ -35,7 +35,7 @@
               %label{for: 'is_public'}
                 = t('menu.is_public') + ':'
                 %input.is_public{:name => 'is_public', :id => 'is_public',
-                  :type => 'checkbox', :"rv-value" => 'menu:is_public', :checked => @menu.is_public}
+                  :type => 'checkbox', :"rv-checked" => 'menu:is_public', :checked => @menu.is_public}
         .clearfix
         .days
           %ul.nav.nav-tabs
