@@ -4,13 +4,13 @@ feature 'Create menu', js: true do
   scenario 'Guest creates menu' do
     visit menu_dashboard_path
 
-    click_link 'Create menu'
+    click_link I18n.t('menu.create')
     fill_in 'name', with: 'Guest menu'
-    click_button 'Save'
+    click_button I18n.t('helpers.links.save')
 
     menu = Menu::Menu.find_by(name: 'Guest menu')
     expect(current_path).to eq menu_menu_path(menu)
-    expect(page).to have_link('Edit')
+    expect(page).to have_link(I18n.t('helpers.links.edit'))
   end
 
   scenario 'Menu with notes' do
@@ -18,7 +18,7 @@ feature 'Create menu', js: true do
     dish_category = create :menu_dish_category, :with_dishes
 
     visit menu_dashboard_path
-    click_link 'Create menu'
+    click_link I18n.t('menu.create')
     fill_in 'name', with: 'Menu'
 
     day_el = find('.days .day', match: :first)
@@ -53,7 +53,7 @@ feature 'Create menu', js: true do
     click_link I18n.t('menu.description')
     fill_in 'menu_menu_description', with: menu_description
 
-    click_button 'Save'
+    click_button I18n.t('helpers.links.save')
     expect(page).to have_content day_note
     expect(page).to have_content meal_note
     expect(page).to have_content dish_note
@@ -65,7 +65,7 @@ feature 'Create menu', js: true do
     dish_category = create :menu_dish_category, :with_dishes
 
     visit menu_dashboard_path
-    click_link 'Create menu'
+    click_link I18n.t('menu.create')
     fill_in 'name', with: 'Menu'
 
     day_el = find('.days .day', match: :first)
@@ -89,9 +89,54 @@ feature 'Create menu', js: true do
     rename_entity(dish_entity, new_dish_name)
     expect(dish_entity).to have_content(new_dish_name)
 
-    click_button 'Save'
+    click_button I18n.t('helpers.links.save')
     expect(page).to have_content new_meal_name
     expect(page).to have_content new_dish_name
+  end
+
+  scenario 'Used products' do
+    meal = create :menu_meal
+    product1 = create :menu_product
+    product2 = create :menu_product
+    dish_category = create :menu_dish_category, :with_dishes
+    dish1 = dish_category.dishes.first
+    dish1.products << product1
+    dish2 = dish_category.dishes.last
+    dish2.products << product2
+
+    visit menu_dashboard_path
+    click_link I18n.t('menu.create')
+    fill_in 'name', with: 'Menu'
+
+    day_el = find('.days .day', match: :first)
+
+    # Drag meal
+    drag_meal(day_el, meal)
+
+    # Drag dishes
+    drag_dish(meal.name, dish_category, dish1)
+    drag_dish(meal.name, dish_category, dish2)
+
+    expand_used_products
+    expand_used_product(product1)
+    expand_used_product(product2)
+
+    menu_products = find('#menu-products')
+    expect(menu_products).to have_content "#{I18n.t('menu.day')}-1 / #{meal.name} / #{dish1.name}"
+    expect(menu_products).to have_content "#{I18n.t('menu.day')}-1 / #{meal.name} / #{dish2.name}"
+
+    within menu_products do
+      [product1, product2].each do |product|
+        used_product_el = find('.menu-used-product', text: product.name)
+        used_product_el.find('input.weight').set(product.id)
+      end
+    end
+    within day_el do
+      [product1, product2].each do |product|
+        weight_input = find('.entity-3', text: product.name).find('input.weight')
+        expect(weight_input[:value]).to eq product.id.to_s
+      end
+    end
   end
 
   private
@@ -107,8 +152,8 @@ feature 'Create menu', js: true do
   end
 
   def drag_dish(meal_name, category, dish)
-    find('.sidebar a[href="#dish_list"]').click # switch to dishes list
-    find('.category-name', text: category.name).click # expand category
+    switch_to_dishes_list
+    expand_dish_category(category)
     dish_el = find('.items .dish', text: dish.name)
     entity_node = entity_el(meal_name)
     dish_el.drag_to(entity_node)
@@ -140,5 +185,25 @@ feature 'Create menu', js: true do
 
   def blur_entity_name_input
     page.execute_script "$('.day input.custom-name:visible').trigger('blur')"
+  end
+
+
+  def switch_to_dishes_list
+    find('.sidebar a[href="#dish_list"]').click # switch to dishes list
+  end
+
+  def expand_dish_category(category)
+    category_node = find('#dish_list li.category', text: category.name)
+    unless category_node[:class].include?('expanded')
+      category_node.find('.category-name').click # expand category
+    end
+  end
+
+  def expand_used_products
+    click_link I18n.t('menu.used_products')
+  end
+
+  def expand_used_product(product)
+    find('#menu-products .product-name', text: product.name, visible: true).click
   end
 end

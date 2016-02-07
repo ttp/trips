@@ -1,6 +1,8 @@
 #= require models/menu_day_entity_model
+#= require collections/menu_day_collection
 _.namespace "App.collections"
 (->
+  Days = App.collections.MenuDayCollection;
   App.collections.MenuDayEntityCollection = new (Backbone.Collection.extend(
     model: App.models.MenuDayEntityModel
     initialize: ->
@@ -38,12 +40,37 @@ _.namespace "App.collections"
       if json
         entities = _.map entities, (entity) -> entity.toJSON()
       flat_tree = _.groupBy entities, (entity) -> if json then entity.parent_id else entity.get('parent_id')
-      @_flat_tree_to_tree(flat_tree, parent_id)
+      @_flatTreeToTree(flat_tree, parent_id)
 
-    _flat_tree_to_tree: (flat_tree, parent_id) ->
+    _flatTreeToTree: (flat_tree, parent_id) ->
       _.map(flat_tree[parent_id], (entity) ->
         entity: entity,
-        children: @_flat_tree_to_tree(flat_tree, entity.id) if flat_tree[entity.id]
+        children: @_flatTreeToTree(flat_tree, entity.id) if flat_tree[entity.id]
       , this)
+
+    eachFromTree: (tree, cb) ->
+      _.each tree, (item) =>
+        cb(item.entity)
+        @eachFromTree(item.children, cb) if item.children
+
+    eachProductFromTree: (cb) ->
+      Days.forEach (day) =>
+        tree = @tree(day.get('id'))
+        @eachFromTree tree, (entity) ->
+          cb(entity) if entity.isProduct()
+
+    productsTotals: ->
+      products = {}
+      @eachProductFromTree (entity) =>
+        product_id = entity.get('entity_id')
+        if !products[product_id]
+          products[product_id] =
+            product: entity.getEntityModel()
+            entities: []
+            weight: 0
+        products[product_id].entities.push entity
+        products[product_id].weight += entity.get('weight')
+      Object.keys(products).map (key) -> products[key]
+
   ))
 )()

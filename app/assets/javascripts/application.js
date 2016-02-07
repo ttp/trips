@@ -7,6 +7,9 @@
 //= require underscore-ux
 //= require backbone
 //= require bootstrap-slider
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree ./templates
 //= require i18n
 //= require i18n/translations

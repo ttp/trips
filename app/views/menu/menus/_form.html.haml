@@ -54,11 +54,19 @@
               .panel-body
                 = f.input :description, as: :text, label: false,
                                         input_html: { rows: 10, class: 'textile', :'rv-value' => 'menu:description'}
+          .panel.panel-default
+            #headingDescription.panel-heading{ role: "tab" }
+              %h4.panel-title
+                %a{ href: "#collapseProducts", :'data-toggle' => "collapse" }= t('menu.used_products')
+            #collapseProducts.panel-collapse.collapse{:role => "tabpanel"}
+              .panel-body
+                #menu-products
 
         %textarea.hide{name: 'data'}
-        .form-actions
-          %button.btn.btn-primary.save= t('helpers.links.save')
-          = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
+        .form-actions.clearfix
+          .pull-right
+            = link_to t('helpers.links.cancel'), params[:back_url] || request.referer, :class => 'btn'
+            %button.btn.btn-primary.save= t('helpers.links.save')
   .col-md-4
     %div.sidebar{"data-spy" => "affix", "data-offset-top" => "80"}
       %ul.nav.nav-tabs

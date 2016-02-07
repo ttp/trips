@@ -86,4 +86,6 @@ Pohody::Application.configure do
   config.site[:analytics] = true
   config.site[:notification_email] = 'human.ttp@gmail.com'
   config.eager_load = true
+
+  config.react.variant = :production
 end

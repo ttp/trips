@@ -46,7 +46,7 @@ RSpec.configure do |config|
   Capybara.default_driver         = :rack_test
   Capybara.javascript_driver      = :selenium
   Capybara.ignore_hidden_elements = false
-  Capybara.default_wait_time      = 5
+  Capybara.default_max_wait_time  = 5
 
   # To use non-headless driver, uncomment beneath and comment :webkit(or :poltergeist) driver option
   #

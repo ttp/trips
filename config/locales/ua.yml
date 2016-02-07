@@ -290,6 +290,7 @@ ua:
       enter_name: Введіть назву меню
       enter_weight: Введіть кількість продукту у грамах
       incorrect: Некоректне значення
+    used_products: Використані продукти
     products:
       products: Продукти
       add: Додати продукт
