@@ -4,6 +4,9 @@ en:
     registrations:
       user:
         signed_up: "Welcome! You have signed up successfully."
+    failure:
+      user:
+        not_found_in_database: Такого користувача немає в нашій базі
   helpers:
     links:
       add: "Add"
@@ -24,6 +27,7 @@ en:
     actions: "Actions"
   fields:
     created: "Created"
+    updated: Updated
 
   nav:
     home: 'Home'
@@ -40,6 +44,7 @@ en:
     meta_keywords: 'trips, mountain, tracking, hiking'
     meta_description: 'mountain trips, mountain hiking, manage hikings, search members for the hiking, search hiking, hiking calendar'
     not_found: Not found
+    access_denied: Access denied
 
   home:
     title: 'Search and manage trips'
@@ -127,6 +132,10 @@ en:
     join_request_owner_email:
       subject: "New join request"
 
+  notifications_mailer:
+    new_menu_added_email:
+      subject: New menu added
+
   food:
     title: 'Food calculator'
 
@@ -171,6 +180,7 @@ en:
       has_guide: "Include guide man"
       available_places: Available places
 
+      participation: Participation
       scheduled: 'Scheduled trips'
       archive: 'Archived trips'
 # Admin
@@ -189,12 +199,36 @@ en:
     Nepal: Nepal
 
   menu:
+    dashboard:
+      my_menu_info_user: Розкладки меню розроблені мною.
+      my_menu_info_guest: |
+        Увійдіть, щоб мати можливість зберігати розкладки прив"язані до вашого аккаунту. Ви можете не створювати аккаунт
+        але всеодно маєте можливість створити меню як Гість.
+      examples_info: |
+        Готові до використання в туристичному поході розкладки меню додані нашими користувачами. Якщо ви не хочете
+        розбиратись у всіх тонкощах складання меню, просто оберіть підходящу для вас розкладку.
+      goto_menus: Перейти до розкладок
+      dishes_info: |
+        Готові до використання страви для туристичного походу з описом та процесом приготування. Обирайте найкращі,
+        вдосконалюйте, додавайте свої.
+      goto_dishes: Перейти до страв
+      products_info: |
+        Продукти найбільш часто використовувані в туристичних походах. Додавайте свої, робіть рекомендації,
+        описуйте методи готування і т.д.
+      goto_products: Перейти до продуктів
     about_warning_html: |
       Menu builder works in demo mode.
     meta_description: Конструктор меню в похід.
     meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
-
-    menu: Menu Builder
+    videos: Відео
+    view_create_demonstration: Переглянути демонстрацію створення меню
+    drop_products: |
+      Перетягніть сюди трапези, страви або продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+    create_menu_help_html: |
+      <a href="https://www.youtube.com/watch?v=I2iDm_fXqtU" target="_blank"
+      >Переглянути демонстрацію створення</a> меню в похід.
+    menu: Menu
+    title: Розкладка Меню
     my_menu: My menus
     examples: Examples
     add: New menu
@@ -202,16 +236,21 @@ en:
     new: New menu
     create: Create menu
     edit: Edit menu
+    clone: Клонувати
+    all_menus: Всі меню
+    owner: Owner
     day: Day
     days: Days
     days_coverage: Coverage/days
     add_day: Add day
     move: Move
+    notes: Notes
+    description: Description
     meals: Meals
     dishes: Dishes
-    products: Products
     recommended: Recommended
     weight: Weight
+    gram_per_person: Грам на людину
     calories: Calories
     proteins: Proteins
     fats: Fats
@@ -230,7 +269,8 @@ en:
     examples: Menu examples
     quick_add: Quick add
     is_public: Public
-    description: Description
+    categories: Categories
+    share_link: Share link
     coverage:
       full: Full day
       two_meals: 2 meals 80%
@@ -244,3 +284,62 @@ en:
       enter_name: Enter menu name
       enter_weight: Enter product weight
       incorrect: Incorrect value
+    used_products: Використані продукти
+    products:
+      products: Продукти
+      add: Додати продукт
+      new: Новий продукт
+      edit: Редагувати продукт
+      name: Назва
+      category: Категорія
+      caloric: Калорійність
+      calories: Калорії
+      proteins: Білки
+      fats: Жири
+      carbohydrates: Вуглеводи
+      description: Опис
+      norm_default: Норма, г.
+      norm: Нормування
+      is_public: Доступний всім
+      was_created: Продукт створено.
+      was_updated: Продукт оновлено.
+      was_destroyed: Продукт видалено.
+      icon: Іконка
+    dishes:
+      dishes: Страви
+      ingredients: Інгредієнти
+      add: Додати страву
+      new: Нова страва
+      edit: Редагувати страву
+      name: Назва
+      category: Категорія
+      description: Опис
+      is_public: Доступна всім
+      was_created: Страву створено.
+      was_updated: Страву оновлено.
+      was_destroyed: Страву видалено.
+      icon: Іконка
+      drop_products: Перетягніть сюди продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+    partitions:
+      title: Розподіли продуктів
+      partition: Розподіл
+      partition_num: Розподіл продуктів %{num}
+      new: Новий розподіл
+      new_for: Новий розподіл для "%{name}"
+      for: Розподіл для "%{name}"
+      porters: Учасники
+      view: Переглянути
+      porter: Учасник
+      enter_porter_name: Введіть ім'я учасника
+      no_porters: Додайте учасників
+      product_usage_count: Кількість використань
+      today_weight: Вага на сьогодні
+      total_weight: Вага на всі дні
+      auto: Автоматично
+      auto_info: Розподілити всі продукти автоматично
+      split_popup_title: Автоматичний розподіл
+      split: Розподілити
+      weight_rank: Коефіцієнт навантаження %
+      weight_graph: Графік розвантаження
+      all_similar: Всі такі продукти
+      to_each_porter: Кожному учаснику
