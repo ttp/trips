@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p
+      Ви відправили заявку на участь у наступному поході:
+    %p
+      %b= @track.name
+      (#{t(@track.region.name, :scope => 'region')})
+      %br
+      Дати походу: #{l(@trip.start_date) + " - " + l(@trip.end_date)}
+    %p
+      Деталі доступні на сторінці походу:
+      %a{href: trip_url(@trip.id)}= trip_url(@trip.id)
+
+    %p
+      Дякуєм за користування нашим сервісом,
+      %br
+      %a{href: root_url} pohody.com.ua
