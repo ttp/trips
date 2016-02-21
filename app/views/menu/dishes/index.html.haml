@@ -2,7 +2,7 @@
   #products-grid.col-md-9
     %h3
       - if params[:category].present?
-        = title @category.name
+        = title @category.translation(:name)
       - else
         = title t('menu.dishes.dishes')
 
@@ -14,7 +14,7 @@
         = image_tag menu_dish.photo.url(:thumb), class: 'img-thumbnail pull-left'
         .description
           %div
-            = link_to menu_dish.name, menu_dish_path(menu_dish.id)
+            = link_to menu_dish.translation(:name), menu_dish_path(menu_dish.id)
           - if admin?
             .admin-info
               - if menu_dish.user_id
@@ -38,5 +38,5 @@
     %h4= t 'menu.categories'
     %ul.nav.nav-pills.nav-stacked
       - @dish_categories.each do |category|
-        %li{class: ("active" if params[:category] && params[:category].to_i == category['id'])}
-          %a{href: by_category_menu_dishes_path(category['id'])}= category['name']
+        %li{class: ("active" if params[:category] && params[:category].to_i == category.id)}
+          = link_to category.translation(:name), by_category_menu_dishes_path(category.id)

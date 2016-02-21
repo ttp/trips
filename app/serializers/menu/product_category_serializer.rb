@@ -1,3 +1,6 @@
 class Menu::ProductCategorySerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id
+  attribute :name do
+    object.translation(:name)
+  end
 end

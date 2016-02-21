@@ -13,7 +13,7 @@ module MenusHelper
   def render_entity(entity, menu, partition = nil)
     model = menu.entity_model(entity)
     html = "<div class='entity entity-#{entity.entity_type} clearfix'>
-      <span class='entity-name'>#{entity.custom_name || model.name}</span>"
+      <span class='entity-name'>#{entity.custom_name || model.translation(:name)}</span>"
     if entity.notes.present?
       html += "<div class='notes-text text-warning'>#{entity.notes}</div>"
     end
@@ -71,14 +71,6 @@ module MenusHelper
 
   def menu_share_path(menu)
     menu_menu_url(menu, key: menu.read_key)
-  end
-
-  def product_icon_path(icon)
-    icon.blank? ? asset_path('no-image.png') : media_path("products/#{icon}")
-  end
-
-  def dish_icon_path(icon)
-    icon.blank? ? asset_path('no-image.png') : media_path("dishes/#{icon}")
   end
 
   def menu_cache_key(menu)

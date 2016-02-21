@@ -37,12 +37,12 @@
   %ul.nav.navbar-nav.pull-right
     %li.dropdown
       %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#" }
-        %span= I18n.locale.upcase
+        %span= Locale.locales[I18n.locale.to_sym][:abbr]
         %b.caret
       %ul.dropdown-menu
-        - I18n.available_locales.each do |locale|
+        - Locale.locales.each do |code, locale|
           %li
-            = link_to locale.upcase, root_path(locale: locale)
+            = link_to_current_page_in_locale(code, locale)
     - if user_signed_in?
       %li.dropdown
         %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

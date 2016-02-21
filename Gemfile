@@ -25,7 +25,7 @@ gem 'RedCloth'
 gem 'font-awesome-rails'
 gem 'breadcrumbs_on_rails'
 
-gem 'globalize', '~> 5.0'
+gem 'multilang-hstore', '~> 1.0'
 gem 'paperclip', '~> 4.3'
 gem 'newrelic_rpm'
 gem 'active_model_serializers', '~> 0.10.0.rc4'

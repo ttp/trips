@@ -1,6 +1,6 @@
 class Menu::Product < ActiveRecord::Base
-  # attr_accessible :name, :calories, :proteins, :fats, :carbohydrates, :product_category_id, :icon,
-  #                 :description, :norm_info, :norm, :is_public, :photo
+  include ::Translatable
+
   belongs_to :product_category
   belongs_to :user
 
@@ -13,8 +13,11 @@ class Menu::Product < ActiveRecord::Base
   }
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }
+  scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
   validates :name, :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
 
-  translates :name, :description, :norm_info
+  multilang :name
+  multilang :description
+  multilang :norm_info
 end

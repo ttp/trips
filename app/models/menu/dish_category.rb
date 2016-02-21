@@ -1,10 +1,11 @@
 class Menu::DishCategory < ActiveRecord::Base
-  # attr_accessible :name
+  include ::Translatable
+
   has_many :dishes
-  translates :name
-  class Translation
-    # attr_accessible :locale
-  end
+
+  multilang :name
+
+  scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
   def self.by_lang(lang)
     connection.select_all(

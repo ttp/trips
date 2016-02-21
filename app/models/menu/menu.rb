@@ -52,8 +52,8 @@ class Menu::Menu < ActiveRecord::Base
     return @products if @products
 
     ids = entities_by_type(Menu::DayEntity::PRODUCT).map(&:entity_id).uniq
-    @products = Menu::Product.where('menu_products.id in(?)', ids).preload(:translations).to_a
-    @products.sort! { |a, b| a.name <=> b.name }
+    @products = Menu::Product.where('menu_products.id in(?)', ids).to_a
+    @products.sort! { |a, b| a.translation(:name) <=> b.translation(:name) }
     @products = @products.index_by(&:id)
   end
 
@@ -61,11 +61,11 @@ class Menu::Menu < ActiveRecord::Base
     return @dishes if @dishes
 
     ids = entities_by_type(Menu::DayEntity::DISH).map(&:entity_id).uniq
-    @dishes = Menu::Dish.where('menu_dishes.id in(?)', ids).preload(:translations).index_by(&:id)
+    @dishes = Menu::Dish.where('menu_dishes.id in(?)', ids).index_by(&:id)
   end
 
   def meals
-    @meals || (@meals = Menu::Meal.preload(:translations).index_by(&:id))
+    @meals || (@meals = Menu::Meal.all.index_by(&:id))
   end
 
   def entities_by_type(type)

@@ -73,16 +73,15 @@ class Menu::ProductsController < ApplicationController
   private
 
   def fetch_products
-    @menu_products = Menu::Product.with_translations(I18n.locale)
-    @menu_products = policy_scope(@menu_products)
+    @menu_products = policy_scope(Menu::Product.all).order_by_name(I18n.locale)
   end
 
   def paginate_records
-    @menu_products = @menu_products.order('name').paginate(page: params[:page], per_page: 25)
+    @menu_products = @menu_products.paginate(page: params[:page], per_page: 25)
   end
 
   def fetch_categories
-    @product_categories = Menu::ProductCategory.by_lang(I18n.locale).to_hash
+    @product_categories = Menu::ProductCategory.order_by_name(I18n.locale)
   end
 
   def set_menu_product

@@ -1,4 +1,6 @@
 class Menu::Dish < ActiveRecord::Base
+  include ::Translatable
+
   has_many :dish_products, -> { order 'sort_order' }, dependent: :destroy
   has_many :products, :class_name => 'Menu::Product', through: :dish_products
   belongs_to :dish_category
@@ -18,8 +20,9 @@ class Menu::Dish < ActiveRecord::Base
   }
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }
+  scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
-  translates :name, :description
+  multilang :name, :description
 
   def self.by_lang(lang)
     connection.select_all(

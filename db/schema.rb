@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220143330) do
+ActiveRecord::Schema.define(version: 20160221200132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "menu_day_entities", force: :cascade do |t|
     t.integer "parent_id"
@@ -39,6 +40,9 @@ ActiveRecord::Schema.define(version: 20160220143330) do
   add_index "menu_days", ["menu_id"], name: "index_menu_days_on_menu_id", using: :btree
 
   create_table "menu_dish_categories", force: :cascade do |t|
+    t.hstore   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "menu_dish_category_translations", force: :cascade do |t|
@@ -79,6 +83,10 @@ ActiveRecord::Schema.define(version: 20160220143330) do
     t.string   "photo_content_type", limit: 255
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.hstore   "name"
+    t.hstore   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "menu_meal_translations", force: :cascade do |t|
@@ -93,6 +101,9 @@ ActiveRecord::Schema.define(version: 20160220143330) do
   add_index "menu_meal_translations", ["menu_meal_id"], name: "index_menu_meal_translations_on_menu_meal_id", using: :btree
 
   create_table "menu_meals", force: :cascade do |t|
+    t.hstore   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "menu_menus", force: :cascade do |t|
@@ -139,6 +150,9 @@ ActiveRecord::Schema.define(version: 20160220143330) do
   add_index "menu_partitions", ["menu_id"], name: "index_menu_partitions_on_menu_id", using: :btree
 
   create_table "menu_product_categories", force: :cascade do |t|
+    t.hstore   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "menu_product_category_translations", force: :cascade do |t|
@@ -178,6 +192,11 @@ ActiveRecord::Schema.define(version: 20160220143330) do
     t.string   "photo_content_type",  limit: 255
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.hstore   "name"
+    t.hstore   "description"
+    t.hstore   "norm_info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "regions", force: :cascade do |t|
