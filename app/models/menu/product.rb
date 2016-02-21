@@ -17,17 +17,4 @@ class Menu::Product < ActiveRecord::Base
   validates :name, :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
 
   translates :name, :description, :norm_info
-  class Translation
-    # attr_accessible :locale
-  end
-
-  def self.list_by_user(user, lang)
-    products = self.with_translations(lang)
-    if user
-      products = products.where("menu_products.is_public = ? or menu_products.user_id = ?", true, user.id)
-    else
-      products = products.is_public
-    end
-    products
-  end
 end

@@ -146,17 +146,6 @@ class Menu::MenusController < ApplicationController
     end
   end
 
-  def products
-    data = {}
-    data[:product_categories] = Menu::ProductCategory.with_translations(I18n.locale)
-    data[:products] = Menu::Product.list_by_user(current_user, I18n.locale)
-    data[:dish_categories] = Menu::DishCategory.with_translations(I18n.locale)
-    data[:dishes] = Menu::Dish.list_by_user(current_user, I18n.locale)
-    data[:dish_products] = Menu::DishProduct.all
-    data[:meals] = Menu::Meal.with_translations(I18n.locale)
-    render json: data
-  end
-
   def destroy
     menu = Menu::Menu.find(params[:id])
     authorize menu, :destroy?

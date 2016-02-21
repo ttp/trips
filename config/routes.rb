@@ -27,7 +27,6 @@ Pohody::Application.routes.draw do
       get 'examples', on: :collection
       get 'my', on: :collection
       get 'all', on: :collection
-      get 'products', on: :collection
     end
     resources :products do
       get 'category/:category', on: :collection, action: :category, as: :by_category
@@ -54,5 +53,24 @@ Pohody::Application.routes.draw do
     resources :trips
     get 'admin' => 'admin#index'
     get 'admin/switch_user' => 'admin#switch_user'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :menu do
+        resources :meals, only: [:index]
+        resources :dishes, only: [:index] do
+          collection do
+            get :categories
+            get :all_dish_products
+          end
+        end
+        resources :products, only: [:index] do
+          collection do
+            get :categories
+          end
+        end
+      end
+    end
   end
 end

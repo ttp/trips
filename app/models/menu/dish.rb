@@ -21,25 +21,11 @@ class Menu::Dish < ActiveRecord::Base
 
   translates :name, :description
 
-  class Translation
-    # attr_accessible :locale
-  end
-
   def self.by_lang(lang)
     connection.select_all(
       "SELECT d.id, d.dish_category_id, dt.name FROM menu_dishes d
       JOIN menu_dish_translations dt ON dt.menu_dish_id = d.id
       WHERE dt.locale = #{connection.quote(lang)}")
-  end
-
-  def self.list_by_user(user, lang)
-    dishes = self.with_translations(lang)
-    if user
-      dishes = dishes.where("menu_dishes.is_public = ? or menu_dishes.user_id = ?", true, user.id)
-    else
-      dishes = dishes.is_public
-    end
-    dishes
   end
 
   def products_list(lang)
