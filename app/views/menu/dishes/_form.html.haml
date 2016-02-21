@@ -7,8 +7,9 @@
       = f.error_notification
 
       = hidden_field_tag :back_url, back_url
-      = f.input :name, label: t('menu.dishes.name')
-      = f.input :dish_category_id, collection: Menu::DishCategory.order_by_name(I18n.locale), label: t('menu.dishes.category')
+      = f.input :name, label: t('menu.dishes.name'), as: :string
+      = f.input :dish_category_id, collection: Menu::DishCategory.order_by_name(I18n.locale),
+                                   label: t('menu.dishes.category'), label_method: :any_name
 
       %script#dish_products_map{type: "text/json"}
         = raw ActiveSupport::JSON.encode(@dish_products)

@@ -5,4 +5,8 @@ class Menu::ProductCategory < ActiveRecord::Base
   multilang :name
 
   scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
+
+  def any_name
+    translation(:name)
+  end
 end
