@@ -1,17 +1,17 @@
 class RenameUaLocale < ActiveRecord::Migration
   def up
-    Menu::Dish::Translation.where(locale: 'ua').update_all(locale: 'uk')
-    Menu::DishCategory::Translation.where(locale: 'ua').update_all(locale: 'uk')
-    Menu::Meal::Translation.where(locale: 'ua').update_all(locale: 'uk')
-    Menu::Product::Translation.where(locale: 'ua').update_all(locale: 'uk')
-    Menu::ProductCategory::Translation.where(locale: 'ua').update_all(locale: 'uk')
+    execute "UPDATE menu_dish_translations SET locale='uk' WHERE locale='ua'"
+    execute "UPDATE menu_dish_category_translations SET locale='uk' WHERE locale='ua'"
+    execute "UPDATE menu_meal_translations SET locale='uk' WHERE locale='ua'"
+    execute "UPDATE menu_product_translations SET locale='uk' WHERE locale='ua'"
+    execute "UPDATE menu_product_category_translations SET locale='uk' WHERE locale='ua'"
   end
 
   def down
-    Menu::Dish::Translation.where(locale: 'uk').update_all(locale: 'ua')
-    Menu::DishCategory::Translation.where(locale: 'uk').update_all(locale: 'ua')
-    Menu::Meal::Translation.where(locale: 'uk').update_all(locale: 'ua')
-    Menu::Product::Translation.where(locale: 'uk').update_all(locale: 'ua')
-    Menu::ProductCategory::Translation.where(locale: 'uk').update_all(locale: 'ua')
+    execute "UPDATE menu_dish_translations SET locale='ua' WHERE locale='uk'"
+    execute "UPDATE menu_dish_category_translations SET locale='ua' WHERE locale='uk'"
+    execute "UPDATE menu_meal_translations SET locale='ua' WHERE locale='uk'"
+    execute "UPDATE menu_product_translations SET locale='ua' WHERE locale='uk'"
+    execute "UPDATE menu_product_category_translations SET locale='ua' WHERE locale='uk'"
   end
 end
