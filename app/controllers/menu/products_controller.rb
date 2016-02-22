@@ -67,7 +67,7 @@ class Menu::ProductsController < ApplicationController
     authorize @menu_product, :destroy?
 
     @menu_product.destroy
-    redirect_to back(menu_products_path), notice: t('menu.products.was_destroyed')
+    redirect_to (request.referer || menu_products_path), notice: t('menu.products.was_destroyed')
   end
 
   private

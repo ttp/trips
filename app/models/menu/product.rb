@@ -15,7 +15,8 @@ class Menu::Product < ActiveRecord::Base
   scope :is_private, -> { where(is_public: false) }
   scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
-  validates :name, :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
+  validates :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
+  validates :name, presence: true, if: 'name.any.blank?'
 
   multilang :name
   multilang :description

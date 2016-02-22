@@ -1,0 +1,7 @@
+.form-group{class: ('has-error' if object.errors.messages.key?(field))}
+  = f.label input_label, class: 'control-label'
+  - I18n.available_locales.each do |locale|
+    .input-group
+      %span.input-group-addon= locale
+      = f.input_field "#{field}_#{locale}", as: :text, class: 'form-control'
+  = f.error field

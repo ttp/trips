@@ -8,7 +8,8 @@ class Menu::Dish < ActiveRecord::Base
 
   has_attached_file :photo, styles: { thumb: '64x64>'  }, default_url: ':style/no-image.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
-  validates :name, :dish_category_id, presence: true
+  validates :dish_category_id, presence: true
+  validates :name, presence: true, if: 'name.any.blank?'
 
   scope :by_category, ->(id) { where(dish_category_id: id) }
   scope :for_user, lambda { |user|

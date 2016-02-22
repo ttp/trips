@@ -7,7 +7,10 @@
       = f.error_notification
 
       = hidden_field_tag :back_url, back_url
-      = f.input :name, label: t('menu.dishes.name'), as: :string
+      - if policy(@menu_dish).multilang?
+        = render 'shared/fields/multilang_input', f: f, input_label: t('menu.dishes.name'), field: :name, object: @menu_dish
+      - else
+        = f.input :name, label: t('menu.dishes.name'), as: :string
       = f.input :dish_category_id, collection: Menu::DishCategory.order_by_name(I18n.locale),
                                    label: t('menu.dishes.category'), label_method: :any_name
 
@@ -24,7 +27,10 @@
             .noitems
               = I18n.t('menu.dishes.drop_products')
 
-      = f.input :description, as: :text, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
+      - if policy(@menu_dish).multilang?
+        = render 'shared/fields/multilang_textarea', f: f, input_label: t('menu.dishes.description'), field: :description, object: @menu_dish
+      - else
+        = f.input :description, as: :text, label: t('menu.dishes.description'), input_html: {:rows => 15, :class => 'textile'}
 
       - if policy(Menu::Dish).change_icon?
         = f.input :photo, label: t('menu.products.icon'), as: :file, wrapper: :vertical_file_input
