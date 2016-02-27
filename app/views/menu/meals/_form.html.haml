@@ -1,0 +1,10 @@
+= simple_form_for(@menu_meal, :html => { :class => 'row col-md-9' }) do |f|
+  = f.error_notification
+
+  = hidden_field_tag :back_url, back_url
+  = render 'shared/fields/multilang_input', f: f, input_label: t('fields.name'), field: :name, object: @menu_meal
+
+  .form-actions
+    .pull-right
+      = link_to t("helpers.links.cancel"), back_url(menu_meals_path), class: 'btn'
+      = f.button :submit, class: 'btn-primary', value: t('helpers.links.save')

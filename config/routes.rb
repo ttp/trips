@@ -31,10 +31,13 @@ Pohody::Application.routes.draw do
     resources :products do
       get 'category/:category', on: :collection, action: :category, as: :by_category
     end
+    resources :product_categories, except: [:show]
 
     resources :dishes do
       get 'category/:category', on: :collection, action: :category, as: :by_category
     end
+    resources :dish_categories, except: [:show]
+    resources :meals, except: [:show]
   end
 
   get 'about' => 'home#about', as: :about

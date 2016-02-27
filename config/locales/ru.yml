@@ -28,6 +28,7 @@ ru:
   fields:
     created: "Створено"
     updated: "Оновлено"
+    name: Название
 
   nav:
     home: 'Головна'
@@ -252,8 +253,6 @@ ru:
     move: Перемістити
     notes: Нотатки
     description: Опис, нотатки
-    meals: Трапези
-    dishes: Страви
     recommended: Рекомендовано
     weight: Вага
     gram_per_person: Грам на людину
@@ -326,6 +325,18 @@ ru:
       was_destroyed: Страву видалено.
       icon: Іконка
       drop_products: Перетягніть сюди продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+    product_categories:
+      title: Категорії продуктів
+      new: Нова категорія для продуктів
+      edit: Редагування категорії для продуктів
+    meals:
+      title: Трапези
+      new: Нова трапеза
+      edit: Редагувати трапезу
+    dish_categories:
+      title: Категорії страв
+      new: Нова категорія для страв
+      edit: Редагування категорії для страв
     partitions:
       title: Розподіли продуктів
       partition: Розподіл

@@ -43,6 +43,15 @@
       .pull-right= link_to t('menu.dashboard.goto_products'), menu_products_path
       .clearfix
 
+- if current_user.admin?
+  %p
+    %div
+      = link_to t('menu.meals.meals'), menu_meals_path
+    %div
+      = link_to t('menu.product_categories.title'), menu_product_categories_path
+    %div
+      = link_to t('menu.dish_categories.title'), menu_dish_categories_path
+
 %h3
   = t 'menu.videos'
   %i.fa.fa-youtube

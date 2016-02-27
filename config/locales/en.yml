@@ -28,6 +28,7 @@ en:
   fields:
     created: "Created"
     updated: Updated
+    name: Name
 
   nav:
     home: 'Home'
@@ -246,8 +247,6 @@ en:
     move: Move
     notes: Notes
     description: Description
-    meals: Meals
-    dishes: Dishes
     recommended: Recommended
     weight: Weight
     gram_per_person: Грам на людину
@@ -320,6 +319,18 @@ en:
       was_destroyed: Страву видалено.
       icon: Іконка
       drop_products: Перетягніть сюди продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+    product_categories:
+      title: Product categories
+      new: New product category
+      edit: Edit product category
+    meals:
+      title: Meals
+      new: New meal
+      edit: Edit meal
+    dish_categories:
+      title: Dish categories
+      new: New dish category
+      edit: Edit dish category
     partitions:
       title: Розподіли продуктів
       partition: Розподіл
