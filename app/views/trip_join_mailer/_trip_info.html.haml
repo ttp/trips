@@ -1,0 +1,9 @@
+%p
+  #{@trip.track.name} (#{t(@trip.track.region.name, :scope => "region")})
+  %br
+  #{t('dates')}: #{l(@trip.start_date) + '-' + l(@trip.end_date)}
+
+%p
+  = t('trip_join_mailer.full_details_url') + ':'
+  %br
+  %a{href: trip_url(@trip.id)}= trip_url(@trip.id)

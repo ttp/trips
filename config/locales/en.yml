@@ -49,6 +49,7 @@ en:
     send: "Send"
     title: 'Comments'
     to_add_comments: 'to add comments'
+  dates: Dates
   devise:
     failure:
       user:
@@ -260,6 +261,7 @@ en:
   notifications_mailer:
     new_menu_added_email:
       subject: New menu added
+      nem_menu_added: New menu added
   region:
     Carpathian: Carpathian
     Caucasus: Caucasus
@@ -274,6 +276,7 @@ en:
     meta_keywords: 'trips, mountain, tracking, hiking'
     not_found: Not found
   site_title: Pohody
+  thank_you: Thank you for using our service
   trip:
     already_joined: "You already joined"
     approve: "Approve"
@@ -303,13 +306,20 @@ en:
     approve_email:
       subject: "Your join request has been approved"
     decline_email:
+      declined: Your join request has been declined
       subject: "Your join request has been declined"
     join_request_owner_email:
       subject: "New join request"
+      wants_to_join: It's just a notification that "%{name}" wants to join next trip
+      approve_decline_page: You can approve or decline this request on the trip page
     join_request_user_email:
       subject: "New join request"
+      join_request: It's just a notification that you have sent a join request for the next trip
     leave_email:
       subject: "User has left trip"
+      user_left_trip: User "%{name}" has left trip
+    approved: Your join request has been approved
+    full_details_url: Full trip details are available by url
   trips_calendar: 'Trips calendar'
   user:
     current_password: 'Current password'

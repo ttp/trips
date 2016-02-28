@@ -1,0 +1,6 @@
+<%= t('notifications_mailer.new_menu_added_email.nem_menu_added') %>: <%= @menu.name %>
+
+View: <%= menu_share_path(@menu) %>
+Edit: <%= guest_menu_edit_path(@menu) %>
+
+<%= render 'shared/email_footer', formats: [:text] %>
