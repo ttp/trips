@@ -41,6 +41,7 @@
         %b.caret
       %ul.dropdown-menu
         - Locale.locales.each do |code, locale|
+          - next unless I18n.available_locales.include?(code)
           %li
             = link_to_current_page_in_locale(code, locale)
     - if user_signed_in?
