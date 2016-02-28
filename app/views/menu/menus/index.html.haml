@@ -43,7 +43,7 @@
       .pull-right= link_to t('menu.dashboard.goto_products'), menu_products_path
       .clearfix
 
-- if current_user.admin?
+- if current_user && current_user.admin?
   %p
     %div
       = link_to t('menu.meals.meals'), menu_meals_path

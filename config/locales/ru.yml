@@ -1,362 +1,336 @@
 ru:
-  site_title: Походи
+  about:
+    contacts: Контакты
+    title: "О сайте"
+  account:
+    admin:
+      admin_panel: Администрирование
+      switch_user: "Сменить пользователя"
+    cancal_unhappy: "Надоел наш сайт?"
+    cancel: "Удалить мой аккаунт"
+    edit: "Редактировать аккаунт"
+    new_track: "Добавить маршрут"
+    profile: "Туристический профайл"
+    track:
+      add: "Добавить маршрут"
+      description: "Описание маршрута"
+      edit: "Редактировать маршрут"
+      name: Название
+      new: "Новый маршрут"
+      track: Маршрут
+      url: Сайт
+      was_created: "Маршрут создан."
+      was_updated: "Маршрут обновлен."
+    tracks: Маршруты
+    trip:
+      add: "Добавить поход"
+      archive: "Прошлые походы"
+      available_places: "Доступно мест"
+      dates: "Даты похода"
+      details: "Детали похода"
+      details_hint: "Стоимость участия, протяженность, сложность, участники и т.д."
+      edit: "Редактировать поход"
+      end: Окончания
+      has_guide: "Поход с гидом"
+      new: "Новый поход"
+      participation: "Как участник"
+      scheduled: "Запланированы походы"
+      start: Начало
+      trip: Поход
+      url: "Сайт походу"
+      was_created: "Поход создан."
+      was_updated: "Поход обновлен."
+    trips: Походы
+  comments:
+    add: "Добавить комментарий"
+    no_comments: "Нет комментариев"
+    remove_confirm: "Удалить комментарий?"
+    send: Отправить
+    title: Комментарии
+    to_add_comments: "чтобы оставить комментарий"
   devise:
-    registrations:
-      user:
-        signed_up: "Ви успішно зареєструвались в системі"
     failure:
       user:
-        not_found_in_database: Такого користувача немає в нашій базі
-  helpers:
-    links:
-      add: "Додати"
-      edit: "Редагувати"
-      copy: копіювати
-      paste: вставити
-      destroy: "Видалити"
-      confirm: "Ви впевненені?"
-      save: "Зберегти"
-      update: "Оновити"
-      cancel: "Відміна"
-      back: 'Повернутись'
-      sign_in: "Увійти"
-      sign_out: "Вийти"
-      sign_up: "Зареєструватись"
-      forgot_password: 'Забули ваш пароль?'
-      confirm_instr_question: "Не отримали інструкцій по підвтердженню?"
-    actions: "Дії"
+        not_found_in_database: "Такого пользователя нет в нашей базе"
+    registrations:
+      user:
+        signed_up: "Вы успешно зарегистрировались в системе"
   fields:
-    created: "Створено"
-    updated: "Оновлено"
+    created: Создана
     name: Название
-
-  nav:
-    home: 'Головна'
-    calendar: 'Календар'
-    about: 'Про сайт'
-    my_trips: 'Мої походи'
-    scheduled: 'Заплановані'
-    archive: 'Минулі'
-    manage: 'Керування'
-    tools: 'Інструменти'
-    menu_builder: 'Розкладка Меню'
-
-  site:
-    meta_keywords: 'походи, гори, туризм, гірські походи, керування походами, організація походу, пошук учасників для походу, пошук походу, календар походів'
-    meta_description: 'Сайт пошуку та керування походами'
-    not_found: Запис не знайдено
-    access_denied: Доступ заборонено
-
-  home:
-    title: 'Сайт пошуку та керування походами'
-    description: |
-      Сайт створювався для того щоб відійти від пошуку учасників у похід по форумах,
-      а надати для цього зручний інструмент.
-    list:
-      text_calendar_html: 'Всі заплановані походи доступні в %{calendar} походів.'
-      in_calendar: 'календарі'
-      text_join_add: 'Ви можете приєднатись до вже існуючого походу або додати свій.'
-      text_profile_html: 'Кожен користувач має %{profile} по якому організатор походу вирішує чи приймати заявку на похід.'
-    more: 'Детальніше про проект'
-    upcoming_trips: 'Найближчі походи'
-  about:
-    title: 'Про сайт'
-    contacts: 'Контакти'
-
-  user:
-    name: 'Ім"я'
-    password: 'Пароль'
-    password_hint: 'Залиште пустим, якщо ви не хочете змінювати пароль'
-    password_confirmation: 'Повторіть пароль'
-    current_password: 'Поточний пароль'
-    current_password_hint: 'Введіть свій поточний пароль щоб підтвердити зміни'
-    remember_me: 'Запам"ятати мене'
-    login: "Увійдіть"
-
-  user_profile:
-    about_me: "Про мене"
-    about_me_hint: "Хто ви, звідки і т.д."
-    experience: "Досвід походів"
-    equipment: "Спорядженя"
-    equipment_hint: "Що з спорядження ви маєте, що не вистачає, чим можете поділитись."
-    contacts: "Мої контакти"
-    private_contacts: "Приватні контакти"
-    private_contacts_hint: "Приватні контакти може бачити лише організатор походу"
-    private_info: "Приватна інформація"
-    private_info_hint: |
-      Приватну інформацію може бачити лише організатор походу. Ви можете додати сюди
-      будь-яку додаткову інформацію яку варто знати організатору, їжу яку ви не їсте,
-      хвороби, і т.д.
-    was_updated: Профайл оновлено
-
-  trips_calendar: 'Календар походів'
-  trip:
-    site: "Сайт"
-    users: "Учасники походу"
-    want_to_join: Хочуть приєднатися
-    join: Приєднатись
-    no_users: "Немає учасників"
-    login: "Увійдіть"
-    to_join: "щоб приєднатися"
-    already_joined: "Ви вже подали заявку на похід"
-    no_available_places: "Немає доступних місць"
-    join_request_added: "Заявку на похід успішно подано"
-    approve: "Прийняти заявку"
-    decline: "Відхилити заявку"
-    decline_reason: "Причина відмови"
-    remove_user: "Видалити учасника"
-    cancel_request: "Відмінити заявку"
-    leave_trip: "Покинути похід"
-    has_guide: "Працює гід"
-    has_guide_f: "Ні"
-    has_guide_t: "Так"
-    paid: Платний
-    has_guide_desc: "Платні походи"
-    organizer: 'Організатор'
-    menu: 'Меню походу'
-    duration: Тривалість
-
-  comments:
-    title: 'Коментарі'
-    to_leave_comments: 'щоб залишити коментар'
-    send: "Надіслати"
-    no_comments: "Немає коментарів"
-    add: "Додати коментар"
-    remove_confirm: "Видалити коментар?"
-
-  trip_join_mailer:
-    leave_email:
-      subject: "Користувач покинув похід"
-    approve_email:
-      subject: "Ваша заявка на участь у поході прийнята"
-    decline_email:
-      subject: "Ваша заявка на участь у поході відхилена"
-    join_request_user_email:
-      subject: "Заявка на участь у поході"
-    join_request_owner_email:
-      subject: "Нова заявка на участь у поході"
-
-  notifications_mailer:
-    new_menu_added_email:
-      subject: Нове меню
-
+    updated: Обновлен
   food:
-    title: 'Розкладка їжі'
-
-  account:
-    profile: 'Туристичний профайл'
-    edit: 'Редагувати аккаунт'
-    cancel: 'Видалити мій аккаунт'
-    cancal_unhappy: 'Набрид наш сайт?'
-
-# Tracks
-    tracks: "Маршрути"
-    new_track: "Додати маршрут"
-    track:
-      track: Маршрут
-      new: 'Новий маршрут'
-      edit: 'Редагувати маршрут'
-      add: 'Додати маршрут'
-      was_created: 'Маршрут створено.'
-      was_updated: 'Маршрут оновлено.'
-
-      name: "Назва"
-      description: "Опис маршруту"
-      track: "Маршрут"
-      url: "Сайт"
-
-# Trips
-    trips: "Походи"
-    trip:
-      trip: Похід
-      new: "Новий похід"
-      edit: "Редагувати похід"
-      add: "Додати похід"
-      was_created: 'Похід створено.'
-      was_updated: 'Похід оновлено.'
-
-      start: "Початок"
-      end: "Закінчення"
-      dates: "Дати походу"
-      details: "Деталі походу"
-      details_hint: "Вартість участі, протяжність, складність, учасники і т.д."
-      url: "Сайт походу"
-      has_guide: "Похід з гідом"
-      available_places: Доступно місць
-
-      participation: Як учасник
-      scheduled: 'Заплановані походи'
-      archive: 'Минулі походи'
-
-# Admin
-    admin:
-      admin_panel: Адміністрування
-      switch_user: Змінити користувача
-# Regions
-  region:
-    region: Регіон
-
-    Carpathian: Карпати
-    Crimea: Крим
-    Caucasus: Кавказ
-    Turkey: Туреччина
-    Romania: Румунія
-    Nepal: Непал
-
+    title: "Раскладка еды"
+  helpers:
+    actions: Действия
+    links:
+      add: Добавить
+      back: Вернуться
+      cancel: Отмена
+      confirm: "Вы уверены?"
+      confirm_instr_question: "Не получили инструкций по підвтердженню?"
+      copy: Копировать
+      destroy: Удалить
+      edit: Редактировать
+      forgot_password: "Забыли ваш пароль?"
+      paste: Вставить
+      save: Сохранить
+      sign_in: Войти
+      sign_out: Выйти
+      sign_up: Зарегистрироваться
+      update: Обновить
+  home:
+    description: |
+      Сайт создавался для того чтобы отойти от поиска участников в поход по форумам,
+      а предоставить для этого удобный инструмент.
+    list:
+      in_calendar: календаре
+      text_calendar_html: "Все запланированные походы доступны в %{calendar} походов."
+      text_join_add: "Вы можете присоединиться к уже существующему похода или добавить свой."
+      text_profile_html: "Каждый пользователь имеет %{profile} по которому организатор похода решает принимать ли заявку на поход."
+    more: "Подробнее о проекте"
+    title: "Сайт поиска и управления походами"
+    upcoming_trips: "Ближайшие походы"
   menu:
-    dashboard:
-      my_menu_info_user: Розкладки меню розроблені мною.
-      my_menu_info_guest: |
-        Увійдіть, щоб мати можливість зберігати розкладки прив"язані до вашого аккаунту. Ви можете не створювати аккаунт
-        але всеодно маєте можливість створити меню як Гість.
-      examples_info: |
-        Готові до використання в туристичному поході розкладки меню додані нашими користувачами. Якщо ви не хочете
-        розбиратись у всіх тонкощах складання меню, просто оберіть підходящу для вас розкладку.
-      goto_menus: Перейти до розкладок
-      dishes_info: |
-        Готові до використання страви для туристичного походу з описом та процесом приготування. Обирайте найкращі,
-        вдосконалюйте, додавайте свої.
-      goto_dishes: Перейти до страв
-      products_info: |
-        Продукти найбільш часто використовувані в туристичних походах. Додавайте свої, робіть рекомендації,
-        описуйте методи готування і т.д.
-      goto_products: Перейти до продуктів
     about_warning_html: |
-      Конструктор меню це онлайн версія <a href="http://softpole.narod.ru/index.html">Outdoor Food Ration calculator</a>.
-      Поточна база продуктів/страв взята з <strong>Outdoor Food Ration calculator</strong> і буде модифікована пізніше.
-      Конструктор меню працює в чорновому режимі і всі меню як і база продуктів/страв час від часу очищаються до фінальної версії.
-    meta_description: Конструктор меню в похід.
-    meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
-    videos: Відео
-    view_create_demonstration: Переглянути демонстрацію створення меню
-    drop_products: |
-      Перетягніть сюди трапези, страви або продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+      Конструктор меню это онлайн версия <a href="http://softpole.narod.ru/index.html">Outdoor Food Ration calculator</a>.
+      Текущая база продуктов/блюд взята из <strong>Outdoor Food Ration calculator</strong> и будет модифицированная позже.
+      Конструктор меню работает в черновом режиме и все меню как и база продуктов/блюд время от времени очищаются до финальной версии.
+    add: "Добавить меню"
+    add_day: "Добавить день"
+    all_menus: "Все меню"
+    calories: Калории
+    carbohydrates: Углеводы
+    categories: Категории
+    clone: Клонировать
+    coverage:
+      empty: Пустой
+      full: "Полный день"
+      nosh: "Перекус 20%"
+      one_meal: "1 трапеза 40%"
+      one_meal_plus: "1 трапеза перекус 60%"
+      two_meals: "2 трапезы 80%"
+    create: "Создать меню"
     create_menu_help_html: |
       <a href="https://www.youtube.com/watch?v=I2iDm_fXqtU" target="_blank"
-      >Переглянути демонстрацію створення</a> меню в похід.
-    menu: Меню
-    title: Розкладка Меню
-    my_menu: Мої меню
-    examples: Приклади меню
-    add: Додати меню
-    to_add_menu: щоб створити своє меню
-    new: Нове меню
-    create: Створити меню
-    edit: Редагувати меню
-    clone: Клонувати
-    all_menus: Всі меню
-    owner: Власник
+      >Посмотреть демонстрацию создания</a> меню в поход.
+    dashboard:
+      dishes_info: |
+        Готовые к использованию продукты для туристического похода с описанием и процессом приготовления. Выбирайте лучшие,
+        совершенствуйте, добавляйте свои.
+      examples_info: |
+        Готовые к использованию в туристическом походе раскладки меню добавлены нашими пользователями. Если вы не хотите
+        разбираться во всех тонкостях составления меню, просто выберите подходящую для вас раскладку.
+      goto_dishes: "Перейти к блюдам"
+      goto_menus: "Перейти к раскладкам"
+      goto_products: "Перейти к продуктам"
+      my_menu_info_guest: |
+        Войдите, чтобы иметь возможность сохранять раскладки привязаны к вашему аккаунту. Вы можете не создавать аккаунт
+        но все равно имеете возможность создать меню как Гость.
+      my_menu_info_user: "Раскладки меню разработаны мной."
+      products_info: |
+        Продукты наиболее часто используемые в туристических походах. Добавляйте свои, делайте рекомендации,
+        описывайте методы приготовления и т.д.
     day: День
-    days: Днів
-    days_coverage: Покриття/днів
-    add_day: Додати день
-    move: Перемістити
-    notes: Нотатки
-    description: Опис, нотатки
-    recommended: Рекомендовано
-    weight: Вага
-    gram_per_person: Грам на людину
-    calories: Калорії
-    proteins: Білки
-    fats: Жири
-    carbohydrates: Вуглеводи
-    person_per_day: На людину в день
-    person_all_days: На людину за всі дні
-    group_all_days: На групу за всі дні
-    persons: Учасників
-    summary: Загальний підсумок
-    ration: Раціон
-    g: г
-    kg: кг
-    name: Назва
-    was_created: Меню створено
-    was_updated: Меню оновлено
-    examples: Приклади меню
-    quick_add: Швидке додавання
-    is_public: Загальнодоступне
-    categories: Категорії
-    share_link: Поділитись
-    coverage:
-      full: Повний день
-      two_meals: 2 трапези 80%
-      one_meal_plus: 1 трапеза + перекус 60%
-      one_meal: 1 трапеза 40%
-      nosh: Перекус 20%
-      empty: Порожній
-    validation:
-      fix_errors: Будь-ласка, виправте помилки
-      required: Це поле не може бути пустим
-      enter_name: Введіть назву меню
-      enter_weight: Введіть кількість продукту у грамах
-      incorrect: Некоректне значення
-    used_products: Використані продукти
-    products:
-      products: Продукти
-      add: Додати продукт
-      new: Новий продукт
-      edit: Редагувати продукт
-      name: Назва
-      category: Категорія
-      caloric: Калорійність
-      calories: Калорії
-      proteins: Білки
-      fats: Жири
-      carbohydrates: Вуглеводи
-      description: Опис
-      norm_default: Норма, г.
-      norm: Нормування
-      is_public: Доступний всім
-      was_created: Продукт створено.
-      was_updated: Продукт оновлено.
-      was_destroyed: Продукт видалено.
-      icon: Іконка
-    dishes:
-      dishes: Страви
-      ingredients: Інгредієнти
-      add: Додати страву
-      new: Нова страва
-      edit: Редагувати страву
-      name: Назва
-      category: Категорія
-      description: Опис
-      is_public: Доступна всім
-      was_created: Страву створено.
-      was_updated: Страву оновлено.
-      was_destroyed: Страву видалено.
-      icon: Іконка
-      drop_products: Перетягніть сюди продукти зі списку справа або скористайтесь швидким додаванням за назвою.
-    product_categories:
-      title: Категорії продуктів
-      new: Нова категорія для продуктів
-      edit: Редагування категорії для продуктів
-    meals:
-      title: Трапези
-      new: Нова трапеза
-      edit: Редагувати трапезу
+    days: Дней
+    days_coverage: "Покрытие/дней"
+    description: "Описание, заметки"
     dish_categories:
-      title: Категорії страв
-      new: Нова категорія для страв
-      edit: Редагування категорії для страв
+      edit: "Редактирование категории для блюд"
+      new: "Новая категория для блюд"
+      title: "Категории блюд"
+    dishes:
+      add: "Добавить блюдо"
+      category: Категория
+      description: Описание
+      dishes: Блюда
+      drop_products: "Перетащите сюда продукты из списка справа или воспользуйтесь быстрым добавлением по названию."
+      edit: "Редактировать блюдо"
+      icon: Иконка
+      ingredients: Ингредиенты
+      is_public: "Доступна всем"
+      name: Название
+      new: "Новое блюдо"
+      was_created: "Блюдо создано."
+      was_destroyed: "Блюдо удалено."
+      was_updated: "Блюдо обновлено."
+    drop_products: "Перетащите сюда трапезы, блюда или продукты из списка справа или воспользуйтесь быстрым добавлением по названию."
+    edit: "Редактировать меню"
+    examples: "Примеры меню"
+    fats: Жиры
+    g: г
+    gram_per_person: "Грамм на человека"
+    group_all_days: "На группу за все дни"
+    is_public: Общедоступное
+    kg: кг
+    meals:
+      edit: "Редактировать трапезу"
+      new: "Новая трапеза"
+      title: Трапезы
+    menu: Меню
+    meta_description: "Конструктор меню в поход."
+    meta_keywords: "меню, раскладка, конструктор, калькулятор, продукты, поход, питание"
+    move: Переместить
+    my_menu: "Мои меню"
+    name: Название
+    new: "Новое меню"
+    notes: Заметки
+    owner: Владелец
     partitions:
-      title: Розподіли продуктів
-      partition: Розподіл
-      partition_num: Розподіл продуктів %{num}
-      new: Новий розподіл
-      new_for: Новий розподіл для "%{name}"
-      for: Розподіл для "%{name}"
-      porters: Учасники
-      view: Переглянути
-      porter: Учасник
-      enter_porter_name: Введіть ім'я учасника
-      no_porters: Додайте учасників
-      product_usage_count: Кількість використань
-      today_weight: Вага на сьогодні
-      total_weight: Вага на всі дні
-      auto: Автоматично
-      auto_info: Розподілити всі продукти автоматично
-      split_popup_title: Автоматичний розподіл
-      split: Розподілити
-      weight_rank: Коефіцієнт навантаження %
-      weight_graph: Графік розвантаження
-      all_similar: Всі такі продукти
-      to_each_porter: Кожному учаснику
+      all_similar: "Все такие продукты"
+      auto: Автоматически
+      auto_info: "Распределить все продукты автоматически"
+      enter_porter_name: "Введите имя участника"
+      for: 'Распределение для "%{name}"'
+      new: "Новое распределение"
+      new_for: 'Новый раздел для "%{name}"'
+      no_porters: "Добавьте участников"
+      partition: Распределение
+      partition_num: "Распределение продуктов %{num}"
+      porter: Участник
+      porters: Участники
+      product_usage_count: "Количество использований"
+      split: Распределить
+      split_popup_title: "Автоматическое распределение"
+      title: "Распределения продуктов"
+      to_each_porter: "Каждому участнику"
+      today_weight: "Вес на сегодня"
+      total_weight: "Вес на все дни"
+      view: Просмотреть
+      weight_graph: "График разгрузки"
+      weight_rank: "Коэффициент нагрузки %"
+    person_all_days: "На человека за все дни"
+    person_per_day: "На человека в день"
+    persons: Участников
+    product_categories:
+      edit: "Редактирование категории для продуктов"
+      new: "Новая категория для продуктов"
+      title: "Категории продуктов"
+    products:
+      add: "Добавить продукт"
+      caloric: Калорийность
+      calories: Калории
+      carbohydrates: Углеводы
+      category: Категория
+      description: Описание
+      edit: "Редактировать продукт"
+      fats: Жиры
+      icon: Иконка
+      is_public: "Доступен всем"
+      name: Название
+      new: "Новый продукт"
+      norm: Нормирование
+      norm_default: "Норма, г."
+      products: Продукты
+      proteins: Белки
+      was_created: "Продукт создан."
+      was_destroyed: "Продукт удален."
+      was_updated: "Продукт обновлен."
+    proteins: Белки
+    quick_add: "Быстрое добавление"
+    ration: Рацион
+    recommended: Рекомендовано
+    share_link: Поделиться
+    summary: "Общий итог"
+    title: "Раскладка Меню"
+    to_add_menu: "чтобы создать свое меню"
+    used_products: "Использованы продукты"
+    validation:
+      enter_name: "Введите название меню"
+      enter_weight: "Введите количество продукта в граммах"
+      fix_errors: "Пожалуйста, исправьте ошибки"
+      incorrect: "Некорректное значение"
+      required: "Это поле не может быть пустым"
+    videos: Видео
+    view_create_demonstration: "Посмотреть демонстрацию создания меню"
+    was_created: "Меню создано"
+    was_updated: "Меню обновлено"
+    weight: Вес
+  nav:
+    about: "О сайте"
+    archive: Прошлые
+    calendar: Календарь
+    home: Главная
+    manage: Управление
+    menu_builder: "Раскладка Меню"
+    my_trips: "Мои походы"
+    scheduled: Запланированы
+    tools: Инструменты
+  notifications_mailer:
+    new_menu_added_email:
+      subject: "Новое меню"
+  region:
+    Carpathian: Карпаты
+    Caucasus: Кавказ
+    Crimea: Крым
+    Nepal: Непал
+    Romania: Румыния
+    Turkey: Турция
+    region: Регион
+  site:
+    access_denied: "Доступ запрещен"
+    meta_description: "Сайт поиска и управления походами"
+    meta_keywords: "походы, горы, туризм, горные походы, управление походами, организация похода, поиск участников для похода, поиск похода, календарь походов"
+    not_found: "Запись не найдена"
+  site_title: Походы
+  trip:
+    already_joined: "Вы уже подали заявку на поход"
+    approve: "Принять заявку"
+    cancel_request: "Отменить заявку"
+    decline: "Отклонить заявку"
+    decline_reason: "Причина отказа"
+    duration: Продолжительность
+    has_guide: "Работает гид"
+    has_guide_desc: "Платные походы"
+    has_guide_f: Нет
+    has_guide_t: Так
+    join: Присоединиться
+    join_request_added: "Заявку на поход успешно подано"
+    leave_trip: "Покинуть поход"
+    login: Войдите
+    menu: "Меню похода"
+    no_available_places: "Нет доступных мест"
+    no_users: "Нет участников"
+    organizer: Организатор
+    paid: Платный
+    remove_user: "Удалить участника"
+    site: Сайт
+    to_join: "чтобы присоединиться"
+    users: "Участники похода"
+    want_to_join: "Хотят присоединиться"
+  trip_join_mailer:
+    approve_email:
+      subject: "Ваша заявка на участие в походе принята"
+    decline_email:
+      subject: "Ваша заявка на участие в походе отклонена"
+    join_request_owner_email:
+      subject: "Новая заявка на участие в походе"
+    join_request_user_email:
+      subject: "Заявка на участие в походе"
+    leave_email:
+      subject: "Пользователь покинул поход"
+  trips_calendar: "Календарь походов"
+  user:
+    current_password: "Текущий пароль"
+    current_password_hint: "Введите свой текущий пароль, чтобы подтвердить изменения"
+    login: Войдите
+    name: Имя
+    password: Пароль
+    password_confirmation: "Повторите пароль"
+    password_hint: "Оставьте пустым, если вы не хотите менять пароль"
+    remember_me: "Запомнить меня"
+  user_profile:
+    about_me: "Обо меня"
+    about_me_hint: "Кто вы, откуда и т.д."
+    contacts: "Мои контакты"
+    equipment: Снаряжение
+    equipment_hint: "Что из снаряжения вы имеете, что не хватает, чем можете поделиться."
+    experience: "Опыт походов"
+    private_contacts: "Частные контакты"
+    private_contacts_hint: "Частные контакты может видеть только организатор похода"
+    private_info: "Частная информация"
+    private_info_hint: |
+      Частную информацию может видеть только организатор похода. Вы можете добавить сюда
+      любую дополнительную информацию, которую стоит знать организатору, еду которую вы не едите,
+      болезни, и т.д.
+    was_updated: "Профайл обновлен"
