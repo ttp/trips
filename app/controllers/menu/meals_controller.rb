@@ -3,7 +3,7 @@ class Menu::MealsController < ApplicationController
   before_action :set_breadcrumb, only: [:index]
 
   def index
-    add_breadcrumb t('menu.meals.meals')
+    add_breadcrumb t('menu.meals.title')
     @menu_meals = Menu::Meal.order_by_name(I18n.locale)
   end
 
