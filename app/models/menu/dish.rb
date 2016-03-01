@@ -1,4 +1,6 @@
 class Menu::Dish < ActiveRecord::Base
+  include ::Translatable
+
   has_many :dish_products, -> { order 'sort_order' }, dependent: :destroy
   has_many :products, :class_name => 'Menu::Product', through: :dish_products
   belongs_to :dish_category
@@ -6,7 +8,8 @@ class Menu::Dish < ActiveRecord::Base
 
   has_attached_file :photo, styles: { thumb: '64x64>'  }, default_url: ':style/no-image.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
-  validates :name, :dish_category_id, presence: true
+  validates :dish_category_id, presence: true
+  validates :name, presence: true, if: 'name.any.blank?'
 
   scope :by_category, ->(id) { where(dish_category_id: id) }
   scope :for_user, lambda { |user|
@@ -18,28 +21,15 @@ class Menu::Dish < ActiveRecord::Base
   }
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }
+  scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
-  translates :name, :description
-
-  class Translation
-    # attr_accessible :locale
-  end
+  multilang :name, :description
 
   def self.by_lang(lang)
     connection.select_all(
       "SELECT d.id, d.dish_category_id, dt.name FROM menu_dishes d
       JOIN menu_dish_translations dt ON dt.menu_dish_id = d.id
       WHERE dt.locale = #{connection.quote(lang)}")
-  end
-
-  def self.list_by_user(user, lang)
-    dishes = self.with_translations(lang)
-    if user
-      dishes = dishes.where("menu_dishes.is_public = ? or menu_dishes.user_id = ?", true, user.id)
-    else
-      dishes = dishes.is_public
-    end
-    dishes
   end
 
   def products_list(lang)

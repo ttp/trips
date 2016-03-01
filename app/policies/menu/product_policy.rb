@@ -24,13 +24,10 @@ class Menu::ProductPolicy <  ApplicationPolicy
   end
 
   def permitted_attributes
-    if admin? || user.moderator?
-      [:name, :calories, :proteins, :fats, :carbohydrates, :product_category_id,
-       :description, :norm_info, :norm, :is_public, :photo]
-    else
-      [:name, :calories, :proteins, :fats, :carbohydrates, :product_category_id,
-       :description, :norm_info, :norm]
-    end
+    attributes = [:calories, :proteins, :fats, :carbohydrates, :product_category_id, :norm] +
+                 with_locales('name', 'description', 'norm_info')
+    attributes += [:is_public, :photo] if admin? || user.moderator?
+    attributes
   end
 
   class Scope < Scope

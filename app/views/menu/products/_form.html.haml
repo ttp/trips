@@ -4,8 +4,13 @@
   = f.error_notification
 
   = hidden_field_tag :back_url, back_url
-  = f.input :name, label: t('menu.products.name')
-  = f.input :product_category_id, :collection => Menu::ProductCategory.with_translations(I18n.locale).order('name'), :label => t('menu.products.category')
+  - if policy(@menu_product).multilang?
+    = render 'shared/fields/multilang_input', f: f, input_label: t('menu.products.name'), field: :name, object: @menu_product
+  - else
+    = f.input :name, label: t('menu.products.name'), as: :string, required: true
+
+  = f.input :product_category_id, collection: Menu::ProductCategory.order_by_name(I18n.locale),
+                                  label: t('menu.products.category'), label_method: :any_name
   .row
     .col-sm-3
       = f.input :calories, label: t('menu.products.calories')
@@ -17,12 +22,18 @@
     .col-sm-2
       = f.input :carbohydrates, label: t('menu.products.carbohydrates')
 
-  = f.input :description, as: :text, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
+  - if policy(@menu_product).multilang?
+    = render 'shared/fields/multilang_textarea', f: f, input_label: t('menu.products.description'), field: :description, object: @menu_product
+  - else
+    = f.input :description, as: :text, label: t('menu.products.description'), input_html: {:rows => 15, :class => 'textile'}
 
   .row
     .col-sm-3
       = f.input :norm, label: t('menu.products.norm_default')
-  = f.input :norm_info, as: :text, label: t('menu.products.norm'), input_html: {:rows => 5}
+  - if policy(@menu_product).multilang?
+    = render 'shared/fields/multilang_textarea', f: f, input_label: t('menu.products.norm'), field: :norm_info, object: @menu_product
+  - else
+    = f.input :norm_info, as: :text, label: t('menu.products.norm'), input_html: {:rows => 5}
 
   - if policy(Menu::Product).change_icon?
     = f.input :photo, label: t('menu.products.icon'), as: :file, wrapper: :vertical_file_input

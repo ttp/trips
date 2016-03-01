@@ -1,6 +1,6 @@
 = javascript_include_tag "init/partition_show_init"
 
-- cache ['menu_partition', menu_partition_cache_key(@menu, @partition)] do
+- cache ['menu_partition', menu_partition_cache_key(@menu, @partition), I18n.locale] do
   %script{type: "application/json", id: "menu_days"}
     = @menu.menu_days.to_json.html_safe
   %script{type: "application/json", id: "menu_entities"}
@@ -21,7 +21,7 @@
         .products_list
           - porter_total[:products].each do |id, product_total|
             .product
-              %span= product_total[:product].name
+              %span= product_total[:product].translation(:name)
               %span.weight= product_total[:weight].to_s + t('menu.g')
       - porter_num += 1
 

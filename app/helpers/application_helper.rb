@@ -51,10 +51,6 @@ module ApplicationHelper
     RedCloth.new(message, [:filter_html, :filter_styles, :filter_classes, :filter_ids]).to_html
   end
 
-  def media_path(filename)
-    "/media/#{filename}"
-  end
-
   def return_path
     request.original_fullpath.include?('return=') ? root_path : request.original_fullpath
   end
@@ -71,6 +67,15 @@ module ApplicationHelper
       'alert-info' # Blue
     else
       flash_type.to_s
+    end
+  end
+
+  def link_to_current_page_in_locale(code, locale)
+    param_code = code == I18n.default_locale ? nil : locale[:code]
+    if request.query_string.empty?
+      link_to locale[:name], locale: param_code
+    else
+      link_to locale[:name], params.merge(locale: param_code)
     end
   end
 end

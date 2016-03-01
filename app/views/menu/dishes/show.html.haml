@@ -1,5 +1,5 @@
 %h3
-  = title @menu_dish.name
+  = title @menu_dish.translation(:name)
   - if policy(@menu_dish).edit? || policy(@menu_dish).destroy?
     .btn-group.btn-group-xs.pull-right.hidden-print
       - if policy(@menu_dish).edit?
@@ -17,10 +17,10 @@
 
 .dish-products
   %h4= t('menu.dishes.ingredients')
-  - @dish_products_list.each do |dish_product|
+  - @menu_dish.dish_products.each do |dish_product|
     %div
       %a.glyphicon.glyphicon-link{href: menu_product_path(dish_product['product_id'])}
-      = dish_product['name'] + ': ' + dish_product['weight'].to_s + t('menu.g')
+      = dish_product.product.name + ': ' + dish_product.weight.to_s + t('menu.g')
 
 
 - if !@menu_dish.description.blank?

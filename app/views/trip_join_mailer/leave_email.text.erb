@@ -1,0 +1,5 @@
+<%= t('trip_join_mailer.leave_email.user_left_trip', name: @user.name) %>:
+
+<%= render 'trip_join_mailer/trip_info', formats: [:text] %>
+
+<%= render 'shared/email_footer', formats: [:text]  %>

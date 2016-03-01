@@ -1,9 +1,0 @@
-It's just a notification that you have sent a join request for the next trip:
-
-<%= @track.name %> (<%= t(@track.region.name, :scope => 'region') %>)
-Dates: <%= l(@trip.start_date) + " - " + l(@trip.end_date) %>
-
-Full trip details are available on the trip page: <%= trip_url(@trip.id) %>
-
-Thank you for using our service,
-pohody.com.ua

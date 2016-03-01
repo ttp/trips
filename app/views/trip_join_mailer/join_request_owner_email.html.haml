@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p= t('trip_join_mailer.join_request_owner_email.wants_to_join', name: @user.name)
+    = render 'trip_join_mailer/trip_info', formats: [:html]
+    %p
+      = t('trip_join_mailer.join_request_owner_email.approve_decline_page') + ':'
+      %a{href: trip_url(@trip.id)}= trip_url(@trip.id)
+    = render 'shared/email_footer', formats: [:html]

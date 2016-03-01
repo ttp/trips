@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p= t('trip_join_mailer.decline_email.declined') + ':'
+    %p= @message
+    = render 'trip_join_mailer/trip_info', formats: [:html]
+    = render 'shared/email_footer', formats: [:html]

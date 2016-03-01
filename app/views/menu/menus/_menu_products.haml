@@ -1,10 +1,10 @@
-- cache ['menu_products', menu_cache_key(@menu)] do
+- cache ['menu_products', menu_cache_key(@menu), I18n.locale] do
   .products
     %h4.visible-print= t 'menu.products.products'
     %table.table
       - @menu.products.each do |product_id, product|
         %tr
           %td
-            %span.name= product.name
+            %span.name= product.translation(:name)
           %td
             %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')

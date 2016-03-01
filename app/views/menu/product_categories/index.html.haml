@@ -1,0 +1,23 @@
+.rows
+  .col-md-9
+    %h3
+      = title t('menu.product_categories.title')
+      .pull-right
+        = link_to t('helpers.links.add'), new_menu_product_category_path, :class => 'btn btn-primary'
+
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= t('fields.name')
+          %th= t('helpers.actions')
+      %tbody
+        - @menu_product_categories.each do |product_category|
+          %tr.menu-item
+            %td= product_category.name
+            %td
+              .btn-group
+                = link_to edit_menu_product_category_path(product_category), class: 'btn btn-default btn-sm', title: t('helpers.links.edit') do
+                  %i.glyphicon.glyphicon-edit
+                = link_to menu_product_category_path(product_category), method: :delete, data: { confirm: t('helpers.links.confirm')},
+                                                class: 'btn btn-sm btn-danger', title: t('helpers.links.destroy') do
+                  %i.glyphicon.glyphicon-remove

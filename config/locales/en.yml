@@ -1,246 +1,344 @@
 en:
-  site_title: Pohody
+  about:
+    contacts: 'Contacts'
+    title: 'About'
+  account:
+    admin:
+      admin_panel: Admin panel
+      switch_user: Switch User
+    cancal_unhappy: 'Unhappy?'
+    cancel: 'Cancel account'
+    edit: 'Edit account'
+    new_track: "Add track"
+    profile: 'Tourist profile'
+    track:
+      add: 'Add track'
+      description: "Description"
+      edit: 'Edit track'
+      name: "Name"
+      new: 'New track'
+      track: "Track"
+      track: Track
+      url: "Site"
+      was_created: 'Created.'
+      was_updated: 'Updated.'
+    tracks: "Tracks"
+    trip:
+      add: "Add trip"
+      archive: 'Archived trips'
+      available_places: Available places
+      dates: "Dates"
+      details: "Details"
+      details_hint: "Attendees, price, length, etc"
+      edit: "Edit trip"
+      end: "End"
+      has_guide: "Include guide man"
+      new: "New trip"
+      participation: Participation
+      scheduled: 'Scheduled trips'
+      start: "Start"
+      trip: Trip
+      url: "Site url"
+      was_created: 'Trip created.'
+      was_updated: 'Trip updated.'
+    trips: "Trips"
+  comments:
+    add: "Add comment"
+    no_comments: "No comments"
+    remove_confirm: "Remove comment?"
+    send: "Send"
+    title: 'Comments'
+    to_add_comments: 'to add comments'
+  dates: Dates
   devise:
+    failure:
+      user:
+        not_found_in_database: Такого користувача немає в нашій базі
     registrations:
       user:
         signed_up: "Welcome! You have signed up successfully."
+  fields:
+    created: "Created"
+    name: Name
+    updated: Updated
+  food:
+    title: 'Food calculator'
   helpers:
+    actions: "Actions"
     links:
       add: "Add"
-      edit: "Edit"
-      copy: copy
-      paste: paste
-      destroy: "Remove"
-      confirm: "Are you sure?"
-      save: "Save"
-      update: "Update"
-      cancel: "Cancel"
       back: 'Back'
+      cancel: "Cancel"
+      confirm: "Are you sure?"
+      confirm_instr_question: "Didn't receive instructions?"
+      copy: copy
+      destroy: "Remove"
+      edit: "Edit"
+      forgot_password: 'Forgot password?'
+      paste: paste
+      save: "Save"
       sign_in: "Login"
       sign_out: "Sign out"
       sign_up: "Sign up"
-      forgot_password: 'Forgot password?'
-      confirm_instr_question: "Didn't receive instructions?"
-    actions: "Actions"
-  fields:
-    created: "Created"
-
-  nav:
-    home: 'Home'
-    calendar: 'Calendar'
-    about: 'About'
-    my_trips: 'My trips'
-    scheduled: 'Scheduled'
-    archive: 'Archive'
-    manage: 'Manage'
-    tools: 'Інструменти'
-    menu_builder: 'Menu builder'
-
-  site:
-    meta_keywords: 'trips, mountain, tracking, hiking'
-    meta_description: 'mountain trips, mountain hiking, manage hikings, search members for the hiking, search hiking, hiking calendar'
-    not_found: Not found
-
+      update: "Update"
   home:
-    title: 'Search and manage trips'
     description: |
       Сайт створювався для того щоб відійти від пошуку учасників у похід по форумах,
       а надати для цього зручний інструмент.
     list:
-      text_calendar: 'Всі заплановані походи доступні в календарі походів.'
       in_calendar: 'in calendar'
+      text_calendar: 'Всі заплановані походи доступні в календарі походів.'
       text_join_add: 'Ви можете приєднатись до вже існуючого походу або додати свій.'
       text_profile: 'Кожен користувач має туристичний профайл по якому організатор походу вирішує чи приймати заявку на похід.'
     more: 'More about project'
+    title: 'Search and manage trips'
     upcoming_trips: 'Upcoming trips'
-  about:
-    title: 'About'
-    contacts: 'Contacts'
-
+  menu:
+    about_warning_html: |
+      Menu builder works in demo mode.
+    add: New menu
+    add_day: Add day
+    all_menus: Всі меню
+    calories: Calories
+    carbohydrates: Carbohydrates
+    categories: Categories
+    clone: Клонувати
+    coverage:
+      empty: Empty
+      full: Full day
+      nosh: Nosh 20%
+      one_meal: 1 meal 40%
+      one_meal_plus: 1 meal + nosh 60%
+      two_meals: 2 meals 80%
+    create: Create menu
+    create_menu_help_html: |
+      <a href="https://www.youtube.com/watch?v=I2iDm_fXqtU" target="_blank"
+      >Переглянути демонстрацію створення</a> меню в похід.
+    dashboard:
+      dishes_info: |
+        Готові до використання страви для туристичного походу з описом та процесом приготування. Обирайте найкращі,
+        вдосконалюйте, додавайте свої.
+      examples_info: |
+        Готові до використання в туристичному поході розкладки меню додані нашими користувачами. Якщо ви не хочете
+        розбиратись у всіх тонкощах складання меню, просто оберіть підходящу для вас розкладку.
+      goto_dishes: Перейти до страв
+      goto_menus: Перейти до розкладок
+      goto_products: Перейти до продуктів
+      my_menu_info_guest: |
+        Увійдіть, щоб мати можливість зберігати розкладки прив"язані до вашого аккаунту. Ви можете не створювати аккаунт
+        але всеодно маєте можливість створити меню як Гість.
+      my_menu_info_user: Розкладки меню розроблені мною.
+      products_info: |
+        Продукти найбільш часто використовувані в туристичних походах. Додавайте свої, робіть рекомендації,
+        описуйте методи готування і т.д.
+    day: Day
+    days: Days
+    days_coverage: Coverage/days
+    description: Description
+    dish_categories:
+      edit: Edit dish category
+      new: New dish category
+      title: Dish categories
+    dishes:
+      add: Додати страву
+      category: Категорія
+      description: Опис
+      dishes: Страви
+      drop_products: Перетягніть сюди продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+      edit: Редагувати страву
+      icon: Іконка
+      ingredients: Інгредієнти
+      is_public: Доступна всім
+      name: Назва
+      new: Нова страва
+      was_created: Страву створено.
+      was_destroyed: Страву видалено.
+      was_updated: Страву оновлено.
+    drop_products: |
+      Перетягніть сюди трапези, страви або продукти зі списку справа або скористайтесь швидким додаванням за назвою.
+    edit: Edit menu
+    examples: Examples
+    examples: Menu examples
+    fats: Fats
+    gram_per_person: Грам на людину
+    group_all_days: For Group all days
+    is_public: Public
+    kg: kg
+    meals:
+      edit: Edit meal
+      new: New meal
+      title: Meals
+    menu: Menu
+    meta_description: Конструктор меню в похід.
+    meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
+    move: Move
+    my_menu: My menus
+    name: Name
+    new: New menu
+    notes: Notes
+    owner: Owner
+    partitions:
+      all_similar: Всі такі продукти
+      auto: Автоматично
+      auto_info: Розподілити всі продукти автоматично
+      enter_porter_name: Введіть ім'я учасника
+      for: 'Розподіл для "%{name}"'
+      new: Новий розподіл
+      new_for: 'Новий розподіл для "%{name}"'
+      no_porters: Додайте учасників
+      partition: Розподіл
+      partition_num: Розподіл продуктів %{num}
+      porter: Учасник
+      porters: Учасники
+      product_usage_count: Кількість використань
+      split: Розподілити
+      split_popup_title: Автоматичний розподіл
+      title: Розподіли продуктів
+      to_each_porter: Кожному учаснику
+      today_weight: Вага на сьогодні
+      total_weight: Вага на всі дні
+      view: Переглянути
+      weight_graph: Графік розвантаження
+      weight_rank: Коефіцієнт навантаження %
+    person_all_days: For Person all days
+    person_per_day: For Person per day
+    persons: Persons
+    product_categories:
+      edit: Edit product category
+      new: New product category
+      title: Product categories
+    products:
+      add: Додати продукт
+      caloric: Калорійність
+      calories: Калорії
+      carbohydrates: Вуглеводи
+      category: Категорія
+      description: Опис
+      edit: Редагувати продукт
+      fats: Жири
+      icon: Іконка
+      is_public: Доступний всім
+      name: Назва
+      new: Новий продукт
+      norm: Нормування
+      norm_default: Норма, г.
+      products: Продукти
+      proteins: Білки
+      was_created: Продукт створено.
+      was_destroyed: Продукт видалено.
+      was_updated: Продукт оновлено.
+    proteins: Proteins
+    quick_add: Quick add
+    ration: Ration
+    g: g
+    recommended: Recommended
+    share_link: Share link
+    summary: Summary
+    title: Розкладка Меню
+    to_add_menu: щоб створити своє меню
+    used_products: Використані продукти
+    validation:
+      enter_name: Enter menu name
+      enter_weight: Enter product weight
+      fix_errors: Please, fix errors
+      incorrect: Incorrect value
+      required: This field can't be empty
+    videos: Відео
+    view_create_demonstration: Переглянути демонстрацію створення меню
+    was_created: Menu created
+    was_updated: Menu updated
+    weight: Weight
+  nav:
+    about: 'About'
+    archive: 'Archive'
+    calendar: 'Calendar'
+    home: 'Home'
+    manage: 'Manage'
+    menu_builder: 'Menu builder'
+    my_trips: 'My trips'
+    scheduled: 'Scheduled'
+    tools: 'Інструменти'
+  notifications_mailer:
+    new_menu_added_email:
+      subject: New menu added
+      nem_menu_added: New menu added
+  region:
+    Carpathian: Carpathian
+    Caucasus: Caucasus
+    Crimea: Crimea
+    Nepal: Nepal
+    region: Region
+    Romania: Romania
+    Turkey: Turkey
+  site:
+    access_denied: Access denied
+    meta_description: 'mountain trips, mountain hiking, manage hikings, search members for the hiking, search hiking, hiking calendar'
+    meta_keywords: 'trips, mountain, tracking, hiking'
+    not_found: Not found
+  site_title: Pohody
+  thank_you: Thank you for using our service
+  trip:
+    already_joined: "You already joined"
+    approve: "Approve"
+    cancel_request: "Cancel request"
+    decline: "Decline"
+    decline_reason: "Decline reason"
+    duration: Duration
+    has_guide: "Includes guide"
+    has_guide_0: "No"
+    has_guide_1: "Yes"
+    has_guide_desc: "Paid trips"
+    join: "Join"
+    join_request_added: "Join request added."
+    leave_trip: "Leave trip"
+    login: "Login"
+    menu: 'Menu'
+    no_available_places: "No available places"
+    no_users: "No users"
+    organizer: 'Organizer'
+    paid: Paid
+    remove_user: "Remove user"
+    site: "Site"
+    to_join: "to join"
+    users: "Users"
+    want_to_join: "Want to join"
+  trip_join_mailer:
+    approve_email:
+      subject: "Your join request has been approved"
+    decline_email:
+      declined: Your join request has been declined
+      subject: "Your join request has been declined"
+    join_request_owner_email:
+      subject: "New join request"
+      wants_to_join: It's just a notification that "%{name}" wants to join next trip
+      approve_decline_page: You can approve or decline this request on the trip page
+    join_request_user_email:
+      subject: "New join request"
+      join_request: It's just a notification that you have sent a join request for the next trip
+    leave_email:
+      subject: "User has left trip"
+      user_left_trip: User "%{name}" has left trip
+    approved: Your join request has been approved
+    full_details_url: Full trip details are available by url
+  trips_calendar: 'Trips calendar'
   user:
-    name: 'Name'
-    password: 'Password'
-    password_hint: "Leave empty if don't want to change"
-    password_confirmation: 'Repead password'
     current_password: 'Current password'
     current_password_hint: 'Enter you current password to confirm your changes'
-    remember_me: 'Remember me'
     login: "Sign in"
-
+    name: 'Name'
+    password: 'Password'
+    password_confirmation: 'Repead password'
+    password_hint: "Leave empty if don't want to change"
+    remember_me: 'Remember me'
   user_profile:
     about_me: "About me"
     about_me_hint: "Who are you, where are you from, etc"
-    experience: "My experience"
+    contacts: "My contacts"
     equipment: "Equipment"
     equipment_hint: "Equipment you have(don't have), equipment that you can share"
-    contacts: "My contacts"
+    experience: "My experience"
     private_contacts: "Private contacts"
     private_contacts_hint: "This contacts info can see only trip organizer"
     private_info: "Private info"
     private_info_hint: "This private info can see only trip organizer"
     was_updated: Profile was updated
-
-  trips_calendar: 'Trips calendar'
-  trip:
-    site: "Site"
-    users: "Users"
-    want_to_join: "Want to join"
-    join: "Join"
-    no_users: "No users"
-    login: "Login"
-    to_join: "to join"
-    already_joined: "You already joined"
-    no_available_places: "No available places"
-    join_request_added: "Join request added."
-    approve: "Approve"
-    decline: "Decline"
-    decline_reason: "Decline reason"
-    remove_user: "Remove user"
-    cancel_request: "Cancel request"
-    leave_trip: "Leave trip"
-    has_guide: "Includes guide"
-    has_guide_0: "No"
-    has_guide_1: "Yes"
-    paid: Paid
-    has_guide_desc: "Paid trips"
-    organizer: 'Organizer'
-    menu: 'Menu'
-    duration: Duration
-
-  comments:
-    title: 'Comments'
-    to_leave_comments: 'to leave comments'
-    send: "Send"
-    no_comments: "No comments"
-    add: "Add comment"
-    remove_confirm: "Remove comment?"
-
-  trip_join_mailer:
-    leave_email:
-      subject: "User has left trip"
-    approve_email:
-      subject: "Your join request has been approved"
-    decline_email:
-      subject: "Your join request has been declined"
-    join_request_user_email:
-      subject: "New join request"
-    join_request_owner_email:
-      subject: "New join request"
-
-  food:
-    title: 'Food calculator'
-
-  account:
-    profile: 'Tourist profile'
-    edit: 'Edit account'
-    cancel: 'Cancel account'
-    cancal_unhappy: 'Unhappy?'
-
-# Tracks
-    tracks: "Tracks"
-    new_track: "Add track"
-    track:
-      track: Track
-      new: 'New track'
-      edit: 'Edit track'
-      add: 'Add track'
-      was_created: 'Created.'
-      was_updated: 'Updated.'
-
-      name: "Name"
-      description: "Description"
-      track: "Track"
-      url: "Site"
-
-# Trips
-    trips: "Trips"
-    trip:
-      trip: Trip
-      new: "New trip"
-      edit: "Edit trip"
-      add: "Add trip"
-      was_created: 'Trip created.'
-      was_updated: 'Trip updated.'
-
-      start: "Start"
-      end: "End"
-      dates: "Dates"
-      details: "Details"
-      details_hint: "Attendees, price, length, etc"
-      url: "Site url"
-      has_guide: "Include guide man"
-      available_places: Available places
-
-      scheduled: 'Scheduled trips'
-      archive: 'Archived trips'
-# Admin
-    admin:
-      admin_panel: Admin panel
-      switch_user: Switch User
-# Regions
-  region:
-    region: Region
-
-    Carpathian: Carpathian
-    Crimea: Crimea
-    Caucasus: Caucasus
-    Turkey: Turkey
-    Romania: Romania
-    Nepal: Nepal
-
-  menu:
-    about_warning_html: |
-      Menu builder works in demo mode.
-    meta_description: Конструктор меню в похід.
-    meta_keywords: меню, розкладка, конструктор, калькулятор, продукти, похід, харчування
-
-    menu: Menu Builder
-    my_menu: My menus
-    examples: Examples
-    add: New menu
-    to_add_menu: щоб створити своє меню
-    new: New menu
-    create: Create menu
-    edit: Edit menu
-    day: Day
-    days: Days
-    days_coverage: Coverage/days
-    add_day: Add day
-    move: Move
-    meals: Meals
-    dishes: Dishes
-    products: Products
-    recommended: Recommended
-    weight: Weight
-    calories: Calories
-    proteins: Proteins
-    fats: Fats
-    carbohydrates: Carbohydrates
-    person_per_day: For Person per day
-    person_all_days: For Person all days
-    group_all_days: For Group all days
-    persons: Persons
-    summary: Summary
-    ration: Ration
-    g: g
-    kg: kg
-    name: Name
-    was_created: Menu created
-    was_updated: Menu updated
-    examples: Menu examples
-    quick_add: Quick add
-    is_public: Public
-    description: Description
-    coverage:
-      full: Full day
-      two_meals: 2 meals 80%
-      one_meal_plus: 1 meal + nosh 60%
-      one_meal: 1 meal 40%
-      nosh: Nosh 20%
-      empty: Empty
-    validation:
-      fix_errors: Please, fix errors
-      required: This field can't be empty
-      enter_name: Enter menu name
-      enter_weight: Enter product weight
-      incorrect: Incorrect value

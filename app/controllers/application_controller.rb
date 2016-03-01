@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   after_action :store_location
+  before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery
   helper_method :admin?
@@ -49,6 +50,18 @@ class ApplicationController < ActionController::Base
 
   def admin?
     current_user && current_user.admin? || session[:admin]
+  end
+
+  def default_url_options(options = {})
+    if I18n.locale != I18n.default_locale
+      { locale: I18n.locale }.merge options
+    else
+      options
+    end
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
   private

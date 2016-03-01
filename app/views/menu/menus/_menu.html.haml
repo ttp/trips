@@ -1,4 +1,4 @@
-- cache ['menu', menu_cache_key(@menu)] do
+- cache ['menu', menu_cache_key(@menu), I18n.locale] do
   .menu
     %ul.nav.nav-tabs.hidden-print
       - @menu.days.each_with_index do |day, i|

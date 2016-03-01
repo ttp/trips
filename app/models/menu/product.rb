@@ -1,6 +1,6 @@
 class Menu::Product < ActiveRecord::Base
-  # attr_accessible :name, :calories, :proteins, :fats, :carbohydrates, :product_category_id, :icon,
-  #                 :description, :norm_info, :norm, :is_public, :photo
+  include ::Translatable
+
   belongs_to :product_category
   belongs_to :user
 
@@ -13,21 +13,12 @@ class Menu::Product < ActiveRecord::Base
   }
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }
+  scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
-  validates :name, :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
+  validates :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
+  validates :name, presence: true, if: 'name.any.blank?'
 
-  translates :name, :description, :norm_info
-  class Translation
-    # attr_accessible :locale
-  end
-
-  def self.list_by_user(user, lang)
-    products = self.with_translations(lang)
-    if user
-      products = products.where("menu_products.is_public = ? or menu_products.user_id = ?", true, user.id)
-    else
-      products = products.is_public
-    end
-    products
-  end
+  multilang :name
+  multilang :description
+  multilang :norm_info
 end

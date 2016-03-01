@@ -44,6 +44,10 @@ class ApplicationPolicy
     admin?
   end
 
+  def multilang?
+    admin? || user.moderator?
+  end
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end
@@ -64,6 +68,14 @@ class ApplicationPolicy
 
     def guest?
       user.new_record?
+    end
+  end
+
+  protected
+
+  def with_locales(*fields)
+    fields.inject([]) do |memo,field|
+      memo + I18n.available_locales.map {|locale| "#{field}_#{locale}" } + [ field ]
     end
   end
 end

@@ -28,8 +28,7 @@ class Menu::DishesController < ApplicationController
     add_breadcrumb t('menu.dishes.dishes'), menu_dishes_path
     add_breadcrumb @menu_dish.dish_category.name, by_category_menu_dishes_path(@menu_dish.dish_category_id)
     add_breadcrumb @menu_dish.name
-
-    @dish_products_list = @menu_dish.products_list(I18n.locale)
+    @menu_dish.dish_products.preload(:products)
   end
 
   def new
@@ -82,16 +81,15 @@ class Menu::DishesController < ApplicationController
   private
 
   def fetch_dishes
-    @menu_dishes = Menu::Dish.with_translations(I18n.locale)
-    @menu_dishes = policy_scope(@menu_dishes)
+    @menu_dishes = policy_scope(Menu::Dish.all).order_by_name(I18n.locale)
   end
 
   def paginate_records
-    @menu_dishes = @menu_dishes.order('name').paginate(page: params[:page], per_page: 25)
+    @menu_dishes = @menu_dishes.paginate(page: params[:page], per_page: 25)
   end
 
   def fetch_categories
-    @dish_categories = Menu::DishCategory.by_lang(I18n.locale).to_hash
+    @dish_categories = Menu::DishCategory.order_by_name(I18n.locale)
   end
 
   def set_menu_dish

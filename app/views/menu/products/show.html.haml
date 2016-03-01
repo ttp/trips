@@ -1,5 +1,5 @@
 %h3
-  = title @menu_product.name
+  = title @menu_product.translation(:name)
   - if policy(@menu_product).edit? || policy(@menu_product).destroy?
     .btn-group.btn-group-xs.pull-right.hidden-print
       - if policy(@menu_product).edit?

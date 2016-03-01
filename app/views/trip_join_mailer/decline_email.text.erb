@@ -1,0 +1,7 @@
+<%= t('trip_join_mailer.decline_email.declined') %>:
+
+<%= @message %>
+
+<%= render 'trip_join_mailer/trip_info', formats: [:text] %>
+
+<%= render 'shared/email_footer', formats: [:text]  %>
