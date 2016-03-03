@@ -78,6 +78,8 @@ task setup: :environment do
   queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/system")
   queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/media")
   queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/media")
+  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/sitemaps")
+  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/sitemaps")
 
   queue! %(touch "#{deploy_to}/#{shared_path}/config/database.yml")
   queue! %(touch "#{deploy_to}/#{shared_path}/config/secrets.yml")

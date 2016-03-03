@@ -24,6 +24,7 @@ gem 'gravatar_image_tag'
 gem 'RedCloth'
 gem 'font-awesome-rails'
 gem 'breadcrumbs_on_rails'
+gem 'sitemap_generator'
 
 gem 'multilang-hstore', '~> 1.0'
 gem 'paperclip', '~> 4.3'

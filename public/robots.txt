@@ -15,4 +15,5 @@ Disallow: /users/sign_up
 Disallow: /users/sign_in
 Disallow: /users/confirmation/new
 Disallow: /users/password/new
-
+Disallow: /menu/menus/new
+Sitemap: http://pohody.com.ua/sitemaps/sitemap.xml.gz
