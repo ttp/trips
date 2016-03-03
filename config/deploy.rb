@@ -32,7 +32,8 @@ set :shared_paths, [
   'config/secrets.yml',
   'config/initializers/devise.rb',
   'public/system',
-  'public/media'
+  'public/media',
+  'public/sitemaps'
 ]
 
 # Optional settings:
