@@ -1,5 +1,6 @@
 SitemapGenerator::Sitemap.default_host = "http://pohody.com.ua"
 SitemapGenerator::Sitemap.create_index = false
+SitemapGenerator::Sitemap.include_root = false
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 SitemapGenerator::Sitemap.create do
   locales = [nil, 'ru']
