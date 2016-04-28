@@ -125,6 +125,8 @@ _.namespace "App.views"
       @addNewEntity(entity)
 
     addNewEntity: (entity) ->
+      if entity.isProduct()
+        entity.set 'weight', entity.getEntityModel().get('norm')
       entity_view = @addEntity(entity)
       entity_view.addDishProducts() if entity.isDish()
 
