@@ -86,6 +86,8 @@ class Menu::ProductsController < ApplicationController
 
   def set_menu_product
     @menu_product = Menu::Product.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to menu_products_path
   end
 
   def menu_product_params

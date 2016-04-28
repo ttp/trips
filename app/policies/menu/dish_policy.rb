@@ -20,12 +20,12 @@ class Menu::DishPolicy <  ApplicationPolicy
   end
 
   def change_icon?
-    admin? || user.moderator?
+    admin? || user.moderator? || owner?
   end
 
   def permitted_attributes
-    attributes = with_locales('name', 'description') + [:dish_category_id]
-    attributes += [:is_public, :photo] if admin? || user.moderator?
+    attributes = with_locales('name', 'description') + [:dish_category_id, :photo]
+    attributes += [:is_public] if admin? || user.moderator?
     attributes
   end
 

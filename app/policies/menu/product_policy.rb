@@ -20,13 +20,13 @@ class Menu::ProductPolicy <  ApplicationPolicy
   end
 
   def change_icon?
-    admin? || user.moderator?
+    admin? || user.moderator? || owner?
   end
 
   def permitted_attributes
-    attributes = [:calories, :proteins, :fats, :carbohydrates, :product_category_id, :norm] +
+    attributes = [:calories, :proteins, :fats, :carbohydrates, :product_category_id, :norm, :photo] +
                  with_locales('name', 'description', 'norm_info')
-    attributes += [:is_public, :photo] if admin? || user.moderator?
+    attributes += [:is_public] if admin? || user.moderator?
     attributes
   end
 

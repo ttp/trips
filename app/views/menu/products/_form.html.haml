@@ -35,7 +35,7 @@
   - else
     = f.input :norm_info, as: :text, label: t('menu.products.norm'), input_html: {:rows => 5}
 
-  - if policy(Menu::Product).change_icon?
+  - if policy(@menu_product).change_icon?
     = f.input :photo, label: t('menu.products.icon'), as: :file, wrapper: :vertical_file_input
     - if @menu_product.persisted? && @menu_product.photo.present?
       = image_tag @menu_product.photo.url(:thumb), class: 'img-thumbnail'

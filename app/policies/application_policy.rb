@@ -13,7 +13,7 @@ class ApplicationPolicy
   end
 
   def owner?
-    record.user_id.present? && record.user_id == user.id
+    record.new_record? || record.user_id.present? && record.user_id == user.id
   end
 
   def index?
