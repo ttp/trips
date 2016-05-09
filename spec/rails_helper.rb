@@ -9,6 +9,7 @@ require 'capybara/poltergeist'
 require 'pundit/rspec'
 require 'paperclip/matchers'
 require 'factory_girl_rails'
+require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -102,5 +103,6 @@ RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   config.include Paperclip::Shoulda::Matchers
+  config.include Shoulda::Matchers::ActiveRecord, type: :model
   config.include ActionDispatch::TestProcess
 end

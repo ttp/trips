@@ -8,7 +8,7 @@ $ ->
   Backbone.Validation.configure
     forceUpdate: true
 
-  localeData = data: { locale: I18n.defaultLocale }
+  localeData = data: { locale: I18n.locale }
   loadings = [
     App.collections.MenuProductCategoryCollection.fetch(localeData),
     App.collections.MenuProductCollection.fetch(localeData),

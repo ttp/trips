@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.4'
+gem 'rails', '~> 4.2.6'
+gem 'sprockets-rails', '2.3.3', require: 'sprockets/railtie'
 gem 'pg'
 gem 'figaro', '~> 1.1.0'
 
 gem 'uglifier'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
-gem 'i18n-js'
+gem 'i18n-js', '>= 3.0.0.rc12'
 gem 'react-rails', '~> 1.5.0'
 gem 'ruby-haml-js', git: 'git://github.com/ttp/ruby-haml-js.git'
 gem 'haml-rails'
@@ -52,5 +53,5 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'poltergeist'
-  gem 'selenium-webdriver', '2.48.1'
+  gem 'selenium-webdriver', '2.53.0'
 end

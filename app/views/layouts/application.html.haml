@@ -10,7 +10,7 @@
     = csrf_meta_tags
     = yield(:head)
     %script{:type => "text/javascript"}
-      I18n.defaultLocale = "#{I18n.locale}";
+      I18n.locale = "#{I18n.locale}";
   %body{:class => "#{controller_name} #{action_name}"}
     %nav.navbar.navbar-default.navbar-fixed-top.hidden-print{role: 'navigation'}
       .container

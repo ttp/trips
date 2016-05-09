@@ -1,7 +1,7 @@
 #= require views/menu_dish_products_view
 #= require views/menu_products_view
 $ ->
-  localeData = data: { locale: I18n.defaultLocale }
+  localeData = data: { locale: I18n.locale }
   loadings = [
     App.collections.MenuProductCategoryCollection.fetch(localeData),
     App.collections.MenuProductCollection.fetch(localeData)
