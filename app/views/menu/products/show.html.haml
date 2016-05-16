@@ -37,4 +37,4 @@
         %td= @menu_product.fats
         %td= @menu_product.carbohydrates
 
-= render 'shared/disqus'
+= render 'shared/disqus', page_url: menu_product_url(@menu_product.id), page_id: @menu_product.id

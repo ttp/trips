@@ -27,11 +27,11 @@
         %p.dates
           %b= t('account.trip.dates') + ":"
           %span= dates_range_text(@trip.start_date, @trip.end_date)
-        - if trip_url(@trip, @track)
+        - if trip_external_url(@trip, @track)
           %p
             %b= t('trip.site') + ":"
-            %a{href: trip_url(@trip, @track)}
-              = trip_url(@trip, @track)
+            %a{href: trip_external_url(@trip, @track)}
+              = trip_external_url(@trip, @track)
 
         %p.organizer
           %b= t('trip.organizer') + ':'
@@ -61,7 +61,7 @@
                 = render "menu/menus/menu"
 
       #trip_comments
-        = render 'shared/disqus'
+        = render 'shared/disqus', page_url: trip_url(@trip.id), page_id: @trip.id
 
     #trip_users.col-md-4
       = render :partial => "users"

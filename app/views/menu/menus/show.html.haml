@@ -54,4 +54,4 @@
   .row
     .col-md-8
       #disqus_comments
-        = render 'shared/disqus'
+        = render 'shared/disqus', page_url: menu_menu_url(@menu.id), page_id: @menu.id

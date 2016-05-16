@@ -30,11 +30,10 @@ class TripsController < ApplicationController
   # POST /trips/1/join.json
   def join
     trip = Trip.find(params[:id])
-    trip_url = "/trips/#{trip.id}"
 
     if trip.available_places == 0
       respond_to do |format|
-        format.html { redirect_to trip_url, flash: { error: t('trip.no_available_places') } }
+        format.html { redirect_to trip_url(trip.id), flash: { error: t('trip.no_available_places') } }
         format.json { render json: { error: t('trip.no_available_places'), status: :unprocessable_entity } }
       end
       return
@@ -42,7 +41,7 @@ class TripsController < ApplicationController
 
     unless trip.user_can_join?(current_user.id)
       respond_to do |format|
-        format.html { redirect_to trip_url, flash: { error: t('trip.already_joined') } }
+        format.html { redirect_to trip_url(trip.id), flash: { error: t('trip.already_joined') } }
         format.json { render json: { error: t('trip.already_joined') }, status: :unprocessable_entity }
       end
       return
@@ -53,7 +52,7 @@ class TripsController < ApplicationController
     TripJoinMailer.join_request_owner_email(current_user, trip).deliver_now
 
     respond_to do |format|
-      format.html { redirect_to trip_url, notice: t('trip.join_request_added') }
+      format.html { redirect_to trip_url(trip.id), notice: t('trip.join_request_added') }
       format.json { render json: { status: :ok }, status: :ok }
     end
   end

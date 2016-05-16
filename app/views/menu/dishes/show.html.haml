@@ -27,4 +27,4 @@
   %h4= t('menu.dishes.description')
   %p.description= raw safe_textile(@menu_dish.description)
 
-= render 'shared/disqus'
+= render 'shared/disqus', page_url: menu_dish_url(@menu_dish.id), page_id: @menu_dish.id)
