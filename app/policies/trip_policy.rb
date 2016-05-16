@@ -1,4 +1,12 @@
 class TripPolicy <  ApplicationPolicy
+  def index?
+    true
+  end
+
+  def account_trips?
+    !guest?
+  end
+
   def show?
     true
   end

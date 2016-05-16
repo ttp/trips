@@ -11,7 +11,7 @@ class Account::TracksController < ApplicationController
   end
 
   def index
-    authorize(Track)
+    authorize(Track, :account_tracks?)
 
     @tracks = Track.where(user_id: current_user.id).includes(:region)
               .order(order).paginate(page: params[:page])

@@ -1,4 +1,12 @@
 class TrackPolicy <  ApplicationPolicy
+  def index?
+    true
+  end
+
+  def account_tracks?
+    !guest?
+  end
+
   def create?
     !guest?
   end

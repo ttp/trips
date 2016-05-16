@@ -12,7 +12,7 @@ class Account::TripsController < ApplicationController
   end
 
   def index
-    authorize(Trip)
+    authorize(Trip, :account_trips?)
     @trips = Trip.joins(:track).includes(track: [:region]).where(user_id: current_user.id)
              .paginate(page: params[:page]).order(order)
   end
