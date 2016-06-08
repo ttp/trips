@@ -29,10 +29,13 @@ uk:
       failure: 'Неможливо увійти з облікового запису %{kind} через те, що обліковий запис "%{reason}".'
       success: 'Вхід успішний з облікового запису %{kind}.'
     passwords:
+      change_my: Змінити мій пароль
+      change_title: Змініть ваш пароль
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
 
       send_instructions: 'Ви отримаєте інструкції зі скидання паролю через декілька хвилин.'
       send_paranoid_instructions: "Ваш email існує у нашій базі даних, Вам надіслано посилання для відновлення вашого паролю"
+      submit_intructions: 'Надіслати інструкції'
       updated: 'Ваш пароль було успішно змінено.'
       updated_not_active: 'Ваш пароль було успішно змінено.'
     registrations:
