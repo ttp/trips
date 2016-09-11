@@ -187,6 +187,9 @@ $hover_color: #ffa;
   }
 
   .menu-products {
+    i.glyphicon {
+      cursor: pointer;
+    }
     .product-name {
       cursor: pointer;
 

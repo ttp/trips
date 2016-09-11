@@ -20,7 +20,7 @@ var MenuProductTotal = React.createClass({
     var iconClass = 'glyphicon glyphicon-' + (this.state.expanded ? 'chevron-up' : 'chevron-down');
     return (
       <div className="menu-used-product">
-        <i className={iconClass}></i>
+        <i className={iconClass} onClick={this.expandEntities}></i>
         <strong data-product-id={productTotal.product.get('id')} onClick={this.expandEntities} className="product-name">{productTotal.product.get('name')}</strong>
 
         <small> ({productTotal.entities.length})</small> - {productTotal.weight}
