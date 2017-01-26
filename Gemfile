@@ -53,5 +53,5 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'poltergeist'
-  gem 'selenium-webdriver', '2.53.0'
+  gem 'selenium-webdriver', '3.0.5'
 end

@@ -45,16 +45,15 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   Capybara.default_driver         = :rack_test
-  Capybara.javascript_driver      = :selenium
   Capybara.ignore_hidden_elements = false
   Capybara.default_max_wait_time  = 5
 
   # To use non-headless driver, uncomment beneath and comment :webkit(or :poltergeist) driver option
   #
-  # Capybara.register_driver :chrome do |app|
-  #   Capybara::Selenium::Driver.new(app, :browser => :chrome)
-  # end
-  # Capybara.javascript_driver = :chrome
+  Capybara.register_driver :chrome do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  end
+  Capybara.javascript_driver = :chrome
   #
 
   # RSpec Rails can automatically mix in different behaviours to your tests
