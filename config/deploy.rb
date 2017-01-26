@@ -10,12 +10,11 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain,      '128.199.40.129'
+set :domain,      '138.201.154.11'
 set :user,        'rails'
 set :repository,  'git@github.com:ttp/trips.git'
 set :branch,      'master'
 set :deploy_to,   '/home/rails/www/pohody.com.ua'
-set :app_path,    "#{deploy_to}/#{current_path}"
 set :rails_env,   'production'
 set :keep_releases, 5
 
@@ -24,16 +23,19 @@ set :keep_releases, 5
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, [
+set :shared_dirs, [
   'log',
   'tmp',
-  'config/database.yml',
-  'config/environments/production.rb',
-  'config/secrets.yml',
-  'config/initializers/devise.rb',
   'public/system',
   'public/media',
   'public/sitemaps'
+]
+
+set :shared_files, [
+  'config/database.yml',
+  'config/environments/production.rb',
+  'config/secrets.yml',
+  'config/initializers/devise.rb'
 ]
 
 # Optional settings:
@@ -50,49 +52,49 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.2.3@default]'
+  invoke :'rvm:use', 'ruby-2.3.1'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task setup: :environment do
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/log")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log")
+  command %(mkdir -p "#{fetch(:shared_path)}/log")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/log")
 
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets")
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids")
+  command %(mkdir -p "#{fetch(:shared_path)}/tmp/sockets")
+  command %(mkdir -p "#{fetch(:shared_path)}/tmp/pids")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/sockets")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/pids")
 
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config")
+  command %(mkdir -p "#{fetch(:shared_path)}/config")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config")
 
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config/initializers")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config/initializers")
+  command %(mkdir -p "#{fetch(:shared_path)}/config/initializers")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config/initializers")
 
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/config/environments")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config/environments")
+  command %(mkdir -p "#{fetch(:shared_path)}/config/environments")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config/environments")
 
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/system")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/system")
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/media")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/media")
-  queue! %(mkdir -p "#{deploy_to}/#{shared_path}/public/sitemaps")
-  queue! %(chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/public/sitemaps")
+  command %(mkdir -p "#{fetch(:shared_path)}/public/system")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/public/system")
+  command %(mkdir -p "#{fetch(:shared_path)}/public/media")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/public/media")
+  command %(mkdir -p "#{fetch(:shared_path)}/public/sitemaps")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/public/sitemaps")
 
-  queue! %(touch "#{deploy_to}/#{shared_path}/config/database.yml")
-  queue! %(touch "#{deploy_to}/#{shared_path}/config/secrets.yml")
-  queue! %(touch "#{deploy_to}/#{shared_path}/config/environments/production.rb")
-  queue! %(touch "#{deploy_to}/#{shared_path}/config/initializers/devise.rb")
-  queue %(echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config*'.")
+  command %(touch "#{fetch(:shared_path)}/config/database.yml")
+  command %(touch "#{fetch(:shared_path)}/config/secrets.yml")
+  command %(touch "#{fetch(:shared_path)}/config/environments/production.rb")
+  command %(touch "#{fetch(:shared_path)}/config/initializers/devise.rb")
+  command %(echo "-----> Be sure to edit '#{fetch(:shared_path)}/config*'.")
 end
 
 desc 'Deploys the current version to the server.'
 task deploy: :environment do
   deploy do
-    to :prepare do
+    on :prepare do
     end
 
     invoke :'git:clone'
@@ -102,7 +104,7 @@ task deploy: :environment do
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
-    to :launch do
+    on :launch do
       invoke :'passenger:restart'
     end
   end
@@ -110,32 +112,32 @@ end
 
 desc 'Seed data to the database'
 task seed: :environment do
-  queue "cd #{deploy_to}/#{current_path}/"
-  queue "bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-  queue %(echo "-----> Rake Seeding Completed.")
+  command "cd #{fetch(:current_path)}/"
+  command "bundle exec rake db:seed RAILS_ENV=#{fetch(:rails_env)}"
+  command %(echo "-----> Rake Seeding Completed.")
 end
 
 namespace :unicorn do
-  set :unicorn_pid, "#{app_path}/tmp/pids/unicorn.pid"
+  set :unicorn_pid, "#{fetch(:current_path)}/tmp/pids/unicorn.pid"
   set :start_unicorn, %(
-    cd #{app_path}
-    bundle exec unicorn -c #{app_path}/config/unicorn.rb -E #{rails_env} -D
+    cd #{fetch(:current_path)}
+    bundle exec unicorn -c #{fetch(:current_path)}/config/unicorn.rb -E #{fetch(:rails_env)} -D
     )
 
   # Start task
   # ------------------------------------------------------------------------------
   desc 'Start unicorn'
   task start: :environment do
-    queue 'echo "-----> Start Unicorn"'
-    queue! start_unicorn
+    command 'echo "-----> Start Unicorn"'
+    command start_unicorn
   end
 
   # Stop task
   # ------------------------------------------------------------------------------
   desc 'Stop unicorn'
   task :stop do
-    queue 'echo "-----> Stop Unicorn"'
-    queue! %(
+    command 'echo "-----> Stop Unicorn"'
+    command %(
       test -s "#{unicorn_pid}" && kill -QUIT `cat "#{unicorn_pid}"` && echo "Stop Ok" && exit 0
       echo >&2 "Not running"
         )
@@ -152,20 +154,20 @@ end
 
 namespace :passenger do
   task :restart do
-    queue "touch #{app_path}/tmp/restart.txt"
+    command "touch #{fetch(:current_path)}/tmp/restart.txt"
   end
 end
 
 namespace :jobs do
   task stop: :environment do
-    queue 'echo "stop background jobs"'
-    queue "cd #{app_path} && RAILS_ENV=#{rails_env} bin/delayed_job stop"
-    queue 'echo "done"'
+    command 'echo "stop background jobs"'
+    command "cd #{fetch(:current_path)} && RAILS_ENV=#{fetch(:rails_env)} bin/delayed_job stop"
+    command 'echo "done"'
   end
 
   task start: :environment do
-    queue 'echo "start background jobs"'
-    queue "cd #{app_path} && RAILS_ENV=#{rails_env} bin/delayed_job start"
-    queue 'echo "done"'
+    command 'echo "start background jobs"'
+    command "cd #{fetch(:current_path)} && RAILS_ENV=#{fetch(:rails_env)} bin/delayed_job start"
+    command 'echo "done"'
   end
 end
