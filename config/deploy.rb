@@ -23,7 +23,7 @@ set :keep_releases, 5
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_dirs, [
+set :shared_dirs, fetch(:shared_dirs, []) + [
   'log',
   'tmp',
   'public/system',
@@ -52,7 +52,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use', 'ruby-2.3.1'
+  invoke :'rvm:use', 'ruby-2.3.1@default'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
