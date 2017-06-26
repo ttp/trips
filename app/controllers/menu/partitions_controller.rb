@@ -35,6 +35,7 @@ class Menu::PartitionsController < ApplicationController
     remove_porters(data['porters']) if data['porters'].present?
     save_porters(data['porters']) if data['porters'].present?
     save_products(data['porter_products']) if data['porter_products'].present?
+    @partition.touch
     redirect_to menu_menu_partition_path(@menu, @partition)
   end
 
