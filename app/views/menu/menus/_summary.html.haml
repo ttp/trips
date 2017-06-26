@@ -1,4 +1,4 @@
-- cache ['menu_summary', menu_cache_key(menu), I18n.locale] do
+- cache ['menu_summary', menu_partition_cache_key(menu, partition), I18n.locale] do
   - if menu.days_count > 0
     .summary
       %h4.visible-print= t('menu.summary')

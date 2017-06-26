@@ -77,7 +77,8 @@ module MenusHelper
     "#{menu.id}-#{menu.updated_at}-#{menu.users_count}"
   end
 
-  def menu_partition_cache_key(menu, partition)
+  def menu_partition_cache_key(menu, partition = nil)
+    return menu_cache_key(menu) unless partition
     menu_cache_key(menu) + "-#{partition.id}-#{partition.updated_at}"
   end
 end
