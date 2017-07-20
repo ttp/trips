@@ -229,10 +229,12 @@ uk:
       was_created: Продукт створено.
       was_destroyed: Продукт видалено.
       was_updated: Продукт оновлено.
+
     proteins: Білки
     quick_add: Швидке додавання
     ration: Раціон
     g: г
+    usage: Використання
     recommended: Рекомендовано
     share_link: Поділитись
     summary: Загальний підсумок
