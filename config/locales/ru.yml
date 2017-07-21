@@ -232,6 +232,8 @@ ru:
     proteins: Белки
     quick_add: "Быстрое добавление"
     ration: Рацион
+    g: г
+    usage: Использование
     recommended: Рекомендовано
     share_link: Поделиться
     summary: "Общий итог"

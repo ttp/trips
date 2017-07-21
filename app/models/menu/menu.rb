@@ -114,7 +114,12 @@ class Menu::Menu < ActiveRecord::Base
     return @total_products if @total_products
     @total_products = entities_by_type(Menu::DayEntity::PRODUCT).group_by(&:entity_id)
     @total_products.each do |key, items|
-      @total_products[key] = items.inject(0) { |mem, item| mem + item.weight }
+      @total_products[key] = {}
+      @total_products[key][:total_weight] = items.inject(0) { |mem, item| mem + item.weight } * users_count
+      @total_products[key][:count_groups] = Hash[items.group_by(&:weight).map do |weight, items_group|
+        total_weight = weight * users_count
+        [total_weight, items_group.size]
+      end]
     end
     @total_products
   end

@@ -2,9 +2,20 @@
   .products
     %h4.visible-print= t 'menu.products.products'
     %table.table
-      - @menu.products.each do |product_id, product|
+      %thead
         %tr
-          %td
-            %span.name= product.translation(:name)
-          %td
-            %span.weight= (@menu.total_products[product_id] * @menu.users_count).to_s + t('menu.g')
+          %th= t('menu.products.name')
+          %th= t('menu.usage')
+          %th= t('menu.weight')
+      %tbody
+        - @menu.products.each do |product_id, product|
+          %tr
+            %td
+              %span.name= product.translation(:name)
+            %td
+              - @menu.total_products[product_id][:count_groups].each do |weight, count|
+                %span.group_weight
+                  = "#{weight}#{t('menu.g')}"
+                  %small= "(#{count})"
+            %td
+              %span.weight= (@menu.total_products[product_id][:total_weight]).to_s + t('menu.g')
