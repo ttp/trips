@@ -14,10 +14,6 @@
         %i.glyphicon.glyphicon-cog
       %ul.dropdown-menu{role: "menu"}
         %li
-          %a.assign-all{href: "#"}
-            %i.glyphicon.glyphicon-pushpin
-            = I18n.t('menu.partitions.all_similar')
-        %li
           %a.remove-porter{href: "#"}
             %i.glyphicon.glyphicon-remove
             = I18n.t('helpers.links.destroy')

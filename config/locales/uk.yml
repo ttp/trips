@@ -196,7 +196,9 @@ uk:
       split: Розподілити
       split_popup_title: Автоматичний розподіл
       title: Розподіли продуктів
-      to_each_porter: Кожному учаснику
+      assign_each_next: Кожному по черзі
+      assign_all_porters: Додати всіх
+      apply_to_all_same: Застосувати до всіх таких
       today_weight: Вага на сьогодні
       total_weight: Вага на всі дні
       view: Переглянути

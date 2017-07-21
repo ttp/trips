@@ -2,6 +2,8 @@
 #= require collections/menu_day_collection
 #= require collections/menu_day_entity_collection
 #= require models/entity_assigner_to_each_porter
+#= require models/entity_assigner_to_all_porters
+#= require models/entity_assigner_apply_to_all_same
 
 _.namespace "App.views"
 (->
@@ -12,6 +14,8 @@ _.namespace "App.views"
     events:
       'click .porter': 'createPorterEntity'
       'click .each-porter': 'assignToEachPorter'
+      'click .all-porters': 'assignToAllPorters'
+      'click .apply-to-all': 'applyToAll'
 
     initialize: (options) ->
       @porters = App.collections.MenuPartitionPorterCollection
@@ -40,6 +44,12 @@ _.namespace "App.views"
 
     assignToEachPorter: (e) ->
       new App.models.EntityAssignerToEachPorter(@entity(e)).assign()
+
+    assignToAllPorters: (e) ->
+      new App.models.EntityAssignerToAllPorters(@entity(e), @porters.models).assign()
+
+    applyToAll: (e) ->
+      new App.models.EntityAssignerApplyToAllSame(@entity(e)).assign()
 
     createPorterEntity: (e)->
       porter_id = $(e.currentTarget).find('.name').data('porter-id')

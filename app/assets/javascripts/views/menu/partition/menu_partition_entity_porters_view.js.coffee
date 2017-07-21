@@ -1,5 +1,3 @@
-#= require models/entity_assigner_to_porter
-
 _.namespace "App.views"
 (->
   porters_dropdown_view = new App.views.MenuPortersDropdownView
@@ -17,7 +15,6 @@ _.namespace "App.views"
 
     bindEvents: ->
       @$el.on('click', '.add-porter', $.proxy(@showPortersDropdown, this))
-      @$el.on('click', '.assign-all', $.proxy(@assignAll, this))
       @$el.on('click', '.remove-porter', $.proxy(@removePorter, this))
       @porter_entities.on 'add', $.proxy(@onPorterEntityAdd, this)
       @porter_entities.on 'remove', $.proxy(@onPorterEntityRemove, this)
@@ -65,12 +62,6 @@ _.namespace "App.views"
     porterEntityFromEvent: (e) ->
       entity_id = $(e.target).closest('.btn-group').data('entity-id')
       @porter_entities.get(entity_id)
-
-    assignAll: (e) ->
-      e.preventDefault()
-      setTimeout (-> $('body').trigger('click')), 1
-      porter = @porterEntityFromEvent(e).porter()
-      new App.models.EntityAssignerToPorter(@entity, porter).assign()
 
     porterEntities: ->
       @porter_entities.byEntity @entity

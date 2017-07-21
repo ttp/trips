@@ -194,7 +194,9 @@ ru:
       split: Распределить
       split_popup_title: "Автоматическое распределение"
       title: "Распределения продуктов"
-      to_each_porter: "Каждому участнику"
+      assign_each_next: Каждому по очереди
+      assign_all_porters: Добавить всех
+      apply_to_all_same: Применить ко всем таким
       today_weight: "Вес на сегодня"
       total_weight: "Вес на все дни"
       view: Просмотреть

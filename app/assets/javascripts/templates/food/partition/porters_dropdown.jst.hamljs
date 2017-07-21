@@ -8,6 +8,12 @@
           %span= porter.dayWeight(day)
         %td.total
           %span= porter.total_weight()
+    %tr.all-porters
+      %td{colspan: 3}
+        = I18n.t('menu.partitions.assign_all_porters')
     %tr.each-porter
       %td{colspan: 3}
-        = I18n.t('menu.partitions.to_each_porter')
+        = I18n.t('menu.partitions.assign_each_next')
+    %tr.apply-to-all
+      %td{colspan: 3}
+        = I18n.t('menu.partitions.apply_to_all_same')
