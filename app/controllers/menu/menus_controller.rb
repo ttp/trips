@@ -27,7 +27,7 @@ class Menu::MenusController < ApplicationController
     add_breadcrumb t('menu.my_menu')
 
     @title = t('menu.my_menu')
-    @menus = policy_scope(Menu::Menu)
+    @menus = policy_scope(Menu::Menu).order('name')
     render 'my'
   end
 
@@ -35,7 +35,7 @@ class Menu::MenusController < ApplicationController
     add_breadcrumb t('menu.title'), menu_dashboard_path
     add_breadcrumb t('menu.examples')
 
-    @menus = Menu::Menu.where(is_public: true)
+    @menus = Menu::Menu.where(is_public: true).order('name')
     render 'examples'
   end
 
