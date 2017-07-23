@@ -31,6 +31,7 @@ gem 'multilang-hstore', '~> 1.0'
 gem 'paperclip', '~> 4.3'
 gem 'newrelic_rpm'
 gem 'active_model_serializers', '~> 0.10.0.rc4'
+gem 'mina', '~> 1.0.6', require: false
 
 group :development, :test do
   gem 'html2haml'
