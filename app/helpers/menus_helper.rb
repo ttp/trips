@@ -81,4 +81,8 @@ module MenusHelper
     return menu_cache_key(menu) unless partition
     menu_cache_key(menu) + "-#{partition.id}-#{partition.updated_at}"
   end
+
+  def sorted_products(products)
+    products.sort_by {|key, product_total| product_total[:product].translation(:name) }.to_h
+  end
 end
