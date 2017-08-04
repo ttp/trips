@@ -23,7 +23,7 @@
     display: block;
     visibility: visible;
   }
-  .summary, .products, .description {
+  .summary, .products, .description, #products_partition {
     page-break-before: always;
   }
   #partitions {
