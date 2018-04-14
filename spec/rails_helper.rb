@@ -5,7 +5,6 @@ require 'action_mailer'
 require 'email_spec'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
-require 'capybara/poltergeist'
 require 'pundit/rspec'
 require 'paperclip/matchers'
 require 'factory_girl_rails'
@@ -48,8 +47,6 @@ RSpec.configure do |config|
   Capybara.ignore_hidden_elements = false
   Capybara.default_max_wait_time  = 5
 
-  # To use non-headless driver, uncomment beneath and comment :webkit(or :poltergeist) driver option
-  #
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, :browser => :chrome)
   end

@@ -1,4 +1,4 @@
-class TripUser < ActiveRecord::Base
+class TripUser < ApplicationRecord
   # attr_accessible :user_id, :trip_id, :approved
   belongs_to :trip
   belongs_to :user

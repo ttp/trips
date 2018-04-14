@@ -1,4 +1,4 @@
-class Region < ActiveRecord::Base
+class Region < ApplicationRecord
   # attr_accessible :name
   has_many :tracks
 

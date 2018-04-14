@@ -1,15 +1,10 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
-  %body
-    %p
-      = t('notifications_mailer.new_menu_added_email.nem_menu_added') + ':'
-      %br
-      = @menu.name
-      %br
-      = link_to 'View', menu_share_path(@menu)
-      |
-      = link_to 'Edit', guest_menu_edit_path(@menu)
+%p
+  = t('notifications_mailer.new_menu_added_email.nem_menu_added') + ':'
+  %br
+  = @menu.name
+  %br
+  = link_to 'View', menu_share_path(@menu)
+  |
+  = link_to 'Edit', guest_menu_edit_path(@menu)
 
-    = render 'shared/email_footer', formats: [:html]
+= render 'shared/email_footer', formats: [:html]

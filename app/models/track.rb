@@ -1,4 +1,4 @@
-class Track < ActiveRecord::Base
+class Track < ApplicationRecord
   belongs_to :region
   belongs_to :user
   has_many :trips

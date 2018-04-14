@@ -14,12 +14,12 @@ describe Menu::PartitionsController do
   describe 'POST create' do
     it 'creates partition' do
       expect do
-        post :create, data: '{}', menu_id: menu.id
+        post :create, params: { data: '{}', menu_id: menu.id }
       end.to change(Menu::Partition, :count).by(1)
     end
 
     it 'assigns a newly created partition as @partition' do
-      post :create, data: '{}', menu_id: menu.id
+      post :create, params: { data: '{}', menu_id: menu.id }
       assigns(:partition).should be_a(Menu::Partition)
       assigns(:partition).should be_persisted
     end
@@ -32,7 +32,7 @@ describe Menu::PartitionsController do
         }
       }
       expect do
-        post :create, data: data.to_json, menu_id: menu.id
+        post :create, params: { data: data.to_json, menu_id: menu.id }
       end.to change(Menu::PartitionPorter, :count).by(2)
     end
 
@@ -48,7 +48,7 @@ describe Menu::PartitionsController do
         ]
       }
       expect do
-        post :create, data: data.to_json, menu_id: menu.id
+        post :create, params: { data: data.to_json, menu_id: menu.id }
       end.to change(Menu::PartitionPorterProduct, :count).by(2)
     end
   end

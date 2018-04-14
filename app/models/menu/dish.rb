@@ -1,10 +1,10 @@
-class Menu::Dish < ActiveRecord::Base
+class Menu::Dish < ApplicationRecord
   include ::Translatable
 
   has_many :dish_products, -> { order 'sort_order' }, dependent: :destroy
   has_many :products, :class_name => 'Menu::Product', through: :dish_products
   belongs_to :dish_category
-  belongs_to :user
+  belongs_to :user, optional: true
 
   has_attached_file :photo, styles: { thumb: '64x64>'  }, default_url: ':style/no-image.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/

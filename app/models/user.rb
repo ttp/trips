@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   ROLE  = [
     ADMIN = 'admin',
     USER = 'user',

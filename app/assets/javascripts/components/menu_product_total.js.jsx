@@ -1,4 +1,4 @@
-var MenuProductTotal = React.createClass({
+var MenuProductTotal = createReactClass({
   getInitialState: function () {
     return { expanded: false };
   },

@@ -10,7 +10,7 @@ development:
   username: dev
   password: 123654
 
-test: &test
+test:
   <<: *default
   hostname: localhost
   database: trips_test
@@ -21,9 +21,7 @@ test: &test
 production:
   <<: *default
   hostname: localhost
-  database: trips_prod
+  database: trips
   username: dev
   password: 123654
 
-cucumber:
-  <<: *test

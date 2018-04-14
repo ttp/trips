@@ -1,4 +1,4 @@
-class Menu::DishProduct < ActiveRecord::Base
+class Menu::DishProduct < ApplicationRecord
   belongs_to :dish
   belongs_to :product
 

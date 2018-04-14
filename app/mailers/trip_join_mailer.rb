@@ -1,4 +1,4 @@
-class TripJoinMailer < ActionMailer::Base
+class TripJoinMailer < ApplicationMailer
   default from: 'noreply@pohody.com.ua'
 
   def join_request_user_email(user, trip)
