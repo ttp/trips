@@ -1,4 +1,4 @@
-var MenuProductsList = React.createClass({
+var MenuProductsList = createReactClass({
   componentDidMount: function() {
     var entities = this.props.entities;
     var update = this.forceUpdate.bind(this, null);

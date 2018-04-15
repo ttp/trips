@@ -1,4 +1,4 @@
-class TripComment < ActiveRecord::Base
+class TripComment < ApplicationRecord
   # attr_accessible :comment
   belongs_to :user
   belongs_to :trip

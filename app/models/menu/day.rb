@@ -1,4 +1,4 @@
-class Menu::Day < ActiveRecord::Base
+class Menu::Day < ApplicationRecord
   # attr_accessible :num
   belongs_to :menu
   has_many :menu_day_entities, :class_name => 'Menu::DayEntity'

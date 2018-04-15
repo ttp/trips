@@ -1,4 +1,4 @@
-class Menu::DishCategory < ActiveRecord::Base
+class Menu::DishCategory < ApplicationRecord
   include ::Translatable
 
   has_many :dishes

@@ -1,4 +1,4 @@
-class Menu::PartitionPorterProduct < ActiveRecord::Base
-  belongs_to :partition_porter, class_name: 'Menu::PartitionPorter'
-  belongs_to :day_entity
+class Menu::PartitionPorterProduct < ApplicationRecord
+  belongs_to :partition_porter, class_name: 'Menu::PartitionPorter', optional: true
+  belongs_to :day_entity, optional: true
 end

@@ -3,7 +3,6 @@ require 'rails_helper'
 feature 'Create menu', js: true do
   scenario 'Guest creates menu' do
     visit menu_dashboard_path
-
     click_link I18n.t('menu.create')
     fill_in 'name', with: 'Guest menu'
     click_button I18n.t('helpers.links.save')
@@ -26,7 +25,6 @@ feature 'Create menu', js: true do
     # Add day note
     day_note = 'Day note'
     add_day_note(day_el, day_note)
-    save_screenshot '/home/ttp/page.png'
     expect(day_el).to have_css('.notes-text', text: day_note, visible: true)
 
     # Drag meal

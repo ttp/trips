@@ -1,9 +1,7 @@
-class AddDescriptionToMenuProduct < ActiveRecord::Migration
+class AddDescriptionToMenuProduct < ActiveRecord::Migration[4.2]
   def up
-    Menu::Product.add_translation_fields!({
-      description: :text,
-      norm_info: :text
-    })
+    add_column :menu_product_translations, :description, :text
+    add_column :menu_product_translations, :norm_info, :text
     add_column :menu_products, :icon, :string, :null => false, :default => ''
     add_column :menu_products, :norm, :integer, :null => false, :default => 0
   end

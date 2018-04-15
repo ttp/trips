@@ -1,4 +1,4 @@
-class CreateTripComments < ActiveRecord::Migration
+class CreateTripComments < ActiveRecord::Migration[4.2]
   def change
     create_table :trip_comments do |t|
       t.references :user

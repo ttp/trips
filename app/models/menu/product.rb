@@ -1,8 +1,8 @@
-class Menu::Product < ActiveRecord::Base
+class Menu::Product < ApplicationRecord
   include ::Translatable
 
   belongs_to :product_category
-  belongs_to :user
+  belongs_to :user, optional: true
 
   has_attached_file :photo, styles: { thumb: '64x64>'  }, default_url: ':style/no-image.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/

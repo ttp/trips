@@ -1,4 +1,4 @@
-class AddDurationToTrip < ActiveRecord::Migration
+class AddDurationToTrip < ActiveRecord::Migration[4.2]
   def up
     add_column :trips, :cached_duration, :integer
 

@@ -1,4 +1,4 @@
-class Menu::ProductCategory < ActiveRecord::Base
+class Menu::ProductCategory < ApplicationRecord
   include ::Translatable
 
   has_many :products

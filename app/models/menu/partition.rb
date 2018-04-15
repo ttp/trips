@@ -1,4 +1,4 @@
-class Menu::Partition < ActiveRecord::Base
+class Menu::Partition < ApplicationRecord
   belongs_to :menu
   has_many :partition_porters
   has_many :porter_products, through: :partition_porters

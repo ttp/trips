@@ -21,12 +21,12 @@ puts 'user: ' << user.name
 puts 'Regions'
 Region.delete_all
 regions = [
-    {id: 1, name: "Карпати"},
-    {id: 2, name: "Крим"},
-    {id: 3, name: "Кавказ"},
-    {id: 4, name: "Туреччина"},
-    {id: 5, name: "Румунія"},
-    {id: 6, name: "Непал"}
+    {id: 1, name: "Carpathian"},
+    {id: 2, name: "Crimea"},
+    {id: 3, name: "Caucasus"},
+    {id: 4, name: "Turkey"},
+    {id: 5, name: "Romania"},
+    {id: 6, name: "Nepal"}
 ]
 regions.each do |region|
   row = Region.new(region)

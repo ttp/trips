@@ -1,4 +1,4 @@
-class NotificationsMailer < ActionMailer::Base
+class NotificationsMailer < ApplicationMailer
   default from: 'noreply@pohody.com.ua'
   add_template_helper MenusHelper
 

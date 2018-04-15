@@ -1,4 +1,4 @@
-class AddUserToProduct < ActiveRecord::Migration
+class AddUserToProduct < ActiveRecord::Migration[4.2]
   def up
     add_column :menu_products, :user_id, :integer
     add_column :menu_products, :is_public, :boolean, null: false, default: false

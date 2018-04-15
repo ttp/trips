@@ -1,4 +1,4 @@
-class Menu::Meal < ActiveRecord::Base
+class Menu::Meal < ApplicationRecord
   include ::Translatable
 
   multilang :name

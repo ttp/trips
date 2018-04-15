@@ -1,4 +1,4 @@
-class AddUserIndexes < ActiveRecord::Migration
+class AddUserIndexes < ActiveRecord::Migration[4.2]
   def change
     add_index :tracks, :region_id
     add_index :tracks, :user_id

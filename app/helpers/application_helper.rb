@@ -27,7 +27,7 @@ module ApplicationHelper
 
     html = <<-HTML
     <th class="#{classes}">
-      #{link_to label, params.merge(sort_params)}
+      #{link_to label, params.permit('*').merge(sort_params)}
     </th>
     HTML
     html.html_safe
@@ -75,7 +75,7 @@ module ApplicationHelper
     if request.query_string.empty?
       link_to locale[:name], locale: param_code
     else
-      link_to locale[:name], params.merge(locale: param_code)
+      link_to locale[:name], params.permit('*').merge(locale: param_code)
     end
   end
 end

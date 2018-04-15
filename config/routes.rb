@@ -1,4 +1,4 @@
-Pohody::Application.routes.draw do
+Rails.application.routes.draw do
   post 'users/ulogin' => 'users#ulogin'
   get 'users/edit-profile' => 'users#edit_profile', as: :user_profile
   patch 'users/edit-profile' => 'users#update_profile'

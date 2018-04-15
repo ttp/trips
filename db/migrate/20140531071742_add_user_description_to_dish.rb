@@ -1,8 +1,6 @@
-class AddUserDescriptionToDish < ActiveRecord::Migration
+class AddUserDescriptionToDish < ActiveRecord::Migration[4.2]
   def up
-    Menu::Dish.add_translation_fields!({
-      description: :text
-    })
+    add_column :menu_dish_translations, :description, :text
     add_column :menu_dishes, :icon, :string, :null => false, :default => ''
     add_column :menu_dishes, :user_id, :integer
     add_column :menu_dishes, :is_public, :boolean, null: false, default: false

@@ -1,7 +1,7 @@
 require 'securerandom'
 
-class Menu::Menu < ActiveRecord::Base
-  belongs_to :user
+class Menu::Menu < ApplicationRecord
+  belongs_to :user, optional: true
   has_many :menu_days, class_name: 'Menu::Day'
   has_many :menu_day_product_entities, class_name: 'Menu::DayEntity', through: :menu_days
   has_many :menu_day_dish_entities, class_name: 'Menu::DayEntity', through: :menu_days
