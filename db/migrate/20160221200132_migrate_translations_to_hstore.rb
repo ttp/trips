@@ -1,4 +1,4 @@
-class MigrateTranslationsToHstore < ActiveRecord::Migration
+class MigrateTranslationsToHstore < ActiveRecord::Migration[4.2]
   def change
     change_table :menu_products do |t|
       t.hstore :name

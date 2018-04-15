@@ -1,4 +1,4 @@
-class RenameUaLocale < ActiveRecord::Migration
+class RenameUaLocale < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE menu_dish_translations SET locale='uk' WHERE locale='ua'"
     execute "UPDATE menu_dish_category_translations SET locale='uk' WHERE locale='ua'"

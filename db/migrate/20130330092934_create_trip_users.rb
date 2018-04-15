@@ -1,4 +1,4 @@
-class CreateTripUsers < ActiveRecord::Migration
+class CreateTripUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :trip_users do |t|
       t.references :trip

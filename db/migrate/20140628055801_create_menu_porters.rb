@@ -1,4 +1,4 @@
-class CreateMenuPorters < ActiveRecord::Migration
+class CreateMenuPorters < ActiveRecord::Migration[4.2]
   def change
     create_table :menu_partitions do |t|
       t.references :menu
