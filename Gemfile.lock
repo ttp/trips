@@ -200,7 +200,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.0)
+    mimemagic (0.3.2)
     mina (1.0.7)
       open4 (~> 1.3.4)
       rake
@@ -215,12 +215,12 @@ GEM
       mini_portile2 (~> 2.3.0)
     open4 (1.3.4)
     orm_adapter (0.5.0)
-    paperclip (4.3.7)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
+    paperclip (5.2.1)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
       mime-types
-      mimemagic (= 0.3.0)
+      mimemagic (~> 0.3.0)
     pg (0.21.0)
     public_suffix (3.0.2)
     puma (3.11.3)
@@ -372,7 +372,7 @@ DEPENDENCIES
   mina (~> 1.0.6)
   multilang-hstore!
   newrelic_rpm
-  paperclip (~> 4.3)
+  paperclip (~> 5.2.0)
   pg
   puma (~> 3.7)
   pundit

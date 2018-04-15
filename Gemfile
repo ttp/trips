@@ -28,7 +28,7 @@ gem 'breadcrumbs_on_rails'
 gem 'sitemap_generator'
 
 gem 'multilang-hstore', git: 'https://github.com/ttp/multilang-hstore.git'
-gem 'paperclip', '~> 4.3'
+gem 'paperclip', '~> 5.2.0'
 gem 'newrelic_rpm'
 gem 'active_model_serializers', '~> 0.10.0.rc4'
 gem 'mina', '~> 1.0.6', require: false
