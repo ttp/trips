@@ -2,6 +2,6 @@ class TextileController < ActionController::Base
   include ApplicationHelper
 
   def preview
-    render text: safe_textile(params[:data])
+    render plain: safe_textile(params[:data])
   end
 end
