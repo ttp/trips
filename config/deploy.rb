@@ -1,8 +1,8 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+# require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,16 +10,14 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain,      '138.201.154.11'
-set :user,        'rails'
+set :domain,      '195.201.119.174'
+set :user,        'deploy'
 set :repository,  'git@github.com:ttp/trips.git'
 set :branch,      'master'
-set :deploy_to,   '/home/rails/www/pohody.com.ua'
+set :deploy_to,   '/home/deploy/www/pohody.com.ua'
 set :rails_env,   'production'
+set :rbenv_path,   '/home/deploy/.rbenv'
 set :keep_releases, 5
-
-# For system-wide RVM install.
-#   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
@@ -35,7 +33,6 @@ set :shared_files, [
   'config/database.yml',
   'config/environments/production.rb',
   'config/secrets.yml',
-  'config/initializers/devise.rb'
 ]
 
 # Optional settings:
@@ -48,11 +45,11 @@ set :shared_files, [
 
 task :environment do
   # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .rbenv-version to your repository.
-  # invoke :'rbenv:load'
+  # Be sure to commit your .ruby-version or .rbenv-version to your repository.
+  invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use', 'ruby-2.3.1@default'
+  # invoke :'rvm:use', 'ruby-2.3.1@default'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -71,9 +68,6 @@ task setup: :environment do
   command %(mkdir -p "#{fetch(:shared_path)}/config")
   command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config")
 
-  command %(mkdir -p "#{fetch(:shared_path)}/config/initializers")
-  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config/initializers")
-
   command %(mkdir -p "#{fetch(:shared_path)}/config/environments")
   command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config/environments")
 
@@ -87,7 +81,6 @@ task setup: :environment do
   command %(touch "#{fetch(:shared_path)}/config/database.yml")
   command %(touch "#{fetch(:shared_path)}/config/secrets.yml")
   command %(touch "#{fetch(:shared_path)}/config/environments/production.rb")
-  command %(touch "#{fetch(:shared_path)}/config/initializers/devise.rb")
   command %(echo "-----> Be sure to edit '#{fetch(:shared_path)}/config*'.")
 end
 
@@ -99,6 +92,7 @@ task deploy: :environment do
 
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
+    command "gem install bundler"
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
