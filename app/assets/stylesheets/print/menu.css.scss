@@ -18,6 +18,7 @@
         @extend .avoid-page-break;
       }
     }
+    page-break-after: always;
   }
   .tab-pane {
     display: block;
