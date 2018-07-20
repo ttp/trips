@@ -14,6 +14,7 @@ gem 'ruby-haml-js', git: 'git://github.com/ttp/ruby-haml-js.git'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.3'
+gem 'webpacker', '~> 3.5'
 
 gem 'devise'
 gem 'switch_user'
@@ -36,6 +37,7 @@ gem 'mina', '~> 1.0.6', require: false
 group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'foreman'
 end
 
 group :development, :test do
