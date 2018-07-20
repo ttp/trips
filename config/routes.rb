@@ -40,6 +40,10 @@ Rails.application.routes.draw do
     resources :meals, except: [:show]
   end
 
+  namespace :map do
+    get '/' => 'map#index', as: :index
+  end
+
   get 'about' => 'home#about', as: :about
   post 'textile/preview' => 'textile#preview'
 
