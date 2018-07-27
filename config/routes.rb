@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
   namespace :map do
     get '/' => 'map#index', as: :index
+    resources :markers
   end
 
   get 'about' => 'home#about', as: :about
