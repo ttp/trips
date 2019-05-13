@@ -13,7 +13,7 @@ gem 'react-rails', '~> 2.4'
 gem 'ruby-haml-js', git: 'git://github.com/ttp/ruby-haml-js.git'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 gem 'devise'
 gem 'switch_user'
