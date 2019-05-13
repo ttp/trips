@@ -31,7 +31,7 @@ gem 'multilang-hstore', git: 'https://github.com/ttp/multilang-hstore.git'
 gem 'paperclip', '~> 5.2.0'
 gem 'newrelic_rpm'
 gem 'active_model_serializers', '~> 0.10.0.rc4'
-gem 'mina', '~> 1.0.6', require: false
+gem 'mina', '~> 1.2.3', require: false
 
 group :development do
   gem 'spring'
