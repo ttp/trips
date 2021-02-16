@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2'
 gem 'sprockets-rails', '2.3.3', require: 'sprockets/railtie'
 gem 'pg'
 gem 'figaro', '~> 1.1.0'
