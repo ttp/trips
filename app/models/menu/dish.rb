@@ -9,7 +9,7 @@ class Menu::Dish < ApplicationRecord
   has_attached_file :photo, styles: { thumb: '64x64>'  }, default_url: ':style/no-image.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
   validates :dish_category_id, presence: true
-  validates :name, presence: true, if: 'name.any.blank?'
+  validates :name, presence: true, if: :blank_names?
 
   scope :by_category, ->(id) { where(dish_category_id: id) }
   scope :for_user, lambda { |user|
@@ -45,5 +45,9 @@ class Menu::Dish < ApplicationRecord
     if persisted? && is_public?
       products.is_private.update_all is_public: true
     end
+  end
+
+  def blank_names?
+    name.any.blank?
   end
 end

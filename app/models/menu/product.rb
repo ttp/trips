@@ -16,9 +16,13 @@ class Menu::Product < ApplicationRecord
   scope :order_by_name, ->(locale) { order("name->'#{locale}'") }
 
   validates :product_category_id, :calories, :proteins, :fats, :carbohydrates, presence: true
-  validates :name, presence: true, if: 'name.any.blank?'
+  validates :name, presence: true, if: :blank_names?
 
   multilang :name
   multilang :description
   multilang :norm_info
+
+  def blank_names?
+    name.any.blank?
+  end
 end
