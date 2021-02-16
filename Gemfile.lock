@@ -230,7 +230,8 @@ GEM
       mimemagic (~> 0.3.0)
     pg (0.21.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (5.2.1)
+      nio4r (~> 2.0)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
     racc (1.5.2)
@@ -386,7 +387,7 @@ DEPENDENCIES
   newrelic_rpm
   paperclip (~> 5.2.0)
   pg
-  puma (~> 3.7)
+  puma (~> 5.2)
   pundit
   rails (~> 5.2)
   rails-controller-testing

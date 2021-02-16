@@ -40,7 +40,7 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'puma', '~> 3.7'
+  gem 'puma', '~> 5.2'
   gem 'html2haml'
   gem 'letter_opener'
   gem 'better_errors'
